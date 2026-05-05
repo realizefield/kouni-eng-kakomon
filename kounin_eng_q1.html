@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高認英語 第1問 攻略 v2 | GAMBA</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink)}
+.q-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.scene{background:var(--soft);padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px}
+.dialog{font-size:1rem;line-height:2;font-family:"Georgia",serif}
+.dialog .line{margin:6px 0;padding:6px 8px;border-radius:6px;transition:background .25s}
+.dialog .line.playing{background:#fff5d6;box-shadow:0 0 0 2px var(--accent3)}
+.speaker{font-weight:800;color:var(--accent);margin-right:6px}
+.line-play{display:inline-block;background:none;border:1px solid var(--line);border-radius:50%;width:26px;height:26px;font-size:.75rem;cursor:pointer;color:var(--accent2);margin-right:6px;padding:0;vertical-align:middle;line-height:24px}
+.line-play:hover{background:var(--soft)}
+.line-play:active{transform:scale(.92)}
+
+/* 全文再生コントロール */
+.play-all{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:800;font-size:.88rem;cursor:pointer;box-shadow:0 2px 6px rgba(217,79,79,.3);display:flex;align-items:center;gap:8px;margin-bottom:10px;width:100%;justify-content:center;font-family:inherit}
+.play-all:active{transform:scale(.98)}
+.play-all.playing{background:linear-gradient(135deg,#888,#666)}
+.speed-control{display:flex;gap:4px;margin-bottom:10px;background:var(--soft);padding:4px;border-radius:8px}
+.speed-control button{flex:1;padding:6px;background:transparent;border:none;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--ink);font-family:inherit}
+.speed-control button.on{background:var(--paper);color:var(--accent2);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.blank{display:inline-block;background:var(--hint);border:2px dashed var(--accent3);padding:2px 28px;border-radius:6px;font-weight:700;color:var(--accent3);min-width:140px;text-align:center}
+
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:10px;font-size:.88rem;cursor:pointer;text-align:left;font-family:"Georgia",serif;color:var(--ink);transition:all .15s;line-height:1.4;display:block;width:100%}
+.choice .num{display:inline-block;background:var(--soft);color:var(--accent2);font-weight:800;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;margin-right:6px;font-size:.78rem;font-family:sans-serif}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+.choice .ja-row{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.15);font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:.82rem;color:#444;align-items:center;gap:8px}
+.choices.revealed .choice .ja-row{display:flex}
+.choice .ja-text{flex:1;line-height:1.5}
+.choice .ja-icon{color:var(--accent2);font-weight:800;font-family:sans-serif}
+.choice-spk{background:var(--accent2);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:.7rem;cursor:pointer;font-family:inherit;font-weight:700;flex-shrink:0}
+.choice-spk:active{transform:scale(.94)}
+
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+/* ヒント内の単語表 */
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+.struct-line{background:var(--paper);padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid var(--line)}
+.struct-en{font-family:"Georgia",serif;font-size:.95rem;line-height:1.6;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--line)}
+.struct-buttons{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.struct-buttons button{padding:6px 12px;background:var(--accent2);color:#fff;border:none;border-radius:6px;font-size:.78rem;cursor:pointer;font-weight:700}
+.struct-buttons button.spk{background:var(--accent)}
+.struct-buttons button.expl{background:var(--accent3)}
+.struct-detail{margin-top:6px;padding:10px 12px;background:var(--hint);border-radius:8px;font-size:.86rem;display:none;line-height:1.7;border-left:4px solid var(--accent3)}
+.struct-detail.show{display:block;animation:slidein .25s}
+.struct-detail .ja{font-weight:700;color:var(--accent2)}
+.struct-detail .expl-body p{margin-bottom:8px}
+.struct-detail .expl-body p:last-child{margin-bottom:0}
+.struct-detail .expl-body b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-choices{display:grid;gap:6px}
+.review-choice{background:var(--paper);border:1.5px solid var(--line);padding:8px;border-radius:6px;font-size:.85rem;cursor:pointer;text-align:left;color:var(--ink)}
+.review-choice.right{background:#e8f5e9;border-color:var(--good)}
+.review-choice.bad{background:#fde8e8;border-color:var(--accent)}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+@media (max-width:480px){
+  .choices{grid-template-columns:1fr}
+  .mode-tabs{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎯 高認英語 第1問 攻略 v2</h1>
+  <p><span class="badge">対話文穴埋め</span>R6年新形式対応 ・ 詳しい1文ごと解説つき</p>
+</header>
+
+<div class="year-pick" id="yearPick"></div>
+<div class="q-tabs" id="qTabs"></div>
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS_DATA = {
+  "R7-1": [
+    {
+      no:1, scene:"At home", answer:4,
+      lines:[
+        {sp:"A", text:"Look! It's snowing.", ja:"見て！雪が降っているよ。",
+         explain:"<p>まず <b>Look!</b> は「見て！」という呼びかけです。文の最初に動詞がきているので、これは<b>命令文</b>といって、相手に何かをしてほしいときの形です。</p><p>次の <b>It's snowing.</b> は「雪が降っています」という意味です。ここで気をつけたいのは、<b>It は「それ」と訳さない</b>ということです。天気・時間・季節などを言うときの英語では、文の主語に意味のない「it」を置くルールがあります。日本語に訳すときは「それ」を出さずに「雪が降っています」と訳します。</p><p><b>snowing</b> は <b>snow（雪が降る）</b>という動詞に <b>-ing</b> がついた形です。<b>be動詞 + 〜ing</b> の形を<b>進行形</b>といって、「今〜している最中」という意味を表します。ここでは「ちょうど今、雪が降っている」ということを伝えています。</p>"},
+        {sp:"B", text:"Nice. Why don't we go outside?", ja:"いいね。外に行かない？",
+         explain:"<p><b>Nice.</b> は「いいね」という相づちです。短く反応するときによく使います。</p><p><b>Why don't we 〜?</b> は形は「なぜ〜しないの？」と見えますが、本当の意味は「<b>〜しませんか？</b>」という<b>誘いの表現</b>です。相手を何かに誘いたいときに使う、決まった言い方として覚えてください。たとえば <b>Why don't we go shopping?</b> なら「買い物に行かない？」となります。</p><p><b>go outside</b> は <b>go（行く）</b>と <b>outside（外へ）</b>を組み合わせて「外へ行く」という意味です。</p><p>つまりこの文は、Bが「外に出て雪を見ない？」とAを誘っている場面です。</p>"},
+        {sp:"A", text:"___ It's a little too cold for me.", ja:"___　私には少し寒すぎます。", blank:true,
+         explain:"<p>空所のあとの <b>It's a little too cold for me.</b> がポイントです。</p><p><b>a little</b> は「少し」、<b>too 〜</b> は「<b>〜すぎる</b>」という<b>マイナスの意味</b>を表します。<b>too cold</b> で「寒すぎる」となり、<b>for me</b> は「私にとって」という意味です。</p><p>全部つなげると「私にとっては少し寒すぎます」となります。つまりAは、Bからの「外に行こう」という誘いを<b>断る理由</b>を述べているのです。</p><p>ということは、空所には「断る言葉」が入ります。選択肢の中で「断る表現」は <b>No, thanks.（いや、結構です）</b>だけです。</p>"},
+        {sp:"B", text:"Alright. Then, I'll go by myself.", ja:"わかった。じゃあ一人で行くよ。",
+         explain:"<p><b>Alright.</b> は <b>All right.</b> と同じで、「わかった」「了解」という意味です。</p><p><b>Then</b> は「それなら・じゃあ」という意味で、前の話を受けて次に進むときに使います。</p><p><b>I'll</b> は <b>I will</b> の短縮形で、「私は〜するつもりだ」という<b>これからの予定</b>を表します。</p><p><b>by myself</b> は<b>「自分一人で」</b>という意味の決まった言い方です。<b>by 〜self</b> の形で覚えてください。たとえば <b>by yourself</b> なら「あなた一人で」、<b>by himself</b> なら「彼一人で」です。</p><p>この文でBは「Aが来ないなら、自分一人で外に行きます」と言っています。これも、Aが誘いを<b>断った</b>からこそ出てくる返事です。</p>"}
+      ],
+      choices:[
+        {t:"That's true.", ja:"その通りだね。"},
+        {t:"I agree.", ja:"賛成だよ。"},
+        {t:"Sounds wonderful.", ja:"素敵だね。"},
+        {t:"No, thanks.", ja:"いや、結構です。"}
+      ],
+      keyWords:[
+        {w:"snowing",mean:"雪が降っている",kana:"スノーイング",ac:"スノー"},
+        {w:"outside",mean:"外へ",kana:"アウトサイド",ac:"サイ"},
+        {w:"cold",mean:"寒い",kana:"コウルド",ac:"コウ"},
+        {w:"myself",mean:"自分自身で",kana:"マイセルフ",ac:"セ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>at home</td><td class='ja'>家で</td></tr><tr><td class='en'>snowing</td><td class='ja'>雪が降っている</td></tr><tr><td class='en'>outside</td><td class='ja'>外</td></tr><tr><td class='en'>cold</td><td class='ja'>寒い</td></tr><tr><td class='en'>by myself</td><td class='ja'>自分で・一人で</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>Bさんが <b>Why don't we go outside?</b> と聞いていますね。<br><b>why</b> は「どうして」だから……<span class='think-arrow'>→</span>「<b>どうして外に行かないの?</b>」と聞いていることになります。</div><div class='step'>つまりBさんは外に行こうと<b>誘っている</b>のです。それに対してAさんは <b>It's a little too cold for me.（私には少し寒すぎます）</b>と言っています。<br><b>cold（寒い）</b>という単語から、Aさんは外に行きたくないと感じていることがわかりますね。</div>",
+        "Bが「Alright（わかった）。じゃあ一人で行く」と言っている → AはBの誘いを<b>断った</b>のですね。",
+        "選択肢を見てみましょう。1〜3は<b>賛成・同意</b>の表現です。<br>誘いを<b>断る</b>表現はどれでしょうか？"
+      ],
+      think:"場面読み→空所の<b>前後</b>を確認→「寒すぎる」「一人で行く」から断ったと判断→「No, thanks.」を選ぶ。"
+    },
+    {
+      no:2, scene:"At a station", answer:4,
+      lines:[
+        {sp:"A", text:"Excuse me. What time will the next train arrive at the airport?", ja:"すみません。次の電車は何時に空港に着きますか？",
+         explain:"<p><b>Excuse me.</b> は知らない人に話しかけるときの「すみません」です。「ごめんなさい」という謝罪の意味ではありません。</p><p><b>What time will 〜?</b> は「<b>何時に〜しますか？</b>」とたずねる形です。<b>will</b> は「〜するでしょう」という未来を表す言葉です。</p><p><b>arrive at 〜</b> は<b>「〜に到着する」</b>という意味で、<b>at</b> という前置詞とセットで使います。場所が空港・駅などの場合は <b>at</b>、国や都市の場合は <b>arrive in</b> となります。</p><p><b>the next train</b> は「次の電車」、<b>the airport</b> は「その空港」です。日本語に訳すときは「その」は省略してかまいません。</p>"},
+        {sp:"B", text:"The next train? It'll get there at 11:00.", ja:"次の電車ですか？11時に着きますよ。",
+         explain:"<p>最初の <b>The next train?</b> は、相手の言葉を確認するための聞き返しです。「次の電車のことですよね？」という感じです。</p><p><b>It'll</b> は <b>It will</b> の短縮形で、ここの <b>it</b> は「次の電車」のことを指しています。</p><p><b>get there</b> は<b>「そこに着く」</b>という意味です。<b>get</b> はいろいろな意味を持つ動詞ですが、ここでは「到着する」という意味で、前の文の <b>arrive</b> とほぼ同じです。<b>there（そこ＝空港）</b>に着くという意味です。</p><p><b>at 11:00</b> は「11時に」。時刻を言うときは <b>at</b> を使います。</p>"},
+        {sp:"A", text:"Oh, that's not good. I need to get there by 10:00.", ja:"あ、それは困ります。10時までに着く必要があるんです。",
+         explain:"<p><b>Oh, that's not good.</b> は「あ、それは良くない＝困った」という反応です。</p><p><b>I need to 〜</b> は<b>「私は〜する必要がある」</b>という意味です。<b>need to + 動詞の元の形</b>で覚えてください。</p><p><b>get there</b> は前の文と同じ「そこに着く」です。</p><p>ここで一番大事なのが <b>by 10:00</b> です。<b>by</b> は<b>「〜までに」</b>という<b>期限</b>を表します。よく似た言葉に <b>until（〜までずっと）</b>がありますが、意味がちがいます。<b>by 10:00</b> は「10時までに（着けばいい）」、<b>until 10:00</b> は「10時までずっと（続く）」です。</p><p>つまりAは「10時までに空港に着く必要がある」のに、電車は11時にしか着かない、という<b>困った状況</b>にあります。</p>"},
+        {sp:"B", text:"Then, ___ It'll only take 20 minutes.", ja:"それなら、___　20分しかかからないですよ。", blank:true,
+         explain:"<p><b>Then</b> は「それなら」。Aが困っているのを受けて、解決策を提案する場面です。</p><p>空所のあとの <b>It'll only take 20 minutes.</b> がヒントです。</p><p><b>It takes + 時間</b> は<b>「〜の時間がかかる」</b>という決まった言い方です。たとえば <b>It takes 30 minutes.</b> なら「30分かかります」。</p><p><b>only</b> は<b>「〜だけ・たったの〜」</b>という意味で、少なさを強調します。</p><p>つまり「<b>たった20分しかかからない</b>」と言っているのです。電車だと11時着なのに、何かを使えば20分で空港に着く——それは何でしょうか？</p><p>選択肢4の <b>you should take a taxi.（タクシーに乗るべきです）</b>がぴったりです。<b>should</b> は「〜すべき」という<b>アドバイス</b>を表します。</p>"}
+      ],
+      choices:[
+        {t:"you must cancel your flight.", ja:"フライトをキャンセルしなければならない。"},
+        {t:"you must have had a long day.", ja:"長い1日だったに違いない。"},
+        {t:"you should have told me earlier.", ja:"もっと早く言うべきだった。"},
+        {t:"you should take a taxi.", ja:"タクシーに乗るべきだ。"}
+      ],
+      keyWords:[
+        {w:"arrive",mean:"到着する",kana:"アライヴ",ac:"ライ"},
+        {w:"airport",mean:"空港",kana:"エアポート",ac:"エア"},
+        {w:"cancel",mean:"キャンセルする",kana:"キャンセル",ac:"キャン"},
+        {w:"taxi",mean:"タクシー",kana:"タクシー",ac:"タ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Excuse me</td><td class='ja'>すみません</td></tr><tr><td class='en'>What time</td><td class='ja'>何時に</td></tr><tr><td class='en'>next train</td><td class='ja'>次の電車</td></tr><tr><td class='en'>arrive at</td><td class='ja'>〜に到着する</td></tr><tr><td class='en'>airport</td><td class='ja'>空港</td></tr><tr><td class='en'>get there</td><td class='ja'>そこに着く</td></tr><tr><td class='en'>at 11:00</td><td class='ja'>11時に</td></tr><tr><td class='en'>not good</td><td class='ja'>よくない・困った</td></tr><tr><td class='en'>need to</td><td class='ja'>〜する必要がある</td></tr><tr><td class='en'>by 10:00</td><td class='ja'>10時までに</td></tr><tr><td class='en'>only</td><td class='ja'>〜だけ・たったの</td></tr><tr><td class='en'>take 20 minutes</td><td class='ja'>20分かかる</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>Aさんが「<b>What time will the next train arrive at the airport?</b>」と聞いていますね。<br><b>What time</b> は「何時」、<b>arrive at</b> は「〜に到着する」だから……<span class='think-arrow'>→</span>「<b>何時に空港に着きますか？</b>」とたずねていることになります。</div><div class='step'>Bさんは「<b>at 11:00</b>（11時に着く）」と答えました。でもAさんは「<b>by 10:00</b>（10時までに着きたい）」と言っています。<br>つまりAさんは<b>電車だと間に合わなくて困っている</b>ということですね。</div><div class='step'>そこでBさんが空所のあとで「<b>It'll only take 20 minutes.</b>」と言っています。<br><b>only</b>（〜だけ）+ <b>take 20 minutes</b>（20分かかる）= <b>たった20分しかかからない</b>。<br>Bさんは、空港に20分で着く方法を提案しているのですね。</div>",
+        "Bさんは何かの<b>解決策</b>を提案しています。「<b>たった20分しかかからない</b>」と言っているので、電車よりも<b>速い別の手段</b>のはずですね。",
+        "電車より速くて20分で着くもの……何でしょうか？　選択肢の中から<b>移動手段</b>に関係するものを探してみましょう。"
+      ],
+      think:"Aの困りごと（10時までに着きたいが電車は11時）→ Bが解決策を提案。「20分で着く」もの＝タクシー。"
+    },
+    {
+      no:3, scene:"At school", answer:1,
+      lines:[
+        {sp:"A", text:"Tom, how's your essay going? It's due this Friday.", ja:"トム、エッセイの進み具合はどう？今週の金曜が締切だよ。",
+         explain:"<p><b>Tom</b> は呼びかけです。話しかけたい相手の名前を文の最初に言います。</p><p><b>How's your essay going?</b> は<b>「エッセイの進み具合はどう？」</b>という意味です。<b>How's 〜 going?</b> は<b>「〜はどんな感じ？」</b>という決まった言い方で、進行状況をたずねるときに使います。</p><p><b>essay</b> は<b>「エッセイ・小論文・作文」</b>のことです。</p><p>後半の <b>It's due this Friday.</b> の <b>it</b> は「エッセイ」を指しています。<b>due</b> は<b>「期限である・締切である」</b>という意味です。<b>It's due 〜</b> で<b>「〜が締切である」</b>という形を覚えてください。</p><p><b>this Friday</b> は「今週の金曜日」です。</p>"},
+        {sp:"B", text:"I've only finished about one-third of it.", ja:"まだ3分の1くらいしか終わっていないよ。",
+         explain:"<p><b>I've</b> は <b>I have</b> の短縮形です。<b>I have + 過去分詞</b> の形を<b>現在完了形</b>といって、ここでは<b>「今までに〜してしまった」</b>という<b>結果・完了</b>の意味を表します。</p><p><b>finished</b> は <b>finish（終える）</b>の過去分詞です。</p><p><b>only</b> は「〜だけ・たったの」です。少なさを強調しています。</p><p><b>about one-third</b> は「約3分の1」。<b>about</b> は「約・だいたい」、<b>one-third</b> は<b>「3分の1」</b>を表します。<b>分子 + 分母</b>の順序で表すのが英語のルールです。<b>two-thirds</b> なら「3分の2」、<b>one-half</b> なら「2分の1」です。</p><p>最後の <b>of it</b> の <b>it</b> はやはり「エッセイ」を指しています。「エッセイのうちの3分の1」という意味です。</p>"},
+        {sp:"A", text:"___ Otherwise, you'll get in trouble.", ja:"___　さもないと、困ったことになるよ。", blank:true,
+         explain:"<p>空所のあとの <b>Otherwise, you'll get in trouble.</b> が一番のヒントです。</p><p><b>Otherwise</b> は<b>「さもないと・そうしないと」</b>という意味の、ちょっと難しい単語です。前の文の内容を「もしそれをしないと」と受けて、<b>悪い結果</b>を続けるときに使います。</p><p><b>you'll</b> は <b>you will</b> の短縮形で、「あなたは〜することになる」。</p><p><b>get in trouble</b> は<b>「困ったことになる・トラブルになる」</b>という決まった言い方です。<b>trouble</b> は「トラブル・困りごと」です。</p><p>つまり「<b>○○しないと、困ったことになるよ</b>」という流れ。空所には「困らないためにすべきこと」、つまりエッセイの締切に関するアドバイスが入ります。</p><p>選択肢1の <b>You have to meet the deadline.（締切に間に合わせなきゃ）</b>がぴったりです。<b>have to + 動詞</b> は「〜しなければならない」、<b>meet the deadline</b> は<b>「締切に間に合わせる」</b>という決まった言い方です。</p>"},
+        {sp:"B", text:"I know. Ms. Thompson already warned me.", ja:"わかってるよ。トンプソン先生にもう注意されたんだ。",
+         explain:"<p><b>I know.</b> は「わかってるよ」。</p><p><b>Ms. Thompson</b> は「トンプソン先生（女性）」。<b>Ms.</b> は女性の敬称で、結婚しているかどうかを問わず使えます。男性なら <b>Mr.</b>。</p><p><b>already</b> は<b>「すでに・もう」</b>という意味です。</p><p><b>warned</b> は <b>warn（警告する・注意する）</b>の過去形です。<b>warn 人</b> で「人に警告する」となります。</p><p>つまりBは「先生にもう注意されてるから、わかってるよ」と返事しています。これも、Aの空所が「締切についての注意」だったことを裏付けます。</p>"}
+      ],
+      choices:[
+        {t:"You have to meet the deadline.", ja:"締切に間に合わせなきゃ。"},
+        {t:"You must change the date.", ja:"日付を変えなきゃ。"},
+        {t:"When is convenient for you?", ja:"いつが都合いい？"},
+        {t:"What's the matter with you?", ja:"どうしたの？"}
+      ],
+      keyWords:[
+        {w:"essay",mean:"エッセイ・作文",kana:"エセイ",ac:"エ"},
+        {w:"due",mean:"締切である",kana:"デュー",ac:"デュー"},
+        {w:"deadline",mean:"締切",kana:"デッドライン",ac:"デッ"},
+        {w:"otherwise",mean:"さもないと",kana:"アザワイズ",ac:"ア"},
+        {w:"warn",mean:"警告する",kana:"ウォーン",ac:"ウォーン"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>school</td><td class='ja'>学校</td></tr><tr><td class='en'>how's ... going?</td><td class='ja'>〜の調子はどう？</td></tr><tr><td class='en'>essay</td><td class='ja'>エッセイ・作文</td></tr><tr><td class='en'>due</td><td class='ja'>締切である</td></tr><tr><td class='en'>this Friday</td><td class='ja'>今週の金曜</td></tr><tr><td class='en'>only finished</td><td class='ja'>〜だけ終わった</td></tr><tr><td class='en'>about one-third</td><td class='ja'>約3分の1</td></tr><tr><td class='en'>Otherwise</td><td class='ja'>さもないと</td></tr><tr><td class='en'>get in trouble</td><td class='ja'>困ったことになる</td></tr><tr><td class='en'>I know</td><td class='ja'>わかってる</td></tr><tr><td class='en'>already</td><td class='ja'>すでに・もう</td></tr><tr><td class='en'>warned me</td><td class='ja'>私に注意した</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>Aさんが「<b>How's your essay going? It's due this Friday.</b>」と言っていますね。<br><b>essay</b> は「作文」、<b>due</b> は「締切」だから……<span class='think-arrow'>→</span>「<b>作文の調子はどう？　今週の金曜が締切だよ</b>」と言っていることになります。</div><div class='step'>Bさんは「<b>only finished about one-third</b>（3分の1だけ終わった）」と答えました。<br>つまり<b>金曜の締切なのに、まだ全然終わっていない</b>状況なのですね。</div><div class='step'>そこでAさんが空所のあとで「<b>Otherwise, you'll get in trouble.</b>（さもないと、困ったことになるよ）」と言っています。<br><b>Otherwise（さもないと）</b>＝「もし○○しないと」という意味なので、空所には<b>「○○しなさい」というアドバイス</b>が入るはずですね。</div>",
+        "Bさんが空所のあと「<b>I know. Ms. Thompson already warned me.</b>（わかってる。トンプソン先生にもう注意されたんだ）」と返事しています。<br><b>warned me</b>（私に注意した）から、Aさんも<b>同じ内容で注意した</b>とわかりますね。",
+        "選択肢の中で「<b>締切に関する忠告</b>」になっているのはどれでしょうか？"
+      ],
+      think:"due（締切）+ Otherwise（さもないと）+ get in trouble（困る）→ 「締切に間に合わせろ」という警告。"
+    },
+    {
+      no:4, scene:"At school (sick)", answer:2,
+      lines:[
+        {sp:"A", text:"Hi, Sam! We missed you yesterday. What happened?", ja:"やあ、サム！昨日はいなくて寂しかったよ。何があったの？",
+         explain:"<p><b>Hi, Sam!</b> は呼びかけです。</p><p><b>We missed you yesterday.</b> の <b>missed</b> は <b>miss</b> の過去形です。<b>miss</b> はとても便利な単語で、ここでは<b>「〜がいなくて寂しく思う」</b>という意味です。<b>We missed you.</b> で<b>「あなたがいなくて寂しかった」</b>となり、誰かが休んだ翌日などによく使う表現です。</p><p><b>What happened?</b> は<b>「何があったの？」</b>とたずねる決まった言い方です。<b>happen</b> は「起こる」という動詞で、過去形は <b>happened</b>。<b>What</b> が主語の役割をしているので「何が起きたの？」となります。</p>"},
+        {sp:"B", text:"Sorry. ___", ja:"ごめん。___", blank:true, blankNo:4,
+         explain:"<p><b>Sorry.</b> は「ごめん」と謝っている言葉です。空所には、<b>休んだ理由</b>が入ります。</p><p>このあとAが「How are you now?（今は大丈夫？）」と聞いていることに注目してください。「今は大丈夫？」と聞かれているということは、Bは<b>体調がよくなかった</b>と考えるのが自然です。</p><p>選択肢2の <b>I wasn't feeling well.（体調がよくありませんでした）</b>がぴったりです。<b>feel well</b> は<b>「体調がいい」</b>という決まった言い方で、<b>wasn't feeling well</b> でその過去進行形「体調が悪かった」となります。</p>"},
+        {sp:"A", text:"How are you now?", ja:"今は大丈夫？",
+         explain:"<p><b>How are you?</b> は普通「元気？」というあいさつですが、ここでは <b>now（今）</b>がついているので<b>「今は（体調は）どう？」</b>という意味になります。</p><p>Aが「今は大丈夫？」と聞くということは、Bが<b>前は体調が悪かった</b>とわかっているということです。これがBの空所（4番）のヒントになります。</p>"},
+        {sp:"B", text:"I'm feeling better. Thanks.", ja:"よくなってきた。ありがとう。",
+         explain:"<p><b>I'm feeling better.</b> の <b>better</b> は <b>good（良い）</b>の比較級で「<b>よりよい</b>」。<b>I'm feeling better.</b> で<b>「（前より）気分がよくなっています」</b>という意味になります。体調が回復してきたことを伝える表現です。</p>"},
+        {sp:"A", text:"Glad to hear that. Did you catch a cold?", ja:"よかった。風邪をひいたの？",
+         explain:"<p><b>Glad to hear that.</b> は<b>「それを聞いて嬉しい・よかった」</b>という決まった言い方です。<b>(I'm) glad to + 動詞</b> で「〜できて嬉しい」となります。</p><p><b>catch a cold</b> は<b>「風邪をひく」</b>という決まった言い方です。<b>catch（つかまえる・かかる）+ a cold（風邪）</b>で覚えてください。</p>"},
+        {sp:"B", text:"___ I just haven't been sleeping well recently.", ja:"___　最近よく眠れていないだけなんだ。", blank:true, blankNo:5,
+         explain:"<p>空所のあとがヒントです。<b>I just haven't been sleeping well recently.</b> を分けて見ましょう。</p><p><b>just</b> は「ただ・〜だけ」、<b>haven't been sleeping</b> は <b>have been + 〜ing</b> の<b>現在完了進行形</b>「ずっと〜している」の否定形なので「ずっと眠れていない」となります。</p><p><b>well</b> は「よく・うまく」、<b>recently</b> は<b>「最近」</b>です。</p><p>つまり「最近よく眠れていないだけ」という意味。これはAの「風邪？」という質問に<b>「いえ、風邪じゃありません」</b>と答えていることになります。</p><p>選択肢1の <b>I don't think so.</b> は<b>「そう（風邪だ）とは思わない」</b>という意味で、<b>やんわりと否定する</b>定番の表現です。</p>"}
+      ],
+      choices:[
+        {t:"Nothing happened.", ja:"何もなかった。"},
+        {t:"I wasn't feeling well.", ja:"体調が悪かった。"},
+        {t:"We had a local festival.", ja:"地元のお祭りがあった。"},
+        {t:"You weren't there.", ja:"あなたはそこにいなかった。"}
+      ],
+      choices2:[
+        {t:"I don't think so.", ja:"そうは思わない。"},
+        {t:"I don't remember it.", ja:"覚えてない。"},
+        {t:"I don't do that.", ja:"それはしない。"},
+        {t:"I don't need any.", ja:"何もいらない。"}
+      ],
+      answer2:1,
+      keyWords:[
+        {w:"missed",mean:"いなくて寂しかった",kana:"ミスト",ac:"ミ"},
+        {w:"happened",mean:"起きた",kana:"ハプンド",ac:"ハ"},
+        {w:"feeling better",mean:"気分がよくなって",kana:"フィーリングベター",ac:"フィー"},
+        {w:"recently",mean:"最近",kana:"リーセントリィ",ac:"リー"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>missed you</td><td class='ja'>あなたがいなくて寂しかった</td></tr><tr><td class='en'>yesterday</td><td class='ja'>昨日</td></tr><tr><td class='en'>What happened?</td><td class='ja'>何があったの？</td></tr><tr><td class='en'>Sorry</td><td class='ja'>ごめん</td></tr><tr><td class='en'>How are you now?</td><td class='ja'>今は大丈夫？</td></tr><tr><td class='en'>feeling better</td><td class='ja'>気分がよくなって</td></tr><tr><td class='en'>Thanks</td><td class='ja'>ありがとう</td></tr><tr><td class='en'>Glad to hear that</td><td class='ja'>それを聞いてよかった</td></tr><tr><td class='en'>catch a cold</td><td class='ja'>風邪をひく</td></tr><tr><td class='en'>just</td><td class='ja'>ただ・〜だけ</td></tr><tr><td class='en'>haven't been sleeping well</td><td class='ja'>よく眠れていない</td></tr><tr><td class='en'>recently</td><td class='ja'>最近</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'><b>【空所4番について】</b><br>Aさんが「<b>What happened?</b>（何があったの？）」と聞き、サムが「<b>Sorry.</b>（ごめん）」と謝っています。<br>そのあとAさんが「<b>How are you now?</b>（今は大丈夫？）」と聞いて、サムは「<b>I'm feeling better.</b>（気分がよくなった）」と答えました。<br>「今は大丈夫？」「気分がよくなった」のやり取りから……<span class='think-arrow'>→</span>サムは<b>前は体調が悪かった</b>とわかりますね。</div><div class='step'><b>【空所5番について】</b><br>Aさんが「<b>Did you catch a cold?</b>（風邪ひいたの？）」と聞きました。<br>それに対してサムは空所のあと「<b>I just haven't been sleeping well recently.</b>」と答えています。<br><b>just</b>（ただ）+ <b>haven't been sleeping well</b>（よく眠れていない）+ <b>recently</b>（最近）= <b>「最近よく眠れていないだけ」</b>。<br>つまりサムは<b>「風邪じゃない」と否定している</b>ことになりますね。</div>",
+        "<b>4番</b>: 「今は大丈夫？」と聞かれているということは、サムは<b>体調がよくなかった</b>と判断できますね。<br><b>5番</b>: 風邪を<b>やんわりと否定</b>する表現が入るはずです。",
+        "<b>5番</b>: 「そう（風邪）ではないと思う」という意味の表現を、選択肢から探してみましょう。"
+      ],
+      think:"long対話は<b>空所の後の発言</b>から逆算する。「今は大丈夫？」→ 前は体調不良。「眠れてないだけ」→ 風邪を否定。"
+    },
+    {
+      no:5, scene:"At a shop (glasses)", answer:2,
+      lines:[
+        {sp:"A", text:"I'd like to buy a pair of glasses, but ___ I've never had glasses before.", ja:"メガネを買いたいのですが、___　メガネをかけたことがないんです。", blank:true, blankNo:6,
+         explain:"<p><b>I'd like to 〜</b> は <b>I would like to 〜</b> の短縮形で、<b>「〜したいのですが」</b>という<b>ていねいな言い方</b>です。<b>I want to 〜（〜したい）</b>のお店で使う上品バージョンと考えてください。</p><p><b>a pair of glasses</b> は<b>「メガネ1つ」</b>という言い方です。<b>glasses</b> はメガネを表すとき、レンズが2つある（左右一組）ので<b>必ず複数形</b>になります。だから<b>a pair of（一組の）</b>をつけて数えます。同じように<b>a pair of shoes（靴1足）</b>、<b>a pair of pants（ズボン1本）</b>など、<b>左右一組のもの</b>はすべて <b>a pair of 〜</b> です。</p><p><b>but</b>（しかし）のあと、空所が続きます。さらにそのあとの <b>I've never had glasses before.</b> がヒントになります。</p><p><b>I've never + 過去分詞</b> は<b>「今まで一度も〜したことがない」</b>という<b>経験を否定</b>する形です。<b>before</b>（以前）と一緒によく使われます。</p><p>つまりAは「メガネを買いたいけれど、今まで一度もかけたことがありません」と言っているのです。「初めてだからどうすればいいかわからない」という気持ちが空所に入ります。</p><p>選択肢2の <b>I don't know what to do.（どうしたらいいかわかりません）</b>がぴったりです。<b>what to do</b> は<b>「何をすべきか」</b>という決まった言い方で、<b>疑問詞 + to + 動詞の元の形</b>のパターンです（<b>where to go</b>＝どこへ行くべきか、<b>how to use</b>＝どう使うべきか、など）。</p>"},
+        {sp:"B", text:"No problem. We will first check your eyes. Then, you can choose your frames.", ja:"大丈夫ですよ。まず目を検査して、それからフレームを選べます。",
+         explain:"<p><b>No problem.</b> は<b>「大丈夫ですよ・問題ありません」</b>という決まった言い方です。お礼を言われたときの「どういたしまして」にも使えます。</p><p><b>We will first 〜</b> の <b>first</b> は「まず最初に」。順序を説明しています。</p><p><b>check your eyes</b> は<b>「あなたの目を検査する」</b>。<b>check</b> は「チェック・確認する」です。</p><p><b>Then</b> は「それから・次に」、<b>you can 〜</b> は「あなたは〜できる」。</p><p><b>choose your frames</b> は<b>「あなたのフレームを選ぶ」</b>。<b>frames</b> はメガネの「フレーム（枠）」です。</p><p>つまり店員（B）は、初めてのお客さん（A）に「まず目を検査して、それからフレームを選びましょう」と<b>手順を教えて</b>います。これも、Aが「どうしたらいいかわからない」と困っていたから出てくる返事ですね。</p>"},
+        {sp:"A", text:"How long does it take to get the glasses?", ja:"メガネができるまで、どのくらいかかりますか？",
+         explain:"<p><b>How long</b> は<b>「どのくらい長く・どのくらいの時間」</b>という疑問詞です。時間の長さを聞きたいときに使います。</p><p><b>does it take</b> は<b>It takes（時間がかかる）</b>の疑問形で、<b>「（時間が）かかりますか？」</b>。</p><p><b>to get the glasses</b> は<b>「メガネを手に入れるのに」</b>。<b>to + 動詞の元の形</b>で「〜するために・〜するのに」という意味になります。</p><p>全体で「メガネを手に入れるまでに、どのくらいの時間がかかりますか？」という質問です。</p>"},
+        {sp:"B", text:"It'll take about one week after we take your order.", ja:"ご注文をいただいてから、約1週間かかります。",
+         explain:"<p><b>It'll take 〜</b> の <b>it</b> は形だけの主語で訳しません。<b>「〜（の時間）がかかります」</b>という決まった形です。</p><p><b>about one week</b> は「約1週間」。<b>about</b>（だいたい）+ <b>one week</b>（1週間）。</p><p><b>after we take your order</b> の <b>after</b> は「〜のあとで」、<b>take your order</b> は<b>「ご注文をいただく」</b>という決まった言い方です。レストランやお店でよく聞く表現です。</p>"},
+        {sp:"A", text:"I see. ___", ja:"なるほど。___", blank:true, blankNo:7,
+         explain:"<p><b>I see.</b> は<b>「なるほど・わかりました」</b>という相づちです。</p><p>空所には何が入るでしょうか？ 次のBの返事 <b>Yes, of course. You can use electronic money as well, if that is easier.</b> がヒントです。</p><p><b>electronic money</b> は<b>「電子マネー」</b>です。Bは<b>「電子マネーも使えますよ」</b>と言っています。<b>as well</b> は <b>too</b> と同じで「〜も」、<b>if that is easier</b> は「もしその方が楽なら」。</p><p>「電子マネーも使える」と言っているということは、Aは<b>支払い方法</b>について何か質問したはずです。</p><p>選択肢4の <b>Can I pay by credit card?（クレジットカードで払えますか？）</b>がぴったりです。<b>Can I 〜?</b> は「〜してもいいですか？」という許可を求める形、<b>pay by + 支払い手段</b>で<b>「〜で払う」</b>。たとえば <b>pay by cash（現金で払う）</b>、<b>pay by credit card（クレジットカードで払う）</b>です。</p>"},
+        {sp:"B", text:"Yes, of course. You can use electronic money as well, if that is easier.", ja:"はい、もちろんです。電子マネーも使えますよ、もしその方が楽でしたら。",
+         explain:"<p><b>Yes, of course.</b> は<b>「はい、もちろんです」</b>。許可をはっきり認める言い方です。</p><p><b>You can use 〜</b> は「あなたは〜が使える」。</p><p><b>electronic money</b>（電子マネー）<b>as well</b>（〜も）= 「電子マネーも」。<b>as well</b> は <b>too</b> と同じ意味ですが、お店ではこちらの方がていねいに聞こえます。</p><p><b>if that is easier</b> は「もしその方（電子マネー）が（クレジットカードより）楽なら」。<b>easier</b> は <b>easy（楽な・簡単な）</b>の比較級です。</p><p>つまり店員は「クレジットカードでも払えますし、電子マネーでも大丈夫ですよ」と<b>追加の選択肢</b>を伝えています。</p>"}
+      ],
+      choices:[
+        {t:"I don't have any money.", ja:"お金がない。"},
+        {t:"I don't know what to do.", ja:"どうしたらいいかわからない。"},
+        {t:"I know how many glasses you have.", ja:"あなたが何個メガネを持っているか知っている。"},
+        {t:"I already have nice glasses.", ja:"もう良いメガネを持っている。"}
+      ],
+      choices2:[
+        {t:"Can you buy me new ones?", ja:"新しいのを買ってくれる？"},
+        {t:"Can I leave them here?", ja:"ここに置いていってもいい？"},
+        {t:"Can you show me where to go?", ja:"どこに行けばいいか教えて？"},
+        {t:"Can I pay by credit card?", ja:"クレジットカードで払える？"}
+      ],
+      answer2:4,
+      keyWords:[
+        {w:"glasses",mean:"メガネ",kana:"グラスィズ",ac:"グ"},
+        {w:"frames",mean:"フレーム",kana:"フレームズ",ac:"フ"},
+        {w:"order",mean:"注文",kana:"オーダー",ac:"オー"},
+        {w:"electronic money",mean:"電子マネー",kana:"エレクトロニックマニー",ac:"トロ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>I'd like to buy</td><td class='ja'>買いたいのですが</td></tr><tr><td class='en'>a pair of glasses</td><td class='ja'>メガネ1つ</td></tr><tr><td class='en'>I've never had ... before</td><td class='ja'>今まで一度も持ったことがない</td></tr><tr><td class='en'>No problem</td><td class='ja'>大丈夫ですよ</td></tr><tr><td class='en'>check your eyes</td><td class='ja'>目を検査する</td></tr><tr><td class='en'>choose your frames</td><td class='ja'>フレームを選ぶ</td></tr><tr><td class='en'>How long does it take?</td><td class='ja'>どれくらいかかる？</td></tr><tr><td class='en'>about one week</td><td class='ja'>約1週間</td></tr><tr><td class='en'>take your order</td><td class='ja'>ご注文をいただく</td></tr><tr><td class='en'>I see</td><td class='ja'>なるほど</td></tr><tr><td class='en'>of course</td><td class='ja'>もちろん</td></tr><tr><td class='en'>electronic money</td><td class='ja'>電子マネー</td></tr><tr><td class='en'>as well</td><td class='ja'>〜も</td></tr><tr><td class='en'>easier</td><td class='ja'>より楽な</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'><b>【空所6番について】</b><br>Aさんが「メガネを買いたい」と言ったあと、空所が来て、続けて「<b>I've never had glasses before.</b>（今までメガネをかけたことがない）」と言っています。<br>そのあと店員（B）が「<b>No problem.</b>（大丈夫です）」と言って、<b>「まず目を検査して、それからフレームを選びましょう」</b>と<b>手順を教えてくれて</b>います。<span class='think-arrow'>→</span>つまりAさんは<b>初めてで何をしたらいいか分からない</b>と困っていたのですね。</div><div class='step'><b>【空所7番について】</b><br>Aさんが何かを聞いて、店員（B）は「<b>Yes, of course. You can use electronic money as well, if that is easier.</b>（はい、もちろん。電子マネーも使えますよ、もしその方が楽なら）」と答えています。<br><b>electronic money（電子マネー）</b>を使えると言っているので、Aさんは<b>支払い方法</b>について何かを聞いたとわかります。<span class='think-arrow'>→</span>「電子マネー<b>も</b>使える」ということは、もう一つの<b>支払い方法</b>について聞いたはずですね。</div>",
+        "<b>6番</b>: 「初めてだから<b>どうしたらいいかわからない</b>」という気持ちの表現が入ります。<br><b>7番</b>: お店の<b>支払い方法</b>といえば、現金以外に何があるでしょうか？",
+        "<b>7番</b>: 選択肢の中で「<b>支払い</b>に関する質問」になっているものはどれでしょう？"
+      ],
+      think:"<b>支払い方法</b>に関する返答 = クレジットカードの質問。困っている人にお店が「大丈夫」と教える流れ。"
+    }
+  ],
+  "R5-2": [
+    {
+      no:1, scene:"At a library", answer:1,
+      lines:[
+        {sp:"A", text:"Hi, I'm looking for the science section.", ja:"こんにちは、科学のコーナーを探しています。",
+         explain:"<p><b>Hi</b> は「やあ・こんにちは」という気軽なあいさつです。</p><p><b>I'm looking for 〜</b> は<b>「〜を探しています」</b>という決まった言い方です。<b>look for 〜</b> で「〜を探す」という意味になります。お店や図書館で何かを探しているときによく使う表現です。</p><p><b>science</b> は<b>「科学」</b>、<b>section</b> は<b>「コーナー・部門・区画」</b>です。図書館の中の<b>「科学のコーナー」</b>を指しています。</p>"},
+        {sp:"B", text:"OK, are you looking for books in a specific scientific field?", ja:"わかりました、特定の科学分野の本をお探しですか？",
+         explain:"<p><b>OK</b> は「わかりました」という相づちです。</p><p><b>are you looking for 〜?</b> は前の文と同じ <b>look for（〜を探す）</b>を使った疑問文で、<b>「〜を探しているのですか？」</b>となります。</p><p><b>books in a specific scientific field</b> を分けてみましょう。<br><b>books</b>（本）<b>in</b>（〜の中の）<b>a specific scientific field</b>（特定の科学分野）。<br>つまり「<b>特定の科学分野の本</b>」という意味です。</p><p><b>specific</b> は<b>「特定の・はっきりした」</b>という意味です。「ぼんやりした」ではなく「はっきり決まった」という感じです。<b>scientific</b> は <b>science（科学）</b>の形容詞形で「科学の」、<b>field</b> は<b>「分野」</b>です。</p>"},
+        {sp:"A", text:"Yes, I'd like to find some books on DNA and genetics.", ja:"はい、DNAと遺伝学についての本を見つけたいのです。",
+         explain:"<p><b>Yes</b> は「はい」。</p><p><b>I'd like to 〜</b> は <b>I would like to 〜</b> の短縮形で、<b>「〜したいのですが」</b>というていねいな言い方です。</p><p><b>find some books</b> は<b>「いくつかの本を見つける」</b>。<b>some</b> は「いくつかの」、本の数は決まっていないけれど、何冊か欲しいという気持ちです。</p><p><b>on DNA and genetics</b> の <b>on</b> は<b>「〜について」</b>という意味の前置詞です。本のテーマを表すときによく使われます。<br><b>genetics</b> は<b>「遺伝学」</b>です。難しい単語ですが、<b>gene（遺伝子）</b>と関係のある言葉です。</p>"},
+        {sp:"B", text:"___", ja:"___", blank:true,
+         explain:"<p>Aさんが「<b>DNAと遺伝学の本</b>」を探していると言いました。空所には、図書館員（B）の<b>その本のある場所への案内</b>が入るはずです。</p><p>選択肢を見てみましょう。<br>① <b>OK, go to Section B, Biology.</b>（B区画の生物学コーナーに行ってください）<br>DNAや遺伝学は<b>生物学（Biology）</b>の一部です。Bさんが具体的なコーナーを案内している、自然な答えですね。</p><p>他の選択肢は文脈に合いません。② は「金曜日までに返却を」という返却の話、③ は「今すぐ読んで」と命令している不自然な内容、④ は「身分証を見せて」という関係のない話です。</p>"}
+      ],
+      choices:[
+        {t:"OK, go to Section B, Biology.", ja:"B区画の生物学コーナーに行ってください。"},
+        {t:"You have to return them by Friday.", ja:"金曜日までに返却しなければなりません。"},
+        {t:"OK, read them right now.", ja:"はい、今すぐ読んでください。"},
+        {t:"You need to show me your ID card.", ja:"身分証を見せる必要があります。"}
+      ],
+      keyWords:[
+        {w:"looking for",mean:"〜を探している",kana:"ルッキングフォー",ac:"ルッ"},
+        {w:"section",mean:"コーナー・区画",kana:"セクション",ac:"セ"},
+        {w:"specific",mean:"特定の",kana:"スペスィフィック",ac:"スィ"},
+        {w:"genetics",mean:"遺伝学",kana:"ジェネティクス",ac:"ネ"},
+        {w:"Biology",mean:"生物学",kana:"バイアロジィ",ac:"ア"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>library</td><td class='ja'>図書館</td></tr><tr><td class='en'>looking for</td><td class='ja'>〜を探している</td></tr><tr><td class='en'>science section</td><td class='ja'>科学のコーナー</td></tr><tr><td class='en'>books</td><td class='ja'>本</td></tr><tr><td class='en'>specific</td><td class='ja'>特定の</td></tr><tr><td class='en'>scientific field</td><td class='ja'>科学分野</td></tr><tr><td class='en'>find</td><td class='ja'>見つける</td></tr><tr><td class='en'>DNA and genetics</td><td class='ja'>DNAと遺伝学</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>図書館</b>。Aさんが「<b>I'm looking for the science section.</b>」（科学のコーナーを探しています）と言っています。</div><div class='step'>図書館員（B）が「<b>specific scientific field</b>（特定の科学分野）の本ですか？」と聞きました。<br>そこでAさんは「<b>DNA and genetics</b>（DNAと遺伝学）」と答えました。<span class='think-arrow'>→</span>つまりAさんは<b>はっきりしたテーマの本</b>を探していますね。</div><div class='step'>これに対する図書館員（B）の答えが空所に入ります。<br>図書館員さんが普通すること……<b>本のある場所を教える</b>ことですね。</div>",
+        "DNAや遺伝学は、理科のうちでも<b>生き物に関する分野</b>に入ります。<br>つまり<b>生物学</b>のコーナーに行けばいいということ。",
+        "「<b>生物学のコーナーへ行ってください</b>」と案内している選択肢を探してみましょう。"
+      ],
+      think:"specific（特定の）→ DNA・遺伝学 → 生物学（Biology） → 案内"
+    },
+    {
+      no:2, scene:"At a post office", answer:4,
+      lines:[
+        {sp:"A", text:"I'd like to send a package to Victoria, Australia.", ja:"オーストラリアのビクトリア州に荷物を送りたいのですが。",
+         explain:"<p><b>I'd like to 〜</b> は<b>「〜したいのですが」</b>というていねいな言い方です。</p><p><b>send a package</b> は<b>「荷物を送る」</b>という意味です。<b>send</b>（送る）+ <b>a package</b>（小包・荷物）。</p><p><b>to Victoria, Australia</b> は「オーストラリアのビクトリア州へ」。<b>to</b>（〜へ）で行き先を表します。<b>Victoria</b> はオーストラリアの州の名前です。</p>"},
+        {sp:"B", text:"First, you need to register both your information and the recipient's information.", ja:"まず、ご自分の情報と受取人の情報の両方を登録する必要があります。",
+         explain:"<p><b>First</b> は<b>「まず・最初に」</b>。手順を説明するときに使います。</p><p><b>you need to 〜</b> は<b>「あなたは〜する必要がある」</b>。<b>need to + 動詞の元の形</b>の形です。</p><p><b>register</b> は<b>「登録する」</b>という意味です。</p><p><b>both A and B</b> は<b>「AとBの両方」</b>という決まった言い方です。<br><b>your information</b>（あなたの情報）と <b>the recipient's information</b>（受取人の情報）の両方ですね。</p><p><b>recipient</b> は<b>「受取人」</b>という意味です。少し難しい単語ですが、<b>receive（受け取る）</b>と関係のある単語と考えるとイメージしやすいです。</p>"},
+        {sp:"A", text:"___", ja:"___", blank:true,
+         explain:"<p>Bさんが「<b>register（登録する）必要があります</b>」と言いました。<br>そのあとBさんが「<b>You can do it here on this computer.</b>（このコンピューターでできますよ）」と答えています。</p><p><b>do it</b>（それをする）は <b>register</b> を指しています。Bさんは<b>「登録のやり方」</b>を答えているので、Aさんは<b>登録の方法</b>を質問したのですね。</p><p>選択肢を見てみましょう。<br>① <b>When do I have to register them?</b>（いつ登録？）→ 「いつ」を聞いている<br>② <b>What do I have to do that for?</b>（何のために？）→ 「目的」を聞いている<br>③ <b>Where do I post it?</b>（どこで投函？）→ 「場所」を聞いている<br>④ <b>How do I do that?</b>（どうやって？）→ <b>「方法」</b>を聞いている<br><br>「コンピューターでできる」と<b>方法を答えている</b>ので、質問は「<b>どうやって？</b>」です。</p>"},
+        {sp:"B", text:"You can do it here on this computer.", ja:"このコンピューターでできますよ。",
+         explain:"<p><b>You can 〜</b> は「〜できます」。</p><p><b>do it</b> の <b>it</b> は前の話に出てきた <b>register（登録する）</b>を指しています。「それ（登録）をすることができますよ」という意味です。</p><p><b>here on this computer</b> は<b>「ここのこのコンピューターで」</b>。<b>on</b> は機器を使うときに使う前置詞です。たとえば <b>on TV</b>（テレビで）、<b>on the phone</b>（電話で）も同じ <b>on</b> です。</p>"}
+      ],
+      choices:[
+        {t:"When do I have to register them?", ja:"いつ登録しなければなりませんか？"},
+        {t:"What do I have to do that for?", ja:"何のためにそれをしなければなりませんか？"},
+        {t:"Where do I post it?", ja:"どこで投函すればいいですか？"},
+        {t:"How do I do that?", ja:"どうやってそれをするのですか？"}
+      ],
+      keyWords:[
+        {w:"package",mean:"荷物・小包",kana:"パキッジ",ac:"パ"},
+        {w:"register",mean:"登録する",kana:"レジスター",ac:"レ"},
+        {w:"both",mean:"両方",kana:"ボウス",ac:"ボウ"},
+        {w:"recipient",mean:"受取人",kana:"リスィピエント",ac:"スィ"},
+        {w:"computer",mean:"コンピューター",kana:"コンピューター",ac:"ピュー"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>post office</td><td class='ja'>郵便局</td></tr><tr><td class='en'>send a package</td><td class='ja'>荷物を送る</td></tr><tr><td class='en'>Australia</td><td class='ja'>オーストラリア</td></tr><tr><td class='en'>First</td><td class='ja'>まず</td></tr><tr><td class='en'>need to</td><td class='ja'>〜する必要がある</td></tr><tr><td class='en'>register</td><td class='ja'>登録する</td></tr><tr><td class='en'>both ... and ...</td><td class='ja'>〜と〜の両方</td></tr><tr><td class='en'>information</td><td class='ja'>情報</td></tr><tr><td class='en'>computer</td><td class='ja'>コンピューター</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>郵便局</b>。Aさんがオーストラリアに荷物を送りたいと言っています。</div><div class='step'>Bさん（局員）が「<b>First, you need to register</b>」（まず登録が必要です）と言いました。<br>それに対してAさんが何かを聞き、Bさんは「<b>You can do it here on this computer.</b>（このコンピューターでできますよ）」と答えています。<span class='think-arrow'>→</span>「コンピューターで<b>できる</b>」と方法を教えてくれているので、Aさんは<b>やり方</b>を聞いたはずですね。</div>",
+        "選択肢の最初の単語に注目しましょう。<br><b>When</b>（いつ）/ <b>What ... for</b>（何のために）/ <b>Where</b>（どこで）/ <b>How</b>（どうやって）。",
+        "「<b>どうやって？</b>」という意味になっている疑問詞を選びましょう。"
+      ],
+      think:"Bがコンピューターで「できる」と方法を答えている → Aは「どうやって？」と聞いた"
+    },
+    {
+      no:3, scene:"On a street", answer:3,
+      lines:[
+        {sp:"A", text:"Did you know the new sports center has just opened?", ja:"新しいスポーツセンターが開いたばかりなの、知ってた？",
+         explain:"<p><b>Did you know 〜?</b> は<b>「〜って知ってた？」</b>と相手にたずねる形です。</p><p><b>the new sports center</b> は「その新しいスポーツセンター」。</p><p><b>has just opened</b> は <b>have just + 過去分詞</b> の形で<b>「ちょうど〜したばかり」</b>という意味です。これを<b>現在完了形</b>といい、過去のできごとが現在につながっている感じを表します。<br>つまり「<b>ちょうど開店したばかり</b>」という意味です。</p>"},
+        {sp:"B", text:"Yes. ___", ja:"うん。___", blank:true,
+         explain:"<p>Bさんは「<b>Yes</b>（うん、知ってる）」と言ったあと、空所が続きます。<br>そのあとAさんが「<b>No, but my sister plays tennis there every Saturday.</b>（いや、でも姉が毎週土曜にそこでテニスをしてるよ）」と答えています。</p><p>ポイントは<b>Aさんが「No」と答えている</b>こと。これは何かの<b>Yes/Noの質問</b>に対する答えです。</p><p>選択肢を見てみましょう。<br>① <b>Will you do me a favor?</b>（お願いがあるんだけど）→ Yes/Noの質問だが、文脈に合わない<br>② <b>Did you check how it's built?</b>（建て方をチェックした？）→ 不自然<br>③ <b>Have you already been there?</b>（もうそこに行ったことがある？）→ Aの「No, but my sister...」と自然につながる<br>④ <b>Do you have the name list?</b>（名簿を持ってる？）→ 文脈に合わない</p><p>つまりBさんはAさんに<b>「もうそこに行ったことがあるの？」</b>と聞き返したのですね。</p>"},
+        {sp:"A", text:"No, but my sister plays tennis there every Saturday.", ja:"いや、でも姉が毎週土曜日にそこでテニスをしているよ。",
+         explain:"<p><b>No, but 〜</b> は「いや、でも〜」。<b>but</b> でつなぐと「自分はNoだけど、別の話で関連がある」と話を広げられます。</p><p><b>my sister</b> は「私の姉（妹）」。</p><p><b>plays tennis there</b> は「そこでテニスをする」。<b>there</b>（そこ）は<b>the new sports center（新しいスポーツセンター）</b>を指しています。</p><p><b>every Saturday</b> は<b>「毎週土曜日に」</b>。<b>every + 曜日</b>で「毎週〜曜日に」という意味になります。</p>"},
+        {sp:"B", text:"That's nice. Maybe we can go there together sometime soon.", ja:"いいね。近いうちに一緒に行ってみようよ。",
+         explain:"<p><b>That's nice.</b> は「いいね・素敵だね」という反応です。</p><p><b>Maybe</b> は<b>「たぶん・もしかして」</b>。提案をやわらかくする言葉です。</p><p><b>we can go there together</b> は「一緒にそこに行ける」。</p><p><b>sometime soon</b> は<b>「近いうちに」</b>。<b>sometime</b>（いつか）+ <b>soon</b>（すぐに）= <b>「近いうちに」</b>。</p>"}
+      ],
+      choices:[
+        {t:"Will you do me a favor?", ja:"お願いがあるんだけど。"},
+        {t:"Did you check how it's built?", ja:"どう建てられたかチェックした？"},
+        {t:"Have you already been there?", ja:"もうそこに行ったことある？"},
+        {t:"Do you have the name list?", ja:"名簿を持ってる？"}
+      ],
+      keyWords:[
+        {w:"sports center",mean:"スポーツセンター",kana:"スポーツセンター",ac:"スポー"},
+        {w:"has just opened",mean:"開店したばかり",kana:"ハズジャストオウプンド",ac:"オウ"},
+        {w:"my sister",mean:"私の姉/妹",kana:"マイスィスター",ac:"スィ"},
+        {w:"every Saturday",mean:"毎週土曜",kana:"エヴリィサタディ",ac:"エヴ"},
+        {w:"together",mean:"一緒に",kana:"トゥゲザー",ac:"ゲ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>street</td><td class='ja'>道</td></tr><tr><td class='en'>Did you know ...?</td><td class='ja'>〜知ってた？</td></tr><tr><td class='en'>sports center</td><td class='ja'>スポーツセンター</td></tr><tr><td class='en'>has just opened</td><td class='ja'>開店したばかり</td></tr><tr><td class='en'>my sister</td><td class='ja'>姉/妹</td></tr><tr><td class='en'>plays tennis there</td><td class='ja'>そこでテニスをする</td></tr><tr><td class='en'>every Saturday</td><td class='ja'>毎週土曜日</td></tr><tr><td class='en'>go there together</td><td class='ja'>一緒にそこに行く</td></tr><tr><td class='en'>sometime soon</td><td class='ja'>近いうちに</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>Aさんが「<b>新しいスポーツセンターが開いたばかり</b>」と話を始めました。<br>Bさんは「Yes」と答え、空所で何か聞き返しました。</div><div class='step'>そのあとAさんが「<b>No, but my sister plays tennis there every Saturday.</b>（いや、でも姉が毎週土曜にそこでテニスしてる）」と答えています。<br><b>「No」</b>と答えているので、Bさんは何かの<b>Yes/No質問</b>をしたのですね。<span class='think-arrow'>→</span>姉のことに話が広がっているので、<b>Aさん本人がそこに行ったかどうか</b>を聞いたのが自然です。</div>",
+        "Aさんは「自分はまだ行ってないけど、姉は…」と話を広げています。<br>Bさんが聞いたのは「<b>あなたはもう行った？</b>」のはずです。",
+        "「<b>もうそこに行ったことある？</b>」という意味の選択肢を探してみましょう。"
+      ],
+      think:"AがNoで答え、姉の話に広げる → Bは「もう行った？」と聞いた"
+    },
+    {
+      no:4, scene:"At an office", answer:4,
+      lines:[
+        {sp:"A", text:"Welcome back to work, Hana. How was your trip?", ja:"おかえりなさい、ハナ。旅行はどうでしたか？",
+         explain:"<p><b>Welcome back to work</b> は<b>「お仕事に戻ってきてようこそ＝おかえりなさい」</b>。出張や休暇から戻ってきた同僚にかける決まり文句です。</p><p><b>How was your trip?</b> は<b>「旅行はどうでしたか？」</b>。過去のできごとの感想を聞くときの形 <b>How was 〜?</b> です。</p>"},
+        {sp:"B", text:"It was amazing but the long flight made me exhausted.", ja:"素晴らしかったです。でも長いフライトでくたくたに疲れました。",
+         explain:"<p><b>It was amazing</b> は「それ（旅行）は素晴らしかった」。<b>amazing</b> は<b>「素晴らしい・驚くほどよい」</b>という強い肯定の意味です。</p><p><b>but</b>（しかし）で逆接して、悪い面も伝えています。</p><p><b>the long flight made me exhausted</b> は少し難しい形です。<br><b>made me exhausted</b> = <b>make + 人 + 形容詞</b>の形で<b>「人を〜の状態にした」</b>。<br><b>the long flight</b>（長いフライト）が <b>me</b>（私）を <b>exhausted</b>（くたくたの状態に）<b>made</b>（させた）。<br>つまり「<b>長いフライトのせいでくたくたになった</b>」という意味です。</p><p><b>exhausted</b> は<b>「（疲れて）くたくた」</b>という意味で、<b>tired（疲れた）</b>よりさらに強い言葉です。</p>"},
+        {sp:"A", text:"___", ja:"___", blank:true,
+         explain:"<p>そのあとBさんが「<b>Dream Airways. Everything was wonderful except the flight time.</b>（ドリームエアウェイズです。フライト時間以外はすべて素晴らしかったです）」と答えています。</p><p><b>Dream Airways</b> は<b>航空会社</b>の名前ですね。Bさんが航空会社の名前を答えているということは、Aさんは<b>「どの航空会社？」</b>と聞いたとわかります。</p><p>選択肢を見てみましょう。<br>① <b>What did you do during the flight?</b>（フライト中何をしましたか？）→ 答えと合わない<br>② <b>How long did it take?</b>（どのくらいかかりましたか？）→ 時間を聞いている。「Dream Airways」とは合わない<br>③ <b>Why did you choose this airline?</b>（なぜこの航空会社を選んだ？）→「なぜ」の答えにはならない<br>④ <b>Which airline did you use?</b>（どの航空会社を使った？）→ <b>「Dream Airways」と完全に合う</b></p><p><b>Which 〜?</b> は「いくつかの選択肢の中でどれ？」という疑問詞、<b>airline</b> は<b>「航空会社」</b>です。</p>"},
+        {sp:"B", text:"Dream Airways. Everything was wonderful except the flight time.", ja:"ドリームエアウェイズです。フライト時間以外はすべて素晴らしかったですよ。",
+         explain:"<p><b>Dream Airways.</b> は架空の航空会社名です。<b>Airways</b> は「航空会社」という意味で、社名によく使われます。</p><p><b>Everything was wonderful</b> は「すべてが素晴らしかった」。</p><p><b>except 〜</b> は<b>「〜を除いて・〜以外」</b>という意味です。<b>「フライトの時間以外は」</b>という意味になります。</p><p>つまりBさんは「機材やサービスは良かったけれど、時間が長すぎて疲れた」と言っているのですね。前の文の <b>exhausted</b> ともつながります。</p>"}
+      ],
+      choices:[
+        {t:"What did you do during the flight?", ja:"フライト中、何をしましたか？"},
+        {t:"How long did it take?", ja:"どのくらいかかりましたか？"},
+        {t:"Why did you choose this airline?", ja:"なぜこの航空会社を選んだのですか？"},
+        {t:"Which airline did you use?", ja:"どの航空会社を使ったのですか？"}
+      ],
+      keyWords:[
+        {w:"Welcome back",mean:"おかえりなさい",kana:"ウェルカムバック",ac:"ウェ"},
+        {w:"trip",mean:"旅行",kana:"トリップ",ac:"トリ"},
+        {w:"amazing",mean:"素晴らしい",kana:"アメイズィング",ac:"メイ"},
+        {w:"flight",mean:"フライト・飛行",kana:"フライト",ac:"フラ"},
+        {w:"exhausted",mean:"くたくた",kana:"イグゾースティッド",ac:"ゾー"},
+        {w:"airline",mean:"航空会社",kana:"エアライン",ac:"エア"},
+        {w:"except",mean:"〜を除いて",kana:"イクセプト",ac:"セ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>office</td><td class='ja'>オフィス</td></tr><tr><td class='en'>Welcome back</td><td class='ja'>おかえりなさい</td></tr><tr><td class='en'>trip</td><td class='ja'>旅行</td></tr><tr><td class='en'>amazing</td><td class='ja'>素晴らしい</td></tr><tr><td class='en'>long flight</td><td class='ja'>長いフライト</td></tr><tr><td class='en'>exhausted</td><td class='ja'>くたくた</td></tr><tr><td class='en'>Dream Airways</td><td class='ja'>ドリームエアウェイズ（航空会社名）</td></tr><tr><td class='en'>wonderful</td><td class='ja'>素晴らしい</td></tr><tr><td class='en'>except</td><td class='ja'>〜を除いて</td></tr><tr><td class='en'>flight time</td><td class='ja'>飛行時間</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>オフィス</b>。Aさんが旅行から戻ったハナ（B）に「<b>How was your trip?</b>（旅行はどうでした？）」と聞きました。</div><div class='step'>Bさんは「素晴らしかったけど長いフライトでくたくた」と答え、Aさんが何か質問したあと、Bさんは「<b>Dream Airways</b>」と<b>航空会社の名前</b>を答えています。<span class='think-arrow'>→</span>つまりAさんは<b>航空会社</b>について何かを聞いたのですね。</div>",
+        "選択肢の中で<b>airline（航空会社）</b>という単語が出てくるものを探しましょう。",
+        "選択肢に「airline」を含むものは2つあります。<br>「<b>Dream Airways</b>」という固有の社名が答えなので、<b>「どの〜？」</b>と聞いている方を選びましょう。"
+      ],
+      think:"航空会社名「Dream Airways」が答え → Aは「どの航空会社？」と聞いた"
+    },
+    {
+      no:5, scene:"In a museum", answer:1,
+      lines:[
+        {sp:"A", text:"Excuse me, sir. Could you put away your camera, please?", ja:"すみません、お客様。カメラをしまっていただけますか？",
+         explain:"<p><b>Excuse me, sir.</b> は「すみません、お客様」。<b>sir</b> は男性の客や知らない男性へのていねいな呼びかけです。女性なら <b>ma'am</b>。</p><p><b>Could you 〜?</b> は<b>「〜していただけますか？」</b>という<b>とてもていねいな依頼</b>の形です。<b>Can you 〜?</b> よりも丁寧です。</p><p><b>put away</b> は<b>「片づける・しまう」</b>という決まった言い方です。<br><b>your camera</b>（あなたのカメラ）<b>away</b>（離れた場所に）に <b>put</b>（置く）→ <b>「カメラをしまう」</b>です。</p>"},
+        {sp:"B", text:"I'm sorry. What did you say? I didn't catch that.", ja:"すみません、何とおっしゃいましたか？聞き取れませんでした。",
+         explain:"<p><b>I'm sorry.</b> は「すみません」。</p><p><b>What did you say?</b> は<b>「何と言いましたか？」</b>と聞き返す形です。</p><p><b>I didn't catch that.</b> は<b>「それを聞き取れませんでした」</b>という意味の決まった表現です。<br><b>catch</b> は普通「つかまえる」ですが、ここでは<b>「（言葉を）聞き取る」</b>という意味で使われています。<b>that</b> は相手の言ったこと全体を指しています。</p>"},
+        {sp:"A", text:"___ Please put your camera away.", ja:"___　カメラをしまってください。", blank:true,
+         explain:"<p>Bさんは「<b>聞き取れませんでした</b>」と言いました。そこでAさんは空所のあとで<b>「Please put your camera away.（カメラをしまってください）」</b>ともう一度依頼しています。</p><p>でも空所には、<b>もう一度言うときに加える「理由・ルール」</b>が入りそうです。次のBさんの返事 <b>「Oh, I didn't know that. I'm so sorry.」（あ、知りませんでした。本当にすみません）</b>がヒントです。</p><p><b>I didn't know that</b>（それを知らなかった）と言っているので、空所には<b>「あるルール」</b>が入っています。</p><p>選択肢を見てみましょう。<br>① <b>Taking photos is not allowed here.</b>（ここでは写真撮影は許可されていません）→ <b>ルール</b>を伝える内容<br>② Eating（食事）, ③ Drawing（絵を描く）, ④ Calling（電話）はカメラの話と関係ない<br><br>カメラに関係する<b>ルール</b>は①の「写真撮影が許可されていない」ですね。</p><p><b>be not allowed</b> は<b>「許可されていない・してはいけない」</b>という意味です。</p>"},
+        {sp:"B", text:"Oh, I didn't know that. I'm so sorry.", ja:"あ、それは知りませんでした。本当にすみません。",
+         explain:"<p><b>Oh, I didn't know that.</b> は「あ、それを知らなかった」。<b>that</b> は前の文の<b>「ルール」</b>を指しています。</p><p><b>I'm so sorry.</b> は<b>「本当にすみません」</b>。<b>so</b>（とても）が入って強調されています。<br>知らずにルール違反をしてしまったことを謝っているのですね。</p>"}
+      ],
+      choices:[
+        {t:"Taking photos is not allowed here.", ja:"ここでは写真撮影は許可されていません。"},
+        {t:"Eating here is good now.", ja:"ここでの食事は今は良いです。"},
+        {t:"Drawing is a nice try for you.", ja:"絵を描くのはあなたにとって良い試みです。"},
+        {t:"Calling is not something difficult.", ja:"電話は難しいことではありません。"}
+      ],
+      keyWords:[
+        {w:"Could you",mean:"〜していただけますか",kana:"クッジュー",ac:"クッ"},
+        {w:"put away",mean:"片づける・しまう",kana:"プットアウェイ",ac:"アウェ"},
+        {w:"camera",mean:"カメラ",kana:"キャメラ",ac:"キャ"},
+        {w:"didn't catch",mean:"聞き取れなかった",kana:"ディドゥンキャッチ",ac:"キャッ"},
+        {w:"allowed",mean:"許可されている",kana:"アラウド",ac:"ラウ"},
+        {w:"photos",mean:"写真",kana:"フォウトウズ",ac:"フォウ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>museum</td><td class='ja'>博物館・美術館</td></tr><tr><td class='en'>Excuse me, sir</td><td class='ja'>すみません、お客様</td></tr><tr><td class='en'>Could you ...?</td><td class='ja'>〜していただけますか？</td></tr><tr><td class='en'>put away</td><td class='ja'>しまう・片づける</td></tr><tr><td class='en'>camera</td><td class='ja'>カメラ</td></tr><tr><td class='en'>didn't catch</td><td class='ja'>聞き取れなかった</td></tr><tr><td class='en'>I didn't know that</td><td class='ja'>それを知らなかった</td></tr><tr><td class='en'>I'm so sorry</td><td class='ja'>本当にすみません</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>博物館・美術館</b>。Aさん（係員）が「<b>カメラをしまってください</b>」とお願いしました。<br>Bさんは聞き取れず、Aさんはもう一度空所で何かを言って、再度カメラをしまうようお願いしています。</div><div class='step'>Bさんが空所のあと「<b>I didn't know that.（それを知らなかった）</b>」と言って謝っています。<br>つまり空所には<b>あるルール</b>が入っているはずですね。<span class='think-arrow'>→</span>カメラに関係するルールといえば……<b>写真撮影禁止</b>では？</div>",
+        "選択肢の中で「<b>カメラ・写真</b>」に関係するものを探しましょう。",
+        "「<b>写真撮影が許可されていない</b>」という意味の選択肢を選びましょう。"
+      ],
+      think:"カメラをしまう理由 → 撮影禁止のルール"
+    }
+  ],
+  "R5-1": [
+    {
+      no:1, scene:"In a movie theater", answer:1,
+      lines:[
+        {sp:"A", text:"Excuse me. ___", ja:"すみません。___", blank:true,
+         explain:"<p><b>Excuse me.</b> は知らない人に話しかけるときの「すみません」です。</p><p>空所には何が入るでしょうか？　次のBさんの返事 <b>「Oh, really? I thought this was 16D.」（え、本当ですか？ここは16Dだと思いました）</b>がヒントです。</p><p>Bさんが<b>「16Dだと思った」</b>と言っているので、Aさんは<b>「席が違う」</b>とBさんに伝えたとわかります。</p><p>選択肢を見てみましょう。<br>① <b>I'm afraid this is my seat.</b>（残念ながら、ここは私の席なのですが）→ <b>席をめぐる話</b>に合う<br>② I hope you'll enjoy the show.（楽しんでね）→ 不自然<br>③ I think the movie will start soon.（もうすぐ始まる）→ 関係ない<br>④ I'm sad popcorn is sold out.（ポップコーンが売り切れで悲しい）→ 関係ない</p><p><b>I'm afraid 〜</b> は<b>「残念ですが・申し訳ありませんが〜」</b>という、悪いことを切り出すときのていねいな表現です。</p>"},
+        {sp:"B", text:"Oh, really? I thought this was 16D.", ja:"え、本当ですか？ここは16Dだと思いました。",
+         explain:"<p><b>Oh, really?</b> は「え、本当に？」という驚きの反応です。</p><p><b>I thought 〜</b> は<b>「〜だと思った（実は違った）」</b>という意味で、<b>think</b> の過去形 <b>thought</b> を使っています。</p><p><b>this was 16D</b> は「これ（この席）は16Dだった」。<b>16D</b> は座席番号で、列が「16」、その中の「D」の席という意味です。</p>"},
+        {sp:"A", text:"This is 15D. 16D is behind this seat.", ja:"これは15Dです。16Dはこの席の後ろです。",
+         explain:"<p><b>This is 15D.</b> は「これ（この席）は15Dです」。<br>つまりBさんは1列前に座っていたわけですね。</p><p><b>16D is behind this seat.</b> の <b>behind</b> は<b>「〜の後ろに」</b>。<b>this seat</b>（この席）<b>behind</b>（の後ろに）<b>16D is</b>（16Dがあります）。</p>"},
+        {sp:"B", text:"I'm sorry. I'll move right away.", ja:"ごめんなさい。すぐに移動します。",
+         explain:"<p><b>I'm sorry.</b> は「ごめんなさい」。間違えて他人の席に座っていたことを謝っています。</p><p><b>I'll move</b> は <b>I will move</b> の短縮で、「移動します」という意志・予定を表します。</p><p><b>right away</b> は<b>「すぐに・今すぐ」</b>という決まった言い方です。</p>"}
+      ],
+      choices:[
+        {t:"I'm afraid this is my seat.", ja:"残念ながら、ここは私の席なのですが。"},
+        {t:"I hope you'll enjoy the show.", ja:"楽しんでくださいね。"},
+        {t:"I think the movie will start soon.", ja:"もうすぐ映画が始まると思います。"},
+        {t:"I'm sad popcorn is sold out.", ja:"ポップコーンが売り切れで悲しいです。"}
+      ],
+      keyWords:[
+        {w:"Excuse me",mean:"すみません",kana:"イクスキューズミー",ac:"キュー"},
+        {w:"seat",mean:"席",kana:"スィート",ac:"スィー"},
+        {w:"thought",mean:"思った",kana:"ソート",ac:"ソー"},
+        {w:"behind",mean:"〜の後ろに",kana:"ビハインド",ac:"ハイ"},
+        {w:"move",mean:"移動する",kana:"ムーヴ",ac:"ムー"},
+        {w:"right away",mean:"すぐに",kana:"ライトアウェイ",ac:"アウェ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>movie theater</td><td class='ja'>映画館</td></tr><tr><td class='en'>Excuse me</td><td class='ja'>すみません</td></tr><tr><td class='en'>thought</td><td class='ja'>思った</td></tr><tr><td class='en'>15D / 16D</td><td class='ja'>座席番号</td></tr><tr><td class='en'>seat</td><td class='ja'>席</td></tr><tr><td class='en'>behind</td><td class='ja'>後ろに</td></tr><tr><td class='en'>I'm sorry</td><td class='ja'>ごめんなさい</td></tr><tr><td class='en'>move</td><td class='ja'>移動する</td></tr><tr><td class='en'>right away</td><td class='ja'>すぐに</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>映画館</b>。Aさんが「Excuse me（すみません）」と話しかけています。</div><div class='step'>Bさんが「<b>I thought this was 16D</b>（16Dだと思った）」と答えました。<br>そのあとAさんが「<b>This is 15D. 16D is behind this seat.</b>（ここは15D。16Dは後ろです）」と説明しています。<span class='think-arrow'>→</span>つまりBさんは<b>間違って他人の席に座っていた</b>のですね。</div><div class='step'>Aさんが空所で言ったのは、<b>「ここは私の席です」</b>という指摘のはず。</div>",
+        "Aさんは見知らぬ人に対して「ここは私の席なのですが…」と<b>やわらかく指摘</b>しました。",
+        "「I'm afraid 〜」は<b>言いにくいことをやわらかく</b>切り出す表現です。<br>選択肢の中で「<b>これは私の席</b>」という意味を探しましょう。"
+      ],
+      think:"Bが「16Dだと思った」と答え→Aが席を指摘した→「ここは私の席」"
+    },
+    {
+      no:2, scene:"On the phone", answer:4,
+      lines:[
+        {sp:"A", text:"Mom, can you come to the station to pick me up?", ja:"お母さん、駅まで迎えに来てくれる？",
+         explain:"<p><b>Mom</b> は<b>「お母さん」</b>。<b>Mother</b> よりも親しい呼び方です。</p><p><b>Can you 〜?</b> は<b>「〜してくれる？」</b>という気軽な依頼の形です。</p><p><b>come to the station</b> は「駅に来る」。</p><p><b>to pick me up</b> は<b>「私を迎えに」</b>という決まった言い方です。<br><b>pick up</b>（拾い上げる）+ <b>me</b>（私を）が分かれて <b>pick me up</b> になります。<b>「車で迎えに来る」</b>ときの定番表現として覚えてください。</p>"},
+        {sp:"B", text:"I'm still at work. ___", ja:"まだ仕事中なの。___", blank:true,
+         explain:"<p><b>I'm still at work.</b> は「まだ仕事中」。<b>still</b>（まだ）+ <b>at work</b>（仕事中）。</p><p>空所には、<b>母が代わりに提案する内容</b>が入りそうです。次のAさんの返事 <b>「Isn't he at work as well?」（彼も仕事中じゃないの？）</b>がヒントです。</p><p><b>he</b>（彼）は誰でしょうか？　Aさんが「彼も仕事中？」と聞いているので、空所に<b>男性</b>が出てきているはずです。家族の中の男性といえば<b>お父さん</b>ですね。</p><p>選択肢を見てみましょう。<br>① What do you want your dad to do?（パパに何してほしい？）→ ちょっと不自然<br>② How does your dad go there?（パパどうやって行ってる？）→ 文脈に合わない<br>③ When doesn't your dad use his car?（いつパパは車使わない？）→ 不自然<br>④ <b>Why don't you call your dad?</b>（パパに電話してみたら？）→ <b>パパへの電話を提案</b>している</p><p><b>Why don't you 〜?</b> は<b>「〜したらどう？」</b>という提案・アドバイスの形です。</p>"},
+        {sp:"A", text:"Isn't he at work as well?", ja:"パパも仕事中じゃないの？",
+         explain:"<p><b>Isn't he 〜?</b> は<b>「彼は〜じゃないの？」</b>という否定疑問文です。</p><p><b>at work</b> は「仕事中」。</p><p><b>as well</b> は<b>「〜も」</b>という意味で、<b>too</b> と同じです。<br>「お母さんも仕事中、<b>お父さんも</b>仕事中じゃないの？」と聞いているのです。</p>"},
+        {sp:"B", text:"I don't think so. He said he would come home early today.", ja:"そうは思わないよ。今日は早く帰ると言ってたから。",
+         explain:"<p><b>I don't think so.</b> は<b>「そうは思わない」</b>。お父さんは仕事中ではないと思う、という意味です。</p><p><b>He said he would come home early today.</b> を分けてみましょう。<br><b>He said</b>（彼は言った）+ <b>he would come home early today</b>（今日は早く帰ると）。<br>過去の話なので <b>will</b> が <b>would</b> に変わっています。これを<b>時制の一致</b>といいます。</p><p><b>come home early</b> は「早く家に帰る」、<b>today</b> は「今日」。</p>"}
+      ],
+      choices:[
+        {t:"What do you want your dad to do?", ja:"パパに何をしてほしいの？"},
+        {t:"How does your dad go there?", ja:"パパはそこにどうやって行くの？"},
+        {t:"When doesn't your dad use his car?", ja:"パパはいつ車を使わないの？"},
+        {t:"Why don't you call your dad?", ja:"パパに電話してみたら？"}
+      ],
+      keyWords:[
+        {w:"Mom",mean:"お母さん",kana:"マム",ac:"マ"},
+        {w:"station",mean:"駅",kana:"ステイション",ac:"ステ"},
+        {w:"pick me up",mean:"私を迎えに来る",kana:"ピックミーアップ",ac:"ピッ"},
+        {w:"at work",mean:"仕事中",kana:"アットワーク",ac:"ワー"},
+        {w:"as well",mean:"〜も",kana:"アズウェル",ac:"ウェ"},
+        {w:"call",mean:"電話する",kana:"コール",ac:"コー"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>phone</td><td class='ja'>電話</td></tr><tr><td class='en'>Mom / dad</td><td class='ja'>お母さん / パパ</td></tr><tr><td class='en'>station</td><td class='ja'>駅</td></tr><tr><td class='en'>pick me up</td><td class='ja'>迎えに来る</td></tr><tr><td class='en'>still</td><td class='ja'>まだ</td></tr><tr><td class='en'>at work</td><td class='ja'>仕事中</td></tr><tr><td class='en'>as well</td><td class='ja'>〜も</td></tr><tr><td class='en'>come home early</td><td class='ja'>早く帰宅する</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>子ども（A）が母（B）に「<b>駅まで迎えに来て</b>」と頼みました。<br>母は「<b>まだ仕事中</b>」と答え、空所で何かを提案します。</div><div class='step'>Aさんが「<b>Isn't he at work as well?</b>（彼も仕事中じゃないの？）」と聞いています。<br><b>he（彼）</b>は誰のこと？<span class='think-arrow'>→</span>家族の中の男性、つまり<b>お父さん</b>のことですね。<br>Bさんは空所で<b>「お父さんはどう？」と提案した</b>はずです。</div>",
+        "母は「自分は無理だから、お父さんに頼んだら？」と<b>代わりの方法</b>を提案しています。",
+        "<b>「Why don't you 〜?」</b>は「〜したらどう？」という提案の形です。<br>選択肢の中で<b>パパに連絡することを提案</b>しているものを選びましょう。"
+      ],
+      think:"母は仕事中→子に別の方法を提案→「お父さんに電話したら？」"
+    },
+    {
+      no:3, scene:"In the classroom", answer:2,
+      lines:[
+        {sp:"A", text:"Can you see the words on the screen?", ja:"画面の文字が見えますか？",
+         explain:"<p><b>Can you see 〜?</b> は<b>「〜が見えますか？」</b>。<b>can</b> は能力ではなく「見える」という状態を表しています。</p><p><b>the words on the screen</b> は「画面の上の文字」。<b>on the screen</b>（画面の上に）+ <b>the words</b>（その文字）。</p>"},
+        {sp:"B", text:"Mr. Lee, could you make it a little bigger?", ja:"リー先生、もう少し大きくしていただけますか？",
+         explain:"<p><b>Mr. Lee</b> は<b>「リー先生」</b>。<b>Mr.</b> は男性の敬称です。</p><p><b>could you 〜?</b> は<b>Can you 〜?</b> よりていねいな依頼で<b>「〜していただけますか？」</b>。</p><p><b>make it a little bigger</b> を分解してみましょう。<br><b>make + 物 + 形容詞</b> = <b>「物を〜の状態にする」</b>。<br><b>it</b>（それ＝文字）を <b>a little</b>（少し）<b>bigger</b>（より大きく）<b>make</b>（する）。<br>つまり「<b>少し大きくする</b>」となります。<br><b>bigger</b> は <b>big（大きい）</b>の比較級で<b>「より大きい」</b>。</p>"},
+        {sp:"A", text:"___ How about now?", ja:"___　今はどうですか？", blank:true,
+         explain:"<p>Bさん（生徒）が「<b>少し大きくしてください</b>」とお願いしました。空所のあと、Aさん（先生）は <b>How about now?</b>（今はどうですか？）と聞いています。</p><p><b>How about now?</b> は<b>「今はどう？」</b>という、<b>変化のあとの確認</b>の表現です。つまりAさんは<b>すでに文字を大きくしてから</b>聞いていることになります。</p><p>ということは、空所には<b>「お願いを引き受けた言葉」</b>が入るはずです。</p><p>選択肢を見てみましょう。<br>① <b>Of course not.</b>（もちろん違う）→ <b>否定</b>なので合わない<br>② <b>Sure thing.</b>（もちろんいいですよ）→ <b>引き受ける</b>表現<br>③ <b>Don't mention it.</b>（お礼を言わなくていいよ）→ お礼への返答<br>④ <b>You're welcome.</b>（どういたしまして）→ お礼への返答<br><br><b>Sure thing.</b> は <b>「もちろん」「いいですとも」</b>という、依頼を快く引き受けるカジュアルな表現です。</p>"},
+        {sp:"B", text:"Yes, that's perfect. Thank you.", ja:"はい、ばっちりです。ありがとうございます。",
+         explain:"<p><b>Yes, that's perfect.</b> は「はい、ばっちり（完璧）です」。<b>perfect</b> は<b>「完璧な」</b>。</p><p><b>Thank you.</b> は「ありがとうございます」。文字が見やすくなったお礼です。</p>"}
+      ],
+      choices:[
+        {t:"Of course not.", ja:"もちろん違います。"},
+        {t:"Sure thing.", ja:"もちろんいいですよ。"},
+        {t:"Don't mention it.", ja:"気にしないで。"},
+        {t:"You're welcome.", ja:"どういたしまして。"}
+      ],
+      keyWords:[
+        {w:"screen",mean:"画面",kana:"スクリーン",ac:"クリー"},
+        {w:"could you",mean:"〜していただけますか",kana:"クッジュー",ac:"クッ"},
+        {w:"a little",mean:"少し",kana:"アリトル",ac:"リ"},
+        {w:"bigger",mean:"より大きい",kana:"ビガー",ac:"ビ"},
+        {w:"How about now?",mean:"今はどう？",kana:"ハウアバウトナウ",ac:"バ"},
+        {w:"perfect",mean:"完璧",kana:"パーフェクト",ac:"パー"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>classroom</td><td class='ja'>教室</td></tr><tr><td class='en'>see the words</td><td class='ja'>文字を見る</td></tr><tr><td class='en'>screen</td><td class='ja'>画面</td></tr><tr><td class='en'>could you ...?</td><td class='ja'>〜していただけますか？</td></tr><tr><td class='en'>make it bigger</td><td class='ja'>大きくする</td></tr><tr><td class='en'>How about now?</td><td class='ja'>今はどう？</td></tr><tr><td class='en'>perfect</td><td class='ja'>完璧</td></tr><tr><td class='en'>Thank you</td><td class='ja'>ありがとう</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>教室</b>。先生（A）が「<b>画面の文字見える？</b>」と聞きました。<br>生徒（B）は「<b>もう少し大きく</b>」とお願いしました。</div><div class='step'>先生は空所で何か答え、そのあと「<b>How about now?</b>（今はどう？）」と聞いています。<span class='think-arrow'>→</span>つまり先生は<b>すでに大きくしてから</b>確認しているのですね。</div><div class='step'>ということは、空所は<b>お願いを引き受ける言葉</b>です。</div>",
+        "依頼に対する答えは「<b>もちろんいいよ</b>」のような<b>OKの言葉</b>になります。",
+        "選択肢のうち、<b>「いいですよ」と引き受ける表現</b>はどれでしょう？"
+      ],
+      think:"お願い→（OK）→画面を大きくした→今はどう？　空所は「もちろんOK」"
+    },
+    {
+      no:4, scene:"At home (wake up)", answer:3,
+      lines:[
+        {sp:"A", text:"Tina, wake up!", ja:"ティナ、起きなさい！",
+         explain:"<p><b>Tina</b> は人の名前です。</p><p><b>wake up</b> は<b>「目を覚ます・起きる」</b>という意味です。文の最初に動詞が来ているので<b>命令文</b>「起きなさい！」です。</p>"},
+        {sp:"B", text:"Just five more minutes, Dad.", ja:"あと5分だけ、パパ。",
+         explain:"<p><b>Just five more minutes</b> を分解してみましょう。<br><b>Just</b>（〜だけ）+ <b>five more minutes</b>（あと5分）= <b>「あと5分だけ」</b>。<br><b>more</b> は「もっと・あと」という意味で、追加を表します。</p><p><b>Dad</b> は<b>「パパ・お父さん」</b>。</p><p>朝、なかなか起きられない子どもの定番のセリフですね。</p>"},
+        {sp:"A", text:"___", ja:"___", blank:true,
+         explain:"<p>そのあとBさんが「<b>Don't worry. I'll make it on time.</b>（心配しないで。間に合うから）」と答えています。</p><p><b>make it on time</b> は<b>「時間に間に合う」</b>という決まった言い方です。<br>つまりBさん（ティナ）は何かに<b>「間に合う」</b>と言っているのです。<br>「あと5分寝る」と言っているティナに、お父さんは<b>「何かに遅れるよ」</b>と心配する流れですね。</p><p>選択肢を見てみましょう。<br>① You'll be misunderstood.（誤解されるよ）→ 不自然<br>② You'll be sleepy in class.（授業中眠くなるよ）→ 関係はあるが「間に合う」とのつながりが弱い<br>③ <b>You're going to miss the bus.</b>（バスに乗り遅れるよ）→ <b>「間に合う」と完全に対応</b><br>④ You're going to make breakfast.（朝食作るんでしょ）→ 不自然</p><p><b>be going to 〜</b> は<b>「〜することになる・〜してしまう</b>」という近い未来を表します。<b>miss the bus</b> は<b>「バスに乗り遅れる」</b>。</p>"},
+        {sp:"B", text:"Don't worry. I'll make it on time.", ja:"心配しないで。間に合うから。",
+         explain:"<p><b>Don't worry.</b> は<b>「心配しないで」</b>。<b>worry</b> は「心配する」という動詞、文の最初なので命令文の否定形「心配するな」になります。</p><p><b>I'll make it on time.</b> の <b>make it</b> は<b>「うまくやる・間に合う」</b>という意味の決まった言い方です。<b>on time</b>（時間どおりに）と組み合わせて<b>「時間に間に合う」</b>。<br>つまり「<b>大丈夫、間に合うから</b>」と父を安心させているのです。</p>"}
+      ],
+      choices:[
+        {t:"You'll be misunderstood.", ja:"誤解されるよ。"},
+        {t:"You'll be sleepy in class.", ja:"授業中眠くなるよ。"},
+        {t:"You're going to miss the bus.", ja:"バスに乗り遅れるよ。"},
+        {t:"You're going to make breakfast.", ja:"朝食を作るんでしょ。"}
+      ],
+      keyWords:[
+        {w:"wake up",mean:"起きる",kana:"ウェイクアップ",ac:"ウェ"},
+        {w:"five more minutes",mean:"あと5分",kana:"ファイヴモアミニッツ",ac:"ファ"},
+        {w:"Don't worry",mean:"心配しないで",kana:"ドウントウォリィ",ac:"ウォ"},
+        {w:"make it on time",mean:"時間に間に合う",kana:"メイクイットオンタイム",ac:"メイ"},
+        {w:"miss the bus",mean:"バスに乗り遅れる",kana:"ミスザバス",ac:"ミ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>at home</td><td class='ja'>家で</td></tr><tr><td class='en'>wake up</td><td class='ja'>起きる</td></tr><tr><td class='en'>five more minutes</td><td class='ja'>あと5分</td></tr><tr><td class='en'>Dad</td><td class='ja'>パパ</td></tr><tr><td class='en'>Don't worry</td><td class='ja'>心配しないで</td></tr><tr><td class='en'>make it on time</td><td class='ja'>時間に間に合う</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>家</b>。お父さん（A）が「<b>ティナ、起きなさい！</b>」と起こしています。<br>ティナ（B）は「<b>あと5分だけ</b>」と寝ぼけています。</div><div class='step'>お父さんが空所で何か言ったあと、ティナが「<b>Don't worry. I'll make it on time.</b>（心配しないで、間に合うから）」と答えました。<br><b>make it on time</b> は「<b>時間に間に合う</b>」という意味です。<span class='think-arrow'>→</span>「間に合う」と言うからには、お父さんは「<b>何かに遅れるよ</b>」と<b>注意した</b>はずですね。</div>",
+        "朝の家で子どもが間に合わなくて困るもの……たとえば<b>登校のバス</b>や<b>授業</b>などがあります。",
+        "「<b>○○に遅れるよ</b>」とお父さんが警告した、と読める選択肢を選びましょう。<br>「乗り遅れる」という意味の表現に注目です。"
+      ],
+      think:"父：あと寝てると○○に遅れるよ → 子：間に合うから大丈夫"
+    },
+    {
+      no:5, scene:"At an amusement park", answer:3,
+      lines:[
+        {sp:"A", text:"Hi, I'm wondering if my son can go on this ride.", ja:"こんにちは、息子がこの乗り物に乗れるかどうか知りたいのですが。",
+         explain:"<p><b>I'm wondering if 〜</b> は<b>「〜かどうか知りたいのですが・〜だろうか」</b>というていねいな表現です。<b>wonder</b>（不思議に思う・知りたい）+ <b>if 〜</b>（〜かどうか）。</p><p><b>my son</b> は「私の息子」、<b>can go on this ride</b> は<b>「この乗り物に乗ることができる」</b>。<b>go on a ride</b> は遊園地で<b>「乗り物に乗る」</b>という決まった言い方です。<b>ride</b>（乗り物）。</p>"},
+        {sp:"B", text:"If he is taller than this line on the wall, then he can.", ja:"壁のこの線より身長が高ければ、乗れますよ。",
+         explain:"<p><b>If 〜, then ...</b> は<b>「もし〜ならば、…」</b>という条件の文です。</p><p><b>he is taller than this line on the wall</b> を分解してみましょう。<br><b>he is taller</b>（彼はより背が高い）+ <b>than this line</b>（この線より）+ <b>on the wall</b>（壁の上の）。<br>つまり「<b>壁のこの線よりも身長が高ければ</b>」という意味になります。<br><b>taller</b> は <b>tall（背が高い）</b>の比較級です。</p><p><b>then he can</b> は「そうすれば乗れます」。<b>can</b> のあとに <b>go on this ride</b> が省略されています。</p>"},
+        {sp:"A", text:"What about his age?", ja:"年齢はどうですか？",
+         explain:"<p><b>What about 〜?</b> は<b>「〜はどうですか？」</b>という形で、新しいトピックや別のポイントを聞くときに使います。</p><p><b>his age</b> は「彼の年齢」。<br>身長はクリアしていそうだけど、<b>年齢</b>のほうはどうなんだろう？　とAさんが追加で確認しているのです。</p>"},
+        {sp:"B", text:"___ As long as he is tall enough, he'll be fine.", ja:"___　身長さえ十分なら、大丈夫ですよ。", blank:true,
+         explain:"<p>Aさんが「<b>年齢はどう？</b>」と聞きました。それに対するBさんの答えが空所です。</p><p>空所のあとを見ると <b>「As long as he is tall enough, he'll be fine.」（身長さえ十分なら大丈夫）</b>と書いてあります。<br><b>As long as 〜</b> は<b>「〜さえすれば」</b>という条件の表現です。<br>身長だけ問題なければ大丈夫＝<b>年齢は関係ない</b>と言っているのですね。</p><p>選択肢を見てみましょう。<br>① That's also important.（それも重要です）→ <b>「重要」</b>なので合わない<br>② That's interesting.（興味深いです）→ 不自然<br>③ <b>It doesn't matter.</b>（関係ありません）→ <b>「年齢は関係ない」</b>と完全に合う<br>④ It couldn't be better.（最高です）→ 不自然</p><p><b>matter</b> は動詞で<b>「重要である・関係する」</b>。<b>It doesn't matter.</b> は<b>「関係ない・どうでもいい」</b>という決まった言い方です。</p>"}
+      ],
+      choices:[
+        {t:"That's also important.", ja:"それも重要です。"},
+        {t:"That's interesting.", ja:"それは興味深いですね。"},
+        {t:"It doesn't matter.", ja:"関係ありません。"},
+        {t:"It couldn't be better.", ja:"最高です。"}
+      ],
+      keyWords:[
+        {w:"wondering if",mean:"〜かどうか知りたい",kana:"ワンダリングイフ",ac:"ワン"},
+        {w:"son",mean:"息子",kana:"サン",ac:"サ"},
+        {w:"go on this ride",mean:"この乗り物に乗る",kana:"ゴウオンディスライド",ac:"ライ"},
+        {w:"taller",mean:"より背が高い",kana:"トーラー",ac:"トー"},
+        {w:"age",mean:"年齢",kana:"エイジ",ac:"エ"},
+        {w:"As long as",mean:"〜さえすれば",kana:"アズロングアズ",ac:"ロン"},
+        {w:"matter",mean:"重要である",kana:"マター",ac:"マ"}
+      ],
+      hints:[
+        "<p>知っている単語を拾ってみましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>amusement park</td><td class='ja'>遊園地</td></tr><tr><td class='en'>my son</td><td class='ja'>息子</td></tr><tr><td class='en'>this ride</td><td class='ja'>この乗り物</td></tr><tr><td class='en'>taller than</td><td class='ja'>〜より背が高い</td></tr><tr><td class='en'>line on the wall</td><td class='ja'>壁の線</td></tr><tr><td class='en'>What about ...?</td><td class='ja'>〜はどう？</td></tr><tr><td class='en'>age</td><td class='ja'>年齢</td></tr><tr><td class='en'>As long as</td><td class='ja'>〜さえすれば</td></tr><tr><td class='en'>tall enough</td><td class='ja'>十分な身長</td></tr></table><p>これらの単語から想像してみてください。</p><div class='step'>場面は<b>遊園地</b>。Aさん（親）が「息子は乗れる？」と聞きました。<br>Bさん（係員）は「<b>壁の線より身長が高ければOK</b>」と答えました。</div><div class='step'>Aさんが続けて「<b>What about his age?</b>（年齢はどう？）」と聞きました。<br>Bさんは空所で答え、そのあと「<b>As long as he is tall enough, he'll be fine.</b>（身長さえ十分なら大丈夫）」と続けます。<span class='think-arrow'>→</span>身長だけが条件で、<b>年齢は条件にない</b>とわかりますね。</div>",
+        "Bさんは「身長だけが大事」と言っています。<br>つまり<b>「年齢は関係ない」</b>という意味の答えが空所に入ります。",
+        "「<b>関係ありません</b>」「<b>どうでもいい</b>」という意味の選択肢を選びましょう。<br><b>matter</b> という動詞が使われているものに注目です。"
+      ],
+      think:"年齢の質問に対し「身長だけが条件」と答える→年齢は関係ない"
+    }
+  ]
+};
+
+let currentYear = "R7-1";
+let currentQ = 0;
+let reviewList = [];
+let savedSet = new Set();
+let hintShownCount = 0;
+
+function getKey(yr, idx, w){return `${yr}-${idx}-${w}`}
+
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  Object.keys(QUESTIONS_DATA).forEach(y=>{
+    const b = document.createElement('button');
+    b.textContent = `令和${y[1]}年 第${y[3]}回`;
+    if(y===currentYear) b.classList.add('on');
+    b.onclick = ()=>{
+      if(typeof stopAllPlay==='function') stopAllPlay();
+      currentYear=y;currentQ=0;renderYearPick();renderTabs();renderQuestion();
+    };
+    yp.appendChild(b);
+  });
+  ["R7-2","R6-2","R6-1","R5-2","R5-1"].forEach(y=>{
+    if(!QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = `令和${y[1]}年 第${y[3]}回 (準備中)`;
+      b.style.opacity = "0.5";
+      b.disabled = true;
+      yp.appendChild(b);
+    }
+  });
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML='';
+  data.forEach((q,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'q-tab' + (i===currentQ?' active':'');
+    btn.innerHTML = `問${q.no}<br><small style="font-size:.65rem">${q.scene.split('(')[0].trim()}</small>`;
+    btn.onclick = ()=>{
+      if(typeof stopAllPlay==='function') stopAllPlay();
+      currentQ=i;renderTabs();renderQuestion();
+    };
+    tabs.appendChild(btn);
+  });
+}
+
+function highlightWord(text, words){
+  let result = text;
+  const sorted = [...words].sort((a,b)=>b.w.length-a.w.length);
+  sorted.forEach((kw,idx)=>{
+    const re = new RegExp(`\\b(${kw.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})\\b`,'i');
+    result = result.replace(re, (m)=>{
+      const key = getKey(currentYear, currentQ, kw.w);
+      const isSaved = savedSet.has(key);
+      return `<span class="word" data-word="${kw.w}" data-idx="${idx}" onclick="toggleWordPop(this)">${m}<span class="word-pop"><div class="pop-row"><span><b>${kw.mean}</b><br>【${kw.kana.replace(kw.ac, '<span class="accent">'+kw.ac+'</span>')}】</span></div><div class="pop-row" style="margin-top:6px"><button onclick="event.stopPropagation();speak('${kw.w}')">🔊 発音</button><button class="save ${isSaved?'saved':''}" onclick="event.stopPropagation();saveWord('${kw.w}','${kw.mean}','${kw.kana}',this)">${isSaved?'✓ 保存済':'＋ 保存'}</button></div></span></span>`;
+    });
+  });
+  return result;
+}
+
+function renderQuestion(){
+  hintShownCount = 0;
+  const data = QUESTIONS_DATA[currentYear];
+  const q = data[currentQ];
+  const isLong = q.choices2 !== undefined;
+  const container = document.getElementById('qContainer');
+  
+  let dialogHTML = '';
+  q.lines.forEach((line, i)=>{
+    const text = line.blank ? line.text.replace('___', `<span class="blank" data-blank="${line.blankNo||q.no}">__${line.blankNo||q.no}__</span>`) : line.text;
+    const enhanced = highlightWord(text, q.keyWords);
+    // 発音用テキスト（空所部分は飛ばす）
+    const speakText = line.text.replace(/___/g,'').replace(/\s+/g,' ').trim();
+    dialogHTML += `<div class="line" id="line-${i}"><button class="line-play" onclick="speakLine(${i})" title="この文を発音">🔊</button><span class="speaker">${line.sp}:</span>${enhanced}</div>`;
+  });
+
+  // 全文再生コントロール
+  const playAllHTML = `
+    <button class="play-all" id="playAllBtn" onclick="toggleAllPlay()">
+      <span id="playAllIcon">▶️</span>
+      <span id="playAllText">対話全体を聞く</span>
+    </button>
+    <div class="speed-control">
+      <span style="align-self:center;padding:0 8px;font-size:.75rem;color:#666;font-weight:700">速さ：</span>
+      <button data-speed="0.7" onclick="setSpeed(0.7)">ゆっくり</button>
+      <button data-speed="0.9" class="on" onclick="setSpeed(0.9)">ふつう</button>
+      <button data-speed="1.1" onclick="setSpeed(1.1)">はやめ</button>
+    </div>
+  `;
+
+  let choicesHTML = `<div style="margin-top:14px"><div style="font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:6px">問${q.no}（空所${isLong?(q.lines.find(l=>l.blank).blankNo):q.no}）</div><div class="choices" id="ch1">`;
+  q.choices.forEach((c,i)=>{
+    const safeT = c.t.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    choicesHTML += `<div class="choice" onclick="answer(1, ${i+1})">
+      <div><span class="num">${i+1}</span>${c.t}</div>
+      <div class="ja-row">
+        <span class="ja-icon">訳：</span>
+        <span class="ja-text">${c.ja}</span>
+        <button class="choice-spk" onclick="event.stopPropagation();speak('${safeT}')">🔊</button>
+      </div>
+    </div>`;
+  });
+  choicesHTML += '</div></div>';
+  
+  if(isLong){
+    const blank2 = q.lines.filter(l=>l.blank)[1].blankNo;
+    choicesHTML += `<div style="margin-top:14px"><div style="font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:6px">問${q.no}（空所${blank2}）</div><div class="choices" id="ch2">`;
+    q.choices2.forEach((c,i)=>{
+      const safeT = c.t.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+      choicesHTML += `<div class="choice" onclick="answer(2, ${i+1})">
+        <div><span class="num">${i+1}</span>${c.t}</div>
+        <div class="ja-row">
+          <span class="ja-icon">訳：</span>
+          <span class="ja-text">${c.ja}</span>
+          <button class="choice-spk" onclick="event.stopPropagation();speak('${safeT}')">🔊</button>
+        </div>
+      </div>`;
+    });
+    choicesHTML += '</div></div>';
+  }
+  choicesHTML += `<div class="result-msg" id="resultMsg"></div>`;
+
+  const structHTML = q.lines.map((line,i)=>{
+    return `<div class="struct-line">
+      <div class="struct-en"><span class="speaker">${line.sp}:</span>${line.text}</div>
+      <div class="struct-buttons">
+        <button class="spk" onclick="speak(\`${line.text.replace(/`/g,'').replace(/___/g,'blank')}\`)">🔊 発音</button>
+        <button onclick="toggleDetail(${i}, 'ja')">🇯🇵 和訳</button>
+        ${line.explain?`<button class="expl" onclick="toggleDetail(${i}, 'ex')">📖 詳しい解説</button>`:''}
+      </div>
+      <div class="struct-detail" id="det-${i}-ja"><div class="ja">和訳：${line.ja}</div></div>
+      ${line.explain?`<div class="struct-detail" id="det-${i}-ex"><div class="expl-body">${line.explain}</div></div>`:''}
+    </div>`;
+  }).join('');
+
+  const modeHTML = `
+    <div class="mode-tabs">
+      <button class="mode-btn" data-mode="hint" onclick="showMode('hint')">🔍 ヒント<br><small style="font-weight:400">単語はなんとなくわかる</small></button>
+      <button class="mode-btn" data-mode="struct" onclick="showMode('struct')">📖 詳しい解説<br><small style="font-weight:400">中学英語は大体わかる</small></button>
+    </div>
+    <div class="mode-panel" id="panel-hint">
+      <h3>🔍 解くためのヒント</h3>
+      <div class="hint-buttons">
+        <button class="hint-btn" id="nextHintBtn" onclick="showNextHint()">▶ 次のヒントを見る（0/${q.hints.length}）</button>
+      </div>
+      ${q.hints.map((h,i)=>`<div class="hint-box" id="hint${i}"><div class="hint-num">ヒント${i+1}</div>${h}</div>`).join('')}
+    </div>
+    <div class="mode-panel" id="panel-struct">
+      <h3>📖 1文ごとに詳しく解説します</h3>
+      <p style="font-size:.78rem;color:#666;margin-bottom:8px">各英文の「📖 詳しい解説」ボタンを押すと、語句の意味・文法のしくみ・全体訳がわかります。</p>
+      ${structHTML}
+    </div>
+  `;
+
+  container.innerHTML = `
+    <div class="qcard">
+      <div class="scene">📍 ${q.scene}</div>
+      ${playAllHTML}
+      <div class="dialog">${dialogHTML}</div>
+      ${choicesHTML}
+      ${modeHTML}
+    </div>
+  `;
+}
+
+function toggleWordPop(el){
+  document.querySelectorAll('.word-pop.show').forEach(p=>{if(p!==el.querySelector('.word-pop'))p.classList.remove('show')});
+  document.querySelectorAll('.word.tapped').forEach(w=>{if(w!==el)w.classList.remove('tapped')});
+  el.classList.toggle('tapped');
+  el.querySelector('.word-pop').classList.toggle('show');
+}
+
+document.addEventListener('click',(e)=>{
+  if(!e.target.closest('.word')){
+    document.querySelectorAll('.word-pop.show').forEach(p=>p.classList.remove('show'));
+    document.querySelectorAll('.word.tapped').forEach(w=>w.classList.remove('tapped'));
+  }
+});
+
+/* ============================================
+   音声合成（発音）機能
+   ============================================ */
+let currentSpeed = 0.9;
+let isPlayingAll = false;
+let voicesCache = null;
+
+// 音声リスト読み込み（ブラウザにより非同期）
+function loadVoices(){
+  if('speechSynthesis' in window){
+    voicesCache = speechSynthesis.getVoices();
+  }
+}
+if('speechSynthesis' in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+// 男声・女声を選ぶ（A/Bの話者の区別用）
+function pickVoice(speaker){
+  if(!voicesCache || voicesCache.length===0) return null;
+  const enVoices = voicesCache.filter(v=>v.lang.startsWith('en'));
+  if(enVoices.length===0) return null;
+  // ブラウザによって名前が違うので、男女の手がかりになる単語で探す
+  const maleHints = ['male','man','daniel','alex','fred','david','mark','tom','aaron','arthur'];
+  const femaleHints = ['female','woman','samantha','victoria','karen','susan','allison','ava','kate','zira'];
+  if(speaker==='A'){
+    const m = enVoices.find(v=>maleHints.some(h=>v.name.toLowerCase().includes(h)));
+    if(m) return m;
+  } else {
+    const f = enVoices.find(v=>femaleHints.some(h=>v.name.toLowerCase().includes(h)));
+    if(f) return f;
+  }
+  // ヒントで見つからなかったら最初のen声を返す
+  return enVoices[0];
+}
+
+function speak(text, opts){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = (opts && opts.rate) || currentSpeed;
+  if(opts && opts.voice){
+    const v = pickVoice(opts.voice);
+    if(v) u.voice = v;
+  }
+  if(opts && opts.onend) u.onend = opts.onend;
+  speechSynthesis.speak(u);
+}
+
+// 1文ごとの発音（対話表示部のボタンから）
+function speakLine(idx){
+  if(isPlayingAll){
+    stopAllPlay();
+  }
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const line = data.lines[idx];
+  const text = line.text.replace(/___/g,'').replace(/\s+/g,' ').trim();
+  // 再生中の文をハイライト
+  document.querySelectorAll('.dialog .line').forEach(el=>el.classList.remove('playing'));
+  const lineEl = document.getElementById(`line-${idx}`);
+  if(lineEl) lineEl.classList.add('playing');
+  speak(text, {
+    voice: line.sp,
+    onend: ()=>{ if(lineEl) lineEl.classList.remove('playing'); }
+  });
+}
+
+// 全文再生
+function toggleAllPlay(){
+  if(isPlayingAll){
+    stopAllPlay();
+  } else {
+    startAllPlay();
+  }
+}
+
+function startAllPlay(){
+  isPlayingAll = true;
+  const btn = document.getElementById('playAllBtn');
+  btn.classList.add('playing');
+  document.getElementById('playAllIcon').textContent = '⏹';
+  document.getElementById('playAllText').textContent = '停止';
+  
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  let i = 0;
+  
+  function playNext(){
+    if(!isPlayingAll || i >= data.lines.length){
+      stopAllPlay();
+      return;
+    }
+    const line = data.lines[i];
+    const text = line.text.replace(/___/g,'').replace(/\s+/g,' ').trim();
+    document.querySelectorAll('.dialog .line').forEach(el=>el.classList.remove('playing'));
+    const lineEl = document.getElementById(`line-${i}`);
+    if(lineEl){
+      lineEl.classList.add('playing');
+      // 画面外なら自動スクロール
+      lineEl.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    speak(text, {
+      voice: line.sp,
+      onend: ()=>{
+        if(lineEl) lineEl.classList.remove('playing');
+        i++;
+        // 文と文の間に少し間を取る
+        setTimeout(playNext, 400);
+      }
+    });
+  }
+  playNext();
+}
+
+function stopAllPlay(){
+  isPlayingAll = false;
+  if('speechSynthesis' in window) speechSynthesis.cancel();
+  document.querySelectorAll('.dialog .line').forEach(el=>el.classList.remove('playing'));
+  const btn = document.getElementById('playAllBtn');
+  if(btn){
+    btn.classList.remove('playing');
+    document.getElementById('playAllIcon').textContent = '▶️';
+    document.getElementById('playAllText').textContent = '対話全体を聞く';
+  }
+}
+
+function setSpeed(rate){
+  currentSpeed = rate;
+  document.querySelectorAll('.speed-control button').forEach(b=>{
+    b.classList.toggle('on', parseFloat(b.dataset.speed)===rate);
+  });
+}
+
+function saveWord(w, m, k, btn){
+  const key = getKey(currentYear, currentQ, w);
+  if(savedSet.has(key)){
+    savedSet.delete(key);
+    reviewList = reviewList.filter(r=>r.key!==key);
+    btn.textContent = '＋ 保存';
+    btn.classList.remove('saved');
+  } else {
+    savedSet.add(key);
+    reviewList.push({key, w, m, k});
+    btn.textContent = '✓ 保存済';
+    btn.classList.add('saved');
+  }
+  document.getElementById('reviewCount').textContent = reviewList.length;
+}
+
+function answer(blankNum, choiceNum){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const correct = blankNum===1 ? data.answer : data.answer2;
+  const choicesContainer = document.getElementById(`ch${blankNum}`);
+  const choices = choicesContainer.querySelectorAll('.choice');
+  choices.forEach((c,i)=>{
+    if(i+1===correct) c.classList.add('correct');
+    else if(i+1===choiceNum) c.classList.add('wrong');
+  });
+  // 和訳・発音ボタンを表示
+  choicesContainer.classList.add('revealed');
+  
+  const isLong = data.choices2 !== undefined;
+  const msg = document.getElementById('resultMsg');
+  if(!isLong){
+    if(choiceNum===correct){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！よくできました！';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `❌ 残念...正解は ${correct} 番です。詳しい解説を見てみましょう！`;
+    }
+  } else {
+    if(choiceNum===correct){
+      msg.className = 'result-msg ok show';
+      msg.textContent = `🎉 ${blankNum===1?'1つ目':'2つ目'}正解！`;
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `❌ ${blankNum===1?'1つ目':'2つ目'}残念...正解は ${correct} 番。解説を確認しましょう！`;
+    }
+  }
+}
+
+function showMode(mode){
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active', b.dataset.mode===mode));
+  document.querySelectorAll('.mode-panel').forEach(p=>p.classList.remove('show'));
+  document.getElementById(`panel-${mode}`).classList.add('show');
+}
+
+function showNextHint(){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const total = data.hints.length;
+  if(hintShownCount >= total) return;
+  // 次のヒントを表示
+  const el = document.getElementById(`hint${hintShownCount}`);
+  if(el) el.classList.add('show');
+  hintShownCount++;
+  // ボタンの状態を更新
+  const btn = document.getElementById('nextHintBtn');
+  if(!btn) return;
+  if(hintShownCount >= total){
+    btn.textContent = `✓ すべてのヒントを表示しました（全${total}個）`;
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+    btn.style.cursor = 'default';
+  } else {
+    btn.textContent = `▶ 次のヒントを見る（${hintShownCount}/${total}）`;
+  }
+}
+
+function toggleDetail(i, type){
+  const el = document.getElementById(`det-${i}-${type}`);
+  if(el) el.classList.toggle('show');
+}
+
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(reviewList.length===0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:24px">保存した単語はまだありません。<br>本文中の単語をタップして保存してみよう！</p>';
+  } else {
+    body.innerHTML = reviewList.map((item,idx)=>{
+      const allWords = [];
+      Object.values(QUESTIONS_DATA).forEach(yr=>yr.forEach(q=>q.keyWords.forEach(k=>allWords.push(k))));
+      const others = allWords.filter(a=>a.mean!==item.m).sort(()=>Math.random()-0.5).slice(0,3);
+      const choices = [...others.map(o=>o.mean), item.m].sort(()=>Math.random()-0.5);
+      
+      return `<div class="review-card">
+        <div class="review-word">${item.w} <span style="font-size:.75rem;color:#888;font-weight:400">【${item.k}】</span> <button onclick="speak('${item.w}')" style="background:none;border:1px solid var(--line);border-radius:4px;padding:2px 6px;cursor:pointer">🔊</button></div>
+        <div class="review-q">この単語の意味は？</div>
+        <div class="review-choices" id="rc-${idx}">
+          ${choices.map((c,i)=>`<button class="review-choice" onclick="checkReview(${idx}, '${c.replace(/'/g,"\\'")}', '${item.m.replace(/'/g,"\\'")}', this)">${i+1}. ${c}</button>`).join('')}
+        </div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="rememberWord(${idx})">✓ 覚えた（リストから消す）</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+
+function checkReview(idx, picked, correct, btn){
+  if(picked===correct){
+    btn.classList.add('right');
+  } else {
+    btn.classList.add('bad');
+    document.querySelectorAll(`#rc-${idx} button`).forEach(b=>{
+      if(b.textContent.includes(correct)) b.classList.add('right');
+    });
+  }
+}
+
+function rememberWord(idx){
+  const item = reviewList[idx];
+  savedSet.delete(item.key);
+  reviewList.splice(idx,1);
+  document.getElementById('reviewCount').textContent = reviewList.length;
+  openReview();
+  document.querySelectorAll('.save').forEach(b=>{
+    if(b.classList.contains('saved')){
+      const word = b.closest('.word').dataset.word;
+      const key = getKey(currentYear, currentQ, word);
+      if(!savedSet.has(key)){
+        b.textContent='＋ 保存';
+        b.classList.remove('saved');
+      }
+    }
+  });
+}
+
+renderYearPick();
+renderTabs();
+renderQuestion();
+</script>
+</body>
+</html>
