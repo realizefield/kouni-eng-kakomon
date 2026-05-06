@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高認英語 過去問対策 単元表 | GAMBA</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --muted:#8a7f6e;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:40px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:20px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.35rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header .sub{font-size:.85rem;opacity:.92;margin-bottom:8px}
+header .meta{font-size:.75rem;opacity:.85;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:6px;display:inline-block}
+
+/* セクション見出し */
+.sec-title{font-size:1.05rem;font-weight:800;color:var(--accent2);margin:18px 0 10px 4px;padding-left:10px;border-left:5px solid var(--accent3);line-height:1.2}
+.sec-title small{display:block;font-size:.72rem;color:var(--muted);font-weight:600;margin-top:2px}
+
+/* 設問カードグリッド */
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+@media (max-width:480px){.q-grid{grid-template-columns:1fr}}
+
+.q-card{background:var(--paper);border-radius:14px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--line);position:relative;overflow:hidden;text-decoration:none;color:var(--ink);display:block;transition:transform .15s,box-shadow .15s}
+.q-card.ready:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(0,0,0,.08)}
+.q-card.ready:active{transform:translateY(0)}
+.q-card.coming{opacity:.55;cursor:not-allowed;background:repeating-linear-gradient(45deg,var(--paper),var(--paper) 8px,var(--soft) 8px,var(--soft) 16px)}
+
+.q-num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.78rem;padding:2px 10px;border-radius:8px;letter-spacing:.04em}
+.q-card.coming .q-num{background:var(--muted)}
+.q-status{position:absolute;top:12px;right:12px;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:6px}
+.q-status.ready{background:#e8f5e9;color:var(--good);border:1px solid #c5e1cb}
+.q-status.coming{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+
+.q-title{font-size:1.0rem;font-weight:800;margin:8px 0 4px;color:var(--accent2);line-height:1.35}
+.q-desc{font-size:.78rem;color:#555;line-height:1.55;margin-bottom:10px}
+.q-info{display:flex;flex-wrap:wrap;gap:6px;font-size:.7rem}
+.q-info span{background:var(--soft);padding:2px 8px;border-radius:6px;color:var(--accent2);font-weight:700}
+.q-card.coming .q-info span{background:#eee5d6;color:var(--muted)}
+
+.q-go{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:.82rem;font-weight:700;color:var(--accent)}
+.q-go .arrow{font-size:1.1rem}
+.q-card.coming .q-go{color:var(--muted)}
+
+/* 管理表（収録範囲一覧） */
+.mgmt-box{background:var(--paper);border-radius:14px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
+.mgmt-box .note{font-size:.78rem;color:#666;margin-bottom:10px;line-height:1.6;background:var(--hint);padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3)}
+
+table.mgmt{width:100%;border-collapse:collapse;font-size:.78rem;min-width:560px}
+table.mgmt th,table.mgmt td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+table.mgmt thead th{background:var(--accent2);color:#fff;font-weight:700;font-size:.75rem;border-bottom:none}
+table.mgmt thead th:first-child{border-radius:6px 0 0 0;text-align:left;padding-left:10px}
+table.mgmt thead th:last-child{border-radius:0 6px 0 0}
+table.mgmt tbody tr:hover{background:#fff8ed}
+table.mgmt td.q-label{text-align:left;font-weight:700;color:var(--accent2);padding-left:10px;background:var(--soft);width:30%}
+table.mgmt td.q-label small{display:block;color:var(--muted);font-weight:500;font-size:.7rem;margin-top:2px}
+table.mgmt td.cnt{font-family:"Georgia",serif;font-weight:700;font-size:.92rem;color:var(--accent)}
+table.mgmt td.total{background:var(--hint);font-weight:800;color:var(--accent2);font-size:.95rem}
+table.mgmt tfoot td{background:var(--soft);font-weight:800;color:var(--accent);border-top:2px solid var(--accent3);border-bottom:none}
+table.mgmt tfoot td:first-child{text-align:left;padding-left:10px}
+
+/* 凡例 */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:.72rem;color:#555}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+.legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid var(--line)}
+.legend .dot.ready{background:var(--good)}
+.legend .dot.coming{background:var(--muted)}
+
+/* 学習ガイド */
+.guide{background:var(--paper);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.guide h3{font-size:.95rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+.guide ol{margin-left:1.2em;font-size:.84rem;line-height:1.75}
+.guide ol li{margin-bottom:4px}
+.guide ol li b{color:var(--accent)}
+
+footer{text-align:center;font-size:.7rem;color:var(--muted);margin-top:20px;padding-top:12px;border-top:1px dashed var(--line)}
+footer b{color:var(--accent2)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 高認英語 過去問対策</h1>
+  <p class="sub">設問ごとの形式と攻略ポイントを<b>1問1問</b>マスターしよう</p>
+  <span class="meta">令和5年〜令和7年 過去問対応</span>
+</header>
+
+<!-- ============ 1. 設問別アプリ ============ -->
+<div class="sec-title">設問別アプリ
+  <small>各設問の出題形式に合わせた専用トレーニング</small>
+</div>
+
+<div class="q-grid">
+
+  <!-- 第1問 -->
+  <a class="q-card ready" href="https://realizefield.github.io/kouni-eng-kakomon/kounin_eng_q1.html">
+    <span class="q-status ready">✓ 完成</span>
+    <span class="q-num">第 1 問</span>
+    <div class="q-title">対話文の応答選択</div>
+    <div class="q-desc">日常会話の自然な応答を選ぶ問題。場面理解と定型表現がカギ。</div>
+    <div class="q-info">
+      <span>30問</span>
+      <span>R5〜R7</span>
+      <span>応答選択</span>
+    </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 第2問 -->
+  <a class="q-card ready" href="kounin_eng_q2.html">
+    <span class="q-status ready">✓ 完成</span>
+    <span class="q-num">第 2 問</span>
+    <div class="q-title">短文の語句穴埋め</div>
+    <div class="q-desc">語彙力と文脈把握が問われる4択。前後のヒントを読み取る練習。</div>
+    <div class="q-info">
+      <span>22問</span>
+      <span>R5〜R7</span>
+      <span>語彙・文法</span>
+    </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 第3問 -->
+  <div class="q-card coming">
+    <span class="q-status coming">準備中</span>
+    <span class="q-num">第 3 問</span>
+    <div class="q-title">対話文完成・整序</div>
+    <div class="q-desc">対話の流れに合うように文や語句を並べる問題。論理的なつなぎを意識。</div>
+    <div class="q-info">
+      <span>未収録</span>
+      <span>—</span>
+      <span>整序・文脈</span>
+    </div>
+    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
+  </div>
+
+  <!-- 第4問 -->
+  <div class="q-card coming">
+    <span class="q-status coming">準備中</span>
+    <span class="q-num">第 4 問</span>
+    <div class="q-title">図表・グラフ読み取り</div>
+    <div class="q-desc">広告・案内・スケジュールなど実用的な資料から情報を読み取る。</div>
+    <div class="q-info">
+      <span>未収録</span>
+      <span>—</span>
+      <span>情報処理</span>
+    </div>
+    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
+  </div>
+
+  <!-- 第5問 -->
+  <div class="q-card coming">
+    <span class="q-status coming">準備中</span>
+    <span class="q-num">第 5 問</span>
+    <div class="q-title">中文読解(エッセイ)</div>
+    <div class="q-desc">200語前後のエッセイを読み、内容に関する質問に答える。</div>
+    <div class="q-info">
+      <span>未収録</span>
+      <span>—</span>
+      <span>読解</span>
+    </div>
+    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
+  </div>
+
+  <!-- 第6問 -->
+  <div class="q-card coming">
+    <span class="q-status coming">準備中</span>
+    <span class="q-num">第 6 問</span>
+    <div class="q-title">長文読解</div>
+    <div class="q-desc">物語文・説明文の長文を読み、内容理解の設問に答える。</div>
+    <div class="q-info">
+      <span>未収録</span>
+      <span>—</span>
+      <span>長文読解</span>
+    </div>
+    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
+  </div>
+
+</div>
+
+<!-- ============ 2. 収録範囲一覧（管理表） ============ -->
+<div class="sec-title">収録範囲一覧
+  <small>各設問・年度ごとの収録問題数</small>
+</div>
+
+<div class="mgmt-box">
+  <div class="note">
+    📌 R5（令和5年度）の<b>短文穴埋め形式</b>は問題冊子上では<b>第5問</b>として出題されました。R6以降は第2問に移動しています。表中ではR5分も第2問の枠で集計しています。
+  </div>
+  <table class="mgmt">
+    <thead>
+      <tr>
+        <th>設問</th>
+        <th>R7-1</th>
+        <th>R7-2</th>
+        <th>R6-1</th>
+        <th>R6-2</th>
+        <th>R5-1</th>
+        <th>R5-2</th>
+        <th>合計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q-label">第1問<small>対話文の応答選択</small></td>
+        <td class="cnt">5</td>
+        <td class="cnt">5</td>
+        <td class="cnt">5</td>
+        <td class="cnt">5</td>
+        <td class="cnt">5</td>
+        <td class="cnt">5</td>
+        <td class="total">30</td>
+      </tr>
+      <tr>
+        <td class="q-label">第2問<small>短文の語句穴埋め</small></td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="total">22</td>
+      </tr>
+      <tr>
+        <td class="q-label">第3問<small>対話文完成・整序</small></td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+      </tr>
+      <tr>
+        <td class="q-label">第4問<small>図表読み取り</small></td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+      </tr>
+      <tr>
+        <td class="q-label">第5問<small>中文読解</small></td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+      </tr>
+      <tr>
+        <td class="q-label">第6問<small>長文読解</small></td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>収録済み 合計</td>
+        <td>9</td>
+        <td>9</td>
+        <td>9</td>
+        <td>9</td>
+        <td>8</td>
+        <td>8</td>
+        <td>52</td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="legend">
+    <span><span class="dot ready"></span>収録済み</span>
+    <span><span class="dot coming"></span>未収録（順次追加）</span>
+  </div>
+</div>
+
+<!-- ============ 3. 学習ガイド ============ -->
+<div class="sec-title">学習の進め方
+  <small>このアプリ群を最大限に活用するために</small>
+</div>
+
+<div class="guide">
+  <h3>📝 おすすめのステップ</h3>
+  <ol>
+    <li><b>第1問・第2問</b>から始めましょう。基礎語彙と頻出表現が身につきます。</li>
+    <li>各問題で<b>4択を選んだあと</b>、<b>ヒントモード</b>で考え方を確認しましょう。</li>
+    <li>英文中の<b>下線つき単語</b>をタップすると意味と発音、🔊音声が確認できます。</li>
+    <li>覚えたい単語は<b>「保存」</b>ボタンで復習リストに追加できます。</li>
+    <li>「<b>📚 詳しい解説</b>」モードで<b>文法・選択肢のニュアンスの違い</b>まで読み込むと、本番で迷わなくなります。</li>
+  </ol>
+</div>
+
+<footer>
+  <b>江原予備校 GAMBA</b> 高認英語 過去問対策<br>
+  © Realize Field
+</footer>
+
+</body>
+</html>
