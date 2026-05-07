@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高認英語 第3問 攻略 | GAMBA</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink)}
+.q-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.topic{background:var(--soft);padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px}
+
+/* メッセージ表示 */
+.q-instruction{font-size:.82rem;color:#666;margin-bottom:8px;background:#fffcf3;padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3);line-height:1.5}
+.message{font-size:.95rem;line-height:1.9;font-family:"Georgia",serif;padding:14px;background:#fdf8f0;border-radius:10px;border:1px dashed var(--line);margin-bottom:10px}
+.sentence-play{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 2px 6px rgba(217,79,79,.3);display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:inherit}
+.sentence-play:active{transform:scale(.98)}
+
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+
+/* 第3問は日本語選択肢なので1列レイアウト */
+.choices{display:grid;grid-template-columns:1fr;gap:8px;margin-top:14px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:12px;font-size:.92rem;cursor:pointer;text-align:left;color:var(--ink);transition:all .15s;line-height:1.5;display:flex;align-items:center;gap:10px;width:100%;font-family:"Hiragino Maru Gothic ProN",sans-serif}
+.choice .num{flex:none;background:var(--soft);color:var(--accent2);font-weight:800;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-size:.82rem;font-family:sans-serif}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+/* ヒント内の単語表 */
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+.hint-box .strategy{margin-top:8px;padding:10px 12px;background:#e8f4ff;border-radius:6px;border-left:3px solid var(--accent2)}
+.hint-box .strategy b{color:var(--accent2)}
+.hint-box .ng-mark{color:var(--accent);font-weight:800}
+.hint-box .ok-mark{color:var(--good);font-weight:800}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+/* 解説本体 */
+.explain-box{background:var(--paper);padding:14px;border-radius:8px;border-left:4px solid var(--accent3);font-size:.9rem;line-height:1.85}
+.explain-box p{margin-bottom:10px}
+.explain-box p:last-child{margin-bottom:0}
+.explain-box b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+.explain-box .ja-trans{background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:10px;border-left:3px solid var(--accent2)}
+.explain-box .ja-trans b{color:var(--accent2);background:transparent;padding:0}
+.explain-box .check-table{width:100%;border-collapse:collapse;margin:10px 0;background:#fafafa;border-radius:6px;overflow:hidden;font-size:.85rem}
+.explain-box .check-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-size:.78rem}
+.explain-box .check-table td{padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.explain-box .check-table tr:last-child td{border-bottom:none}
+.explain-box .check-table .ng{color:var(--accent);font-weight:700}
+.explain-box .check-table .ok{color:var(--good);font-weight:700}
+
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+.r5-note{background:#fff8e1;border:1px solid #ffe0a0;padding:8px 12px;border-radius:8px;font-size:.78rem;color:#806000;margin-bottom:10px;line-height:1.5}
+.r5-note b{color:#5a4500}
+
+.tip-banner{background:linear-gradient(135deg,#e8f4ff,#d4eaff);border:1px solid #a0c8e8;padding:10px 14px;border-radius:10px;font-size:.82rem;color:#1a4870;margin-bottom:12px;line-height:1.6}
+.tip-banner b{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📨 高認英語 第3問 攻略</h1>
+  <p><span class="badge">メッセージの意図</span>日本語選択肢で得点源!</p>
+</header>
+
+<div class="tip-banner">
+  💡 <b>第3問は得点のチャンス!</b> 選択肢が日本語なので、英文を全部わからなくても <b>キーワード</b> から「何の話か」がつかめれば正解できます。ヒントを使って一緒に解いてみましょう。
+</div>
+
+<div class="year-pick" id="yearPick"></div>
+<div class="q-tabs" id="qTabs"></div>
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS_DATA = {
+  "R7-1": [
+    {
+      no:1, qNum:12, topic:"通販の配送遅延",
+      message:'We are sorry to inform you that the items you purchased on our website have not been shipped because of severe weather conditions. We will send your items today, so we expect them to arrive within a few days. We apologize for any inconvenience and appreciate your understanding.',
+      messageJa:"申し訳ございませんが、お客様が当ウェブサイトでご購入いただいた商品は、悪天候のためまだ発送されておりません。本日商品を発送いたしますので、数日以内に到着する見込みです。ご不便をおかけしますことをお詫び申し上げますとともに、ご理解に感謝いたします。",
+      answer:1,
+      choices:[
+        "配送遅延について連絡する。",
+        "再配達を依頼する。",
+        "休業について連絡する。",
+        "送迎を依頼する。"
+      ],
+      keyWords:[
+        {w:"sorry",mean:"申し訳なく思う",kana:"ソーリ",ac:"ソー"},
+        {w:"items",mean:"商品",kana:"アイテムズ",ac:"アイ"},
+        {w:"purchased",mean:"購入した",kana:"パーチェスト",ac:"パー"},
+        {w:"website",mean:"ウェブサイト",kana:"ウェブサイト",ac:"ウェ"},
+        {w:"shipped",mean:"発送される",kana:"シップト",ac:"シッ"},
+        {w:"weather",mean:"天気",kana:"ウェザー",ac:"ウェ"},
+        {w:"send",mean:"送る",kana:"センド",ac:"セン"},
+        {w:"arrive",mean:"到着する",kana:"アライヴ",ac:"ライ"},
+        {w:"apologize",mean:"謝る",kana:"アポロジャイズ",ac:"ポ"},
+        {w:"inconvenience",mean:"不便",kana:"インコンヴィーニェンス",ac:"ヴィー"}
+      ],
+      hints:[
+        "<p>まずは英文の中で<b>意味を知っていれば内容が見えてくるカギの単語</b>だけ確認しましょう。全部読まなくて大丈夫です。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>sorry</td><td class='ja'>申し訳ない・残念</td></tr><tr><td class='en'>items</td><td class='ja'>商品</td></tr><tr><td class='en'>purchased</td><td class='ja'>買った（=bought）</td></tr><tr><td class='en'>website</td><td class='ja'>ウェブサイト・通販サイト</td></tr><tr><td class='en'>shipped</td><td class='ja'>発送される</td></tr><tr><td class='en'>weather</td><td class='ja'>天気・天候</td></tr><tr><td class='en'>arrive</td><td class='ja'>到着する</td></tr><tr><td class='en'>apologize</td><td class='ja'>謝る</td></tr></table>",
+        "<p>キー単語を並べると：<b>「sorry（申し訳ない）」「items（商品）」「website（通販サイト）」「shipped（発送）」「weather（天気）」「arrive（到着）」「apologize（謝る）」</b>。</p><div class='step'>これだけで「<b>通販で買った商品</b>」「<b>悪い天気</b>のせいで」「<b>発送できなかった</b>」「<b>謝っている</b>」という流れが見えてきます。<span class='think-arrow'>→</span>つまり「<b>商品の到着が遅れます、ごめんなさい</b>」という連絡ですね。</div>",
+        "<p>日本語の選択肢で<b>明らかに違うもの</b>を消していきましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>2「再配達を依頼する」</b>… これは<b>受け取る側</b>が言うこと。送る側の立場と逆。<br><span class='ng-mark'>×</span> <b>3「休業について連絡する」</b>… <b>店が休む</b>話は出てきていない。<br><span class='ng-mark'>×</span> <b>4「送迎を依頼する」</b>… <b>車で人を運ぶ</b>話ではない。<br><span class='ok-mark'>○</span> <b>1「配送遅延について連絡する」</b>… 「商品」「発送」「謝る」と一致!</div>"
+      ],
+      explain:'<p>このメッセージは <b>通販サイトから買い物をした客に届いたお知らせ</b> です。</p><p>苦手な方は<b>長い文を全部読む必要はありません</b>。第3問は「<b>選択肢が日本語</b>」という大きなヒントがあります。英文の中で<b>カギになる単語</b>を見つけて、<b>選択肢の中から消去法で選ぶ</b>のが基本戦略です。</p><table class="check-table"><tr><th>カギの単語</th><th>意味</th><th>選択肢の手がかり</th></tr><tr><td><b>items</b> / <b>purchased</b> / <b>website</b></td><td>商品 / 買った / 通販サイト</td><td>「配送」関係の話と分かる</td></tr><tr><td><b>shipped</b></td><td>発送される</td><td>「配送」関係の話と分かる</td></tr><tr><td><b>weather conditions</b></td><td>天候・天気の状態</td><td>遅れの<b>原因</b>が天気</td></tr><tr><td><b>apologize</b></td><td>謝る</td><td>悪い知らせを伝えている</td></tr></table><p>これだけ拾えれば、「<b>通販で買った商品の発送が天気のせいで遅れることを謝る</b>」という流れが見えます。選択肢で同じ意味のものは <b>1「配送遅延について連絡する」</b> です。</p><p>不正解の選択肢が×な理由：<b>2 再配達依頼</b>は<b>客の側</b>がする行為（メッセージは送り手＝店側）。<b>3 休業</b>は店が閉まる話で、ここでは出ていない。<b>4 送迎</b>は人の送り迎えで、商品の話とは無関係。</p><p><b>覚えておきたい単語</b>：<b>ship</b>（船で運ぶ → 発送する）、<b>arrive</b>（着く）、<b>apologize</b>（謝る）、<b>inconvenience</b>（不便）。これらは第3問のメッセージで何度も登場します。</p><div class="ja-trans"><b>全体訳：</b>申し訳ございませんが、お客様が当ウェブサイトでご購入いただいた商品は、悪天候のためまだ発送されておりません。本日商品を発送いたしますので、数日以内に到着する見込みです。ご不便をおかけしますことをお詫び申し上げますとともに、ご理解に感謝いたします。</div>'
+    },
+    {
+      no:2, qNum:13, topic:"ホテル予約の確認メール",
+      message:'This message is to confirm your reservation for November 10th. You have booked a one-person stay in a twin room for one night with breakfast included. If you have any questions or requests, please feel free to contact us. We are looking forward to your visit, and we hope you enjoy your stay.',
+      messageJa:"このメッセージは、11月10日のご予約を確認するためのものです。お客様は、朝食付きでツインルームに1名様1泊のご予約を承りました。ご質問やご要望がございましたら、お気軽にお問い合わせください。お客様のお越しを心よりお待ちしております。よいご滞在となりますことを願っております。",
+      answer:4,
+      choices:[
+        "部屋の変更を伝える。",
+        "空室状況を確認する。",
+        "予約の取消しを確認する。",
+        "予約内容を伝える。"
+      ],
+      keyWords:[
+        {w:"confirm",mean:"確認する",kana:"コンファーム",ac:"ファー"},
+        {w:"reservation",mean:"予約",kana:"レザヴェイション",ac:"ヴェイ"},
+        {w:"booked",mean:"予約した",kana:"ブックト",ac:"ブッ"},
+        {w:"twin room",mean:"ツインルーム",kana:"トゥインルーム",ac:"トゥ"},
+        {w:"breakfast",mean:"朝食",kana:"ブレックファスト",ac:"ブレッ"},
+        {w:"included",mean:"含まれた",kana:"インクルーディド",ac:"クルー"},
+        {w:"contact",mean:"連絡する",kana:"コンタクト",ac:"コン"},
+        {w:"visit",mean:"訪問",kana:"ヴィズィット",ac:"ヴィ"},
+        {w:"stay",mean:"滞在",kana:"ステイ",ac:"ステイ"}
+      ],
+      hints:[
+        "<p>カギの単語だけまず確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>confirm</td><td class='ja'>確認する</td></tr><tr><td class='en'>reservation</td><td class='ja'>予約</td></tr><tr><td class='en'>booked</td><td class='ja'>予約した</td></tr><tr><td class='en'>November 10th</td><td class='ja'>11月10日</td></tr><tr><td class='en'>twin room</td><td class='ja'>ツインルーム</td></tr><tr><td class='en'>breakfast included</td><td class='ja'>朝食付き</td></tr><tr><td class='en'>visit / stay</td><td class='ja'>訪問・滞在</td></tr></table>",
+        "<p>キー単語を並べると：<b>「confirm（確認）」「reservation（予約）」「November 10th（11月10日）」「twin room（ツインルーム）」「breakfast included（朝食付き）」「stay（滞在）」</b>。</p><div class='step'>「<b>11月10日</b>の<b>予約</b>を<b>確認</b>します。<b>ツインルーム</b>、<b>朝食付き</b>です」<span class='think-arrow'>→</span>つまり「<b>あなたの予約はこういう内容ですよ</b>」と<b>予約の中身を伝えている</b>メッセージです。<b>ホテルから客への確認メール</b>ですね。</div>",
+        "<p>日本語の選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「部屋の変更」</b>… <b>change</b>（変える）など変更を表す単語が<b>出ていない</b>。<br><span class='ng-mark'>×</span> <b>2「空室状況を確認」</b>… <b>availability</b>（空き状況）など出ていない。客がすでに予約済み。<br><span class='ng-mark'>×</span> <b>3「予約の取消し」</b>… <b>cancel</b>（取り消す）が一切ない。<br><span class='ok-mark'>○</span> <b>4「予約内容を伝える」</b>… 「日付・部屋・朝食つき」と<b>具体的な内容</b>を伝えている!</div>"
+      ],
+      explain:'<p>このメッセージは <b>ホテルから予約客に届いた確認メール</b> です。</p><p>カギの単語：<b>confirm</b>（確認する）、<b>reservation</b>（予約）、<b>booked</b>（予約した）、<b>twin room</b>（ツインルーム）、<b>breakfast included</b>（朝食付き）。これらが並んでいるのを見つければ、<b>「予約の中身を伝えている」</b>のだと分かります。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 部屋の変更</td><td class="ng">×</td><td>change（変える）の語が無い</td></tr><tr><td>2 空室状況確認</td><td class="ng">×</td><td>すでに予約完了している</td></tr><tr><td>3 予約取消し</td><td class="ng">×</td><td>cancel の語が無い</td></tr><tr><td>4 予約内容を伝える</td><td class="ok">○</td><td>日付・部屋・朝食つきと内容を伝えている</td></tr></table><p>このメッセージは「あなたの予約はこの内容で承りました」という<b>確認のお知らせ</b>です。<b>confirm your reservation</b>（予約を確認する）という最初の文がそのまま答えのヒントになっています。</p><p><b>覚えておきたい単語</b>：<b>reservation</b>（予約）、<b>book</b>（予約する／本という意味もある多義語）、<b>confirm</b>（確認する）。ホテル・レストラン・飛行機など、第3問でよく出てくるテーマです。</p><div class="ja-trans"><b>全体訳：</b>このメッセージは、11月10日のご予約を確認するためのものです。お客様は、朝食付きでツインルームに1名様1泊のご予約を承りました。ご質問やご要望がございましたら、お気軽にお問い合わせください。お客様のお越しを心よりお待ちしております。</div>'
+    },
+    {
+      no:3, qNum:14, topic:"薬の使用に関する注意",
+      message:'Medicine can help you get better when you are sick. However, it might cause problems if you do not use it properly. It is important to listen to your doctor, nurse, or pharmacist, and make sure you understand how to use the medicine correctly.',
+      messageJa:"薬は病気のときにあなたが良くなるのを助けてくれます。しかし、正しく使わないと問題を引き起こすかもしれません。医師、看護師、または薬剤師の話を聞いて、薬の正しい使い方をしっかり理解することが大切です。",
+      answer:2,
+      choices:[
+        "受診を勧める。",
+        "薬の使用について注意する。",
+        "病院の場所を教える。",
+        "薬の種類について説明する。"
+      ],
+      keyWords:[
+        {w:"medicine",mean:"薬",kana:"メディスン",ac:"メ"},
+        {w:"sick",mean:"病気の",kana:"スィック",ac:"スィッ"},
+        {w:"problems",mean:"問題",kana:"プロブレムズ",ac:"プ"},
+        {w:"properly",mean:"正しく",kana:"プロパリ",ac:"プ"},
+        {w:"doctor",mean:"医師",kana:"ドクター",ac:"ド"},
+        {w:"nurse",mean:"看護師",kana:"ナース",ac:"ナー"},
+        {w:"pharmacist",mean:"薬剤師",kana:"ファーマスィスト",ac:"ファー"},
+        {w:"correctly",mean:"正しく",kana:"コレクトリ",ac:"レク"}
+      ],
+      hints:[
+        "<p>カギの単語をまず確認。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>medicine</td><td class='ja'>薬</td></tr><tr><td class='en'>sick</td><td class='ja'>病気の</td></tr><tr><td class='en'>problems</td><td class='ja'>問題</td></tr><tr><td class='en'>properly</td><td class='ja'>正しく・適切に</td></tr><tr><td class='en'>doctor / nurse / pharmacist</td><td class='ja'>医師 / 看護師 / 薬剤師</td></tr><tr><td class='en'>correctly</td><td class='ja'>正しく</td></tr></table>",
+        "<p>キー単語：<b>「medicine（薬）」</b>が<b>3回も</b>出てきます。<b>「properly（正しく）」「problems（問題）」「correctly（正しく）」</b>もポイント。</p><div class='step'>「<b>薬</b>は病気を治してくれる。<b>でも</b>、<b>正しく使わないと問題が起こる</b>かもしれない。<b>正しく使う方法</b>を理解すること」<span class='think-arrow'>→</span>つまり「<b>薬の使い方に気をつけて</b>」というメッセージ。テーマは <b>薬の使い方</b> です。</div>",
+        "<p>選択肢を絞り込みましょう。<b>1〜4 すべてに「薬」または「病院」が出てくる</b>ので、<b>何を伝えたいか</b>でじっくり判断します。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「受診を勧める」</b>… 「病院に行きなさい」という流れではない。すでに薬を飲む前提。<br><span class='ng-mark'>×</span> <b>3「病院の場所を教える」</b>… 場所（住所・地図）の話は<b>一切ない</b>。<br><span class='ng-mark'>×</span> <b>4「薬の種類を説明する」</b>… 風邪薬・痛み止めなど<b>具体的な種類</b>の話はない。<br><span class='ok-mark'>○</span> <b>2「薬の使用について注意する」</b>… 「正しく使わないと問題」「正しい使い方を理解」とまさに一致!</div>"
+      ],
+      explain:'<p>このメッセージは <b>薬の正しい使い方を呼びかける</b> 文章です。</p><p>カギになる単語は<b>medicine</b>（薬）と<b>properly / correctly</b>（どちらも「正しく」）です。「<b>薬</b>を<b>正しく</b>使わないと<b>問題</b>が起こる」「<b>正しい使い方</b>を理解しよう」という流れが見えれば、それだけで答えに近づけます。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 受診を勧める</td><td class="ng">×</td><td>「病院に行け」という呼びかけは無い</td></tr><tr><td>2 薬の使用について注意</td><td class="ok">○</td><td>「正しく使わないと問題」と一致</td></tr><tr><td>3 病院の場所を教える</td><td class="ng">×</td><td>場所・住所の話は一切無い</td></tr><tr><td>4 薬の種類を説明</td><td class="ng">×</td><td>具体的な薬の種類は出てこない</td></tr></table><p><b>However</b>（しかし）はとても大事な単語です。「<b>However</b>」のあとには<b>大切な内容</b>がよく来ます。ここでも「However, it might cause problems」と続いて、<b>注意の中身</b>が出てきていますね。</p><p><b>覚えておきたい単語</b>：<b>medicine</b>（薬）、<b>doctor</b>（医師）、<b>nurse</b>（看護師）、<b>pharmacist</b>（薬剤師）、<b>properly / correctly</b>（正しく）。第3問では「<b>病気・健康</b>」のテーマもよく出ます。</p><div class="ja-trans"><b>全体訳：</b>薬は病気のときにあなたが良くなるのを助けてくれます。しかし、正しく使わないと問題を引き起こすかもしれません。医師、看護師、または薬剤師の話を聞いて、薬の正しい使い方をしっかり理解することが大切です。</div>'
+    },
+    {
+      no:4, qNum:15, topic:"会議の開催通知",
+      message:'This is to let everyone know that our monthly meeting will be held on December 5th at 10:30 a.m. in the conference room. We will discuss the budget for the new project. If you are unable to attend, please reply to this email.',
+      messageJa:"この度は皆様にお知らせいたします。月例会議を12月5日午前10時30分から会議室にて開催いたします。新プロジェクトの予算について話し合います。出席できない方は、このメールにご返信ください。",
+      answer:3,
+      choices:[
+        "会議の議題を募集する。",
+        "会議の日程を訂正する。",
+        "会議の開催を通知する。",
+        "会議の延期を要望する。"
+      ],
+      keyWords:[
+        {w:"let everyone know",mean:"皆に知らせる",kana:"レットエヴリワンノウ",ac:"エ"},
+        {w:"monthly",mean:"月例の・毎月の",kana:"マンスリ",ac:"マン"},
+        {w:"meeting",mean:"会議",kana:"ミーティング",ac:"ミー"},
+        {w:"held",mean:"開かれる",kana:"ヘルド",ac:"ヘル"},
+        {w:"December",mean:"12月",kana:"ディセンバー",ac:"セン"},
+        {w:"conference room",mean:"会議室",kana:"コンファレンスルーム",ac:"コン"},
+        {w:"discuss",mean:"話し合う",kana:"ディスカス",ac:"カ"},
+        {w:"budget",mean:"予算",kana:"バジェット",ac:"バ"},
+        {w:"attend",mean:"出席する",kana:"アテンド",ac:"テン"}
+      ],
+      hints:[
+        "<p>カギの単語をまず確認。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>let everyone know</td><td class='ja'>皆に知らせる</td></tr><tr><td class='en'>monthly meeting</td><td class='ja'>月例会議</td></tr><tr><td class='en'>held</td><td class='ja'>開かれる</td></tr><tr><td class='en'>December 5th</td><td class='ja'>12月5日</td></tr><tr><td class='en'>conference room</td><td class='ja'>会議室</td></tr><tr><td class='en'>discuss</td><td class='ja'>話し合う</td></tr><tr><td class='en'>attend</td><td class='ja'>出席する</td></tr></table>",
+        "<p>キー単語：<b>「let everyone know（皆に知らせる）」</b>が文頭に。<b>「meeting（会議）」「held（開く）」「December 5th（12月5日）」「conference room（会議室）」「attend（出席）」</b>がそろっています。</p><div class='step'>「<b>皆に知らせます</b>。<b>会議</b>を<b>12月5日</b>に<b>会議室</b>で<b>開きます</b>」<span class='think-arrow'>→</span>これは<b>会議の開催を知らせる</b>メッセージそのものですね。最初の<b>let everyone know</b>がそのまま答えのヒントになっています。</div>",
+        "<p>選択肢を絞り込みましょう。<b>4つすべてに「会議」がある</b>ので、<b>動詞の部分</b>に注目します。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「議題を募集する」</b>… 議題は<b>すでに決まっていて</b>「予算の話」と書かれている。意見を求めていない。<br><span class='ng-mark'>×</span> <b>2「日程を訂正する」</b>… 「<b>変更</b>」を表す<b>change</b>などの単語が<b>無い</b>。最初に決まる日程を伝えている。<br><span class='ng-mark'>×</span> <b>4「延期を要望する」</b>… <b>postpone</b>（延期する）の語が<b>無い</b>。普通に開催する話。<br><span class='ok-mark'>○</span> <b>3「開催を通知する」</b>… 「皆に知らせる」「会議を開く」と<b>完全に一致</b>!</div>"
+      ],
+      explain:'<p>このメッセージは <b>会議の開催を全員に知らせる業務メール</b> です。</p><p>最初の <b>This is to let everyone know that 〜</b>（皆さんに〜をお知らせします）が、まさに「<b>通知する</b>」という意味です。これだけで答えに近づけます。</p><table class="check-table"><tr><th>カギの単語</th><th>意味</th><th>選択肢の手がかり</th></tr><tr><td><b>let everyone know</b></td><td>皆に知らせる</td><td>「通知する」と同じ意味</td></tr><tr><td><b>meeting</b> / <b>held</b></td><td>会議 / 開かれる</td><td>会議を開く話</td></tr><tr><td><b>December 5th</b> / <b>conference room</b></td><td>12月5日 / 会議室</td><td>具体的な日時・場所</td></tr></table><p>不正解の選択肢：</p><p><b>1「議題を募集」</b>×：「予算について話し合います」とすでに議題が決まっています。<b>discuss</b>（話し合う）が出てきますが、「意見を募集する」のではなく「予算で話す」と決まった内容を伝えているだけ。</p><p><b>2「日程を訂正」</b>×：訂正・変更を表す<b>change</b> / <b>correct</b>などの語が一切ありません。</p><p><b>4「延期を要望」</b>×：延期を表す<b>postpone</b> / <b>delay</b>などの語が一切ありません。</p><p><b>覚えておきたい単語</b>：<b>meeting</b>（会議）、<b>attend</b>（出席する）、<b>discuss</b>（話し合う）、<b>budget</b>（予算）。仕事関係のメッセージで頻出です。</p><div class="ja-trans"><b>全体訳：</b>この度は皆様にお知らせいたします。月例会議を12月5日午前10時30分から会議室にて開催いたします。新プロジェクトの予算について話し合います。出席できない方は、このメールにご返信ください。</div>'
+    }
+  ],
+  "R7-2": [
+    {
+      no:1, qNum:12, topic:"運動会のボランティア募集",
+      message:'On October 3rd, we are having our annual Hikari Kindergarten Sports Festival. Many parents are expected to come by car. So, we need some volunteers to direct traffic in the main parking lot from 7 a.m. to 9 a.m. If you are interested, please contact Mr. Tanaka by email by the end of next week.',
+      messageJa:"10月3日に、ひかり幼稚園の年に一度の運動会を開催します。多くの保護者が車で来る予定です。そのため、午前7時から9時まで、正面駐車場で交通整理をしてくれるボランティアを募集しています。興味のある方は、来週末までに田中先生にメールでご連絡ください。",
+      answer:1,
+      choices:[
+        "ボランティアを募集する。",
+        "駐車場の閉鎖を知らせる。",
+        "公園の清掃を依頼する。",
+        "通行止めを予告する。"
+      ],
+      keyWords:[
+        {w:"annual",mean:"年に一度の",kana:"アニュアル",ac:"ア"},
+        {w:"Kindergarten",mean:"幼稚園",kana:"キンダーガーテン",ac:"キ"},
+        {w:"Sports Festival",mean:"運動会",kana:"スポーツフェスティバル",ac:"フェ"},
+        {w:"parents",mean:"保護者",kana:"ペアレンツ",ac:"ペ"},
+        {w:"volunteers",mean:"ボランティア",kana:"ヴォランティアズ",ac:"ヴォ"},
+        {w:"direct traffic",mean:"交通整理する",kana:"ディレクトトラフィック",ac:"レク"},
+        {w:"parking lot",mean:"駐車場",kana:"パーキングロット",ac:"パー"},
+        {w:"interested",mean:"興味がある",kana:"インタレスティド",ac:"イン"},
+        {w:"contact",mean:"連絡する",kana:"コンタクト",ac:"コン"}
+      ],
+      hints:[
+        "<p>カギの単語をまず確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Sports Festival</td><td class='ja'>運動会</td></tr><tr><td class='en'>parents</td><td class='ja'>保護者</td></tr><tr><td class='en'>volunteers</td><td class='ja'>ボランティア</td></tr><tr><td class='en'>direct traffic</td><td class='ja'>交通整理する</td></tr><tr><td class='en'>parking lot</td><td class='ja'>駐車場</td></tr><tr><td class='en'>interested</td><td class='ja'>興味がある</td></tr><tr><td class='en'>contact</td><td class='ja'>連絡する</td></tr></table>",
+        "<p>キー単語：<b>「Sports Festival（運動会）」「volunteers（ボランティア）」「direct traffic（交通整理）」「If you are interested（興味があれば）」「contact（連絡）」</b>。</p><div class='step'>「<b>運動会</b>のために<b>ボランティア</b>が必要」「<b>興味があれば</b>連絡してください」<span class='think-arrow'>→</span>これは<b>「ボランティアを集めたい」</b>という呼びかけメッセージです。<b>If you are interested, please contact</b>（興味があれば連絡）は<b>募集の決まり文句</b>です。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>2「駐車場の閉鎖」</b>… <b>close</b>（閉める）の語が<b>無い</b>。むしろ駐車場を<b>使う</b>話。<br><span class='ng-mark'>×</span> <b>3「公園の清掃」</b>… <b>park</b>（公園）も<b>clean</b>（掃除）も出てこない。場所は<b>幼稚園</b>。<br><span class='ng-mark'>×</span> <b>4「通行止めを予告」</b>… <b>road closed</b>（通行止め）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>1「ボランティアを募集」</b>… <b>volunteers</b>と<b>If you are interested, please contact</b>と完全に一致!</div>"
+      ],
+      explain:'<p>このメッセージは <b>幼稚園の運動会で交通整理ボランティアを集める呼びかけ</b> です。</p><p>カギになるのは <b>volunteers</b>（ボランティア）と <b>If you are interested, please contact</b>（興味があればご連絡を）。これは募集メッセージの<b>定番の言い回し</b>で、見つけたら「人を集めたい話」だと判断できます。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 ボランティアを募集</td><td class="ok">○</td><td>volunteers + 連絡先 = 募集</td></tr><tr><td>2 駐車場の閉鎖</td><td class="ng">×</td><td>close（閉める）の語が無い</td></tr><tr><td>3 公園の清掃</td><td class="ng">×</td><td>park も clean も出てこない</td></tr><tr><td>4 通行止め予告</td><td class="ng">×</td><td>road closed の語が無い</td></tr></table><p><b>覚えておきたい単語</b>：<b>volunteer</b>（ボランティア）、<b>If you are interested, please contact 〜</b>（興味があれば〜にご連絡を／募集の合言葉）、<b>annual</b>（年に一度の）、<b>direct traffic</b>（交通整理する）。</p><div class="ja-trans"><b>全体訳：</b>10月3日に、ひかり幼稚園の年に一度の運動会を開催します。多くの保護者が車で来る予定です。そのため、午前7時から9時まで、正面駐車場で交通整理をしてくれるボランティアを募集しています。興味のある方は、来週末までに田中先生にメールでご連絡ください。</div>'
+    },
+    {
+      no:2, qNum:13, topic:"図書館への本の寄贈依頼",
+      message:'Our library is requesting donations of books that are in high demand. If you have any of the books listed here that you no longer need, please bring them to the library or send them to us. We would greatly appreciate your support.',
+      messageJa:"当図書館では、需要の高い本の寄贈を募っています。ここに掲載されている本で、もう必要ないものがあれば、図書館にお持ちいただくか、お送りください。皆様のご支援に深く感謝いたします。",
+      answer:4,
+      choices:[
+        "図書館の改装を伝える。",
+        "本の返却を依頼する。",
+        "図書館の休館を伝える。",
+        "本の寄贈を依頼する。"
+      ],
+      keyWords:[
+        {w:"library",mean:"図書館",kana:"ライブラリ",ac:"ラ"},
+        {w:"requesting",mean:"求めている",kana:"リクエスティング",ac:"クエ"},
+        {w:"donations",mean:"寄贈・寄付",kana:"ドネイションズ",ac:"ネイ"},
+        {w:"books",mean:"本",kana:"ブックス",ac:"ブッ"},
+        {w:"high demand",mean:"高い需要",kana:"ハイディマンド",ac:"マン"},
+        {w:"no longer need",mean:"もう必要ない",kana:"ノウロンガーニード",ac:"ロン"},
+        {w:"bring",mean:"持ってくる",kana:"ブリング",ac:"ブ"},
+        {w:"send",mean:"送る",kana:"センド",ac:"セ"},
+        {w:"appreciate",mean:"感謝する",kana:"アプリーシエイト",ac:"プリー"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>donations</b>（寄贈・寄付）がこの問題の最大のヒントです。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>library</td><td class='ja'>図書館</td></tr><tr><td class='en'>requesting</td><td class='ja'>求めている・お願いする</td></tr><tr><td class='en'>donations</td><td class='ja'>寄贈・寄付</td></tr><tr><td class='en'>books</td><td class='ja'>本</td></tr><tr><td class='en'>high demand</td><td class='ja'>高い需要</td></tr><tr><td class='en'>no longer need</td><td class='ja'>もう必要ない</td></tr><tr><td class='en'>bring / send</td><td class='ja'>持ってくる / 送る</td></tr><tr><td class='en'>appreciate</td><td class='ja'>感謝する</td></tr></table>",
+        "<p>キー単語：<b>「library（図書館）」「requesting donations of books（本の寄贈をお願い）」「no longer need（もう必要ない）」「bring or send（持ってくるか送る）」</b>。</p><div class='step'>「<b>図書館</b>が<b>本の寄贈</b>をお願いしている」「もう要らない本があれば<b>持ってきてor送って</b>ほしい」<span class='think-arrow'>→</span>これは「<b>本をください</b>」という<b>寄贈依頼</b>のメッセージです。<b>donations</b>（寄贈）という単語1つで答えにたどりつけます。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「改装を伝える」</b>… <b>renovation</b>（改装）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>2「本の返却を依頼」</b>… <b>return</b>（返す）の語が<b>無い</b>。「もう必要ない本」は<b>図書館の本ではなく、自分の本</b>。<br><span class='ng-mark'>×</span> <b>3「休館を伝える」</b>… <b>closed</b>（閉まる）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>4「本の寄贈を依頼」</b>… <b>donations of books</b>とそのまま一致!</div>"
+      ],
+      explain:'<p>このメッセージは <b>図書館が利用者に本の寄贈をお願いするお知らせ</b> です。</p><p>カギは <b>donations</b>（寄贈・寄付）という1語。これは少し難しい単語ですが、「お金や物をあげる」というニュアンスで覚えておくと、寄付・寄贈関係のメッセージで必ず役立ちます。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 改装を伝える</td><td class="ng">×</td><td>renovation の語が無い</td></tr><tr><td>2 本の返却を依頼</td><td class="ng">×</td><td>return の語が無い。借りた本ではない</td></tr><tr><td>3 休館を伝える</td><td class="ng">×</td><td>closed の語が無い</td></tr><tr><td>4 本の寄贈を依頼</td><td class="ok">○</td><td>donations of books と一致</td></tr></table><p><b>選択肢2「返却」と紛らわしい場合</b>：「return」（返す）と「donate」（あげる）は違う行為です。返却は<b>借りた物を戻す</b>こと、寄贈は<b>自分の物をあげる</b>こと。本文には<b>「もう必要ない本」（your own books）</b>とあるので、これは<b>自分の所有物</b>のこと。だから「寄贈」が正解です。</p><p><b>覚えておきたい単語</b>：<b>donation</b>（寄贈・寄付）、<b>request</b>（依頼する／求める）、<b>appreciate</b>（感謝する）、<b>library</b>（図書館）。</p><div class="ja-trans"><b>全体訳：</b>当図書館では、需要の高い本の寄贈を募っています。ここに掲載されている本で、もう必要ないものがあれば、図書館にお持ちいただくか、お送りください。皆様のご支援に深く感謝いたします。</div>'
+    },
+    {
+      no:3, qNum:14, topic:"会社の社員募集広告",
+      message:'No experience required! Landhawk Group has an excellent training program and a relaxed working environment. There is no overtime or holiday work. We have a cafeteria for all workers, too! Apply now!',
+      messageJa:"未経験者歓迎！ランドホークグループには優れた研修プログラムとリラックスした職場環境があります。残業も休日出勤もありません。全社員用の社員食堂もあります！今すぐご応募ください！",
+      answer:4,
+      choices:[
+        "休暇取得を勧める。",
+        "職場体験を案内する。",
+        "就業規則を知らせる。",
+        "従業員を募集する。"
+      ],
+      keyWords:[
+        {w:"experience",mean:"経験",kana:"イクスピアリエンス",ac:"ピ"},
+        {w:"required",mean:"必要な",kana:"リクワイアド",ac:"クワイ"},
+        {w:"training",mean:"研修・訓練",kana:"トレイニング",ac:"トレイ"},
+        {w:"working environment",mean:"職場環境",kana:"ワーキングエンヴァイロンメント",ac:"ヴァイ"},
+        {w:"overtime",mean:"残業",kana:"オーヴァータイム",ac:"オー"},
+        {w:"holiday work",mean:"休日出勤",kana:"ホリデイワーク",ac:"ホ"},
+        {w:"cafeteria",mean:"社員食堂",kana:"カフェテリア",ac:"テ"},
+        {w:"workers",mean:"労働者・社員",kana:"ワーカーズ",ac:"ワー"},
+        {w:"Apply",mean:"応募する",kana:"アプライ",ac:"プライ"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。最後の <b>Apply now!</b>（今すぐ応募！）が一番わかりやすいヒントです。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>No experience required</td><td class='ja'>未経験者歓迎・経験不問</td></tr><tr><td class='en'>training program</td><td class='ja'>研修プログラム</td></tr><tr><td class='en'>working environment</td><td class='ja'>職場環境</td></tr><tr><td class='en'>overtime</td><td class='ja'>残業</td></tr><tr><td class='en'>holiday work</td><td class='ja'>休日出勤</td></tr><tr><td class='en'>cafeteria</td><td class='ja'>社員食堂</td></tr><tr><td class='en'>workers</td><td class='ja'>労働者・社員</td></tr><tr><td class='en'>Apply now!</td><td class='ja'>今すぐ応募!</td></tr></table>",
+        "<p>キー単語：<b>「No experience required（未経験OK）」「training（研修）」「working environment（職場環境）」「workers（社員）」「Apply now!（今すぐ応募）」</b>。</p><div class='step'>「<b>未経験OK</b>」「<b>研修あり</b>」「<b>残業なし</b>」「<b>食堂あり</b>」「<b>今すぐ応募！</b>」<span class='think-arrow'>→</span>これは完全に<b>求人広告</b>です。よい条件を並べて<b>人を集めたい</b>という流れ。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「休暇取得を勧める」</b>… 休日の話は出ていますが「<b>取れ</b>」という勧めではない。会社の<b>条件</b>を述べているだけ。<br><span class='ng-mark'>×</span> <b>2「職場体験を案内」</b>… 職場体験＝学生の体験学習。<b>Apply</b>（応募）は仕事への正式応募。<br><span class='ng-mark'>×</span> <b>3「就業規則を知らせる」</b>… 規則＝<b>rules</b>。社員向けの規則ではなく、外部に向けた<b>魅力アピール</b>。<br><span class='ok-mark'>○</span> <b>4「従業員を募集」</b>… <b>workers</b> + <b>Apply now!</b>でぴったり!</div>"
+      ],
+      explain:'<p>このメッセージは <b>会社が新しく社員を募集する求人広告</b> です。</p><p>最後の <b>Apply now!</b>（今すぐ応募！）が決め手です。<b>apply</b>（応募する）は求人で必ず登場する単語です。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 休暇取得を勧める</td><td class="ng">×</td><td>休日「取れ」ではなく会社の条件説明</td></tr><tr><td>2 職場体験を案内</td><td class="ng">×</td><td>体験学習ではなく正式な仕事の応募</td></tr><tr><td>3 就業規則を知らせる</td><td class="ng">×</td><td>外部向けの魅力アピール</td></tr><tr><td>4 従業員を募集</td><td class="ok">○</td><td>workers + Apply now! と一致</td></tr></table><p><b>R7-2 問1（ボランティア募集）と似ています</b>が、こちらは <b>仕事の正式な募集</b>。<b>volunteer</b>（無償のボランティア）と<b>worker</b>（給料をもらう労働者）の違いに注意。</p><p><b>覚えておきたい単語</b>：<b>apply</b>（応募する）、<b>required</b>（必要な）、<b>training</b>（研修）、<b>overtime</b>（残業）、<b>cafeteria</b>（社員食堂・カフェテリア）。</p><div class="ja-trans"><b>全体訳：</b>未経験者歓迎！ランドホークグループには優れた研修プログラムとリラックスした職場環境があります。残業も休日出勤もありません。全社員用の社員食堂もあります！今すぐご応募ください！</div>'
+    },
+    {
+      no:4, qNum:15, topic:"お見舞いへのお礼",
+      message:'Thank you for visiting me the other day. I had a very pleasant time talking with you during my stay at the hospital. Fortunately, I will be leaving the hospital next week. Please give my best wishes to everyone.',
+      messageJa:"先日はお見舞いに来てくださりありがとうございました。入院中にあなたとお話しできて、とても楽しい時間を過ごせました。幸い、来週には退院することになりました。皆様によろしくお伝えください。",
+      answer:3,
+      choices:[
+        "病院の移転を知らせる。",
+        "入院することを報告する。",
+        "お見舞いのお礼を伝える。",
+        "担当の医師を紹介する。"
+      ],
+      keyWords:[
+        {w:"Thank you",mean:"ありがとう",kana:"サンキュー",ac:"サン"},
+        {w:"visiting",mean:"訪問・お見舞い",kana:"ヴィズィティング",ac:"ヴィ"},
+        {w:"the other day",mean:"先日",kana:"ジアザーデイ",ac:"ア"},
+        {w:"pleasant",mean:"楽しい・心地よい",kana:"プレザント",ac:"プ"},
+        {w:"talking",mean:"話すこと",kana:"トーキング",ac:"トー"},
+        {w:"hospital",mean:"病院",kana:"ホスピタル",ac:"ホ"},
+        {w:"leaving",mean:"出ていく・去る",kana:"リーヴィング",ac:"リー"},
+        {w:"best wishes",mean:"よろしく・幸運を",kana:"ベストウィッシィズ",ac:"ベ"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>Thank you for visiting me</b>（お見舞いありがとう）が冒頭にあります。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Thank you for ...</td><td class='ja'>〜してくれてありがとう</td></tr><tr><td class='en'>visiting</td><td class='ja'>訪問する・お見舞いに来る</td></tr><tr><td class='en'>the other day</td><td class='ja'>先日</td></tr><tr><td class='en'>pleasant time</td><td class='ja'>楽しい時間</td></tr><tr><td class='en'>hospital</td><td class='ja'>病院</td></tr><tr><td class='en'>stay at the hospital</td><td class='ja'>入院</td></tr><tr><td class='en'>leaving the hospital</td><td class='ja'>退院</td></tr></table>",
+        "<p>キー単語：<b>「Thank you for visiting me（お見舞いありがとう）」「the other day（先日）」「pleasant time（楽しい時間）」「stay at the hospital（入院）」「leaving the hospital（退院）」</b>。</p><div class='step'>「<b>先日のお見舞いありがとう</b>」「お話しできて楽しかった」「<b>来週退院</b>します」<span class='think-arrow'>→</span>これは<b>お見舞いに来てくれた人へのお礼メッセージ</b>です。<b>Thank you for visiting</b>がそのまま答えのヒントです。</div>",
+        "<p>選択肢を絞り込みましょう。「病院」関連の選択肢ばかりで紛らわしいので<b>動詞部分</b>に注目します。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「病院の移転」</b>… <b>move</b>（移転）の話ではなく、本人が<b>退院する</b>話。<br><span class='ng-mark'>×</span> <b>2「入院の報告」</b>… すでに入院中。これから<b>退院</b>する流れ。時系列が逆。<br><span class='ng-mark'>×</span> <b>4「医師の紹介」</b>… <b>doctor</b>（医師）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>3「お見舞いのお礼」</b>… <b>Thank you for visiting me</b>と完全一致!</div>"
+      ],
+      explain:'<p>このメッセージは <b>入院中にお見舞いに来てくれた人へのお礼メッセージ</b> です。</p><p>冒頭の <b>Thank you for visiting me</b>（お見舞いに来てくれてありがとう）がそのまま答えになります。「<b>Thank you for + 〜ing</b>」は<b>お礼の決まり文句</b>で、メッセージの目的が「お礼」だと一発でわかります。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 病院の移転</td><td class="ng">×</td><td>移転ではなく、自分が退院する話</td></tr><tr><td>2 入院の報告</td><td class="ng">×</td><td>すでに入院中で、もう退院する</td></tr><tr><td>3 お見舞いのお礼</td><td class="ok">○</td><td>Thank you for visiting me と一致</td></tr><tr><td>4 医師の紹介</td><td class="ng">×</td><td>doctor の語が無い</td></tr></table><p><b>選択肢2「入院の報告」が紛らわしい</b>場合：<b>stay at the hospital</b>（入院）も<b>leaving the hospital</b>（退院）も両方出てきます。<b>I will be leaving</b>（これから出ていく）と<b>未来形</b>で「これから退院する」と書かれているので、入院の<b>報告</b>ではありません。</p><p><b>覚えておきたい単語・表現</b>：<b>Thank you for + -ing</b>（〜してくれてありがとう／お礼の合言葉）、<b>visit</b>（訪問する／お見舞いに行く）、<b>the other day</b>（先日）、<b>best wishes</b>（よろしく・幸運を）。</p><div class="ja-trans"><b>全体訳：</b>先日はお見舞いに来てくださりありがとうございました。入院中にあなたとお話しできて、とても楽しい時間を過ごせました。幸い、来週には退院することになりました。皆様によろしくお伝えください。</div>'
+    }
+
+  ],
+  "R6-1": [
+    {
+      no:1, qNum:12, topic:"レストランの順番待ち",
+      message:'Thank you for coming to ABC Restaurant. We are sorry that there are no tables available at the moment. Please write down your name and the number of people in your group. One of our staff will be with you shortly.',
+      messageJa:"ABCレストランへようこそ。あいにく現在ご利用いただけるテーブルがございません。お名前とご一緒のお客様の人数をお書きください。スタッフがすぐにご案内いたします。",
+      answer:3,
+      choices:[
+        "マナーを注意喚起する。",
+        "相席の可否を尋ねる。",
+        "順番待ちを依頼する。",
+        "メニューを確認する。"
+      ],
+      keyWords:[
+        {w:"Thank you",mean:"ありがとう",kana:"サンキュー",ac:"サン"},
+        {w:"Restaurant",mean:"レストラン",kana:"レストラン",ac:"レ"},
+        {w:"sorry",mean:"申し訳ない",kana:"ソーリ",ac:"ソー"},
+        {w:"tables",mean:"テーブル・席",kana:"テイブルズ",ac:"テイ"},
+        {w:"available",mean:"利用できる",kana:"アヴェイラブル",ac:"ヴェイ"},
+        {w:"at the moment",mean:"今現在",kana:"アットザモウメント",ac:"モウ"},
+        {w:"write down",mean:"書く・記入する",kana:"ライトダウン",ac:"ライ"},
+        {w:"name",mean:"名前",kana:"ネイム",ac:"ネイ"},
+        {w:"shortly",mean:"すぐに",kana:"ショートリ",ac:"ショー"}
+      ],
+      hints:[
+        "<p>カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Restaurant</td><td class='ja'>レストラン</td></tr><tr><td class='en'>sorry</td><td class='ja'>申し訳ない</td></tr><tr><td class='en'>no tables available</td><td class='ja'>使えるテーブルがない（満席）</td></tr><tr><td class='en'>at the moment</td><td class='ja'>今現在</td></tr><tr><td class='en'>write down your name</td><td class='ja'>名前を書く</td></tr><tr><td class='en'>number of people</td><td class='ja'>人数</td></tr><tr><td class='en'>shortly</td><td class='ja'>すぐに</td></tr></table>",
+        "<p>キー単語：<b>「Restaurant（レストラン）」「no tables available（満席）」「write down your name（名前を書く）」「number of people（人数）」</b>。</p><div class='step'>「<b>レストラン</b>に来てくれてありがとう」「<b>満席</b>でごめんなさい」「<b>名前と人数を書いて</b>」「すぐ案内するから」<span class='think-arrow'>→</span>これは<b>レストランの入口で「待ってください」と頼む</b>メッセージ。日本でも見かける「順番待ちリストに名前を書く」あの場面です。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「マナーを注意喚起」</b>… <b>manner</b>（マナー）の語が<b>無い</b>。客のマナーを注意する内容ではない。<br><span class='ng-mark'>×</span> <b>2「相席の可否を尋ねる」</b>… <b>share a table</b>（相席）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>4「メニューを確認」</b>… <b>menu</b>（メニュー）の語が<b>無い</b>。まだ席にも座っていない。<br><span class='ok-mark'>○</span> <b>3「順番待ちを依頼」</b>… 「満席」「名前と人数を書く」「すぐご案内」と<b>順番待ちの状況</b>に一致!</div>"
+      ],
+      explain:'<p>このメッセージは <b>満席のレストランで客に順番待ちをお願いする案内</b> です。</p><p>カギは <b>no tables available</b>（テーブルが空いていない＝満席）と <b>write down your name and the number of people</b>（名前と人数を書いて）。日本のレストランでも、入口に「順番待ちリスト」が置いてあって、名前と人数を書いて待つことがありますよね。それと同じです。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 マナーを注意喚起</td><td class="ng">×</td><td>manner の語が無い</td></tr><tr><td>2 相席の可否を尋ねる</td><td class="ng">×</td><td>share a table の語が無い</td></tr><tr><td>3 順番待ちを依頼</td><td class="ok">○</td><td>満席+名前記入+すぐ案内 で一致</td></tr><tr><td>4 メニューを確認</td><td class="ng">×</td><td>menu の語が無い</td></tr></table><p><b>覚えておきたい単語</b>：<b>available</b>（利用できる／空いている）、<b>at the moment</b>（今現在）、<b>shortly</b>（すぐに）。<b>available</b>はホテル・レストラン・電車・座席など、生活のあらゆる場面で出てくる重要単語です。</p><div class="ja-trans"><b>全体訳：</b>ABCレストランへようこそ。あいにく現在ご利用いただけるテーブルがございません。お名前とご一緒のお客様の人数をお書きください。スタッフがすぐにご案内いたします。</div>'
+    },
+    {
+      no:2, qNum:13, topic:"ニュースアプリの宣伝",
+      message:'Do you have difficulty keeping up with what is happening in the world right now? If so, our MFS News app can help you. This app allows you to watch a wide range of news from the most trusted sources anytime and anywhere. Download it right now!',
+      messageJa:"今、世界で何が起こっているか追いつくのが大変ではありませんか？もしそうなら、私たちのMFSニュースアプリがお手伝いできます。このアプリを使えば、最も信頼できる情報源から幅広いニュースを、いつでもどこでも見ることができます。今すぐダウンロードしてください！",
+      answer:2,
+      choices:[
+        "ニュースを紹介する。",
+        "アプリケーションを宣伝する。",
+        "応募方法を知らせる。",
+        "ダウンロードを許可する。"
+      ],
+      keyWords:[
+        {w:"difficulty",mean:"困難",kana:"ディフィカルティ",ac:"ディ"},
+        {w:"keeping up",mean:"追いつく",kana:"キーピングアップ",ac:"キー"},
+        {w:"world",mean:"世界",kana:"ワールド",ac:"ワー"},
+        {w:"app",mean:"アプリ",kana:"アップ",ac:"アッ"},
+        {w:"watch",mean:"見る",kana:"ウォッチ",ac:"ウォッ"},
+        {w:"news",mean:"ニュース",kana:"ニューズ",ac:"ニュー"},
+        {w:"trusted",mean:"信頼できる",kana:"トラスティド",ac:"ト"},
+        {w:"sources",mean:"情報源",kana:"ソースィズ",ac:"ソー"},
+        {w:"anytime",mean:"いつでも",kana:"エニタイム",ac:"エ"},
+        {w:"anywhere",mean:"どこでも",kana:"エニウェア",ac:"エ"},
+        {w:"Download",mean:"ダウンロード",kana:"ダウンロード",ac:"ダ"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>app</td><td class='ja'>アプリ</td></tr><tr><td class='en'>news</td><td class='ja'>ニュース</td></tr><tr><td class='en'>can help you</td><td class='ja'>あなたを助けられる</td></tr><tr><td class='en'>allows you to ...</td><td class='ja'>〜できる</td></tr><tr><td class='en'>watch</td><td class='ja'>見る</td></tr><tr><td class='en'>anytime / anywhere</td><td class='ja'>いつでも / どこでも</td></tr><tr><td class='en'>Download it right now!</td><td class='ja'>今すぐダウンロード!</td></tr></table>",
+        "<p>キー単語：<b>「app（アプリ）」</b>が中心。<b>「Do you have difficulty 〜?（困っていませんか？）」「can help you（助けます）」「Download it right now!（今すぐダウンロード!）」</b>。</p><div class='step'>「<b>困っていませんか？</b>」「うちの<b>アプリ</b>が<b>助けられます</b>」「<b>今すぐダウンロード！</b>」<span class='think-arrow'>→</span>これは典型的な<b>商品（アプリ）の宣伝・広告</b>です。「困っていませんか？→ うちの〜なら解決」というのは<b>広告の決まり文句</b>。</div>",
+        "<p>選択肢を絞り込みましょう。<b>news</b>（ニュース）も<b>app</b>（アプリ）も両方出てくるので、<b>何が中心か</b>を見極めます。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「ニュースを紹介する」</b>… 具体的なニュース内容（事件・話題）は<b>1つも</b>出てこない。「ニュース」は単なる手段。<br><span class='ng-mark'>×</span> <b>3「応募方法を知らせる」</b>… <b>apply</b>（応募）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>4「ダウンロードを許可する」</b>… 許可ではなく「<b>してください</b>」と勧めている。<br><span class='ok-mark'>○</span> <b>2「アプリケーションを宣伝」</b>… <b>app</b>の良さを並べて<b>Download!</b>と勧める＝宣伝!</div>"
+      ],
+      explain:'<p>このメッセージは <b>ニュースアプリの宣伝・広告</b> です。</p><p>広告の典型パターン：「<b>Do you have difficulty 〜?</b>（困っていませんか？）」→「<b>our app can help you</b>（うちのアプリが助けます）」→「<b>Download right now!</b>（今すぐダウンロード！）」。この流れが見えれば、迷わず「宣伝」と判断できます。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 ニュースを紹介</td><td class="ng">×</td><td>具体的なニュース内容は出ていない</td></tr><tr><td>2 アプリを宣伝</td><td class="ok">○</td><td>app の良さを並べて Download! と勧める</td></tr><tr><td>3 応募方法を知らせる</td><td class="ng">×</td><td>apply の語が無い</td></tr><tr><td>4 ダウンロードを許可</td><td class="ng">×</td><td>許可ではなく勧めている</td></tr></table><p><b>選択肢1「ニュースを紹介する」が紛らわしい</b>場合：このメッセージは<b>具体的なニュース内容</b>（例：「今日、〇〇が起きました」）を1つも伝えていません。中心は<b>アプリ自体の便利さ</b>です。</p><p><b>覚えておきたい単語・表現</b>：<b>app</b>（アプリ／application の略）、<b>Download</b>（ダウンロードする）、<b>anytime / anywhere</b>（いつでも・どこでも）、<b>can help you</b>（〜のお役に立つ／宣伝でよく使う）。</p><div class="ja-trans"><b>全体訳：</b>今、世界で何が起こっているか追いつくのが大変ではありませんか？もしそうなら、私たちのMFSニュースアプリがお手伝いできます。このアプリを使えば、最も信頼できる情報源から幅広いニュースを、いつでもどこでも見ることができます。今すぐダウンロードしてください！</div>'
+    },
+    {
+      no:3, qNum:14, topic:"カナダからの留学生紹介",
+      message:'We are hosting an international student from Canada this school year. His name is Justin Parker. He is seventeen and from Quebec City. He has been studying Japanese for five years and wants to improve his Japanese skills. Please talk to him when you see him around.',
+      messageJa:"今年度、カナダからの留学生を受け入れています。彼の名前はジャスティン・パーカー。17歳で、ケベック市出身です。日本語を5年間勉強しており、日本語のスキルを上達させたいと思っています。学校で見かけたら、ぜひ話しかけてください。",
+      answer:2,
+      choices:[
+        "国際交流行事を企画する。",
+        "留学生の情報を伝える。",
+        "授業への参加を呼びかける。",
+        "対話の難しさを説明する。"
+      ],
+      keyWords:[
+        {w:"hosting",mean:"受け入れている",kana:"ホウスティング",ac:"ホウ"},
+        {w:"international student",mean:"留学生",kana:"インターナショナルスチューデント",ac:"ナ"},
+        {w:"Canada",mean:"カナダ",kana:"カナダ",ac:"カ"},
+        {w:"school year",mean:"学年・年度",kana:"スクールイヤー",ac:"スクー"},
+        {w:"name",mean:"名前",kana:"ネイム",ac:"ネイ"},
+        {w:"seventeen",mean:"17歳",kana:"セヴンティーン",ac:"ティー"},
+        {w:"studying Japanese",mean:"日本語を勉強",kana:"スタディングジャパニーズ",ac:"パ"},
+        {w:"improve",mean:"上達する",kana:"インプルーヴ",ac:"プルー"},
+        {w:"talk to",mean:"話しかける",kana:"トークトゥ",ac:"トー"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>international student</b>（留学生）が一番大事です。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>hosting</td><td class='ja'>受け入れている</td></tr><tr><td class='en'>international student</td><td class='ja'>留学生</td></tr><tr><td class='en'>Canada</td><td class='ja'>カナダ</td></tr><tr><td class='en'>His name is ...</td><td class='ja'>彼の名前は…</td></tr><tr><td class='en'>seventeen</td><td class='ja'>17歳</td></tr><tr><td class='en'>studying Japanese</td><td class='ja'>日本語を勉強している</td></tr><tr><td class='en'>improve his Japanese</td><td class='ja'>日本語を上達させる</td></tr><tr><td class='en'>talk to him</td><td class='ja'>彼に話しかける</td></tr></table>",
+        "<p>キー単語：<b>「international student（留学生）」「Canada（カナダ）」「His name is Justin Parker（彼の名前はジャスティン・パーカー）」「seventeen（17歳）」「Quebec City（ケベック市）」「studying Japanese for five years（日本語を5年間勉強）」</b>。</p><div class='step'>「<b>カナダから留学生</b>が来ます」「<b>名前は〜</b>」「<b>17歳</b>」「<b>〜出身</b>」「<b>日本語を勉強中</b>」「<b>話しかけて</b>」<span class='think-arrow'>→</span>これは<b>新しく来る留学生のプロフィールを紹介する</b>メッセージです。<b>名前・年齢・出身・趣味（言語学習）</b>と、<b>人を紹介するときの定番情報</b>が並んでいます。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「国際交流行事を企画」</b>… <b>event</b>（イベント・行事）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>3「授業への参加を呼びかける」</b>… <b>class</b>（授業）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>4「対話の難しさを説明」</b>… <b>difficult</b>（難しい）の語が<b>無い</b>。むしろ「話しかけてOK」と歓迎している。<br><span class='ok-mark'>○</span> <b>2「留学生の情報を伝える」</b>… <b>名前・年齢・出身・学習歴</b>と「情報」のオンパレード!</div>"
+      ],
+      explain:'<p>このメッセージは <b>新しく来た留学生のプロフィールを生徒たちに紹介するお知らせ</b> です。</p><p>「人を紹介する」メッセージの典型パターン：<b>名前 → 年齢 → 出身 → 経歴・趣味</b>の順に情報が並びます。このメッセージもまさにその順番です。</p><table class="check-table"><tr><th>カギの単語</th><th>意味</th><th>選択肢の手がかり</th></tr><tr><td><b>international student</b></td><td>留学生</td><td>「留学生」の話だと判明</td></tr><tr><td><b>His name is 〜</b></td><td>名前は〜</td><td>「情報を伝える」の典型</td></tr><tr><td><b>seventeen / Quebec City</b></td><td>17歳 / 出身地</td><td>プロフィール情報</td></tr></table><p><b>覚えておきたい単語</b>：<b>international student</b>（留学生）、<b>host</b>（受け入れる／主催する／ホストする）、<b>improve</b>（上達する・改善する）。<b>improve</b>は仕事のメッセージでもよく出ます（例：improve your skills = スキルを上達させる）。</p><div class="ja-trans"><b>全体訳：</b>今年度、カナダからの留学生を受け入れています。彼の名前はジャスティン・パーカー。17歳で、ケベック市出身です。日本語を5年間勉強しており、日本語のスキルを上達させたいと思っています。学校で見かけたら、ぜひ話しかけてください。</div>'
+    },
+    {
+      no:4, qNum:15, topic:"貸出禁止本の説明",
+      message:'Books with the orange sticker saying "For Library Use Only" cannot be checked out. These books are out of print, and we do not want to lose them. If you want to make photocopies, please use the copy machine upstairs. Thank you for your understanding.',
+      messageJa:"「館内利用のみ」と書かれたオレンジ色のシールが貼ってある本は、貸出できません。これらの本は絶版になっており、なくしたくありません。コピーが必要な場合は、上の階のコピー機をご利用ください。ご理解のほどよろしくお願いいたします。",
+      answer:2,
+      choices:[
+        "コピー機の使い方を説明する。",
+        "貸出禁止の本について説明する。",
+        "本の廃棄について知らせる。",
+        "コピー機の故障を知らせる。"
+      ],
+      keyWords:[
+        {w:"Books",mean:"本",kana:"ブックス",ac:"ブッ"},
+        {w:"orange sticker",mean:"オレンジのシール",kana:"オーレンジスティッカー",ac:"オー"},
+        {w:"Library Use Only",mean:"館内利用のみ",kana:"ライブラリーユースオンリー",ac:"ラ"},
+        {w:"checked out",mean:"貸出される",kana:"チェックトアウト",ac:"チェッ"},
+        {w:"out of print",mean:"絶版の",kana:"アウトオブプリント",ac:"プリ"},
+        {w:"lose",mean:"なくす",kana:"ルーズ",ac:"ルー"},
+        {w:"photocopies",mean:"コピー",kana:"フォトコピーズ",ac:"フォ"},
+        {w:"copy machine",mean:"コピー機",kana:"コピーマシーン",ac:"マ"},
+        {w:"upstairs",mean:"上の階",kana:"アップステアズ",ac:"ア"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>cannot be checked out</b>（貸し出しできない）が一番大事。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Books</td><td class='ja'>本</td></tr><tr><td class='en'>orange sticker</td><td class='ja'>オレンジ色のシール</td></tr><tr><td class='en'>Library Use Only</td><td class='ja'>館内利用のみ</td></tr><tr><td class='en'>cannot be checked out</td><td class='ja'>貸出できない</td></tr><tr><td class='en'>out of print</td><td class='ja'>絶版の（もう作られていない）</td></tr><tr><td class='en'>photocopies</td><td class='ja'>コピー</td></tr><tr><td class='en'>copy machine</td><td class='ja'>コピー機</td></tr><tr><td class='en'>upstairs</td><td class='ja'>上の階</td></tr></table>",
+        "<p>キー単語：<b>「Books（本）」「Library Use Only（館内利用のみ）」「cannot be checked out（貸出不可）」「out of print（絶版）」「photocopies（コピー）」</b>。</p><div class='step'>「<b>オレンジのシール</b>がついた<b>本</b>は<b>貸し出しできない</b>」「絶版だから<b>なくしたくない</b>」「<b>コピーは上の階で</b>」<span class='think-arrow'>→</span>中心は <b>「貸出できない本があります」</b> という説明。コピー機の話は<b>おまけ</b>。</div>",
+        "<p>選択肢を絞り込みましょう。<b>コピー</b>と<b>本</b>の両方が出てくるので<b>中心はどちらか</b>を見極めます。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「コピー機の使い方を説明」</b>… コピー機の話は最後に少し触れているだけで、<b>使い方の説明はしていない</b>。<br><span class='ng-mark'>×</span> <b>3「本の廃棄」</b>… <b>throw away / dispose</b>（捨てる）の語が<b>無い</b>。むしろ<b>失わないようにする</b>話。<br><span class='ng-mark'>×</span> <b>4「コピー機の故障」</b>… <b>broken / out of order</b>（故障）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>2「貸出禁止の本について説明」</b>… 文章の<b>大半が「貸出禁止の本」の説明</b>!</div>"
+      ],
+      explain:'<p>このメッセージは <b>図書館の利用者に「貸し出しできない本」があることを説明するお知らせ</b> です。</p><p>このメッセージの<b>大半</b>が「貸出できない本」の話で、コピー機の話は<b>「もしコピーしたければ」</b>という補足です。<b>本文の量</b>と<b>中心テーマ</b>を見極めることが大切です。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 コピー機の使い方</td><td class="ng">×</td><td>使い方は説明されていない（場所だけ）</td></tr><tr><td>2 貸出禁止の本</td><td class="ok">○</td><td>本文の大半がこの説明</td></tr><tr><td>3 本の廃棄</td><td class="ng">×</td><td>むしろ無くさないようにする話</td></tr><tr><td>4 コピー機の故障</td><td class="ng">×</td><td>broken の語が無い</td></tr></table><p><b>判断のコツ</b>：複数のテーマが出てくるメッセージでは、<b>最も多くの文章を占めているテーマ</b>が中心です。コピー機の話は1文だけで、本の話が3文あります。</p><p><b>覚えておきたい単語</b>：<b>check out</b>（借り出す／チェックアウトする）、<b>library</b>（図書館）、<b>out of print</b>（絶版）、<b>photocopy</b>（コピー）、<b>upstairs</b>（上の階）。</p><div class="ja-trans"><b>全体訳：</b>「館内利用のみ」と書かれたオレンジ色のシールが貼ってある本は、貸出できません。これらの本は絶版になっており、なくしたくありません。コピーが必要な場合は、上の階のコピー機をご利用ください。ご理解のほどよろしくお願いいたします。</div>'
+    }
+
+  ],
+  "R6-2": [
+    {
+      no:1, qNum:12, topic:"映画館での鑑賞マナー",
+      message:'Please turn off your mobile phone. We also ask you to refrain from bringing in food and drinks from other shops, talking loudly during the film, and kicking the seat in front of you. We wish you a pleasant cinema experience.',
+      messageJa:"携帯電話の電源をお切りください。また、他店からの飲食物の持ち込み、上映中の大声でのおしゃべり、前の座席を蹴ることはお控えください。素敵な映画鑑賞をお楽しみいただけますように。",
+      answer:4,
+      choices:[
+        "携帯電話の機能を説明する。",
+        "食事の作法について確認する。",
+        "話し方のマナーについて教える。",
+        "映画鑑賞時の注意事項を伝える。"
+      ],
+      keyWords:[
+        {w:"turn off",mean:"電源を切る",kana:"ターンオフ",ac:"ター"},
+        {w:"mobile phone",mean:"携帯電話",kana:"モウバイルフォウン",ac:"モウ"},
+        {w:"refrain from",mean:"〜を控える",kana:"リフレインフロム",ac:"フレイ"},
+        {w:"food and drinks",mean:"飲食物",kana:"フードアンドドリンクス",ac:"フー"},
+        {w:"talking loudly",mean:"大声で話す",kana:"トーキングラウドリ",ac:"ラウ"},
+        {w:"film",mean:"映画",kana:"フィルム",ac:"フィ"},
+        {w:"kicking",mean:"蹴ること",kana:"キッキング",ac:"キッ"},
+        {w:"seat",mean:"座席",kana:"シート",ac:"シー"},
+        {w:"cinema",mean:"映画館",kana:"スィネマ",ac:"ス"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>turn off</td><td class='ja'>電源を切る</td></tr><tr><td class='en'>mobile phone</td><td class='ja'>携帯電話</td></tr><tr><td class='en'>refrain from</td><td class='ja'>〜を控える</td></tr><tr><td class='en'>food and drinks</td><td class='ja'>飲食物</td></tr><tr><td class='en'>talking loudly</td><td class='ja'>大声で話す</td></tr><tr><td class='en'>film</td><td class='ja'>映画</td></tr><tr><td class='en'>kicking the seat</td><td class='ja'>座席を蹴る</td></tr><tr><td class='en'>cinema</td><td class='ja'>映画館</td></tr></table>",
+        "<p>キー単語：<b>「turn off your mobile phone（携帯切って）」「refrain from（〜は控えて）」「food and drinks（飲食物）」「talking loudly（大声で話す）」「kicking the seat（座席を蹴る）」「film / cinema（映画 / 映画館）」</b>。</p><div class='step'>「<b>携帯切って</b>」「<b>飲食物の持ち込みダメ</b>」「<b>大声ダメ</b>」「<b>座席を蹴るのダメ</b>」<span class='think-arrow'>→</span><b>映画館で守ってほしいこと</b>を並べているメッセージです。<b>refrain from</b>（〜を控える）は注意・禁止のサイン。複数の禁止事項が並んでいます。</div>",
+        "<p>選択肢を絞り込みましょう。<b>4つすべてに「マナー」関連の単語</b>があるので、<b>何が中心か</b>で判断します。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「携帯電話の機能を説明」</b>… 携帯は<b>「電源切って」</b>と1回出るだけ。機能の説明ではない。<br><span class='ng-mark'>×</span> <b>2「食事の作法を確認」</b>… 飲食物の<b>持ち込み</b>禁止の話で、食事マナーではない。<br><span class='ng-mark'>×</span> <b>3「話し方のマナー」</b>… 大声禁止は1つだけ。話し方が中心ではない。<br><span class='ok-mark'>○</span> <b>4「映画鑑賞時の注意事項」</b>… 携帯・飲食・大声・座席蹴り、<b>すべて映画館での注意</b>事項!</div>"
+      ],
+      explain:'<p>このメッセージは <b>映画館で観客に守ってほしいいくつもの注意事項を伝えるアナウンス</b> です。</p><p>選択肢1〜3はそれぞれ<b>1つの注意</b>を取り上げていますが、本文には<b>4つの注意</b>が並んでいます。<b>複数の注意がある場合、それぞれを取り上げた選択肢ではなく、「全部まとめた選択肢」が正解</b>です。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 携帯電話の機能</td><td class="ng">×</td><td>携帯は注意の1つだけ</td></tr><tr><td>2 食事の作法</td><td class="ng">×</td><td>持ち込みダメで作法ではない</td></tr><tr><td>3 話し方のマナー</td><td class="ng">×</td><td>大声禁止は1つだけ</td></tr><tr><td>4 映画鑑賞の注意事項</td><td class="ok">○</td><td>4つの注意全てを含むのは「注意事項」</td></tr></table><p><b>覚えておきたい単語・表現</b>：<b>turn off</b>（電源を切る）、<b>refrain from + -ing</b>（〜を控える／注意の合言葉）、<b>cinema / film</b>（映画館 / 映画）。</p><div class="ja-trans"><b>全体訳：</b>携帯電話の電源をお切りください。また、他店からの飲食物の持ち込み、上映中の大声でのおしゃべり、前の座席を蹴ることはお控えください。素敵な映画鑑賞をお楽しみいただけますように。</div>'
+    },
+    {
+      no:2, qNum:13, topic:"教室にハチが入った時の対処",
+      message:'In spring and early summer, bees can sometimes enter classrooms. If a bee comes into the classroom, first turn off the lights and lower your posture. If the bee doesn\'t leave the classroom, go to the staffroom to tell a teacher.',
+      messageJa:"春から初夏にかけて、教室にハチが入ってくることがあります。教室にハチが入ってきたら、まず電気を消して姿勢を低くしてください。ハチが教室から出ていかない場合は、職員室に行って先生に伝えてください。",
+      answer:2,
+      choices:[
+        "学校の施設を説明する。",
+        "ハチへの対処法を説明する。",
+        "光の影響を確認する。",
+        "ハチの飼育方法を確認する。"
+      ],
+      keyWords:[
+        {w:"spring",mean:"春",kana:"スプリング",ac:"スプ"},
+        {w:"summer",mean:"夏",kana:"サマー",ac:"サ"},
+        {w:"bees",mean:"ハチ",kana:"ビーズ",ac:"ビー"},
+        {w:"enter",mean:"入る",kana:"エンター",ac:"エ"},
+        {w:"classrooms",mean:"教室",kana:"クラスルームズ",ac:"ク"},
+        {w:"turn off the lights",mean:"電気を消す",kana:"ターンオフザライツ",ac:"ライ"},
+        {w:"lower",mean:"低くする",kana:"ロウアー",ac:"ロウ"},
+        {w:"posture",mean:"姿勢",kana:"ポスチャー",ac:"ポ"},
+        {w:"staffroom",mean:"職員室",kana:"スタッフルーム",ac:"ス"},
+        {w:"teacher",mean:"先生",kana:"ティーチャー",ac:"ティー"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>bees</b>（ハチ）と<b>If 〜</b>（もし〜なら）の連続が大事。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>bees</td><td class='ja'>ハチ</td></tr><tr><td class='en'>enter</td><td class='ja'>入る</td></tr><tr><td class='en'>classrooms</td><td class='ja'>教室</td></tr><tr><td class='en'>If a bee comes ...</td><td class='ja'>もしハチが来たら…</td></tr><tr><td class='en'>turn off the lights</td><td class='ja'>電気を消す</td></tr><tr><td class='en'>lower your posture</td><td class='ja'>姿勢を低くする</td></tr><tr><td class='en'>If the bee doesn't leave</td><td class='ja'>もしハチが出ていかなかったら</td></tr><tr><td class='en'>tell a teacher</td><td class='ja'>先生に言う</td></tr></table>",
+        "<p>キー単語：<b>「bees（ハチ）」</b>が3回登場。<b>「If 〜（もし〜なら）」</b>が2回。<b>「turn off the lights（電気消す）」「lower your posture（姿勢を低く）」「tell a teacher（先生に伝える）」</b>。</p><div class='step'>「<b>ハチが教室に入ってきたら</b>→ <b>電気消して姿勢低く</b>」「<b>出ていかなかったら</b>→ <b>先生に伝えて</b>」<span class='think-arrow'>→</span>これは<b>「ハチが入ってきた時の対処手順」</b>を教えるメッセージです。<b>If 〜, then 〜</b>（もし〜なら〜する）は<b>対処法・手順を教える時の決まり文句</b>。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「学校の施設を説明」</b>… <b>building / facility</b>（施設）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>3「光の影響を確認」</b>… 電気を消すのは<b>ハチ対策</b>であって、光の影響を確認している訳ではない。<br><span class='ng-mark'>×</span> <b>4「ハチの飼育方法」</b>… <b>raise / breed</b>（飼育）の語が<b>無い</b>。むしろ<b>追い払う</b>話。<br><span class='ok-mark'>○</span> <b>2「ハチへの対処法」</b>… 「ハチが来たらどうするか」を順番に説明。<b>対処法そのもの</b>!</div>"
+      ],
+      explain:'<p>このメッセージは <b>教室にハチが入ってきた時の対処方法を生徒に伝えるお知らせ</b> です。</p><p>「<b>If A, then B</b>」（もしAなら、Bする）の構造が<b>対処法を伝える</b>メッセージのサインです。「もしハチが来たら → 電気を消して姿勢を低く」「もし出ていかなかったら → 先生に言う」と<b>2段階の手順</b>が示されています。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 学校施設の説明</td><td class="ng">×</td><td>building / facility の語が無い</td></tr><tr><td>2 ハチへの対処法</td><td class="ok">○</td><td>If 〜 → 〜 の対処手順が並ぶ</td></tr><tr><td>3 光の影響を確認</td><td class="ng">×</td><td>ハチ対策の手段にすぎない</td></tr><tr><td>4 ハチの飼育方法</td><td class="ng">×</td><td>raise の語が無い</td></tr></table><p><b>覚えておきたい単語・表現</b>：<b>If 〜, ...</b>（もし〜なら／対処法を教えるサイン）、<b>turn off the lights</b>（電気を消す／本問の R6-2 問1 にも登場）、<b>tell a teacher</b>（先生に伝える）。</p><div class="ja-trans"><b>全体訳：</b>春から初夏にかけて、教室にハチが入ってくることがあります。教室にハチが入ってきたら、まず電気を消して姿勢を低くしてください。ハチが教室から出ていかない場合は、職員室に行って先生に伝えてください。</div>'
+    },
+    {
+      no:3, qNum:14, topic:"店の新装開店",
+      message:'After a full month of renovations, we are excited to announce our re-opening on January 9th with special anniversary dishes. For our loyal customers, we will still serve the same menu items as before so that you can enjoy your favorite meals. We look forward to seeing you soon.',
+      messageJa:"丸1ヶ月の改装を経て、1月9日に特別な記念料理とともに再オープンすることを喜んでお知らせします。長年のお客様のために、これまでと同じメニューも提供しますので、お気に入りのお食事をお楽しみいただけます。近々お会いできることを楽しみにしております。",
+      answer:4,
+      choices:[
+        "移転場所を案内する。",
+        "開店延期を連絡する。",
+        "連絡先の変更を伝える。",
+        "新装開店を宣伝する。"
+      ],
+      keyWords:[
+        {w:"renovations",mean:"改装",kana:"レノヴェイションズ",ac:"ヴェイ"},
+        {w:"announce",mean:"発表する",kana:"アナウンス",ac:"ナウ"},
+        {w:"re-opening",mean:"再オープン",kana:"リーオープニング",ac:"オー"},
+        {w:"January",mean:"1月",kana:"ジャニュアリ",ac:"ジャ"},
+        {w:"anniversary",mean:"記念日の",kana:"アニヴァーサリ",ac:"ヴァー"},
+        {w:"dishes",mean:"料理",kana:"ディッシィズ",ac:"ディッ"},
+        {w:"loyal customers",mean:"お得意様",kana:"ロイヤルカスタマーズ",ac:"ロ"},
+        {w:"serve",mean:"提供する",kana:"サーヴ",ac:"サー"},
+        {w:"menu",mean:"メニュー",kana:"メニュー",ac:"メ"},
+        {w:"meals",mean:"食事",kana:"ミールズ",ac:"ミー"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>re-opening</b>（再オープン）が一番大事。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>renovations</td><td class='ja'>改装</td></tr><tr><td class='en'>announce</td><td class='ja'>発表する・お知らせする</td></tr><tr><td class='en'>re-opening</td><td class='ja'>再オープン</td></tr><tr><td class='en'>January 9th</td><td class='ja'>1月9日</td></tr><tr><td class='en'>anniversary dishes</td><td class='ja'>記念の料理</td></tr><tr><td class='en'>loyal customers</td><td class='ja'>お得意様</td></tr><tr><td class='en'>menu / meals</td><td class='ja'>メニュー / 食事</td></tr><tr><td class='en'>look forward to ...</td><td class='ja'>〜を楽しみにする</td></tr></table>",
+        "<p>キー単語：<b>「renovations（改装）」「re-opening（再オープン）」「January 9th（1月9日）」「anniversary dishes（記念料理）」「menu / meals（メニュー / 食事）」「look forward to seeing you（お会いするのを楽しみに）」</b>。</p><div class='step'>「<b>1ヶ月の改装後</b>、<b>1月9日に再オープン</b>」「<b>お会いできるのを楽しみに</b>」<span class='think-arrow'>→</span>これは<b>レストランが工事を終えて再オープンすることをお知らせ・宣伝する</b>メッセージです。<b>料理</b>が出てくるので飲食店だとわかります。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「移転場所を案内」</b>… <b>move / new location</b>（移転）の語が<b>無い</b>。同じ場所で再オープン。<br><span class='ng-mark'>×</span> <b>2「開店延期を連絡」</b>… <b>postpone / delay</b>（延期）の語が<b>無い</b>。むしろ<b>予定通り開く</b>。<br><span class='ng-mark'>×</span> <b>3「連絡先の変更」</b>… <b>contact / number</b>（連絡先）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>4「新装開店を宣伝」</b>… <b>renovations + re-opening + 記念料理</b>はまさに新装開店!</div>"
+      ],
+      explain:'<p>このメッセージは <b>改装を終えたお店が再オープンを知らせる宣伝メッセージ</b> です。</p><p>カギは <b>re-opening</b>（再オープン）と <b>renovations</b>（改装）。<b>re-</b> は「再び」を表す接頭辞で、<b>re-opening</b>＝「再びオープンする」＝「リニューアルオープン」「新装開店」と同じ意味です。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 移転場所を案内</td><td class="ng">×</td><td>move / new location が無い</td></tr><tr><td>2 開店延期を連絡</td><td class="ng">×</td><td>postpone / delay が無い</td></tr><tr><td>3 連絡先の変更</td><td class="ng">×</td><td>contact / number が無い</td></tr><tr><td>4 新装開店を宣伝</td><td class="ok">○</td><td>renovations + re-opening と一致</td></tr></table><p><b>覚えておきたい単語</b>：<b>renovation</b>（改装）、<b>re-opening</b>（再オープン）、<b>announce</b>（発表する）、<b>anniversary</b>（記念日の）、<b>look forward to + -ing</b>（〜を楽しみにする）。</p><div class="ja-trans"><b>全体訳：</b>丸1ヶ月の改装を経て、1月9日に特別な記念料理とともに再オープンすることを喜んでお知らせします。長年のお客様のために、これまでと同じメニューも提供しますので、お気に入りのお食事をお楽しみいただけます。近々お会いできることを楽しみにしております。</div>'
+    },
+    {
+      no:4, qNum:15, topic:"ポイントキャンペーンの案内",
+      message:'Here comes XYZ Store\'s bonus points campaign! You can get up to 3,000 bonus shopping points now. Just follow the next three steps. First, download our new app. Second, apply for the bonus points campaign. Third, shop at any of our stores or online during the Golden Week holidays. Enjoy your shopping!',
+      messageJa:"XYZストアのボーナスポイントキャンペーンが始まります！今なら最大3,000ポイントのお買い物ボーナスポイントが獲得できます。次の3ステップに従うだけです。1つ目、新アプリをダウンロード。2つ目、ボーナスポイントキャンペーンに申し込む。3つ目、ゴールデンウィーク中に店舗またはオンラインでお買い物。お買い物をお楽しみください！",
+      answer:2,
+      choices:[
+        "キャンペーンの中止を案内する。",
+        "ポイントの獲得方法を説明する。",
+        "オンラインでの予約方法を説明する。",
+        "ダウンロードの可能期間を案内する。"
+      ],
+      keyWords:[
+        {w:"Store",mean:"店",kana:"ストア",ac:"スト"},
+        {w:"bonus points",mean:"ボーナスポイント",kana:"ボウナスポインツ",ac:"ボウ"},
+        {w:"campaign",mean:"キャンペーン",kana:"キャンペイン",ac:"ペイ"},
+        {w:"get up to",mean:"最大〜まで得られる",kana:"ゲットアップトゥ",ac:"ア"},
+        {w:"shopping",mean:"買い物",kana:"ショッピング",ac:"ショッ"},
+        {w:"steps",mean:"手順",kana:"ステップス",ac:"ス"},
+        {w:"download",mean:"ダウンロードする",kana:"ダウンロード",ac:"ダ"},
+        {w:"app",mean:"アプリ",kana:"アップ",ac:"アッ"},
+        {w:"apply for",mean:"申し込む",kana:"アプライフォー",ac:"プライ"},
+        {w:"online",mean:"オンライン",kana:"オンライン",ac:"ライ"},
+        {w:"holidays",mean:"休日",kana:"ホリデイズ",ac:"ホ"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>bonus points</b>（ボーナスポイント）と<b>three steps</b>（3ステップ）が大事。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>bonus points</td><td class='ja'>ボーナスポイント</td></tr><tr><td class='en'>campaign</td><td class='ja'>キャンペーン</td></tr><tr><td class='en'>get up to 3,000 points</td><td class='ja'>最大3000ポイントもらえる</td></tr><tr><td class='en'>three steps</td><td class='ja'>3つの手順</td></tr><tr><td class='en'>First / Second / Third</td><td class='ja'>1番目 / 2番目 / 3番目</td></tr><tr><td class='en'>download our new app</td><td class='ja'>アプリをダウンロード</td></tr><tr><td class='en'>apply for ...</td><td class='ja'>〜に申し込む</td></tr><tr><td class='en'>shop ...</td><td class='ja'>買い物する</td></tr></table>",
+        "<p>キー単語：<b>「bonus points campaign（ポイントキャンペーン）」「You can get（もらえる）」「three steps（3つの手順）」「First / Second / Third（1番・2番・3番）」</b>。</p><div class='step'>「<b>ポイントが最大3000もらえる</b>」「<b>3つの手順</b>でOK」「<b>1番</b>アプリDL、<b>2番</b>申込、<b>3番</b>買い物」<span class='think-arrow'>→</span>これは<b>「どうすればポイントがもらえるか」を順番に説明する</b>メッセージです。<b>First / Second / Third</b>と並ぶときは<b>手順を説明している</b>サインです。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「中止を案内」</b>… <b>cancel</b>（中止）の語が<b>無い</b>。むしろ<b>これから始まる</b>。<br><span class='ng-mark'>×</span> <b>3「オンライン予約」</b>… <b>reserve / book</b>（予約）の語が<b>無い</b>。「オンラインで買い物」は出てくるが予約ではない。<br><span class='ng-mark'>×</span> <b>4「ダウンロード可能期間」</b>… ダウンロードは<b>3つのステップの1つ</b>にすぎない。期間の話もない。<br><span class='ok-mark'>○</span> <b>2「ポイントの獲得方法」</b>… 「3000ポイントもらうには？」→ <b>3ステップ</b>を順に説明。獲得方法そのもの!</div>"
+      ],
+      explain:'<p>このメッセージは <b>ポイントキャンペーンでポイントをもらう方法を説明する宣伝メッセージ</b> です。</p><p>「<b>First / Second / Third</b>」と<b>順序を表す副詞</b>が並んでいたら、それは<b>手順・方法の説明</b>です。これは大事なパターンなのでぜひ覚えてください。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 中止を案内</td><td class="ng">×</td><td>cancel の語が無い</td></tr><tr><td>2 ポイントの獲得方法</td><td class="ok">○</td><td>3ステップで獲得方法を説明</td></tr><tr><td>3 オンライン予約</td><td class="ng">×</td><td>reserve / book の語が無い</td></tr><tr><td>4 ダウンロード可能期間</td><td class="ng">×</td><td>ダウンロードは1ステップ目だけ</td></tr></table><p><b>覚えておきたい単語・表現</b>：<b>First / Second / Third</b>（1番目／2番目／3番目／手順説明のサイン）、<b>steps</b>（手順）、<b>apply for 〜</b>（〜に申し込む）、<b>get up to 〜</b>（最大〜まで得られる）。</p><div class="ja-trans"><b>全体訳：</b>XYZストアのボーナスポイントキャンペーンが始まります！今なら最大3,000ポイントのお買い物ボーナスポイントが獲得できます。次の3ステップに従うだけです。1つ目、新アプリをダウンロード。2つ目、ボーナスポイントキャンペーンに申し込む。3つ目、ゴールデンウィーク中に店舗またはオンラインでお買い物。お買い物をお楽しみください！</div>'
+    }
+
+  ],
+  "R5-1": [
+    {
+      no:1, qNum:15, topic:"キャンプ場の利用ルール",
+      message:'Welcome to Lakeside Campsite. Our quiet hours are from 10 p.m. to 6 a.m. Please do not make loud noises during these times so that everyone can have a relaxing time. Also, please remember to put out your campfire with water before you go to sleep.',
+      messageJa:"レイクサイドキャンプ場へようこそ。静粛時間は午後10時から午前6時までです。皆さんがくつろいだ時間を過ごせるよう、この時間帯は大きな音を立てないでください。また、寝る前にキャンプファイヤーを必ず水で消火することをお忘れなく。",
+      answer:2,
+      choices:[
+        "草花の種類を説明する。",
+        "滞在時の注意事項を伝える。",
+        "施設の利用を呼びかける。",
+        "車の移動をお願いする。"
+      ],
+      keyWords:[
+        {w:"Welcome to",mean:"ようこそ",kana:"ウェルカムトゥ",ac:"ウェ"},
+        {w:"Campsite",mean:"キャンプ場",kana:"キャンプサイト",ac:"キャ"},
+        {w:"quiet hours",mean:"静粛時間",kana:"クワイエットアワーズ",ac:"クワ"},
+        {w:"loud noises",mean:"大きな音",kana:"ラウドノイズィズ",ac:"ラウ"},
+        {w:"relaxing",mean:"くつろぎの",kana:"リラクスィング",ac:"ラ"},
+        {w:"remember to",mean:"〜を忘れずに",kana:"リメンバートゥ",ac:"メ"},
+        {w:"put out",mean:"（火を）消す",kana:"プットアウト",ac:"プッ"},
+        {w:"campfire",mean:"キャンプファイヤー",kana:"キャンプファイア",ac:"キャ"},
+        {w:"water",mean:"水",kana:"ウォーター",ac:"ウォー"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Welcome to</td><td class='ja'>ようこそ</td></tr><tr><td class='en'>Campsite</td><td class='ja'>キャンプ場</td></tr><tr><td class='en'>quiet hours</td><td class='ja'>静粛時間（静かにする時間）</td></tr><tr><td class='en'>loud noises</td><td class='ja'>大きな音</td></tr><tr><td class='en'>Please do not make ...</td><td class='ja'>〜しないでください</td></tr><tr><td class='en'>remember to ...</td><td class='ja'>〜を忘れずに</td></tr><tr><td class='en'>put out</td><td class='ja'>（火を）消す</td></tr><tr><td class='en'>campfire</td><td class='ja'>キャンプファイヤー</td></tr></table>",
+        "<p>キー単語：<b>「Campsite（キャンプ場）」「quiet hours（静粛時間）」「Please do not make loud noises（大きな音を立てないで）」「remember to put out your campfire（キャンプファイヤーを消すのを忘れずに）」</b>。</p><div class='step'>「<b>キャンプ場へようこそ</b>」「<b>夜10時〜朝6時は静かに</b>」「<b>火は必ず消して</b>」<span class='think-arrow'>→</span>これは<b>キャンプ場で守ってほしいルール</b>を伝えるメッセージ。<b>Please do not 〜</b>と<b>remember to 〜</b>はどちらも<b>注意・ルール</b>を伝えるサインです。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「草花の種類を説明」</b>… <b>flowers / plants</b>（草花）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>3「施設の利用を呼びかける」</b>… むしろ<b>「〜しないで」</b>と注意する内容。利用を呼びかけてはいない。<br><span class='ng-mark'>×</span> <b>4「車の移動をお願い」</b>… <b>car</b>（車）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>2「滞在時の注意事項を伝える」</b>… <b>quiet hours</b>と<b>火の始末</b>はキャンプ場滞在中の注意!</div>"
+      ],
+      explain:'<p>このメッセージは <b>キャンプ場が利用客に守ってほしいルール（注意事項）を伝える案内</b> です。</p><p>R6-2 問1（映画館のマナー）と<b>同じパターン</b>です。「複数の注意事項が並んでいる→<b>注意事項を伝える</b>」が答えです。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 草花の種類</td><td class="ng">×</td><td>flowers / plants の語が無い</td></tr><tr><td>2 滞在時の注意事項</td><td class="ok">○</td><td>静粛時間と火の始末＝注意事項</td></tr><tr><td>3 施設の利用を呼びかける</td><td class="ng">×</td><td>むしろ控えてほしいことを伝える</td></tr><tr><td>4 車の移動をお願い</td><td class="ng">×</td><td>car の語が無い</td></tr></table><p><b>覚えておきたい単語・表現</b>：<b>Please do not 〜</b>（〜しないでください／注意の合言葉）、<b>remember to 〜</b>（〜を忘れずに）、<b>put out</b>（火を消す）。</p><div class="ja-trans"><b>全体訳：</b>レイクサイドキャンプ場へようこそ。静粛時間は午後10時から午前6時までです。皆さんがくつろいだ時間を過ごせるよう、この時間帯は大きな音を立てないでください。また、寝る前にキャンプファイヤーを必ず水で消火することをお忘れなく。</div>'
+    },
+    {
+      no:2, qNum:16, topic:"エアコンの新機能紹介",
+      message:'Our latest air conditioner has many amazing functions. One of the newest and most popular functions is the ability to control your air conditioner from your smartphone using our app. Now, you can turn your air conditioner on right before coming home!',
+      messageJa:"私たちの最新のエアコンには、多くの素晴らしい機能があります。最も新しく人気の機能の1つが、専用アプリを使ってスマートフォンからエアコンを操作できる機能です。今や、帰宅直前にエアコンの電源を入れることができます！",
+      answer:4,
+      choices:[
+        "スマートフォンの操作方法を説明する。",
+        "エアコンの種類を説明する。",
+        "スマートフォンの購入方法を紹介する。",
+        "エアコンの機能を紹介する。"
+      ],
+      keyWords:[
+        {w:"latest",mean:"最新の",kana:"レイテスト",ac:"レイ"},
+        {w:"air conditioner",mean:"エアコン",kana:"エアコンディショナー",ac:"エ"},
+        {w:"amazing",mean:"素晴らしい",kana:"アメイジング",ac:"メイ"},
+        {w:"functions",mean:"機能",kana:"ファンクションズ",ac:"ファン"},
+        {w:"newest",mean:"最も新しい",kana:"ニューエスト",ac:"ニュー"},
+        {w:"popular",mean:"人気の",kana:"ポピュラー",ac:"ポ"},
+        {w:"control",mean:"操作する",kana:"コントロール",ac:"トロー"},
+        {w:"smartphone",mean:"スマートフォン",kana:"スマートフォン",ac:"スマー"},
+        {w:"app",mean:"アプリ",kana:"アップ",ac:"アッ"},
+        {w:"turn ... on",mean:"〜の電源を入れる",kana:"ターンオン",ac:"ター"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>functions</b>（機能）が3回出てきます。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>latest</td><td class='ja'>最新の</td></tr><tr><td class='en'>air conditioner</td><td class='ja'>エアコン</td></tr><tr><td class='en'>amazing</td><td class='ja'>素晴らしい・驚くべき</td></tr><tr><td class='en'>functions</td><td class='ja'>機能</td></tr><tr><td class='en'>popular</td><td class='ja'>人気の</td></tr><tr><td class='en'>control</td><td class='ja'>操作する</td></tr><tr><td class='en'>smartphone</td><td class='ja'>スマートフォン</td></tr><tr><td class='en'>app</td><td class='ja'>アプリ</td></tr><tr><td class='en'>turn on</td><td class='ja'>電源を入れる</td></tr></table>",
+        "<p>キー単語：<b>「latest air conditioner（最新エアコン）」「amazing functions（素晴らしい機能）」「One of the newest functions（最も新しい機能の1つ）」</b>。</p><div class='step'>「<b>最新エアコン</b>には<b>素晴らしい機能</b>がたくさんある」「<b>新機能</b>は<b>スマホで操作できる</b>こと」<span class='think-arrow'>→</span>これは<b>エアコンの機能（特に新機能）を紹介する</b>メッセージです。<b>functions</b>という単語が<b>3回</b>出てくることに注目!</div>",
+        "<p>選択肢を絞り込みましょう。<b>エアコン</b>と<b>スマホ</b>の両方が出てくるので<b>主役はどちらか</b>を見極めます。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「スマホの操作方法」</b>… 主役は<b>エアコン</b>。スマホは<b>道具</b>として出てくるだけ。<br><span class='ng-mark'>×</span> <b>2「エアコンの種類」</b>… <b>type / kind</b>（種類）の語が<b>無い</b>。種類ではなく機能の話。<br><span class='ng-mark'>×</span> <b>3「スマホの購入方法」</b>… <b>buy</b>（買う）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>4「エアコンの機能を紹介」</b>… <b>functions</b>と<b>amazing</b>がそろって<b>機能の宣伝</b>!</div>"
+      ],
+      explain:'<p>このメッセージは <b>エアコンの新機能をアピールする宣伝メッセージ</b> です。</p><p>カギは <b>functions</b>（機能）という単語で、これが<b>3回</b>登場します。1つの単語が繰り返し出てくる時は、<b>それがメッセージの中心テーマ</b>です。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 スマホの操作方法</td><td class="ng">×</td><td>主役はエアコンでスマホは道具</td></tr><tr><td>2 エアコンの種類</td><td class="ng">×</td><td>type / kind の語が無い</td></tr><tr><td>3 スマホの購入方法</td><td class="ng">×</td><td>buy の語が無い</td></tr><tr><td>4 エアコンの機能</td><td class="ok">○</td><td>functions が3回登場</td></tr></table><p><b>判断のコツ</b>：「複数の物が出てくるけど、どれが主役？」と迷ったら、<b>同じ単語が何回も使われているもの</b>が中心です。</p><p><b>覚えておきたい単語</b>：<b>function</b>（機能）、<b>latest</b>（最新の）、<b>app</b>（アプリ）、<b>turn on / off</b>（電源を入れる／切る）。</p><div class="ja-trans"><b>全体訳：</b>私たちの最新のエアコンには、多くの素晴らしい機能があります。最も新しく人気の機能の1つが、専用アプリを使ってスマートフォンからエアコンを操作できる機能です。今や、帰宅直前にエアコンの電源を入れることができます！</div>'
+    },
+    {
+      no:3, qNum:17, topic:"熱中症の予防法",
+      message:'There are many things you can do to prevent heatstroke. First, wear light clothing to help your body keep cool. Second, drink a lot of water with some salt. Third, when going outside, wear a hat or use a parasol to protect against direct sunlight.',
+      messageJa:"熱中症を予防するためにできることはたくさんあります。1つ目、体を涼しく保つために軽い服装をすること。2つ目、水分と塩分を十分にとること。3つ目、外出時は直射日光から身を守るために帽子をかぶるか日傘を使うこと。",
+      answer:1,
+      choices:[
+        "熱中症の予防法を伝える。",
+        "健康維持の秘訣を伝える。",
+        "野外での活動を勧める。",
+        "食生活の改善を勧める。"
+      ],
+      keyWords:[
+        {w:"prevent",mean:"予防する",kana:"プリヴェント",ac:"ヴェ"},
+        {w:"heatstroke",mean:"熱中症",kana:"ヒートストローク",ac:"ヒー"},
+        {w:"wear",mean:"身に着ける",kana:"ウェア",ac:"ウェ"},
+        {w:"light clothing",mean:"軽い服装",kana:"ライトクロウジング",ac:"ライ"},
+        {w:"keep cool",mean:"涼しく保つ",kana:"キープクール",ac:"キー"},
+        {w:"drink",mean:"飲む",kana:"ドリンク",ac:"ド"},
+        {w:"water",mean:"水",kana:"ウォーター",ac:"ウォー"},
+        {w:"salt",mean:"塩",kana:"ソルト",ac:"ソ"},
+        {w:"hat",mean:"帽子",kana:"ハット",ac:"ハッ"},
+        {w:"parasol",mean:"日傘",kana:"パラソル",ac:"パ"},
+        {w:"sunlight",mean:"日光",kana:"サンライト",ac:"サン"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>prevent heatstroke</b>（熱中症を予防する）が冒頭にあります。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>prevent</td><td class='ja'>予防する</td></tr><tr><td class='en'>heatstroke</td><td class='ja'>熱中症</td></tr><tr><td class='en'>First / Second / Third</td><td class='ja'>1番目 / 2番目 / 3番目</td></tr><tr><td class='en'>light clothing</td><td class='ja'>軽い服装</td></tr><tr><td class='en'>keep cool</td><td class='ja'>涼しく保つ</td></tr><tr><td class='en'>water with some salt</td><td class='ja'>塩分を含んだ水</td></tr><tr><td class='en'>hat / parasol</td><td class='ja'>帽子 / 日傘</td></tr><tr><td class='en'>sunlight</td><td class='ja'>日光</td></tr></table>",
+        "<p>キー単語：<b>「prevent heatstroke（熱中症予防）」</b>が冒頭。<b>「First / Second / Third（1番・2番・3番）」</b>と手順が並びます。</p><div class='step'>「<b>熱中症を予防</b>するためにできること」「<b>1番</b>軽装で」「<b>2番</b>水と塩分」「<b>3番</b>帽子・日傘」<span class='think-arrow'>→</span>これは<b>熱中症の予防方法を3つ並べて教える</b>メッセージです。<b>prevent</b>（予防）と<b>First/Second/Third</b>がそろえば<b>「予防法を教える」</b>と確定。</div>",
+        "<p>選択肢を絞り込みましょう。「熱中症」「健康」と紛らわしいので<b>本文で何が中心か</b>を見ます。</p><div class='strategy'><span class='ng-mark'>×</span> <b>2「健康維持の秘訣」</b>… 一般的な健康ではなく、具体的に<b>「熱中症」</b>に絞っている。範囲が広すぎる。<br><span class='ng-mark'>×</span> <b>3「野外での活動を勧める」</b>… むしろ外での<b>注意</b>を促す内容。<b>勧めて</b>はいない。<br><span class='ng-mark'>×</span> <b>4「食生活の改善」</b>… 水・塩分は1つだけ。服装・日傘もある。食生活が中心ではない。<br><span class='ok-mark'>○</span> <b>1「熱中症の予防法」</b>… <b>prevent heatstroke</b>がそのまま冒頭にある!</div>"
+      ],
+      explain:'<p>このメッセージは <b>熱中症を予防する方法を3つ並べて伝える健康アドバイス</b> です。</p><p>R6-2 問4 と同じく、<b>First / Second / Third</b> という順序を表す副詞が並んでいるので、<b>「方法・予防法を教える」</b>パターンとわかります。</p><p>冒頭の <b>There are many things you can do to prevent heatstroke.</b>（熱中症を予防するためにできることがたくさんある）が、まさに「これから予防法を伝える」という宣言文です。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 熱中症の予防法</td><td class="ok">○</td><td>prevent heatstroke が冒頭に</td></tr><tr><td>2 健康維持の秘訣</td><td class="ng">×</td><td>「熱中症」に絞っており、範囲が広すぎ</td></tr><tr><td>3 野外活動を勧める</td><td class="ng">×</td><td>むしろ外での注意を促している</td></tr><tr><td>4 食生活の改善</td><td class="ng">×</td><td>食事は3つの方法の1つ</td></tr></table><p><b>選択肢2「健康維持の秘訣」が紛らわしい</b>場合：本文では具体的に<b>heatstroke</b>（熱中症）に焦点を当てています。「健康維持」は範囲が広すぎて、選択肢として不正確です。<b>具体的なテーマがある場合は、より具体的な選択肢が正解</b>です。</p><p><b>覚えておきたい単語</b>：<b>prevent</b>（予防する）、<b>First / Second / Third</b>（手順説明のサイン）、<b>heatstroke</b>（熱中症）、<b>sunlight</b>（日光）。</p><div class="ja-trans"><b>全体訳：</b>熱中症を予防するためにできることはたくさんあります。1つ目、体を涼しく保つために軽い服装をすること。2つ目、水分と塩分を十分にとること。3つ目、外出時は直射日光から身を守るために帽子をかぶるか日傘を使うこと。</div>'
+    }
+
+  ],
+  "R5-2": [
+    {
+      no:1, qNum:15, topic:"授業の課題について",
+      message:'Today is the last lecture in this semester. For your final assignment, you will need to write a 3,000-word essay on any of the readings from this term. The deadline to submit is June 10th at 11:59 p.m. No late papers will be accepted.',
+      messageJa:"今日が今学期最後の授業です。期末課題として、今学期の読み物のいずれかについて3,000語のエッセイを書いてください。提出期限は6月10日午後11時59分です。期限後の提出は受け付けません。",
+      answer:1,
+      choices:[
+        "授業の課題について伝える。",
+        "教科書の購入方法を案内する。",
+        "公開講座の受講方法を案内する。",
+        "休講の理由について伝える。"
+      ],
+      keyWords:[
+        {w:"last lecture",mean:"最後の授業",kana:"ラストレクチャー",ac:"レ"},
+        {w:"semester",mean:"学期",kana:"セメスター",ac:"メ"},
+        {w:"final assignment",mean:"期末課題",kana:"ファイナルアサインメント",ac:"サイ"},
+        {w:"essay",mean:"エッセイ・小論文",kana:"エセイ",ac:"エ"},
+        {w:"readings",mean:"読み物",kana:"リーディングズ",ac:"リー"},
+        {w:"term",mean:"学期",kana:"ターム",ac:"ター"},
+        {w:"deadline",mean:"締切",kana:"デッドライン",ac:"デッ"},
+        {w:"submit",mean:"提出する",kana:"サブミット",ac:"ミッ"},
+        {w:"late",mean:"遅れた",kana:"レイト",ac:"レイ"},
+        {w:"accepted",mean:"受け付けられる",kana:"アクセプティド",ac:"セ"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>final assignment</b>（期末課題）が一番大事。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>last lecture</td><td class='ja'>最後の授業</td></tr><tr><td class='en'>semester / term</td><td class='ja'>学期</td></tr><tr><td class='en'>final assignment</td><td class='ja'>期末課題</td></tr><tr><td class='en'>essay</td><td class='ja'>エッセイ・小論文</td></tr><tr><td class='en'>3,000-word</td><td class='ja'>3000語の</td></tr><tr><td class='en'>deadline</td><td class='ja'>締切</td></tr><tr><td class='en'>submit</td><td class='ja'>提出する</td></tr><tr><td class='en'>No late papers will be accepted</td><td class='ja'>遅れた論文は受け取らない</td></tr></table>",
+        "<p>キー単語：<b>「last lecture（最後の授業）」「final assignment（期末課題）」「3,000-word essay（3000語のエッセイ）」「deadline（締切）」「submit（提出）」</b>。</p><div class='step'>「<b>最後の授業</b>です」「<b>期末課題</b>として<b>3000語のエッセイ</b>を書く」「<b>締切は6月10日</b>」<span class='think-arrow'>→</span>これは<b>大学などの授業で先生が学生に「期末課題」を出す</b>メッセージです。<b>final assignment + deadline</b>がそろえば確定です。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>2「教科書の購入方法」</b>… <b>textbook / buy</b>の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>3「公開講座の受講方法」</b>… <b>open course / register</b>の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>4「休講の理由」</b>… <b>cancel / no class</b>（休講）の語が<b>無い</b>。むしろ<b>「今日が最後の授業」</b>と授業がある。<br><span class='ok-mark'>○</span> <b>1「授業の課題について伝える」</b>… <b>final assignment</b>の中身（3000語・締切）を伝える!</div>"
+      ],
+      explain:'<p>このメッセージは <b>大学の授業で先生が学生に期末課題（final assignment）の内容と締切を伝える連絡</b> です。</p><p>カギは <b>final assignment</b>（期末課題）と <b>deadline</b>（締切）。学生さんに直接関係する単語ですが、大人の生徒さんも一度覚えてしまえば、こうした「学校系」のメッセージは見つけやすくなります。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 授業の課題</td><td class="ok">○</td><td>final assignment と一致</td></tr><tr><td>2 教科書の購入</td><td class="ng">×</td><td>textbook / buy の語が無い</td></tr><tr><td>3 公開講座の案内</td><td class="ng">×</td><td>open course の語が無い</td></tr><tr><td>4 休講の理由</td><td class="ng">×</td><td>cancel の語が無い</td></tr></table><p><b>覚えておきたい単語</b>：<b>assignment</b>（課題）、<b>essay</b>（エッセイ・小論文）、<b>deadline</b>（締切）、<b>submit</b>（提出する）、<b>semester / term</b>（学期）。<b>deadline</b>は仕事でもよく使われる重要単語です。</p><div class="ja-trans"><b>全体訳：</b>今日が今学期最後の授業です。期末課題として、今学期の読み物のいずれかについて3,000語のエッセイを書いてください。提出期限は6月10日午後11時59分です。期限後の提出は受け付けません。</div>'
+    },
+    {
+      no:2, qNum:16, topic:"学校の制服規則",
+      message:'In South Park High School, students are required to wear uniforms to school. We introduced a gender-neutral uniform policy in 2015. Girls and boys can choose to wear a skirt or pants. Please choose whichever style you find more comfortable.',
+      messageJa:"サウスパーク高校では、生徒は学校に制服を着てくることが求められます。2015年に性別を問わない制服ポリシーを導入しました。男女問わず、スカートかパンツを選んで着ることができます。あなたがより快適だと思うスタイルを選んでください。",
+      answer:2,
+      choices:[
+        "制服の廃止を伝える。",
+        "学校の規則を説明する。",
+        "更衣室の改装を伝える。",
+        "学用品の購入方法を説明する。"
+      ],
+      keyWords:[
+        {w:"High School",mean:"高校",kana:"ハイスクール",ac:"ハイ"},
+        {w:"required to",mean:"〜することが必要・求められる",kana:"リクワイアドトゥ",ac:"クワイ"},
+        {w:"wear",mean:"身に着ける",kana:"ウェア",ac:"ウェ"},
+        {w:"uniforms",mean:"制服",kana:"ユニフォームズ",ac:"ユー"},
+        {w:"introduced",mean:"導入した",kana:"イントロデュースト",ac:"デュー"},
+        {w:"gender-neutral",mean:"性別を問わない",kana:"ジェンダーニュートラル",ac:"ジェ"},
+        {w:"policy",mean:"方針・ポリシー",kana:"ポリシー",ac:"ポ"},
+        {w:"skirt",mean:"スカート",kana:"スカート",ac:"ス"},
+        {w:"pants",mean:"ズボン",kana:"パンツ",ac:"パ"},
+        {w:"comfortable",mean:"快適な",kana:"カンファタブル",ac:"カン"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>High School</td><td class='ja'>高校</td></tr><tr><td class='en'>students are required to ...</td><td class='ja'>生徒は〜しなければならない</td></tr><tr><td class='en'>wear uniforms</td><td class='ja'>制服を着る</td></tr><tr><td class='en'>introduced</td><td class='ja'>導入した</td></tr><tr><td class='en'>gender-neutral</td><td class='ja'>性別を問わない</td></tr><tr><td class='en'>policy</td><td class='ja'>方針・ポリシー</td></tr><tr><td class='en'>can choose</td><td class='ja'>選べる</td></tr><tr><td class='en'>skirt or pants</td><td class='ja'>スカートかズボン</td></tr></table>",
+        "<p>キー単語：<b>「students are required to wear uniforms（生徒は制服を着なければならない）」「gender-neutral uniform policy（性別を問わない制服方針）」「Girls and boys can choose（男女問わず選べる）」</b>。</p><div class='step'>「<b>制服必須</b>」「<b>性別を問わないポリシー</b>」「<b>男女どちらもスカート/ズボンを選べる</b>」<span class='think-arrow'>→</span>これは<b>「学校が制服についての規則を説明する」</b>メッセージです。<b>required to</b>（〜しなければならない）と<b>policy</b>（方針）は<b>規則</b>のサインです。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「制服の廃止」</b>… <b>abolish / no longer</b>（廃止）の語が<b>無い</b>。むしろ<b>制服を着る</b>と言っている。<br><span class='ng-mark'>×</span> <b>3「更衣室の改装」</b>… <b>changing room / renovation</b>（更衣室・改装）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>4「学用品の購入」</b>… <b>buy / purchase</b>（買う）の語が<b>無い</b>。<br><span class='ok-mark'>○</span> <b>2「学校の規則を説明」</b>… <b>required + policy</b>はまさに<b>規則</b>!</div>"
+      ],
+      explain:'<p>このメッセージは <b>高校の制服に関する規則（特に性別を問わない方針）を生徒に説明するお知らせ</b> です。</p><p>カギは <b>required to 〜</b>（〜しなければならない）と <b>policy</b>（方針）。この2つが出てきたら<b>規則・ルールの説明</b>と判断できます。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 制服の廃止</td><td class="ng">×</td><td>制服を着ると書いてある（むしろ反対）</td></tr><tr><td>2 学校の規則を説明</td><td class="ok">○</td><td>required + policy で規則の説明</td></tr><tr><td>3 更衣室の改装</td><td class="ng">×</td><td>changing room の語が無い</td></tr><tr><td>4 学用品の購入</td><td class="ng">×</td><td>buy の語が無い</td></tr></table><p><b>覚えておきたい単語</b>：<b>required to 〜</b>（〜しなければならない）、<b>policy</b>（方針・ポリシー）、<b>uniform</b>（制服）、<b>introduce</b>（導入する／紹介する）、<b>comfortable</b>（快適な）。</p><div class="ja-trans"><b>全体訳：</b>サウスパーク高校では、生徒は学校に制服を着てくることが求められます。2015年に性別を問わない制服ポリシーを導入しました。男女問わず、スカートかパンツを選んで着ることができます。あなたがより快適だと思うスタイルを選んでください。</div>'
+    },
+    {
+      no:3, qNum:17, topic:"魚釣りのコツ",
+      message:'Thank you for visiting our fishing port today. Here are some tips to help you catch more fish. First, try to fish in different locations. Second, fish at different times of the day. And last but not least, record your fishing success.',
+      messageJa:"本日は当漁港へお越しいただきありがとうございます。より多くの魚を釣るためのコツをいくつかお伝えします。1つ目、さまざまな場所で釣ってみる。2つ目、1日の中の異なる時間帯に釣る。そして最後に、釣果を記録すること。",
+      answer:4,
+      choices:[
+        "魚の飼育方法を説明する。",
+        "魚の調理方法を説明する。",
+        "魚釣りの日程を説明する。",
+        "魚釣りのコツを説明する。"
+      ],
+      keyWords:[
+        {w:"visiting",mean:"訪問",kana:"ヴィズィティング",ac:"ヴィ"},
+        {w:"fishing port",mean:"漁港",kana:"フィッシングポート",ac:"フィッ"},
+        {w:"tips",mean:"コツ・ヒント",kana:"ティップス",ac:"ティッ"},
+        {w:"catch",mean:"捕まえる・釣る",kana:"キャッチ",ac:"キャッ"},
+        {w:"fish",mean:"魚 / 釣りをする",kana:"フィッシュ",ac:"フィッ"},
+        {w:"different locations",mean:"異なる場所",kana:"ディファレントロケイションズ",ac:"ロ"},
+        {w:"times of the day",mean:"1日の時間帯",kana:"タイムズオブザデイ",ac:"タイ"},
+        {w:"record",mean:"記録する",kana:"レコード",ac:"レ"},
+        {w:"success",mean:"成功",kana:"サクセス",ac:"セ"}
+      ],
+      hints:[
+        "<p>カギの単語を確認。<b>tips</b>（コツ）が一番大事。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>fishing port</td><td class='ja'>漁港</td></tr><tr><td class='en'>tips</td><td class='ja'>コツ・ヒント</td></tr><tr><td class='en'>help you catch more fish</td><td class='ja'>もっと魚を釣るのに役立つ</td></tr><tr><td class='en'>First / Second</td><td class='ja'>1番目 / 2番目</td></tr><tr><td class='en'>last but not least</td><td class='ja'>最後に大切なのは</td></tr><tr><td class='en'>different locations</td><td class='ja'>異なる場所</td></tr><tr><td class='en'>times of the day</td><td class='ja'>1日の時間帯</td></tr><tr><td class='en'>record your fishing success</td><td class='ja'>釣果を記録する</td></tr></table>",
+        "<p>キー単語：<b>「tips（コツ）」「catch more fish（もっと魚を釣る）」「First / Second / last but not least（1番・2番・最後）」</b>。</p><div class='step'>「<b>もっと魚を釣る</b>ための<b>コツ</b>を教えます」「<b>1番</b>場所を変える」「<b>2番</b>時間を変える」「<b>最後に</b>記録する」<span class='think-arrow'>→</span>これは<b>「魚釣りのコツを順番に教える」</b>メッセージです。<b>tips</b>（コツ）+ <b>First/Second/last</b>のセットで完璧。</div>",
+        "<p>選択肢を絞り込みましょう。<b>4つすべてに「魚」</b>があるので、<b>動詞部分</b>に注目します。</p><div class='strategy'><span class='ng-mark'>×</span> <b>1「飼育方法」</b>… <b>raise / breed</b>（飼育）の語が<b>無い</b>。釣る話。<br><span class='ng-mark'>×</span> <b>2「調理方法」</b>… <b>cook</b>（料理する）の語が<b>無い</b>。<br><span class='ng-mark'>×</span> <b>3「釣りの日程」</b>… <b>schedule / dates</b>（日程・日付）の語が<b>無い</b>。具体的な日付ではなく<b>方法</b>。<br><span class='ok-mark'>○</span> <b>4「魚釣りのコツ」</b>… <b>tips</b>がそのまま「コツ」!</div>"
+      ],
+      explain:'<p>このメッセージは <b>漁港を訪れた人に、魚釣りのコツを伝える案内</b> です。</p><p>カギは <b>tips</b>（コツ・ヒント）と <b>First / Second / last but not least</b>（順序を表す副詞）。この組み合わせが出てきたら、<b>「コツ・方法を順番に教える」</b>パターン確定です。</p><p><b>last but not least</b>（最後に大切なのは）は決まり文句で、「最後だけど（重要度が）一番低い訳ではない」という意味。最後の項目を強調する時に使います。</p><table class="check-table"><tr><th>選択肢</th><th>判定</th><th>理由</th></tr><tr><td>1 飼育方法</td><td class="ng">×</td><td>raise / breed の語が無い</td></tr><tr><td>2 調理方法</td><td class="ng">×</td><td>cook の語が無い</td></tr><tr><td>3 釣りの日程</td><td class="ng">×</td><td>schedule / dates の語が無い</td></tr><tr><td>4 魚釣りのコツ</td><td class="ok">○</td><td>tips がそのまま「コツ」</td></tr></table><p><b>覚えておきたい単語・表現</b>：<b>tips</b>（コツ・ヒント／複数形で使う）、<b>last but not least</b>（最後に大切なのは／決まり文句）、<b>catch fish</b>（魚を釣る）、<b>record</b>（記録する）。</p><div class="ja-trans"><b>全体訳：</b>本日は当漁港へお越しいただきありがとうございます。より多くの魚を釣るためのコツをいくつかお伝えします。1つ目、さまざまな場所で釣ってみる。2つ目、1日の中の異なる時間帯に釣る。そして最後に、釣果を記録すること。</div>'
+    }
+
+  ]
+};
+
+let currentYear = "R7-1";
+let currentQ = 0;
+let savedWords = [];
+let answeredMap = {};
+let currentMode = "hint";
+
+function getKey(yr, idx){return `${yr}-${idx}`}
+
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  Object.keys(QUESTIONS_DATA).forEach(y=>{
+    const b = document.createElement('button');
+    b.textContent = `令和${y[1]}年 第${y[3]}回`;
+    if(y===currentYear) b.classList.add('on');
+    b.onclick = ()=>{
+      stopAllPlay();
+      currentYear=y;currentQ=0;renderYearPick();renderTabs();renderQuestion();
+    };
+    yp.appendChild(b);
+  });
+  ["R7-1","R7-2","R6-1","R6-2","R5-1","R5-2"].forEach(y=>{
+    if(!QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = `令和${y[1]}年 第${y[3]}回 (準備中)`;
+      b.style.opacity = "0.5";
+      b.disabled = true;
+      yp.appendChild(b);
+    }
+  });
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML = '';
+  data.forEach((q,i)=>{
+    const t = document.createElement('button');
+    t.className = 'q-tab' + (i===currentQ?' active':'');
+    t.textContent = `問${q.no}`;
+    t.onclick = ()=>{stopAllPlay();currentQ=i;renderTabs();renderQuestion();};
+    tabs.appendChild(t);
+  });
+}
+
+function highlightWord(text, words){
+  if(!words || words.length===0) return text;
+  const sorted = [...words].sort((a,b)=>b.w.length-a.w.length);
+  let result = text;
+  sorted.forEach((kw,i)=>{
+    const safeWord = kw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b(${safeWord})\\b`, 'i');
+    if(result.match(regex)){
+      const opts = JSON.stringify({m:kw.mean,k:kw.kana,a:kw.ac});
+      const escapedOpts = opts.replace(/"/g, '&quot;');
+      result = result.replace(regex, `<span class="word" data-opts="${escapedOpts}" onclick="showVwPop(this,event)">$1</span>`);
+    }
+  });
+  return result;
+}
+
+function renderQuestion(){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const c = document.getElementById('qContainer');
+  const isR5 = currentYear.startsWith("R5");
+  
+  let r5NoteHtml = '';
+  if(isR5){
+    r5NoteHtml = '<div class="r5-note">📝 <b>注意：</b>令和5年度では、この形式は<b>第4問</b>として出題されました（解答番号15〜17の3問）。R6以降は<b>第3問</b>になっています。</div>';
+  }
+  
+  const decorated = highlightWord(data.message, data.keyWords);
+  
+  let choicesHtml = '';
+  data.choices.forEach((ch,i)=>{
+    choicesHtml += `<button class="choice" data-idx="${i}" onclick="pickChoice(${i})">
+      <span class="num">${i+1}</span>${ch}
+    </button>`;
+  });
+  
+  let hintsHtml = '';
+  data.hints.forEach((h,i)=>{
+    hintsHtml += `<div class="hint-box" id="hint${i}"><span class="hint-num">ヒント${i+1}</span><div>${h}</div></div>`;
+  });
+  
+  c.innerHTML = `
+    <div class="qcard">
+      ${r5NoteHtml}
+      <div class="topic">📨 ${data.topic}</div>
+      <div class="q-instruction">次のメッセージの送り手が意図したものとして最も適当なものを、選択肢から選びなさい。<b>（解答番号 ${data.qNum}）</b></div>
+      <button class="sentence-play" onclick="playSentence()">🔊 英文を読み上げる</button>
+      <div class="message" id="messageBox">${decorated}</div>
+      <div class="choices" id="choicesBox">${choicesHtml}</div>
+      <div class="result-msg" id="resultMsg"></div>
+      
+      <div class="mode-tabs">
+        <button class="mode-btn ${currentMode==='hint'?'active':''}" onclick="setMode('hint')">💡 ヒントモード</button>
+        <button class="mode-btn ${currentMode==='explain'?'active':''}" onclick="setMode('explain')">📚 詳しい解説</button>
+      </div>
+      
+      <div class="mode-panel ${currentMode==='hint'?'show':''}" id="hintPanel">
+        <h3>💡 段階的ヒント（英語が苦手でも大丈夫!）</h3>
+        <div class="hint-buttons">
+          <button class="hint-btn" onclick="showHint(0)">①カギの単語</button>
+          <button class="hint-btn" onclick="showHint(1)">②何の話か</button>
+          <button class="hint-btn" onclick="showHint(2)">③消去法</button>
+        </div>
+        ${hintsHtml}
+      </div>
+      
+      <div class="mode-panel ${currentMode==='explain'?'show':''}" id="explainPanel">
+        <h3>📚 詳しい解説</h3>
+        <div class="explain-box">${data.explain}</div>
+      </div>
+    </div>
+  `;
+  
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined){
+    revealAnswer(answeredMap[k], false);
+  }
+}
+
+function setMode(m){
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('hintPanel').classList.toggle('show', m==='hint');
+  document.getElementById('explainPanel').classList.toggle('show', m==='explain');
+}
+
+function showHint(i){
+  const box = document.getElementById('hint'+i);
+  box.classList.toggle('show');
+}
+
+function pickChoice(i){
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined) return;
+  answeredMap[k] = i;
+  revealAnswer(i, true);
+}
+
+function revealAnswer(picked, showMsg){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const ans = data.answer - 1;
+  const choicesEl = document.getElementById('choicesBox');
+  if(!choicesEl) return;
+  const buttons = choicesEl.querySelectorAll('.choice');
+  buttons.forEach((btn, i)=>{
+    if(i===ans) btn.classList.add('correct');
+    else if(i===picked) btn.classList.add('wrong');
+  });
+  if(showMsg){
+    const msg = document.getElementById('resultMsg');
+    if(picked===ans){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `残念。正解は ${data.answer} 番です。`;
+    }
+  }
+}
+
+let activeWordPop = null;
+function showVwPop(el, ev){
+  if(ev) ev.stopPropagation();
+  if(activeWordPop && activeWordPop !== el){
+    closeVwPop(activeWordPop);
+  }
+  if(el.classList.contains('tapped')){
+    closeVwPop(el);
+    return;
+  }
+  el.classList.add('tapped');
+  const opts = JSON.parse(el.getAttribute('data-opts').replace(/&quot;/g,'"'));
+  const word = el.textContent;
+  
+  const isSaved = savedWords.some(w=>w.w===word);
+  
+  const pop = document.createElement('span');
+  pop.className = 'word-pop show';
+  pop.innerHTML = `
+    <div class="pop-row">
+      <div>
+        <div><b>${word}</b> [${opts.k}] ${opts.a?`<span class="accent">▶${opts.a}</span>`:''}</div>
+        <div>${opts.m}</div>
+      </div>
+      <button class="${isSaved?'saved':'save'}" onclick="event.stopPropagation();saveWord('${word}','${opts.m}','${opts.k}',this)">${isSaved?'✓':'保存'}</button>
+    </div>
+  `;
+  el.appendChild(pop);
+  activeWordPop = el;
+}
+
+function closeVwPop(el){
+  el.classList.remove('tapped');
+  const pop = el.querySelector('.word-pop');
+  if(pop) pop.remove();
+  if(activeWordPop===el) activeWordPop = null;
+}
+
+document.addEventListener('click', (e)=>{
+  if(activeWordPop && !activeWordPop.contains(e.target)){
+    closeVwPop(activeWordPop);
+  }
+});
+
+function saveWord(w, m, k, btn){
+  if(savedWords.some(x=>x.w===w)){
+    return;
+  }
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  savedWords.push({w, m, k, year:currentYear, qNo:data.no});
+  btn.textContent = '✓';
+  btn.className = 'saved';
+  document.getElementById('reviewCount').textContent = savedWords.length;
+}
+
+let voices = [];
+let currentSpeech = null;
+
+function loadVoices(){
+  voices = window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function pickVoice(){
+  if(voices.length===0) loadVoices();
+  const enVoice = voices.find(v => /en-US|en-GB/i.test(v.lang) && /male|David|Daniel|Alex/i.test(v.name));
+  return enVoice || voices.find(v=>/en/i.test(v.lang)) || voices[0];
+}
+
+function playSentence(){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  let text = data.message.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function stopAllPlay(){
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+  }
+  currentSpeech = null;
+}
+
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(savedWords.length===0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:20px">まだ単語が保存されていません。<br>英文中の<span style="color:var(--accent2);text-decoration:underline">下線つきの単語</span>をタップして「保存」ボタンを押してください。</p>';
+  } else {
+    body.innerHTML = savedWords.map((w,i)=>`
+      <div class="review-card">
+        <div class="review-word">${w.w}</div>
+        <div class="review-q">[${w.k}] ${w.m}</div>
+        <div style="font-size:.75rem;color:#888;">令和${w.year[1]}年 第${w.year[3]}回 問${w.qNo}より</div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="removeWord(${i})">✓ 覚えた</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+function removeWord(i){
+  savedWords.splice(i, 1);
+  document.getElementById('reviewCount').textContent = savedWords.length;
+  openReview();
+}
+
+renderYearPick();
+renderTabs();
+renderQuestion();
+</script>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高認英語 第4問 攻略 | GAMBA</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink)}
+.q-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.topic{background:var(--soft);padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px}
+
+.q-instruction{font-size:.82rem;color:#666;margin-bottom:8px;background:#fffcf3;padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3);line-height:1.5}
+
+.frame{font-size:.95rem;line-height:1.9;font-family:"Georgia",serif;padding:14px;background:#fdf8f0;border-radius:10px;border:1px dashed var(--line);margin-bottom:10px}
+.frame .blank-area{display:inline-block;background:var(--hint);border:2px dashed var(--accent3);padding:4px 16px;border-radius:6px;font-weight:700;color:var(--accent3);min-width:80px;text-align:center;margin:0 4px;font-family:sans-serif}
+
+.abc-group{margin-bottom:12px}
+.abc-row{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;background:#fafafa;border-radius:8px;margin-bottom:6px;font-family:"Georgia",serif;font-size:.92rem;line-height:1.6;border:1px solid var(--line)}
+.abc-label{flex:none;background:var(--accent2);color:#fff;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.85rem;font-family:sans-serif}
+.abc-text{flex:1}
+.abc-ja{display:none;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:.82rem;color:#555;margin-top:4px;padding-top:4px;border-top:1px dashed var(--line)}
+.abc-row.show-ja .abc-ja{display:block}
+
+.toggle-ja{margin-bottom:10px;padding:6px 12px;background:var(--paper);border:1.5px solid var(--accent2);color:var(--accent2);border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit}
+
+.sentence-play{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 2px 6px rgba(217,79,79,.3);display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:inherit}
+.sentence-play:active{transform:scale(.98)}
+
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+.word-pop button.speak{background:var(--accent2);font-size:.85rem;padding:3px 9px}
+.word-pop button.speak:active{background:#1a4870}
+.word-pop .pop-buttons{display:flex;gap:4px;flex-direction:column}
+
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:11px;font-size:.95rem;cursor:pointer;text-align:center;font-family:"Georgia",serif;color:var(--ink);transition:all .15s;line-height:1.4;font-weight:700}
+.choice .num{display:inline-block;background:var(--soft);color:var(--accent2);font-weight:800;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;margin-right:8px;font-size:.78rem;font-family:sans-serif;vertical-align:middle}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+.hint-box .strategy{margin-top:8px;padding:10px 12px;background:#e8f4ff;border-radius:6px;border-left:3px solid var(--accent2)}
+.hint-box .strategy b{color:var(--accent2)}
+.hint-box .ng-mark{color:var(--accent);font-weight:800}
+.hint-box .ok-mark{color:var(--good);font-weight:800}
+.hint-box .order-arrow{display:inline-block;background:var(--accent);color:#fff;padding:2px 8px;margin:0 4px;border-radius:4px;font-weight:800;font-size:.78rem;font-family:sans-serif}
+.hint-box .signal-word{background:#fff5d6;padding:1px 6px;border-radius:4px;font-weight:800;color:var(--accent);font-family:"Georgia",serif}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+.explain-box{background:var(--paper);padding:14px;border-radius:8px;border-left:4px solid var(--accent3);font-size:.9rem;line-height:1.85}
+.explain-box p{margin-bottom:10px}
+.explain-box p:last-child{margin-bottom:0}
+.explain-box b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+.explain-box .ja-trans{background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:10px;border-left:3px solid var(--accent2)}
+.explain-box .ja-trans b{color:var(--accent2);background:transparent;padding:0}
+.explain-box .check-table{width:100%;border-collapse:collapse;margin:10px 0;background:#fafafa;border-radius:6px;overflow:hidden;font-size:.85rem}
+.explain-box .check-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-size:.78rem}
+.explain-box .check-table td{padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.explain-box .check-table tr:last-child td{border-bottom:none}
+.explain-box .check-table .ng{color:var(--accent);font-weight:700}
+.explain-box .check-table .ok{color:var(--good);font-weight:700}
+.explain-box .order-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fffcf3;padding:10px;border-radius:6px;margin:10px 0;font-weight:700;justify-content:center}
+.explain-box .order-flow .step-box{background:var(--accent2);color:#fff;padding:6px 12px;border-radius:6px;font-size:.85rem}
+.explain-box .order-flow .arrow{color:var(--accent);font-weight:800;font-size:1.1rem}
+
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+.tip-banner{background:linear-gradient(135deg,#e8f4ff,#d4eaff);border:1px solid #a0c8e8;padding:10px 14px;border-radius:10px;font-size:.82rem;color:#1a4870;margin-bottom:12px;line-height:1.6}
+.tip-banner b{color:var(--accent)}
+
+/* ヒントモード冒頭の注意書き */
+.hint-notice{background:#fff8e1;border:1px solid #ffd982;padding:10px 12px;border-radius:8px;font-size:.8rem;color:#806000;margin-bottom:10px;line-height:1.55}
+.hint-notice b{color:#a05000}
+
+/* 解説末尾の学習のすすめ */
+.study-rec{background:linear-gradient(135deg,#f0f8e8,#dcefcd);border:1px solid #a5c97c;padding:12px 14px;border-radius:10px;font-size:.85rem;color:#3a5a1f;margin-top:14px;line-height:1.7}
+.study-rec b{color:#2c4a14}
+.study-rec h4{color:#2c4a14;margin-bottom:6px;font-size:.92rem}
+.study-rec a{display:inline-block;background:#5a8a2c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:.82rem;margin:4px 4px 0 0;font-family:inherit}
+.study-rec a:hover{background:#3e6a14}
+
+@media (max-width:480px){
+  .choices{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔀 高認英語 第4問 攻略</h1>
+  <p><span class="badge">文の並べ替え</span>つなぎ言葉と代名詞がカギ!</p>
+</header>
+
+<div class="tip-banner">
+  💡 <b>このヒントの使い方</b><br>
+  これは<b>「英語が苦手な方が 40点合格を取る」ための戦略的ヒント</b>です。<b>満点用ではありません</b>。確実に得点を伸ばすには、まず<b>中学英単語・中学英文法</b>を学んだうえで、このヒントを補助として使ってください。
+</div>
+
+<div class="year-pick" id="yearPick"></div>
+<div class="q-tabs" id="qTabs"></div>
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS_DATA = {
+  "R7-1": [
+    {
+      no:1, qNum:16, topic:"京都旅行と祇園祭",
+      framePre:'If you are interested in visiting Kyoto, I recommend that you come during summer.',
+      framePost:'This is why I believe summer is the best time to visit Kyoto.',
+      framePreJa:"もしあなたが京都を訪れることに興味があるなら、夏に来ることをお勧めします。",
+      framePostJa:"だから私は、夏が京都を訪れるのに一番よい時期だと思うのです。",
+      sentences:{
+        a:'The biggest reason is that you have a chance to enjoy its famous summer festival, the Gion Matsuri.',
+        b:'In this event, you can see participants pull large floats around the city.',
+        c:'You will be amazed by their beautiful decorations.'
+      },
+      sentencesJa:{
+        a:"一番の理由は、有名な夏祭りの祇園祭を楽しむ機会があるということです。",
+        b:"このイベントでは、参加者が大きな山車を町中で引いている様子を見ることができます。",
+        c:"その美しい装飾には、きっと驚かされるでしょう。"
+      },
+      answer:1,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"interested in",mean:"〜に興味がある",kana:"インタレスティドイン",ac:"イン"},
+        {w:"visiting",mean:"訪問する",kana:"ヴィズィティング",ac:"ヴィ"},
+        {w:"recommend",mean:"勧める",kana:"レコメンド",ac:"メン"},
+        {w:"summer",mean:"夏",kana:"サマー",ac:"サ"},
+        {w:"biggest reason",mean:"一番の理由",kana:"ビゲストリーズン",ac:"ビ"},
+        {w:"chance",mean:"機会",kana:"チャンス",ac:"チャ"},
+        {w:"famous",mean:"有名な",kana:"フェイマス",ac:"フェイ"},
+        {w:"festival",mean:"お祭り",kana:"フェスティヴァル",ac:"フェ"},
+        {w:"event",mean:"行事・イベント",kana:"イヴェント",ac:"ヴェ"},
+        {w:"participants",mean:"参加者",kana:"パーティスィパンツ",ac:"ティ"},
+        {w:"pull",mean:"引く",kana:"プル",ac:"プ"},
+        {w:"floats",mean:"山車",kana:"フロウツ",ac:"フロウ"},
+        {w:"city",mean:"町",kana:"スィティ",ac:"ス"},
+        {w:"amazed",mean:"驚いた",kana:"アメイズド",ac:"メイ"},
+        {w:"decorations",mean:"装飾",kana:"デコレイションズ",ac:"レイ"}
+      ],
+      hints:[
+        "<p>まずは a/b/c の各文の<b>カギの単語</b>だけ確認しましょう。並べ替えは「全部訳す」必要はありません。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>summer festival</td><td class='ja'>夏祭り</td></tr><tr><td class='en'>the Gion Matsuri</td><td class='ja'>祇園祭</td></tr><tr><td class='en'>biggest reason</td><td class='ja'>一番の理由</td></tr><tr><td class='en'>this event</td><td class='ja'>このイベント</td></tr><tr><td class='en'>participants</td><td class='ja'>参加者</td></tr><tr><td class='en'>floats</td><td class='ja'>山車（だし）</td></tr><tr><td class='en'>their beautiful decorations</td><td class='ja'>その美しい装飾</td></tr><tr><td class='en'>You will be amazed</td><td class='ja'>あなたは驚くでしょう</td></tr></table>",
+        "<p>並べ替えで一番大切なのは <b>「指示語・代名詞のルール」</b> です。次の3つを覚えてください。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>this</span>（この）/ <span class='signal-word'>these</span>（これらの）/ <span class='signal-word'>that</span>（その）<span class='think-arrow'>→</span><b>前の文に出た名詞を指す</b><br>② <span class='signal-word'>their</span>（その）/ <span class='signal-word'>its</span>（その）/ <span class='signal-word'>it</span>（それ）<span class='think-arrow'>→</span><b>前の文に出た物を受ける</b><br>③ これらの言葉が含まれる文は <b>絶対に最初には来られません</b>。前に「指す相手」が必要だからです。</div><div class='step'>では a/b/c をもう一度見てください。<br><b>b</b> に <span class='signal-word'>In this event</span>（このイベント）があります。<span class='think-arrow'>→</span>この <b>this event</b> は<b>何のイベント</b>を指すでしょうか？</div><div class='step'><b>c</b> に <span class='signal-word'>their</span>（その）があります。<span class='think-arrow'>→</span>この <b>their</b> は<b>何の</b>を指すでしょうか？</div><p>この2つの問いに答えれば、<b>どの文がどの文の後に来るか</b>がわかります。</p>",
+        "<p>選択肢を絞り込みましょう。並べ替えは <b>1つ1つの選択肢を当てはめてみる</b> のが確実です。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初の文</b>に <span class='signal-word'>this</span> や <span class='signal-word'>their</span> が含まれていたら<b>その選択肢は×</b>（前に指す相手がない）<br>② <b>this event</b> が出てくる文は、<b>前の文に「event（イベント・祭り）に当たるもの」がある</b>はず<br>③ <b>their + 名詞</b> が出てくる文は、<b>前の文に「複数の物（または人）」がある</b>はず</div><p>この視点で6つの選択肢を見て、<b>不自然になるもの</b>に × をつけてみましょう。残るのが正解です。</p><div class='step'><b>例えば：</b> 選択肢「c→a→b」を試してみると…<br><b>c が最初</b>になります。c には <span class='signal-word'>their</span> がありますね。<span class='think-arrow'>→</span>「their」は何を指す？前に文がないから<b>指せない</b>。<br>つまり<b>「c が最初の選択肢」</b>はおかしいですね。</div><p>同じ要領で、<b>b が最初</b>の選択肢も検討してみてください。</p>"
+      ],
+      explain:'<p>このメッセージは <b>京都を訪れるなら夏がおすすめだと、祇園祭を中心に勧める文章</b> です。</p><p><b>正解：a → b → c（選択肢1）</b></p><div class="order-flow"><span class="step-box">a 祇園祭の紹介</span><span class="arrow">→</span><span class="step-box">b このイベントで山車</span><span class="arrow">→</span><span class="step-box">c その装飾に驚く</span></div><p><b>並べ替えの最大のカギ：「指示語・代名詞は前の文を受ける」</b></p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>意味</th></tr><tr><td><b>a</b></td><td><b>the Gion Matsuri</b>（祇園祭）</td><td>「祇園祭」を初めて紹介</td></tr><tr><td><b>b</b></td><td><b>In this event</b>（このイベントでは）</td><td>「このイベント」=祇園祭。aの後</td></tr><tr><td><b>c</b></td><td><b>their</b>（その）+ <b>decorations</b></td><td>「their」=floats（山車）の。bの後</td></tr></table><p><b>this / these / their / it</b> といった代名詞・指示語は、<b>必ず「前の文に出た名詞」を指します</b>。これは並べ替え問題で<b>最強の手がかり</b>です。</p><p><b>判断のポイント1：「In this event」の正体</b><br>bの<b>this event</b>（このイベント）は何を指すでしょうか？前の文に<b>祭り（festival）</b>が出てこないと「this event」は使えません。だから<b>aの後にbが来る</b>と確定します。</p><p><b>判断のポイント2：「their decorations」の正体</b><br>cの<b>their</b>（彼ら／それらの）は何を指すでしょうか？人なら「彼らの」、物なら「それらの」です。直前のbに<b>floats</b>（山車・複数）が出てくるので、<b>their = floats の</b>。だから<b>bの後にcが来る</b>と確定します。</p><p><b>判断のポイント3：本文後半とのつながり</b><br>本文後半の <b>This is why I believe summer is the best time</b>（だから夏が一番）は、<b>「a→b→cの説明全体」</b>を受けて結論を述べています。「祇園祭が見られる→山車も見られる→装飾に驚く→だから夏がベスト」という流れです。</p><p><b>覚えておきたい単語・表現</b>：<b>this / these</b>（この・これらの／前の文の名詞を指す）、<b>their / its</b>（その／前の物を受ける）、<b>biggest reason</b>（一番の理由）、<b>You will be amazed</b>（驚くだろう）。</p><div class="ja-trans"><b>全体訳：</b>もしあなたが京都を訪れることに興味があるなら、夏に来ることをお勧めします。<b>一番の理由は、有名な夏祭りの祇園祭を楽しむ機会があるということです。このイベントでは、参加者が大きな山車を町中で引いている様子を見ることができます。その美しい装飾には、きっと驚かされるでしょう。</b>だから私は、夏が京都を訪れるのに一番よい時期だと思うのです。</div>'
+    },
+    {
+      no:2, qNum:17, topic:"Sachiのバドミントン部",
+      framePre:'Last summer, Sachi joined a badminton club to have fun.',
+      framePost:'Playing badminton not only kept her active but also gave her the chance to make a great friend.',
+      framePreJa:"去年の夏、サチは楽しむためにバドミントン部に入りました。",
+      framePostJa:"バドミントンをすることは彼女を活発に保ってくれただけでなく、素晴らしい友達を作る機会も与えてくれました。",
+      sentences:{
+        a:'But then, she met Yuzu, who became her badminton partner and a good friend.',
+        b:'They both practiced a lot and even won a small tournament.',
+        c:'At first, she did not know anyone there, which made her a bit nervous.'
+      },
+      sentencesJa:{
+        a:"しかしそのとき、彼女はユズに出会い、ユズは彼女のバドミントンのパートナーで親しい友人になりました。",
+        b:"二人ともたくさん練習し、小さな大会でも優勝しました。",
+        c:"最初、彼女はそこで誰も知らなかったので、少し緊張していました。"
+      },
+      answer:5,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"Last summer",mean:"去年の夏",kana:"ラストサマー",ac:"ラ"},
+        {w:"joined",mean:"加入した",kana:"ジョインド",ac:"ジョイ"},
+        {w:"badminton club",mean:"バドミントン部",kana:"バドミントンクラブ",ac:"バ"},
+        {w:"have fun",mean:"楽しむ",kana:"ハヴファン",ac:"ファ"},
+        {w:"But then",mean:"しかしそのとき",kana:"バットゼン",ac:"バッ"},
+        {w:"met",mean:"会った",kana:"メット",ac:"メッ"},
+        {w:"partner",mean:"パートナー",kana:"パートナー",ac:"パー"},
+        {w:"both",mean:"両方とも",kana:"ボウス",ac:"ボウ"},
+        {w:"practiced",mean:"練習した",kana:"プラクティスト",ac:"プ"},
+        {w:"won",mean:"勝った",kana:"ワン",ac:"ワン"},
+        {w:"tournament",mean:"大会",kana:"トーナメント",ac:"トー"},
+        {w:"At first",mean:"最初は",kana:"アットファースト",ac:"ファー"},
+        {w:"did not know",mean:"知らなかった",kana:"ディドノットノウ",ac:"ノウ"},
+        {w:"anyone",mean:"誰も",kana:"エニワン",ac:"エ"},
+        {w:"nervous",mean:"緊張した",kana:"ナーヴァス",ac:"ナー"},
+        {w:"active",mean:"活発な",kana:"アクティヴ",ac:"ア"}
+      ],
+      hints:[
+        "<p>a/b/cの<b>カギの単語</b>を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>But then</td><td class='ja'>しかしそのとき</td></tr><tr><td class='en'>met Yuzu</td><td class='ja'>ユズに会った</td></tr><tr><td class='en'>partner / good friend</td><td class='ja'>パートナー / 親友</td></tr><tr><td class='en'>both</td><td class='ja'>両方とも（=2人）</td></tr><tr><td class='en'>practiced a lot</td><td class='ja'>たくさん練習した</td></tr><tr><td class='en'>won a small tournament</td><td class='ja'>小さな大会で勝った</td></tr><tr><td class='en'>At first</td><td class='ja'>最初は</td></tr><tr><td class='en'>did not know anyone</td><td class='ja'>誰も知らなかった</td></tr><tr><td class='en'>nervous</td><td class='ja'>緊張した</td></tr></table>",
+        "<p>この問題で注目すべき <b>3種類のサイン</b> があります。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>At first</span>（最初は）<span class='think-arrow'>→</span>ストーリーの<b>始まり</b>を表す。最初に来やすい。<br>② <span class='signal-word'>But</span>（しかし）/ <span class='signal-word'>However</span>（しかしながら）<span class='think-arrow'>→</span>前の文と<b>反対の流れ</b>。<b>絶対に最初には来られない</b>（「しかし」の前に何かがないとおかしい）。<br>③ <span class='signal-word'>They</span>（彼ら）/ <span class='signal-word'>he</span>（彼）/ <span class='signal-word'>she</span>（彼女）<span class='think-arrow'>→</span>前の文に出た<b>人を指す</b>。最初には来られない。</div><div class='step'>では a/b/c をもう一度見てください。<br><b>a</b> に <span class='signal-word'>But then</span>（しかしそのとき）があります。<span class='think-arrow'>→</span>「しかし」の前にはどんな話があったはず？</div><div class='step'><b>b</b> に <span class='signal-word'>They both</span>（2人とも）があります。<span class='think-arrow'>→</span>「2人とも」は<b>誰と誰</b>を指す？前の文にその2人が登場している必要があります。</div><div class='step'><b>c</b> に <span class='signal-word'>At first</span>（最初は）があります。<span class='think-arrow'>→</span>これはストーリーのどの位置に来そうですか？</div>",
+        "<p>選択肢を絞り込みましょう。<b>1つ1つの選択肢を当てはめてみる</b>のが確実です。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初に来られない文</b>を探そう（<span class='signal-word'>But</span>で始まる文、<span class='signal-word'>They</span>で始まる文）<br>② <b>最初に来やすい文</b>を探そう（<span class='signal-word'>At first</span>で始まる文）<br>③ <b>感情の流れ</b>に注目（マイナス → プラス、緊張 → 安心、など）</div><div class='step'><b>例えば：</b> 選択肢「a→b→c」を試してみると…<br><b>a が最初</b>になります。a には <span class='signal-word'>But then</span>（しかし）がありますね。<span class='think-arrow'>→</span>最初の文に「しかし」が来るのは<b>不自然</b>。<br>つまり<b>「a が最初の選択肢」</b>は怪しいですね。</div><div class='step'>同じ要領で、<b>b が最初</b>の選択肢も検討してみてください。bには <span class='signal-word'>They both</span> がありますが、最初の文で「They（彼ら2人）」と言われても<b>誰のこと？</b>と困ります。</div><p>この視点で6つの選択肢を見て、<b>不自然になるもの</b>に × をつけてみましょう。残るのが正解です。</p>"
+      ],
+      explain:'<p>このメッセージは <b>サチがバドミントン部で最初は緊張していたが、ユズに出会い、2人で練習して大会で優勝した話</b> です。</p><p><b>正解：c → a → b（選択肢5）</b></p><div class="order-flow"><span class="step-box">c 最初は誰も知らず緊張</span><span class="arrow">→</span><span class="step-box">a しかしユズと出会う</span><span class="arrow">→</span><span class="step-box">b 2人で練習し優勝</span></div><p><b>並べ替えの3つの黄金ルール：</b></p><table class="check-table"><tr><th>カギ</th><th>意味</th><th>位置のヒント</th></tr><tr><td><b>At first</b></td><td>最初は</td><td><b>始まり</b>を表す</td></tr><tr><td><b>But then / However</b></td><td>しかし</td><td>前の文の<b>反対</b>。最初には来ない</td></tr><tr><td><b>They / He / She</b></td><td>彼ら/彼/彼女</td><td>前で出た<b>人を指す</b>。最初には来ない</td></tr></table><p><b>判断のポイント1：「At first」は始まりのサイン</b><br>cの<b>At first, she did not know anyone</b>（最初は誰も知らなかった）は、<b>ストーリーの最初の状況</b>を述べています。これが先頭になります。</p><p><b>判断のポイント2：「But then」は転換のサイン</b><br>aの<b>But then, she met Yuzu</b>（しかしそのとき、ユズに出会った）の<b>But</b>は、<b>前の状況（緊張していた）から流れが変わる</b>ことを示します。だから<b>cの後</b>に来ます。</p><p><b>判断のポイント3：「They both」は2人を指す</b><br>bの<b>They both practiced</b>（2人とも練習した）の<b>They</b>は<b>2人の人</b>を指します。aで<b>Sachi と Yuzu</b>の2人が登場するので、<b>aの後にbが来ます</b>。</p><p><b>判断のポイント4：本文後半とのつながり</b><br>本文後半 <b>gave her the chance to make a great friend</b>（素晴らしい友達を作る機会をくれた）は、aで出会った<b>Yuzuのこと</b>を指しています。a→bの流れで「ユズと出会い→練習し優勝した」物語の結論として自然です。</p><p><b>覚えておきたい単語・表現</b>：<b>At first</b>（最初は／物語の始まり）、<b>But / However</b>（しかし／流れの転換・最初には来ない）、<b>They both</b>（2人とも／前の2人を指す）、<b>practiced a lot</b>（たくさん練習した）。</p><div class="ja-trans"><b>全体訳：</b>去年の夏、サチは楽しむためにバドミントン部に入りました。<b>最初、彼女はそこで誰も知らなかったので、少し緊張していました。しかしそのとき、彼女はユズに出会い、ユズは彼女のバドミントンのパートナーで親しい友人になりました。二人ともたくさん練習し、小さな大会でも優勝しました。</b>バドミントンをすることは彼女を活発に保ってくれただけでなく、素晴らしい友達を作る機会も与えてくれました。</div>'
+    }
+  ],
+  "R7-2": [
+    {
+      no:1, qNum:16, topic:"日本での運転免許取得",
+      framePre:'There are several steps to get a driver\'s license in Japan.',
+      framePost:'If you pass it, you can now start driving.',
+      framePreJa:"日本で運転免許を取るにはいくつかの段階があります。",
+      framePostJa:"もしそれに合格すれば、もう運転を始めることができます。",
+      sentences:{
+        a:'You normally need to attend a driving school.',
+        b:'Once you finish driving school, you take a written test to get your license.',
+        c:'There, you learn the traffic rules and practice driving with an instructor.'
+      },
+      sentencesJa:{
+        a:"普通、教習所に通う必要があります。",
+        b:"教習所を終えたら、免許を取るために筆記試験を受けます。",
+        c:"そこで、交通ルールを学び、教官と一緒に運転練習をします。"
+      },
+      answer:2,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"steps",mean:"段階・手順",kana:"ステップス",ac:"ス"},
+        {w:"driver's license",mean:"運転免許",kana:"ドライバーズライセンス",ac:"ライ"},
+        {w:"normally",mean:"普通は",kana:"ノーマリ",ac:"ノー"},
+        {w:"attend",mean:"通う・出席する",kana:"アテンド",ac:"テン"},
+        {w:"driving school",mean:"教習所",kana:"ドライヴィングスクール",ac:"ドラ"},
+        {w:"Once",mean:"〜したら",kana:"ワンス",ac:"ワン"},
+        {w:"finish",mean:"終える",kana:"フィニッシュ",ac:"フィ"},
+        {w:"written test",mean:"筆記試験",kana:"リトンテスト",ac:"リ"},
+        {w:"There",mean:"そこで",kana:"ゼア",ac:"ゼ"},
+        {w:"traffic rules",mean:"交通ルール",kana:"トラフィックルールズ",ac:"ト"},
+        {w:"practice",mean:"練習する",kana:"プラクティス",ac:"プ"},
+        {w:"instructor",mean:"教官・指導者",kana:"インストラクター",ac:"ストラ"},
+        {w:"pass",mean:"合格する",kana:"パス",ac:"パ"}
+      ],
+      hints:[
+        "<p>まずは a/b/c の各文の<b>カギの単語</b>だけ確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>driver's license</td><td class='ja'>運転免許</td></tr><tr><td class='en'>driving school</td><td class='ja'>教習所</td></tr><tr><td class='en'>attend</td><td class='ja'>通う</td></tr><tr><td class='en'>Once you finish</td><td class='ja'>〜を終えたら</td></tr><tr><td class='en'>written test</td><td class='ja'>筆記試験</td></tr><tr><td class='en'>There</td><td class='ja'>そこで</td></tr><tr><td class='en'>traffic rules</td><td class='ja'>交通ルール</td></tr><tr><td class='en'>practice driving</td><td class='ja'>運転練習</td></tr><tr><td class='en'>pass</td><td class='ja'>合格する</td></tr></table>",
+        "<p>並べ替えで一番大切なのは <b>「指示語・場所を表す言葉」</b> です。次の3つを覚えてください。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>There</span>（そこで）<span class='think-arrow'>→</span><b>前の文に出た場所を指す</b>。最初には来られない。<br>② <span class='signal-word'>Once 〜</span>（〜したら）<span class='think-arrow'>→</span><b>前の段階が終わってから</b>を表す。前の文に「何かをやっている」内容が必要。<br>③ <span class='signal-word'>it</span>（それ）<span class='think-arrow'>→</span>前の文に出た物を指す。</div><div class='step'><b>c</b> に <span class='signal-word'>There</span>（そこで）があります。<span class='think-arrow'>→</span>「そこ」とは<b>どこ</b>を指す？前の文に「場所を表す名詞」がある必要があります。</div><div class='step'><b>b</b> に <span class='signal-word'>Once you finish driving school</span>（教習所を終えたら）があります。<span class='think-arrow'>→</span>これは<b>教習所での学習が終わった後</b>のこと。だから前の文には<b>「教習所に通う」「教習所で学ぶ」</b>が出ているはず。</div><div class='step'>本文後半 <span class='signal-word'>If you pass it</span>（もしそれに合格すれば）の <b>it</b> は<b>何</b>を指す？</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初の文</b>に <span class='signal-word'>There</span> や代名詞が含まれていたら<b>その選択肢は×</b>（前に指す相手がない）<br>② <b>Once you finish driving school</b>（bの文）の<b>前</b>には、<b>教習所での話</b>がある必要がある<br>③ 本文最後の <span class='signal-word'>If you pass it</span>（もし合格すれば）の <b>it</b> は何を指すか？それを最後にもってくると自然</div><div class='step'><b>例えば：</b> 選択肢「c→a→b」を試してみると…<br><b>c が最初</b>になります。c には <span class='signal-word'>There</span> がありますね。<span class='think-arrow'>→</span>「そこで」と言っても、まだ場所の話が出ていない。<br>つまり<b>「c が最初の選択肢」</b>はおかしいですね。</div><p>残りの選択肢を、上の3つの視点で順に検討してみましょう。</p>"
+      ],
+      explain:'<p>このメッセージは <b>日本での運転免許取得の手順</b> を順番に説明する文章です。</p><p><b>正解：a → c → b（選択肢2）</b></p><div class="order-flow"><span class="step-box">a 教習所に通う</span><span class="arrow">→</span><span class="step-box">c そこで交通ルール学習</span><span class="arrow">→</span><span class="step-box">b 終えたら筆記試験</span></div><p><b>各文の役割と判断のカギ：</b></p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>役割</th></tr><tr><td><b>a</b></td><td>You normally need to attend a <b>driving school</b></td><td>最初の段階。「教習所」を初めて紹介</td></tr><tr><td><b>c</b></td><td><b>There</b>（そこで）= driving school</td><td>aの「教習所」を受けて、そこで何をするかを説明</td></tr><tr><td><b>b</b></td><td><b>Once you finish</b>（終えたら） + <b>written test</b>（筆記試験）</td><td>cの後の段階。試験を受ける</td></tr></table><p><b>判断のポイント1：「There」（そこで）は前の文の場所を指す</b><br>cの<b>There</b>（そこで）は何を指すでしょうか？前の文に <b>driving school</b>（教習所）が登場すれば、そこを「There」で受けることができます。だから<b>aの後にc</b>が来ます。</p><p><b>判断のポイント2：「Once you finish driving school」の意味</b><br>bの<b>Once you finish driving school</b>（教習所を終えたら）は、<b>「教習所での学習が終わった後」</b>を意味します。だから<b>cの後にb</b>が来ます。</p><p><b>判断のポイント3：本文末尾の「it」が指すもの</b><br>本文最後 <b>If you pass it</b>（もし合格すれば）の<b>it</b>は<b>written test（筆記試験）</b>を指します。だから<b>bが末尾</b>に来て、本文後半とつながります。</p><p><b>覚えておきたい単語・表現</b>：<b>There</b>（そこで／前の文の場所を指す）、<b>Once 〜</b>（〜したら／時間の順序）、<b>attend</b>（通う・出席する）、<b>practice</b>（練習する）、<b>traffic rules</b>（交通ルール）。</p><div class="ja-trans"><b>全体訳：</b>日本で運転免許を取るにはいくつかの段階があります。<b>普通、教習所に通う必要があります。そこで、交通ルールを学び、教官と一緒に運転練習をします。教習所を終えたら、免許を取るために筆記試験を受けます。</b>もしそれに合格すれば、もう運転を始めることができます。</div>'
+    },
+    {
+      no:2, qNum:17, topic:"Ayaのハムスター",
+      framePre:'Aya moved to Tokyo to start university and was living by herself for the first time.',
+      framePost:'After talking with a clerk in a pet shop, she chose to get a hamster.',
+      framePreJa:"アヤは大学を始めるため東京に引っ越し、初めて一人暮らしをしていました。",
+      framePostJa:"ペットショップの店員と話した後、彼女はハムスターを買うことを選びました。",
+      sentences:{
+        a:'Since she lives in a small apartment, she wanted a small, quiet animal.',
+        b:'She was excited about her new life in the first few months.',
+        c:'However, she soon began to feel lonely and decided to get a pet.'
+      },
+      sentencesJa:{
+        a:"小さなアパートに住んでいるので、彼女は小さくて静かな動物が欲しかったのです。",
+        b:"最初の数ヶ月、彼女は新生活にワクワクしていました。",
+        c:"しかしすぐに寂しくなって、彼女はペットを飼うことに決めました。"
+      },
+      answer:4,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"moved to",mean:"〜に引っ越した",kana:"ムーヴドトゥ",ac:"ムー"},
+        {w:"start university",mean:"大学を始める",kana:"スタートユニバースィティ",ac:"スター"},
+        {w:"by herself",mean:"一人で",kana:"バイハーセルフ",ac:"セ"},
+        {w:"for the first time",mean:"初めて",kana:"フォーザファーストタイム",ac:"ファー"},
+        {w:"Since",mean:"〜なので",kana:"スィンス",ac:"スィン"},
+        {w:"apartment",mean:"アパート",kana:"アパートメント",ac:"パー"},
+        {w:"quiet",mean:"静かな",kana:"クワイエット",ac:"クワ"},
+        {w:"excited",mean:"わくわくした",kana:"イクサイティド",ac:"サイ"},
+        {w:"first few months",mean:"最初の数ヶ月",kana:"ファーストフューマンス",ac:"フュー"},
+        {w:"However",mean:"しかし",kana:"ハウエヴァー",ac:"エ"},
+        {w:"soon",mean:"すぐに",kana:"スーン",ac:"スー"},
+        {w:"lonely",mean:"寂しい",kana:"ロウンリ",ac:"ロウン"},
+        {w:"decided to",mean:"〜することに決めた",kana:"ディサイディドトゥ",ac:"サイ"},
+        {w:"pet",mean:"ペット",kana:"ペット",ac:"ペッ"},
+        {w:"clerk",mean:"店員",kana:"クラーク",ac:"クラー"},
+        {w:"hamster",mean:"ハムスター",kana:"ハムスター",ac:"ハ"}
+      ],
+      hints:[
+        "<p>a/b/cの<b>カギの単語</b>を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Since 〜</td><td class='ja'>〜なので（理由）</td></tr><tr><td class='en'>small apartment</td><td class='ja'>小さなアパート</td></tr><tr><td class='en'>quiet animal</td><td class='ja'>静かな動物</td></tr><tr><td class='en'>excited</td><td class='ja'>わくわくした</td></tr><tr><td class='en'>first few months</td><td class='ja'>最初の数ヶ月</td></tr><tr><td class='en'>However</td><td class='ja'>しかし（流れの転換）</td></tr><tr><td class='en'>soon</td><td class='ja'>すぐに</td></tr><tr><td class='en'>lonely</td><td class='ja'>寂しい</td></tr><tr><td class='en'>decided to get a pet</td><td class='ja'>ペットを飼うと決めた</td></tr></table>",
+        "<p>並べ替えで大切な <b>3種類のサイン</b> に注目してください。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>However</span>（しかし）<span class='think-arrow'>→</span>前の文と<b>反対の流れ</b>を作る。<b>絶対に最初には来られない</b>。<br>② <span class='signal-word'>first few months</span>（最初の数ヶ月）<span class='think-arrow'>→</span>ストーリーの<b>始まり</b>を表す時間表現。<br>③ <span class='signal-word'>Since 〜</span>（〜なので）<span class='think-arrow'>→</span><b>理由</b>を表す。「ペットを飼うと決めた」のような流れの<b>後</b>に、その理由として来やすい。</div><div class='step'><b>感情の流れ</b>に注目！この問題は感情の変化が大きなヒントです。<br>・<b>b</b> = 「<b>excited</b>（ワクワク）」<span class='think-arrow'>→</span>プラスの感情<br>・<b>c</b> = 「<b>lonely</b>（寂しい）」「However（しかし）」<span class='think-arrow'>→</span>マイナスへの転換<br>・<b>a</b> = 「<b>quiet animal</b> が欲しい」<span class='think-arrow'>→</span>具体的な希望（=ペットを飼うと決めた後の話）</div><div class='step'>本文後半 <span class='signal-word'>After talking with a clerk in a pet shop, she chose to get a hamster</span>（店員と話してハムスターを選んだ）。これは<b>a/b/cのどの状況</b>の続き？</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <span class='signal-word'>However</span>（しかし）が含まれる<b>c は最初に来られません</b>。前の文がないと「しかし」と言えない。<br>② <span class='signal-word'>first few months</span>（最初の数ヶ月）が含まれる<b>b はストーリーの始まり</b>に来やすい。<br>③ <span class='signal-word'>Since 〜</span>（〜なので）の<b>a は「ペット決定後」の希望</b>を表すので、cの後ろに来る可能性が高い。</div><div class='step'><b>例えば：</b> 選択肢「c→a→b」を試してみると…<br><b>c が最初</b>になります。c には <span class='signal-word'>However</span>（しかし）がありますね。<span class='think-arrow'>→</span>最初の文に「しかし」が来るのは<b>不自然</b>。<br>つまり<b>「c が最初の選択肢」</b>は怪しいですね。</div><p>残りの選択肢を、感情の流れと上の3つのルールで順に検討してください。</p>"
+      ],
+      explain:'<p>このメッセージは <b>東京で一人暮らしを始めたAyaが、寂しさからペットを飼うと決めて、ハムスターを選んだ話</b> です。</p><p><b>正解：b → c → a（選択肢4）</b></p><div class="order-flow"><span class="step-box">b 最初はワクワク</span><span class="arrow">→</span><span class="step-box">c しかし寂しくペット決定</span><span class="arrow">→</span><span class="step-box">a 小さく静かな動物希望</span></div><p><b>感情の流れを追う</b>のがこの問題のカギです：</p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>感情</th></tr><tr><td><b>b</b></td><td><b>excited</b>（ワクワク）+ <b>first few months</b>（最初の数ヶ月）</td><td>プラスの感情。ストーリーの始まり</td></tr><tr><td><b>c</b></td><td><b>However</b>（しかし）+ <b>lonely</b>（寂しい）</td><td>マイナスへ転換。bを受ける</td></tr><tr><td><b>a</b></td><td><b>Since 〜</b>（〜なので）+ <b>quiet animal</b>（静かな動物）</td><td>具体的な希望。cの後</td></tr></table><p><b>判断のポイント1：「However」は最初に来ない</b><br>cの<b>However</b>（しかし）は<b>前の文を受けて反対の内容</b>を出す接続詞です。前の文がないと使えません。だから<b>cが最初の選択肢（5、6）は除外</b>できます。</p><p><b>判断のポイント2：「first few months」はストーリーの始まり</b><br>bの<b>first few months</b>（最初の数ヶ月）は、新生活が始まったすぐの時期を表します。これが<b>ストーリーの先頭</b>に来るのが自然です。</p><p><b>判断のポイント3：「Since 〜」は理由を表す</b><br>aの<b>Since she lives in a small apartment</b>（小さなアパートだから）は、<b>「ペットを飼うと決めた後</b>に、どんなペットがいいか考えている」流れ。だから<b>「ペット決定」を述べたcの後</b>に来ます。</p><p><b>判断のポイント4：本文末尾とのつながり</b><br>本文末尾は <b>After talking with a clerk in a pet shop, she chose to get a hamster</b>（ペットショップで店員と話した後、ハムスターを選んだ）。これは<b>aの「小さくて静かな動物が欲しい」を受けて、店員と相談してハムスターに決めた</b>という流れ。だから<b>aが末尾</b>に来ます。</p><p><b>覚えておきたい単語・表現</b>：<b>However</b>（しかし／流れの転換・最初には来ない）、<b>Since 〜</b>（〜なので／理由）、<b>excited</b>（わくわくした）、<b>lonely</b>（寂しい）、<b>decided to 〜</b>（〜することに決めた）。</p><div class="ja-trans"><b>全体訳：</b>アヤは大学を始めるため東京に引っ越し、初めて一人暮らしをしていました。<b>最初の数ヶ月、彼女は新生活にワクワクしていました。しかしすぐに寂しくなって、彼女はペットを飼うことに決めました。小さなアパートに住んでいるので、彼女は小さくて静かな動物が欲しかったのです。</b>ペットショップの店員と話した後、彼女はハムスターを買うことを選びました。</div>'
+    }
+
+  ],
+  "R6-1": [
+    {
+      no:1, qNum:16, topic:"Tomへのメール（音楽の先生のお見舞い）",
+      framePre:'Dear Tom, I hope this email finds you well.',
+      framePost:'Sincerely, Emily',
+      framePreJa:"トムへ、お元気でお過ごしのことと思います。",
+      framePostJa:"敬具、エミリー",
+      sentences:{
+        a:'He has been in the hospital for three weeks and I am planning to visit him next month.',
+        b:'Please let me know if you\'d like to join me then.',
+        c:'I am writing to tell you about our former music teacher, Mr. White.'
+      },
+      sentencesJa:{
+        a:"彼は3週間入院していて、私は来月お見舞いに行く予定です。",
+        b:"もし一緒に行きたいなら、教えてください。",
+        c:"私は、私たちの元の音楽の先生、ホワイト先生についてお伝えするためにこのメールを書いています。"
+      },
+      answer:5,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"Dear",mean:"〜さんへ（手紙の冒頭）",kana:"ディア",ac:"ディ"},
+        {w:"hope",mean:"願う",kana:"ホウプ",ac:"ホウ"},
+        {w:"finds you well",mean:"お元気でお過ごし",kana:"ファインズユーウェル",ac:"ファイ"},
+        {w:"hospital",mean:"病院",kana:"ホスピタル",ac:"ホ"},
+        {w:"three weeks",mean:"3週間",kana:"スリーウィークス",ac:"スリー"},
+        {w:"planning to",mean:"〜する予定",kana:"プランニングトゥ",ac:"プラ"},
+        {w:"visit",mean:"訪問する",kana:"ヴィズィット",ac:"ヴィ"},
+        {w:"next month",mean:"来月",kana:"ネクストマンス",ac:"ネ"},
+        {w:"let me know",mean:"教えて",kana:"レットミーノウ",ac:"ノウ"},
+        {w:"join",mean:"参加する",kana:"ジョイン",ac:"ジョイ"},
+        {w:"writing to",mean:"〜するために書いている",kana:"ライティングトゥ",ac:"ライ"},
+        {w:"former",mean:"元の・以前の",kana:"フォーマー",ac:"フォー"},
+        {w:"music teacher",mean:"音楽の先生",kana:"ミュージックティーチャー",ac:"ミュー"},
+        {w:"Sincerely",mean:"敬具",kana:"シンスィアリ",ac:"シン"}
+      ],
+      hints:[
+        "<p>まずは a/b/c の各文の<b>カギの単語</b>だけ確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>He has been in the hospital</td><td class='ja'>彼は入院している</td></tr><tr><td class='en'>three weeks</td><td class='ja'>3週間</td></tr><tr><td class='en'>visit him</td><td class='ja'>彼を訪問（お見舞い）</td></tr><tr><td class='en'>next month</td><td class='ja'>来月</td></tr><tr><td class='en'>Please let me know</td><td class='ja'>教えてください</td></tr><tr><td class='en'>join me</td><td class='ja'>一緒に行く</td></tr><tr><td class='en'>writing to tell you</td><td class='ja'>伝えるために書いている</td></tr><tr><td class='en'>former music teacher</td><td class='ja'>元の音楽の先生</td></tr><tr><td class='en'>Mr. White</td><td class='ja'>ホワイト先生</td></tr></table>",
+        "<p>並べ替えで一番大切なのは <b>「指示語・代名詞」</b> です。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>He</span>（彼）/ <span class='signal-word'>him</span>（彼を）<span class='think-arrow'>→</span>前の文に出た<b>男性</b>を指す。最初には来られない。<br>② <span class='signal-word'>me</span>（私を）/ <span class='signal-word'>then</span>（その時）<span class='think-arrow'>→</span>前の文の内容を受ける。<br>③ <span class='signal-word'>I am writing to tell you about 〜</span>（〜についてお伝えするために書いている）<span class='think-arrow'>→</span>これは<b>メールの目的を伝える定型文</b>。本題に入る最初の文によく使われる。</div><div class='step'><b>a</b> に <span class='signal-word'>He</span> と <span class='signal-word'>him</span> があります。<span class='think-arrow'>→</span>「彼」とは<b>誰</b>を指す？前の文に男性の名前が出ている必要があります。</div><div class='step'><b>b</b> に <span class='signal-word'>join me then</span>（その時一緒に行く）があります。<span class='think-arrow'>→</span>「その時」とは<b>いつ</b>？「一緒に行く」とは<b>どこに</b>？前の文に予定が出ている必要があります。</div><div class='step'><b>c</b> に <span class='signal-word'>I am writing to tell you about ... Mr. White</b>（ホワイト先生についてお伝えします）があります。<span class='think-arrow'>→</span>これは<b>メールの本題を切り出す</b>典型的な文ですね。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初の文</b>に <span class='signal-word'>He</span>（彼）が含まれていたら<b>その選択肢は×</b>（前に「誰」がない）<br>② <b>b</b> の <span class='signal-word'>join me then</span>（その時一緒に行く）の<b>前</b>には、<b>具体的な予定（行く場所・時期）</b>が必要<br>③ <b>c</b> の「<b>I am writing to tell you about Mr. White</b>」（ホワイト先生について書いています）は<b>本題を切り出す文</b>。だから<b>本題の最初</b>に来やすい。</div><div class='step'><b>例えば：</b> 選択肢「a→b→c」を試してみると…<br><b>a が最初</b>になります。a には <span class='signal-word'>He</span>（彼）がいきなり出てきますね。<span class='think-arrow'>→</span>「彼」と言われても<b>誰のこと？</b> ホワイト先生がまだ紹介されていないので不自然。<br>つまり<b>「a が最初の選択肢」</b>はおかしいですね。</div><p>残りの選択肢を、上の3つの視点で順に検討してみましょう。</p>"
+      ],
+      explain:'<p>このメッセージは <b>EmilyからTomへ送るメールで、元の音楽の先生（ホワイト先生）のお見舞いに一緒に行こうと誘うもの</b> です。</p><p><b>正解：c → a → b（選択肢5）</b></p><div class="order-flow"><span class="step-box">c ホワイト先生について書く</span><span class="arrow">→</span><span class="step-box">a 彼は入院中で来月見舞い予定</span><span class="arrow">→</span><span class="step-box">b 一緒に行きたいなら教えて</span></div><p><b>各文の役割と判断のカギ：</b></p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>役割</th></tr><tr><td><b>c</b></td><td><b>I am writing to tell you about ... Mr. White</b></td><td>メールの本題を切り出す。<b>Mr. White を初登場</b></td></tr><tr><td><b>a</b></td><td><b>He</b>（彼）= Mr. White / <b>visit him next month</b>（来月見舞いに）</td><td>cで紹介された Mr. White の状況を説明</td></tr><tr><td><b>b</b></td><td><b>join me then</b>（その時一緒に）</td><td>aの「来月見舞い」を受けて誘う</td></tr></table><p><b>判断のポイント1：メールの典型構造</b><br>英語のメールには<b>定型の流れ</b>があります：<br>① 挨拶（I hope this email finds you well 等）<br>② 本題の切り出し（<b>I am writing to tell you about 〜</b>）<br>③ 詳しい内容<br>④ 提案・お願い（Please let me know）<br>⑤ 結び（Sincerely 等）<br>cはまさに②の「本題切り出し」、aは③の詳細、bは④の提案、と完璧に対応します。</p><p><b>判断のポイント2：「He」が指す人</b><br>aの<b>He</b>は<b>男性を指す</b>ので、前の文に男性の名前が必要。cで <b>Mr. White</b> が紹介されているので、<b>cの後にa</b>が来ます。</p><p><b>判断のポイント3：「join me then」の意味</b><br>bの<b>then</b>（その時）は<b>aの「next month（来月）」を指します</b>。「来月一緒に見舞いに行きたいなら教えて」という流れ。だから<b>aの後にb</b>。</p><p><b>覚えておきたい単語・表現</b>：<b>I am writing to tell you about 〜</b>（〜についてお伝えするために書いています／メールの定型）、<b>former</b>（元の・以前の）、<b>let me know</b>（教えて）、<b>join</b>（一緒に行く・参加する）、<b>Sincerely</b>（敬具）。</p><div class="ja-trans"><b>全体訳：</b>トムへ、お元気でお過ごしのことと思います。<b>私は、私たちの元の音楽の先生、ホワイト先生についてお伝えするためにこのメールを書いています。彼は3週間入院していて、私は来月お見舞いに行く予定です。もし一緒に行きたいなら、教えてください。</b>敬具、エミリー</div>'
+    },
+    {
+      no:2, qNum:17, topic:"家庭料理の利点",
+      framePre:'These days, many people are enjoying cooking at home with their family.',
+      framePost:'Cooking at home can bring many benefits for families.',
+      framePreJa:"最近、多くの人が家族と一緒に家で料理することを楽しんでいます。",
+      framePostJa:"家での料理は家族に多くの利点をもたらします。",
+      sentences:{
+        a:'Moreover, cooking together can be a good opportunity for parents to communicate with their children.',
+        b:'One benefit is that it is better for their health than eating out.',
+        c:'While cooking, they can talk with their kids about what is going on at school.'
+      },
+      sentencesJa:{
+        a:"さらに、一緒に料理することは、親が子供とコミュニケーションを取るよい機会になります。",
+        b:"1つの利点は、外食よりも健康に良いということです。",
+        c:"料理しながら、彼らは子供たちと学校での出来事について話すことができます。"
+      },
+      answer:3,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"These days",mean:"最近",kana:"ジーズデイズ",ac:"デイ"},
+        {w:"cooking at home",mean:"家で料理する",kana:"クッキングアットホウム",ac:"クッ"},
+        {w:"family",mean:"家族",kana:"ファミリ",ac:"ファ"},
+        {w:"Moreover",mean:"さらに",kana:"モーオウヴァー",ac:"オウ"},
+        {w:"opportunity",mean:"機会",kana:"オポチューニティ",ac:"チュー"},
+        {w:"parents",mean:"親",kana:"ペアレンツ",ac:"ペ"},
+        {w:"communicate",mean:"コミュニケーションを取る",kana:"コミューニケイト",ac:"ミュー"},
+        {w:"children",mean:"子供たち",kana:"チルドレン",ac:"チ"},
+        {w:"benefit",mean:"利点",kana:"ベネフィット",ac:"ベ"},
+        {w:"health",mean:"健康",kana:"ヘルス",ac:"ヘ"},
+        {w:"eating out",mean:"外食",kana:"イーティングアウト",ac:"イー"},
+        {w:"While cooking",mean:"料理しながら",kana:"ホワイルクッキング",ac:"ホワ"},
+        {w:"kids",mean:"子供",kana:"キッズ",ac:"キッ"},
+        {w:"school",mean:"学校",kana:"スクール",ac:"スクー"}
+      ],
+      hints:[
+        "<p>a/b/cの<b>カギの単語</b>を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Moreover</td><td class='ja'>さらに（追加）</td></tr><tr><td class='en'>cooking together</td><td class='ja'>一緒に料理する</td></tr><tr><td class='en'>opportunity</td><td class='ja'>機会</td></tr><tr><td class='en'>communicate</td><td class='ja'>コミュニケーション</td></tr><tr><td class='en'>One benefit</td><td class='ja'>1つの利点</td></tr><tr><td class='en'>better for their health</td><td class='ja'>健康によい</td></tr><tr><td class='en'>eating out</td><td class='ja'>外食</td></tr><tr><td class='en'>While cooking</td><td class='ja'>料理しながら</td></tr><tr><td class='en'>talk with their kids</td><td class='ja'>子供と話す</td></tr></table>",
+        "<p>並べ替えで大切な <b>3種類のサイン</b> に注目してください。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>One benefit is 〜</span>（1つの利点は〜）<span class='think-arrow'>→</span><b>利点リストの最初</b>を表す。本題の切り出し。<br>② <span class='signal-word'>Moreover</span>（さらに）<span class='think-arrow'>→</span><b>前の話に追加</b>する接続詞。前の文がないと使えない。最初には来られない。<br>③ <span class='signal-word'>While cooking</span>（料理しながら）<span class='think-arrow'>→</span><b>具体例</b>を示す。前の話を補足する位置に来やすい。</div><div class='step'><b>a</b> に <span class='signal-word'>Moreover</span>（さらに）があります。<span class='think-arrow'>→</span>「さらに」と言うには、<b>前に何か（最初の利点）</b>が出ている必要があります。</div><div class='step'><b>b</b> に <span class='signal-word'>One benefit is</span>（1つの利点は）があります。<span class='think-arrow'>→</span>これは<b>利点を1つ目から紹介する切り出し</b>。本題の最初に来やすいですね。</div><div class='step'><b>c</b> に <span class='signal-word'>While cooking, they can talk with their kids</span>（料理しながら子供と話せる）があります。<span class='think-arrow'>→</span>これは<b>「コミュニケーション」の具体例</b>。aの「communicate」を補足する内容です。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初の文</b>に <span class='signal-word'>Moreover</span>（さらに）が含まれていたら<b>その選択肢は×</b>（追加すべき前の話がない）<br>② <b>One benefit</b> は<b>利点リストの1つ目</b>。利点を並べる文章では先頭に来やすい。<br>③ <b>While cooking, they can talk with their kids</b>（料理しながら子供と話す）は<b>「communicate（aの内容）」の具体例</b>。だから<b>aの後ろ</b>に来る可能性が高い。</div><div class='step'><b>例えば：</b> 選択肢「a→b→c」を試してみると…<br><b>a が最初</b>になります。a には <span class='signal-word'>Moreover</span>（さらに）がありますね。<span class='think-arrow'>→</span>最初の文に「さらに」が来るのは<b>不自然</b>。前に何かが出ていないとダメ。<br>つまり<b>「a が最初の選択肢」</b>は怪しいですね。</div><p>残りの選択肢を、上の3つの視点で順に検討してください。</p>"
+      ],
+      explain:'<p>このメッセージは <b>家庭料理の利点を2つ並べて紹介する文章</b> です。</p><p><b>正解：b → a → c（選択肢3）</b></p><div class="order-flow"><span class="step-box">b 1つ目の利点：健康</span><span class="arrow">→</span><span class="step-box">a さらにコミュニケーション</span><span class="arrow">→</span><span class="step-box">c 具体例：学校の話</span></div><p><b>各文の役割と判断のカギ：</b></p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>役割</th></tr><tr><td><b>b</b></td><td><b>One benefit is 〜</b>（1つ目の利点は）</td><td>1つ目の利点（健康）を紹介</td></tr><tr><td><b>a</b></td><td><b>Moreover</b>（さらに）+ <b>communicate</b></td><td>2つ目の利点（コミュニケーション）を追加</td></tr><tr><td><b>c</b></td><td><b>While cooking, they can talk with their kids</b></td><td>aの「コミュニケーション」の具体例</td></tr></table><p><b>判断のポイント1：「One benefit is 〜」は最初に来る</b><br>bの<b>One benefit is 〜</b>（1つ目の利点は）は、<b>利点リストの最初</b>を表します。複数の利点を並べる文章では、これが先頭に来るのが自然です。</p><p><b>判断のポイント2：「Moreover」は最初に来ない</b><br>aの<b>Moreover</b>（さらに）は<b>前の話に追加する</b>接続詞です。前に何かないと使えないので、<b>aが最初の選択肢（1、2）は除外</b>できます。「Moreover」は2つ目の項目を出すサインです。</p><p><b>判断のポイント3：「While cooking」は具体例</b><br>cの<b>While cooking, they can talk with their kids about what is going on at school</b>（料理しながら子供と学校の話ができる）は、<b>aの「communicate（コミュニケーション）」の具体例</b>。だから<b>aの後にc</b>が来ます。</p><p><b>判断のポイント4：本文末尾とのつながり</b><br>本文末尾は <b>Cooking at home can bring many benefits</b>（多くの利点がある）で、<b>b→a→cの3つの利点・例</b>を全部受けて結論を述べています。</p><p><b>覚えておきたい単語・表現</b>：<b>One benefit is 〜</b>（1つ目の利点は／リストの先頭）、<b>Moreover</b>（さらに／追加・最初には来ない）、<b>While 〜</b>（〜しながら／具体例）、<b>opportunity</b>（機会）、<b>communicate</b>（コミュニケーション）。</p><div class="ja-trans"><b>全体訳：</b>最近、多くの人が家族と一緒に家で料理することを楽しんでいます。<b>1つの利点は、外食よりも健康に良いということです。さらに、一緒に料理することは、親が子供とコミュニケーションを取るよい機会になります。料理しながら、彼らは子供たちと学校での出来事について話すことができます。</b>家での料理は家族に多くの利点をもたらします。</div>'
+    }
+
+  ],
+  "R6-2": [
+    {
+      no:1, qNum:16, topic:"Bobの博物館訪問",
+      framePre:'Bob was planning to go to the mall yesterday.',
+      framePost:'So, he agreed to go to the museum with his parents.',
+      framePreJa:"ボブは昨日ショッピングモールに行く予定でした。",
+      framePostJa:"そこで、彼は両親と一緒に博物館に行くことに同意しました。",
+      sentences:{
+        a:'However, his parents suggested they go to the museum together.',
+        b:'At first, he didn\'t like the idea because he wanted to enjoy shopping at the mall.',
+        c:'But he learned there was a special exhibition of insects at the museum.'
+      },
+      sentencesJa:{
+        a:"しかし、彼の両親は一緒に博物館に行くことを提案しました。",
+        b:"最初、彼はモールで買い物を楽しみたかったので、その案が気に入りませんでした。",
+        c:"しかし彼は、博物館で昆虫の特別展示があることを知りました。"
+      },
+      answer:1,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"planning to",mean:"〜する予定",kana:"プランニングトゥ",ac:"プラ"},
+        {w:"mall",mean:"ショッピングモール",kana:"モール",ac:"モー"},
+        {w:"yesterday",mean:"昨日",kana:"イェスタデイ",ac:"イェ"},
+        {w:"However",mean:"しかし",kana:"ハウエヴァー",ac:"エ"},
+        {w:"parents",mean:"両親",kana:"ペアレンツ",ac:"ペ"},
+        {w:"suggested",mean:"提案した",kana:"サジェスティド",ac:"ジェ"},
+        {w:"museum",mean:"博物館",kana:"ミュージアム",ac:"ジー"},
+        {w:"At first",mean:"最初は",kana:"アットファースト",ac:"ファー"},
+        {w:"didn't like",mean:"気に入らなかった",kana:"ディドゥントライク",ac:"ライ"},
+        {w:"idea",mean:"案・考え",kana:"アイディア",ac:"ディ"},
+        {w:"shopping",mean:"買い物",kana:"ショッピング",ac:"ショッ"},
+        {w:"learned",mean:"知った・学んだ",kana:"ラーンド",ac:"ラー"},
+        {w:"special exhibition",mean:"特別展示",kana:"スペシャルエクスィビション",ac:"スペ"},
+        {w:"insects",mean:"昆虫",kana:"インセクツ",ac:"イン"},
+        {w:"agreed",mean:"同意した",kana:"アグリード",ac:"グリー"}
+      ],
+      hints:[
+        "<p>まずは a/b/c の各文の<b>カギの単語</b>だけ確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>However</td><td class='ja'>しかし（流れの転換）</td></tr><tr><td class='en'>parents suggested</td><td class='ja'>両親が提案した</td></tr><tr><td class='en'>museum</td><td class='ja'>博物館</td></tr><tr><td class='en'>At first</td><td class='ja'>最初は</td></tr><tr><td class='en'>didn't like the idea</td><td class='ja'>その案が気に入らなかった</td></tr><tr><td class='en'>shopping at the mall</td><td class='ja'>モールで買い物</td></tr><tr><td class='en'>But</td><td class='ja'>しかし</td></tr><tr><td class='en'>learned</td><td class='ja'>知った</td></tr><tr><td class='en'>special exhibition of insects</td><td class='ja'>昆虫の特別展示</td></tr></table>",
+        "<p>並べ替えで大切な <b>3種類のサイン</b> に注目してください。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>However</span>（しかし）/ <span class='signal-word'>But</span>（しかし）<span class='think-arrow'>→</span>前の文と<b>反対の流れ</b>を作る。<b>絶対に最初には来られない</b>。<br>② <span class='signal-word'>At first</span>（最初は）<span class='think-arrow'>→</span><b>その後で気持ちが変わる</b>展開のサイン。<br>③ <span class='signal-word'>the idea</span>（その案）<span class='think-arrow'>→</span>「その」は<b>前に出た案</b>を指す。前の文に「提案」が必要。</div><div class='step'><b>a</b> に <span class='signal-word'>However</span>（しかし）+ <span class='signal-word'>parents suggested</span>（両親が提案した）があります。<span class='think-arrow'>→</span>「しかし」と言える<b>前の話</b>がいるはず。何が「Bobの予定」と対比される？</div><div class='step'><b>b</b> に <span class='signal-word'>At first, he didn't like the idea</span>（最初は気に入らなかった）があります。<span class='think-arrow'>→</span>「the idea（その案）」とは<b>何の案</b>？前の文に「提案」が出ている必要があります。</div><div class='step'><b>c</b> に <span class='signal-word'>But he learned ... insects</span>（しかし昆虫の展示があると知った）があります。<span class='think-arrow'>→</span>「But」は気持ちの変化のサイン。<b>気が進まなかった気持ちが変わった</b>瞬間ですね。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初の文</b>に <span class='signal-word'>However</span>（しかし）や <span class='signal-word'>But</span>（しかし）が含まれていたら、<b>その選択肢の冒頭としては可</b>（本文前の文を受けるため）。ただし2文目以降に置く方が自然な場合もある。<br>② <b>b の the idea</b>（その案）は<b>前に「提案」が必要</b>。a の「parents suggested（両親が提案）」がないと「the idea」が指せない。<br>③ <b>感情の流れ</b>：<b>気が進まない（b）→ しかし良いことを知る（c）→ だから同意した（本文後半）</b> の流れになるはず。</div><div class='step'><b>例えば：</b> 選択肢「b→a→c」を試してみると…<br><b>b が最初</b>になります。b には <span class='signal-word'>the idea</span>（その案）がありますね。<span class='think-arrow'>→</span>「その案」と言われても、<b>まだ「両親の提案」が出ていない</b>ので何の案かわからない。<br>つまり<b>「b が最初の選択肢」</b>は怪しいですね。</div><p>残りの選択肢を、上の3つの視点で順に検討してください。</p>"
+      ],
+      explain:'<p>このメッセージは <b>Bobがモールに行く予定だったが、両親の提案で博物館に行くことになった話</b> です。</p><p><b>正解：a → b → c（選択肢1）</b></p><div class="order-flow"><span class="step-box">a しかし両親が博物館を提案</span><span class="arrow">→</span><span class="step-box">b 最初は気に入らなかった</span><span class="arrow">→</span><span class="step-box">c しかし昆虫展示を知った</span></div><p><b>各文の役割と判断のカギ：</b></p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>役割</th></tr><tr><td><b>a</b></td><td><b>However</b>（しかし）+ <b>parents suggested</b></td><td>本文前（モール予定）と対比して、両親の提案を出す</td></tr><tr><td><b>b</b></td><td><b>At first ... didn\'t like the idea</b></td><td>提案を受けて Bob の最初の反応（気に入らない）</td></tr><tr><td><b>c</b></td><td><b>But ... learned ... insects</b></td><td>気持ちが変わるきっかけ（昆虫展示を知った）</td></tr></table><p><b>判断のポイント1：「However」は本文前を受ける</b><br>aの<b>However</b>は、<b>本文前の「Bob はモールに行く予定だった」と対比</b>しています。「Bobはモールに行く予定だった。<b>しかし</b>両親は博物館を提案した」という自然な流れ。だから<b>aが先頭</b>に来ます。</p><p><b>判断のポイント2：「the idea」が指すもの</b><br>bの<b>the idea</b>（その案）は<b>「両親が博物館を提案した案」</b>を指します。だから<b>aの後にb</b>が来ないと、「その案」が何を指すかわかりません。</p><p><b>判断のポイント3：「But he learned」の意味</b><br>cの<b>But</b>は、bの「最初は気に入らなかった」を受けて<b>気持ちが変わる</b>サインです。「最初は嫌だった。<b>しかし</b>昆虫展示があると知った」という展開。だから<b>bの後にc</b>。</p><p><b>判断のポイント4：本文末尾とのつながり</b><br>本文末尾は <b>So, he agreed to go to the museum</b>（だから、博物館に行くことに同意した）。<b>cで昆虫展示を知った</b>から、<b>同意した</b>という因果関係。だから<b>cが末尾</b>に来ます。</p><p><b>覚えておきたい単語・表現</b>：<b>However / But</b>（しかし／流れの転換）、<b>At first</b>（最初は／後で変わる伏線）、<b>the idea</b>（その案／前の提案を指す）、<b>suggested</b>（提案した）、<b>special exhibition</b>（特別展示）。</p><div class="ja-trans"><b>全体訳：</b>ボブは昨日ショッピングモールに行く予定でした。<b>しかし、彼の両親は一緒に博物館に行くことを提案しました。最初、彼はモールで買い物を楽しみたかったので、その案が気に入りませんでした。しかし彼は、博物館で昆虫の特別展示があることを知りました。</b>そこで、彼は両親と一緒に博物館に行くことに同意しました。</div>'
+    },
+    {
+      no:2, qNum:17, topic:"鏡の歴史",
+      framePre:'Among the different items we use daily, mirrors have a long history.',
+      framePost:'Today, the most common mirrors are made of glass.',
+      framePreJa:"私たちが日常的に使うさまざまな物の中で、鏡は長い歴史を持っています。",
+      framePostJa:"今日、最も一般的な鏡はガラスで作られています。",
+      sentences:{
+        a:'Later, ancient Egyptians made them with metals such as bronze and silver.',
+        b:'The mirrors of that time were made of stones.',
+        c:'It is believed that people first made mirrors around 8,000 years ago.'
+      },
+      sentencesJa:{
+        a:"後に、古代エジプト人は青銅や銀のような金属でそれらを作りました。",
+        b:"その時代の鏡は石で作られていました。",
+        c:"人々が初めて鏡を作ったのは、約8,000年前だと信じられています。"
+      },
+      answer:6,
+      orderLabels:["a→b→c","a→c→b","b→a→c","b→c→a","c→a→b","c→b→a"],
+      keyWords:[
+        {w:"items",mean:"物・品物",kana:"アイテムズ",ac:"アイ"},
+        {w:"daily",mean:"日常的に",kana:"デイリ",ac:"デイ"},
+        {w:"mirrors",mean:"鏡",kana:"ミラーズ",ac:"ミ"},
+        {w:"long history",mean:"長い歴史",kana:"ロングヒストリ",ac:"ロン"},
+        {w:"Later",mean:"後に",kana:"レイター",ac:"レイ"},
+        {w:"ancient",mean:"古代の",kana:"エインシェント",ac:"エイン"},
+        {w:"Egyptians",mean:"エジプト人",kana:"イジプシャンズ",ac:"ジ"},
+        {w:"metals",mean:"金属",kana:"メタルズ",ac:"メ"},
+        {w:"bronze",mean:"青銅",kana:"ブロンズ",ac:"ブロ"},
+        {w:"silver",mean:"銀",kana:"スィルヴァー",ac:"スィ"},
+        {w:"of that time",mean:"その時代の",kana:"オブザットタイム",ac:"タイ"},
+        {w:"stones",mean:"石",kana:"ストウンズ",ac:"ストウ"},
+        {w:"It is believed",mean:"〜と信じられている",kana:"イットイズビリーヴド",ac:"リー"},
+        {w:"around 8,000 years ago",mean:"約8000年前",kana:"アラウンド8000イヤーズアゴウ",ac:"ラウ"},
+        {w:"common",mean:"一般的な",kana:"コモン",ac:"コ"},
+        {w:"glass",mean:"ガラス",kana:"グラス",ac:"グ"}
+      ],
+      hints:[
+        "<p>a/b/cの<b>カギの単語</b>を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Later</td><td class='ja'>後に（時間順）</td></tr><tr><td class='en'>ancient Egyptians</td><td class='ja'>古代エジプト人</td></tr><tr><td class='en'>them</td><td class='ja'>それら</td></tr><tr><td class='en'>metals (bronze, silver)</td><td class='ja'>金属（青銅、銀）</td></tr><tr><td class='en'>that time</td><td class='ja'>その時代</td></tr><tr><td class='en'>stones</td><td class='ja'>石</td></tr><tr><td class='en'>It is believed that ...</td><td class='ja'>〜と信じられている</td></tr><tr><td class='en'>first made mirrors</td><td class='ja'>初めて鏡を作った</td></tr><tr><td class='en'>around 8,000 years ago</td><td class='ja'>約8000年前</td></tr></table>",
+        "<p>歴史を順番に説明する文章は <b>「時間の順序」</b> がカギです。</p><div class='strategy'><b>並べ替えの黄金ルール：</b><br>① <span class='signal-word'>It is believed that ...</span>（〜と信じられている）<span class='think-arrow'>→</span>歴史の話を切り出す<b>典型的な文</b>。最初に来やすい。<br>② <span class='signal-word'>Later</span>（後に）<span class='think-arrow'>→</span><b>時間順で次の段階</b>を表す。前に「もっと前の時代」が出ている必要がある。最初には来られない。<br>③ <span class='signal-word'>that time</span>（その時代）<span class='think-arrow'>→</span><b>前に出た時代</b>を指す。前の文に時代の話が必要。</div><div class='step'><b>a</b> に <span class='signal-word'>Later</span>（後に）+ <span class='signal-word'>them</span>（それら）があります。<span class='think-arrow'>→</span>「後に」は<b>何より後</b>？「them（それら）」は<b>何</b>を指す？前の文に時代と物（鏡？）が出ている必要があります。</div><div class='step'><b>b</b> に <span class='signal-word'>The mirrors of that time</span>（その時代の鏡）があります。<span class='think-arrow'>→</span>「that time（その時代）」とは<b>いつ</b>？前の文に時代の表現がある必要があります。</div><div class='step'><b>c</b> に <span class='signal-word'>It is believed that people first made mirrors around 8,000 years ago</b>（約8000年前に初めて鏡を作ったと信じられている）があります。<span class='think-arrow'>→</span>これは<b>「最も古い時代」を切り出す</b>文。歴史の話の<b>始まり</b>に来やすいですね。</div>",
+        "<p>選択肢を絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>最初の文</b>に <span class='signal-word'>Later</span>（後に）や <span class='signal-word'>them</span>（それら）が含まれていたら<b>その選択肢は×</b>（前に基準となる時代・物がない）<br>② <b>b の that time</b>（その時代）は<b>前に「いつ」が必要</b>。c の「8,000 years ago（8000年前）」がないと「that time」が指せない。<br>③ 歴史は<b>古い順</b>に並べる。「8000年前 → その時代の石 → 後に金属（古代エジプト）→ 今のガラス」の流れ。</div><div class='step'><b>例えば：</b> 選択肢「a→b→c」を試してみると…<br><b>a が最初</b>になります。a には <span class='signal-word'>Later</span>（後に）と <span class='signal-word'>them</span>（それら）がありますね。<span class='think-arrow'>→</span>「後に」「それら」と言われても<b>何より後？それらって何？</b>と分からない。<br>つまり<b>「a が最初の選択肢」</b>は怪しいですね。</div><p>残りの選択肢を、時間順と上の3つの視点で順に検討してください。</p>"
+      ],
+      explain:'<p>このメッセージは <b>鏡の長い歴史を、古い時代から順番に説明する文章</b> です。</p><p><b>正解：c → b → a（選択肢6）</b></p><div class="order-flow"><span class="step-box">c 8000年前に初めて鏡が作られた</span><span class="arrow">→</span><span class="step-box">b その時代の鏡は石製</span><span class="arrow">→</span><span class="step-box">a 後に古代エジプトで金属製</span></div><p><b>各文の役割と判断のカギ：</b></p><table class="check-table"><tr><th>文</th><th>カギの言葉</th><th>役割</th></tr><tr><td><b>c</b></td><td><b>It is believed that ... around 8,000 years ago</b></td><td>歴史の話の切り出し（最古の時代）</td></tr><tr><td><b>b</b></td><td><b>The mirrors of that time</b>（その時代の鏡）</td><td>cの「8000年前」を「that time」で受ける</td></tr><tr><td><b>a</b></td><td><b>Later</b>（後に）+ <b>them</b>（それら=mirrors）</td><td>bの石製の後の段階（金属製）</td></tr></table><p><b>判断のポイント1：「It is believed that 〜」は歴史の切り出し</b><br>cの<b>It is believed that 〜</b>（〜と信じられている）は、歴史的な事実を切り出す<b>定型表現</b>です。これが歴史の話の最初に来るのが自然です。</p><p><b>判断のポイント2：「that time」が指すもの</b><br>bの<b>The mirrors of that time</b>（その時代の鏡）の<b>that time</b>は<b>「8,000年前（c に出てくる）」</b>を指します。だから<b>cの後にb</b>が来ます。「8000年前」と先に言ってから「その時代の鏡は石でできていた」と続くわけです。</p><p><b>判断のポイント3：「Later」と「them」が指すもの</b><br>aの<b>Later</b>（後に）は<b>「8000年前の石の鏡の後に」</b>を意味します。<b>them</b>（それら）は<b>mirrors（鏡）</b>を指します。だから<b>bの後にa</b>が来ます。「石の鏡 → 後にエジプトで金属の鏡」の時間順。</p><p><b>判断のポイント4：本文末尾とのつながり</b><br>本文末尾は <b>Today, the most common mirrors are made of glass</b>（今日、最も一般的な鏡はガラス製）。歴史の流れは「<b>石 → 金属 → ガラス</b>」と発展。だから<b>aが末尾</b>（金属まで説明）で、本文後半の「ガラス」と自然につながります。</p><p><b>覚えておきたい単語・表現</b>：<b>It is believed that 〜</b>（〜と信じられている／歴史の切り出し）、<b>Later</b>（後に／時間順）、<b>that time</b>（その時代／前の時代を指す）、<b>them</b>（それら／前の複数物を指す）、<b>ancient</b>（古代の）。</p><div class="ja-trans"><b>全体訳：</b>私たちが日常的に使うさまざまな物の中で、鏡は長い歴史を持っています。<b>人々が初めて鏡を作ったのは、約8,000年前だと信じられています。その時代の鏡は石で作られていました。後に、古代エジプト人は青銅や銀のような金属でそれらを作りました。</b>今日、最も一般的な鏡はガラスで作られています。</div>'
+    }
+
+  ]
+};
+
+let currentYear = "R7-1";
+let currentQ = 0;
+let savedWords = [];
+let answeredMap = {};
+let currentMode = "hint";
+
+function getKey(yr, idx){return `${yr}-${idx}`}
+
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  Object.keys(QUESTIONS_DATA).forEach(y=>{
+    const b = document.createElement('button');
+    b.textContent = `令和${y[1]}年 第${y[3]}回`;
+    if(y===currentYear) b.classList.add('on');
+    b.onclick = ()=>{
+      stopAllPlay();
+      currentYear=y;currentQ=0;renderYearPick();renderTabs();renderQuestion();
+    };
+    yp.appendChild(b);
+  });
+  ["R7-1","R7-2","R6-1","R6-2"].forEach(y=>{
+    if(!QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = `令和${y[1]}年 第${y[3]}回 (準備中)`;
+      b.style.opacity = "0.5";
+      b.disabled = true;
+      yp.appendChild(b);
+    }
+  });
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML = '';
+  data.forEach((q,i)=>{
+    const t = document.createElement('button');
+    t.className = 'q-tab' + (i===currentQ?' active':'');
+    t.textContent = `問${q.no}`;
+    t.onclick = ()=>{stopAllPlay();currentQ=i;renderTabs();renderQuestion();};
+    tabs.appendChild(t);
+  });
+}
+
+function highlightWord(text, words){
+  if(!words || words.length===0) return text;
+  const sorted = [...words].sort((a,b)=>b.w.length-a.w.length);
+  let result = text;
+  sorted.forEach((kw,i)=>{
+    const safeWord = kw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b(${safeWord})\\b`, 'i');
+    if(result.match(regex)){
+      const opts = JSON.stringify({m:kw.mean,k:kw.kana,a:kw.ac});
+      const escapedOpts = opts.replace(/"/g, '&quot;');
+      result = result.replace(regex, `<span class="word" data-opts="${escapedOpts}" onclick="showVwPop(this,event)">$1</span>`);
+    }
+  });
+  return result;
+}
+
+function renderQuestion(){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const c = document.getElementById('qContainer');
+  
+  const decoratedPre = highlightWord(data.framePre, data.keyWords);
+  const decoratedPost = highlightWord(data.framePost, data.keyWords);
+  const decoratedA = highlightWord(data.sentences.a, data.keyWords);
+  const decoratedB = highlightWord(data.sentences.b, data.keyWords);
+  const decoratedC = highlightWord(data.sentences.c, data.keyWords);
+  
+  let choicesHtml = '';
+  data.orderLabels.forEach((label,i)=>{
+    choicesHtml += `<button class="choice" data-idx="${i}" onclick="pickChoice(${i})">
+      <span class="num">${i+1}</span>${label}
+    </button>`;
+  });
+  
+  let hintsHtml = '';
+  data.hints.forEach((h,i)=>{
+    hintsHtml += `<div class="hint-box" id="hint${i}"><span class="hint-num">ヒント${i+1}</span><div>${h}</div></div>`;
+  });
+  
+  c.innerHTML = `
+    <div class="qcard">
+      <div class="topic">📖 ${data.topic}</div>
+      <div class="q-instruction">次の文章の □ 内に <b>a〜c の英文</b> を入れる場合、文脈上最も適当な順序を、選択肢から選びなさい。<b>（解答番号 ${data.qNum}）</b></div>
+      <button class="sentence-play" onclick="playSentence()">🔊 英文を読み上げる</button>
+      
+      <div class="frame">
+        ${decoratedPre} <span class="blank-area">[ ${data.qNum} ]</span> ${decoratedPost}
+      </div>
+      
+      <button class="toggle-ja" onclick="toggleJa()">📝 a〜cの日本語訳を表示／非表示</button>
+      
+      <div class="abc-group" id="abcGroup">
+        <div class="abc-row" id="abcA"><span class="abc-label">a</span><div class="abc-text">${decoratedA}<div class="abc-ja">${data.sentencesJa.a}</div></div></div>
+        <div class="abc-row" id="abcB"><span class="abc-label">b</span><div class="abc-text">${decoratedB}<div class="abc-ja">${data.sentencesJa.b}</div></div></div>
+        <div class="abc-row" id="abcC"><span class="abc-label">c</span><div class="abc-text">${decoratedC}<div class="abc-ja">${data.sentencesJa.c}</div></div></div>
+      </div>
+      
+      <div class="choices" id="choicesBox">${choicesHtml}</div>
+      <div class="result-msg" id="resultMsg"></div>
+      
+      <div class="mode-tabs">
+        <button class="mode-btn ${currentMode==='hint'?'active':''}" onclick="setMode('hint')">💡 ヒントモード</button>
+        <button class="mode-btn ${currentMode==='explain'?'active':''}" onclick="setMode('explain')">📚 詳しい解説</button>
+      </div>
+      
+      <div class="mode-panel ${currentMode==='hint'?'show':''}" id="hintPanel">
+        <h3>💡 段階的ヒント（並べ替えのコツ）</h3>
+        <div class="hint-notice">
+          ⚠️ <b>このヒントは「合格点（40点〜）を取るための戦略」です。</b>本番で安定して点を取るには、<b>中学英単語・中学英文法</b>の基礎力が必要です。コツだけに頼ると、違うパターンが出たときに対応できません。
+        </div>
+        <div class="hint-buttons">
+          <button class="hint-btn" onclick="showHint(0)">①カギの単語</button>
+          <button class="hint-btn" onclick="showHint(1)">②つなぎ言葉</button>
+          <button class="hint-btn" onclick="showHint(2)">③消去法</button>
+        </div>
+        ${hintsHtml}
+      </div>
+      
+      <div class="mode-panel ${currentMode==='explain'?'show':''}" id="explainPanel">
+        <h3>📚 詳しい解説</h3>
+        <div class="explain-box">${data.explain}</div>
+        <div class="study-rec">
+          <h4>📖 もっと安定して点を取りたい方へ</h4>
+          このアプリのヒントは「<b>英文を全部読まなくても解ける戦略</b>」を紹介しています。本番でもっと余裕を持って解きたい方は、<b>中学英単語・中学英文法</b>のアプリで基礎を固めましょう。基礎ができれば、ヒントなしでも安定して解けるようになります。<br>
+          <a href="https://realizefield.github.io/j-engglish-word/" target="_blank">📚 中学英単語アプリ</a>
+          <a href="https://realizefield.github.io/j-english/" target="_blank">📝 中学英文法アプリ</a>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined){
+    revealAnswer(answeredMap[k], false);
+  }
+}
+
+function toggleJa(){
+  document.querySelectorAll('.abc-row').forEach(r=>r.classList.toggle('show-ja'));
+}
+
+function setMode(m){
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('hintPanel').classList.toggle('show', m==='hint');
+  document.getElementById('explainPanel').classList.toggle('show', m==='explain');
+}
+
+function showHint(i){
+  const box = document.getElementById('hint'+i);
+  box.classList.toggle('show');
+}
+
+function pickChoice(i){
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined) return;
+  answeredMap[k] = i;
+  revealAnswer(i, true);
+}
+
+function revealAnswer(picked, showMsg){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const ans = data.answer - 1;
+  const choicesEl = document.getElementById('choicesBox');
+  if(!choicesEl) return;
+  const buttons = choicesEl.querySelectorAll('.choice');
+  buttons.forEach((btn, i)=>{
+    if(i===ans) btn.classList.add('correct');
+    else if(i===picked) btn.classList.add('wrong');
+  });
+  if(showMsg){
+    const msg = document.getElementById('resultMsg');
+    if(picked===ans){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `残念。正解は ${data.answer} 番（${data.orderLabels[ans]}）です。`;
+    }
+  }
+}
+
+let activeWordPop = null;
+function showVwPop(el, ev){
+  if(ev) ev.stopPropagation();
+  if(activeWordPop && activeWordPop !== el){
+    closeVwPop(activeWordPop);
+  }
+  if(el.classList.contains('tapped')){
+    closeVwPop(el);
+    return;
+  }
+  el.classList.add('tapped');
+  const opts = JSON.parse(el.getAttribute('data-opts').replace(/&quot;/g,'"'));
+  const word = el.textContent;
+  
+  const isSaved = savedWords.some(w=>w.w===word);
+  
+  const pop = document.createElement('span');
+  pop.className = 'word-pop show';
+  pop.innerHTML = `
+    <div class="pop-row">
+      <div>
+        <div><b>${word}</b> [${opts.k}] ${opts.a?`<span class="accent">▶${opts.a}</span>`:''}</div>
+        <div>${opts.m}</div>
+      </div>
+      <div class="pop-buttons">
+        <button class="speak" onclick="event.stopPropagation();speakWord('${word.replace(/'/g,"\\'")}')">🔊</button>
+        <button class="${isSaved?'saved':'save'}" onclick="event.stopPropagation();saveWord('${word.replace(/'/g,"\\'")}','${opts.m}','${opts.k}',this)">${isSaved?'✓':'保存'}</button>
+      </div>
+    </div>
+  `;
+  el.appendChild(pop);
+  activeWordPop = el;
+}
+
+function speakWord(word){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  // Stop any current speech
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  u.pitch = 1.15; // 明るく聞こえるよう少し高め
+  speechSynthesis.speak(u);
+}
+
+function closeVwPop(el){
+  el.classList.remove('tapped');
+  const pop = el.querySelector('.word-pop');
+  if(pop) pop.remove();
+  if(activeWordPop===el) activeWordPop = null;
+}
+
+document.addEventListener('click', (e)=>{
+  if(activeWordPop && !activeWordPop.contains(e.target)){
+    closeVwPop(activeWordPop);
+  }
+});
+
+function saveWord(w, m, k, btn){
+  if(savedWords.some(x=>x.w===w)){
+    return;
+  }
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  savedWords.push({w, m, k, year:currentYear, qNo:data.no});
+  btn.textContent = '✓';
+  btn.className = 'saved';
+  document.getElementById('reviewCount').textContent = savedWords.length;
+}
+
+let voices = [];
+let currentSpeech = null;
+
+function loadVoices(){
+  voices = window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function pickVoice(){
+  if(voices.length===0) loadVoices();
+  // 明るい声の女性ボイスを優先順位付きで選ぶ
+  // 1. iOS/Mac: Samantha（明るい標準女性）、Karen（豪・明るい）
+  // 2. Windows: Zira（明るい女性）
+  // 3. Chrome: Google US English Female
+  // 4. 名前に female / woman が付いているもの
+  const priorityNames = [
+    'Samantha',
+    'Karen',
+    'Zira',
+    'Google US English',
+    'Google UK English Female',
+    'Microsoft Zira',
+    'Allison',
+    'Ava',
+    'Susan'
+  ];
+  
+  // 優先順位の高いボイスを順に探す
+  for(const name of priorityNames){
+    const v = voices.find(voice => 
+      voice.name.includes(name) && /en-US|en-GB|en-AU/i.test(voice.lang)
+    );
+    if(v) return v;
+  }
+  
+  // 名前に female や woman が含まれる英語ボイス
+  const femaleByName = voices.find(v => 
+    /en-US|en-GB|en-AU/i.test(v.lang) && /female|woman/i.test(v.name)
+  );
+  if(femaleByName) return femaleByName;
+  
+  // 男性ボイスを除外して英語ボイスを探す（明らかに男性名のものを避ける）
+  const maleNames = /male|man|David|Daniel|Alex|Tom|James|Mark|George|Fred/i;
+  const nonMaleEn = voices.find(v => 
+    /en-US|en-GB|en-AU/i.test(v.lang) && !maleNames.test(v.name)
+  );
+  if(nonMaleEn) return nonMaleEn;
+  
+  // 最終フォールバック：何でもいいから英語ボイス
+  return voices.find(v => /en/i.test(v.lang)) || voices[0];
+}
+
+function playSentence(){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const ans = data.answer - 1;
+  const labels = data.orderLabels[ans].split('→');
+  const orderedSentences = labels.map(l => data.sentences[l]).join(' ');
+  const fullText = data.framePre + ' ' + orderedSentences + ' ' + data.framePost;
+  const cleanText = fullText.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  
+  const u = new SpeechSynthesisUtterance(cleanText);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  u.pitch = 1.15; // 明るく聞こえるよう少し高め
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function stopAllPlay(){
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+  }
+  currentSpeech = null;
+}
+
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(savedWords.length===0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:20px">まだ単語が保存されていません。<br>英文中の<span style="color:var(--accent2);text-decoration:underline">下線つきの単語</span>をタップして「保存」ボタンを押してください。</p>';
+  } else {
+    body.innerHTML = savedWords.map((w,i)=>`
+      <div class="review-card">
+        <div class="review-word">${w.w}</div>
+        <div class="review-q">[${w.k}] ${w.m}</div>
+        <div style="font-size:.75rem;color:#888;">令和${w.year[1]}年 第${w.year[3]}回 問${w.qNo}より</div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="removeWord(${i})">✓ 覚えた</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+function removeWord(i){
+  savedWords.splice(i, 1);
+  document.getElementById('reviewCount').textContent = savedWords.length;
+  openReview();
+}
+
+renderYearPick();
+renderTabs();
+renderQuestion();
+</script>
+</body>
+</html>
