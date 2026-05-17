@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高認英語 第6問 攻略 | GAMBA</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+  /* 段落カラー */
+  --p1:#2c5f8d; /* 青 */
+  --p2:#3d8b5a; /* 緑 */
+  --p3:#e8a838; /* オレンジ */
+  --p4:#d94f4f; /* 赤 */
+  --p1-bg:#e3edf5;
+  --p2-bg:#e3f1e7;
+  --p3-bg:#fcefd2;
+  --p4-bg:#fce0e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.tip-banner{background:linear-gradient(135deg,#e8f4ff,#d4eaff);border:1px solid #a0c8e8;padding:10px 14px;border-radius:10px;font-size:.82rem;color:#1a4870;margin-bottom:12px;line-height:1.6}
+.tip-banner b{color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+/* 段落俯瞰ビュー */
+.story-overview{background:var(--paper);border-radius:14px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.story-overview .ov-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.story-overview h3{font-size:.95rem;color:var(--accent2);font-weight:800;display:flex;align-items:center;gap:6px}
+.story-overview .ov-controls{display:flex;gap:6px}
+.story-overview .ov-toggle{background:var(--paper);border:1.5px solid var(--accent2);color:var(--accent2);border-radius:6px;font-size:.74rem;font-weight:700;padding:5px 10px;cursor:pointer;font-family:inherit}
+.story-overview .ov-toggle:hover{background:var(--soft)}
+.story-overview .ov-play{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:6px;padding:5px 10px;font-weight:700;font-size:.74rem;cursor:pointer;font-family:inherit}
+
+.story-title{text-align:center;font-weight:800;font-size:1rem;color:var(--accent2);margin-bottom:10px;padding:6px 0;border-top:2px solid var(--accent2);border-bottom:2px solid var(--accent2);font-family:"Georgia",serif}
+
+.para-row{display:flex;gap:10px;margin-bottom:10px;align-items:stretch}
+.para-row:last-child{margin-bottom:0}
+.para-tag{flex:none;width:60px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:4px;font-weight:800;font-size:.72rem;color:#fff;border-radius:6px;text-align:center;line-height:1.2}
+.para-tag.p1{background:var(--p1)}
+.para-tag.p2{background:var(--p2)}
+.para-tag.p3{background:var(--p3);color:#5a3a10}
+.para-tag.p4{background:var(--p4)}
+.para-tag .ptag-num{font-size:.95rem;display:block;margin-top:2px}
+.para-tag .ptag-q{font-size:.65rem;display:block;margin-top:2px;background:rgba(255,255,255,.4);padding:1px 4px;border-radius:3px;color:inherit}
+.para-tag.p3 .ptag-q{background:rgba(255,255,255,.6)}
+
+.para-body{flex:1;padding:10px 12px;border-radius:6px;font-family:"Georgia",serif;font-size:.92rem;line-height:1.75}
+.para-body.p1{background:var(--p1-bg);border-left:3px solid var(--p1)}
+.para-body.p2{background:var(--p2-bg);border-left:3px solid var(--p2)}
+.para-body.p3{background:var(--p3-bg);border-left:3px solid var(--p3)}
+.para-body.p4{background:var(--p4-bg);border-left:3px solid var(--p4)}
+
+.story-overview .story-content.collapsed .para-body{
+  max-height:3.6em;overflow:hidden;position:relative;
+}
+.story-overview .story-content.collapsed .para-body::after{
+  content:"...";position:absolute;bottom:4px;right:8px;color:#666;font-size:.85rem;background:inherit;padding:0 4px
+}
+
+/* 設問タブ */
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink);line-height:1.3}
+.q-tab .qt-num{font-size:.7rem;font-weight:500;display:block;margin-top:2px}
+.q-tab.active.qt1{background:var(--p1);color:#fff;border-color:var(--p1)}
+.q-tab.active.qt2{background:var(--p2);color:#fff;border-color:var(--p2)}
+.q-tab.active.qt3{background:var(--p3);color:#5a3a10;border-color:var(--p3)}
+.q-tab.active.qt4{background:var(--p4);color:#fff;border-color:var(--p4)}
+
+/* 設問カード */
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.qcard.qc1{border-top:5px solid var(--p1)}
+.qcard.qc2{border-top:5px solid var(--p2)}
+.qcard.qc3{border-top:5px solid var(--p3)}
+.qcard.qc4{border-top:5px solid var(--p4)}
+
+.topic{padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;margin-bottom:10px}
+.topic.t1{background:var(--p1-bg);color:var(--p1)}
+.topic.t2{background:var(--p2-bg);color:var(--p2)}
+.topic.t3{background:var(--p3-bg);color:#5a3a10}
+.topic.t4{background:var(--p4-bg);color:var(--p4)}
+
+.q-instruction{font-size:.82rem;color:#666;margin-bottom:10px;background:#fffcf3;padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3);line-height:1.5}
+.q-instruction b{color:var(--accent)}
+
+/* 対応段落の再掲 */
+.related-para{padding:12px 14px;border-radius:10px;margin-bottom:12px;font-family:"Georgia",serif;font-size:.95rem;line-height:1.85;border:2px solid}
+.related-para.p1{background:var(--p1-bg);border-color:var(--p1)}
+.related-para.p2{background:var(--p2-bg);border-color:var(--p2)}
+.related-para.p3{background:var(--p3-bg);border-color:var(--p3)}
+.related-para.p4{background:var(--p4-bg);border-color:var(--p4)}
+.related-para .rp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:.78rem;font-weight:800}
+.related-para.p1 .rp-head{color:var(--p1)}
+.related-para.p2 .rp-head{color:var(--p2)}
+.related-para.p3 .rp-head{color:#5a3a10}
+.related-para.p4 .rp-head{color:var(--p4)}
+.related-para .rp-play{background:#fff;border:1.5px solid currentColor;border-radius:5px;padding:3px 8px;font-size:.72rem;font-weight:700;cursor:pointer;color:inherit;font-family:inherit}
+.related-para .rp-play:hover{background:rgba(255,255,255,.8)}
+
+.toggle-ja{margin-bottom:10px;padding:6px 12px;background:var(--paper);border:1.5px solid var(--accent2);color:var(--accent2);border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit}
+.para-ja{display:none;background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:8px;font-size:.85rem;line-height:1.65;border-left:3px solid var(--accent2);font-family:"Hiragino Maru Gothic ProN",sans-serif}
+.para-ja.show{display:block}
+
+/* キーワードハイライト */
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+.word-pop button.speak{background:var(--accent2);font-size:.85rem;padding:3px 9px}
+.word-pop .pop-buttons{display:flex;gap:4px;flex-direction:column}
+
+/* 質問・選択肢 */
+.qsec{background:#fafafa;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
+.qsec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qsec-num{display:inline-block;color:#fff;font-weight:800;padding:3px 10px;border-radius:6px;font-size:.78rem}
+.qsec-num.s1{background:var(--p1)}
+.qsec-num.s2{background:var(--p2)}
+.qsec-num.s3{background:var(--p3);color:#5a3a10}
+.qsec-num.s4{background:var(--p4)}
+.qsec-question{font-family:"Georgia",serif;font-size:.95rem;line-height:1.6;margin-bottom:8px;color:var(--ink)}
+.qsec-question .blank-num{display:inline-block;background:#fff5d6;border:1.5px dashed var(--accent3);color:var(--accent3);padding:1px 12px;margin:0 4px;border-radius:4px;font-weight:800;font-size:.85rem;font-family:sans-serif}
+
+.choices{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.92rem;cursor:pointer;text-align:left;font-family:"Georgia",serif;color:var(--ink);transition:all .15s;line-height:1.45;font-weight:600}
+.choice .num{display:inline-block;background:var(--soft);color:var(--accent2);font-weight:800;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;margin-right:8px;font-size:.78rem;font-family:sans-serif;vertical-align:middle}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+/* モード切替 */
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3;font-family:inherit}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:inherit}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+.hint-box .strategy{margin-top:8px;padding:10px 12px;background:#e8f4ff;border-radius:6px;border-left:3px solid var(--accent2)}
+.hint-box .strategy b{color:var(--accent2)}
+.hint-box .signal-word{background:#fff5d6;padding:1px 6px;border-radius:4px;font-weight:800;color:var(--accent);font-family:"Georgia",serif}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+.explain-box{background:var(--paper);padding:14px;border-radius:8px;border-left:4px solid var(--accent3);font-size:.9rem;line-height:1.85}
+.explain-box p{margin-bottom:10px}
+.explain-box p:last-child{margin-bottom:0}
+.explain-box b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+.explain-box .ans-key{display:inline-block;background:#fffcf3;border:1.5px solid var(--good);color:var(--good);padding:3px 10px;border-radius:6px;font-weight:800;margin-bottom:8px;font-size:.92rem}
+.explain-box .check-table{width:100%;border-collapse:collapse;margin:10px 0;background:#fafafa;border-radius:6px;overflow:hidden;font-size:.85rem}
+.explain-box .check-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-size:.78rem}
+.explain-box .check-table td{padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.explain-box .check-table tr:last-child td{border-bottom:none}
+.explain-box .check-table .ng{color:var(--accent);font-weight:700}
+.explain-box .check-table .ok{color:var(--good);font-weight:700}
+.explain-box .ja-trans{background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:10px;border-left:3px solid var(--accent2)}
+.explain-box .ja-trans b{color:var(--accent2);background:transparent;padding:0}
+.explain-box .clue-quote{background:#fff5d6;padding:6px 10px;border-radius:5px;margin:6px 0;border-left:3px solid var(--accent3);font-family:"Georgia",serif;font-size:.88rem}
+.explain-box .clue-quote::before{content:"💡 本文の根拠：";display:block;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:.75rem;color:#806000;font-weight:800;margin-bottom:3px}
+
+/* 復習リスト */
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100;font-family:inherit}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff;font-family:inherit}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;font-family:inherit}
+
+/* ヒント注意書き */
+.hint-notice{background:#fff8e1;border:1px solid #ffd982;padding:10px 12px;border-radius:8px;font-size:.8rem;color:#806000;margin-bottom:10px;line-height:1.55}
+.hint-notice b{color:#a05000}
+
+/* 学習のすすめ */
+.study-rec{background:linear-gradient(135deg,#f0f8e8,#dcefcd);border:1px solid #a5c97c;padding:12px 14px;border-radius:10px;font-size:.85rem;color:#3a5a1f;margin-top:14px;line-height:1.7}
+.study-rec b{color:#2c4a14}
+.study-rec h4{color:#2c4a14;margin-bottom:6px;font-size:.92rem}
+.study-rec a{display:inline-block;background:#5a8a2c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:.82rem;margin:4px 4px 0 0;font-family:inherit}
+.study-rec a:hover{background:#3e6a14}
+
+@media (max-width:480px){
+  .para-tag{width:50px;font-size:.68rem}
+  .para-tag .ptag-num{font-size:.85rem}
+  .para-body{font-size:.86rem;padding:8px 10px}
+  .qsec-question{font-size:.9rem}
+  .choice{font-size:.88rem;padding:9px 10px}
+  .related-para{font-size:.9rem;padding:10px 12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📖 高認英語 第6問 攻略</h1>
+  <p><span class="badge">長文読解</span>段落と設問は対応している！全文読まなくても解ける戦略</p>
+</header>
+
+<div class="tip-banner">
+  💡 <b>このヒントの使い方</b><br>
+  これは<b>「英語が苦手な方が 40点合格を取る」ための戦略的ヒント</b>です。<b>満点用ではありません</b>。確実に得点を伸ばすには、まず<b>中学英単語・中学英文法</b>を学んだうえで、このヒントを補助として使ってください。
+</div>
+
+<div class="year-pick" id="yearPick"></div>
+
+<!-- 段落俯瞰ビュー -->
+<div class="story-overview" id="storyOverview"></div>
+
+<!-- 設問タブ -->
+<div class="q-tabs" id="qTabs"></div>
+
+<!-- 設問本体 -->
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+
+<script>
+const QUESTIONS_DATA = {
+
+// ============================================================
+// R7-1：Kenの清掃イベント（社会・リーダーシップ）
+// ============================================================
+"R7-1": {
+  storyTitle: "Ken's Community Clean-Up",
+  topicJa: "ケンの地域清掃活動",
+  paragraphs: [
+    {
+      summary: "通学路のゴミ問題に気づく",
+      en: "Ken, a hardworking high school student, always took pride in his school and his role as a member of the student council. Recently, as he was walking from the train station to school, he noticed that the street had become dirtier than before. There were plastic bottles, cans, and even scraps of food scattered along the street. Ken felt he had to do something about this problem. As he discussed the issue with friends at school, he found that many students shared his concern. This made him decide to take action.",
+      ja: "ケンは勤勉な高校生で、学校と生徒会メンバーとしての役割をいつも誇りに思っていました。最近、駅から学校へ歩く道中、通りが以前より汚くなっていることに気づきました。プラスチックボトルや缶、さらには食べ物のかすまで通りに散らばっていました。ケンはこの問題について何かしなければならないと感じました。学校で友達と話し合うと、多くの生徒が同じ懸念を持っていることが分かり、行動を起こす決意をしました。"
+    },
+    {
+      summary: "生徒会で清掃イベントを提案",
+      en: "At the student council meeting, Ken proposed an idea of organizing a weekend clean-up event. Initially, not everyone on the student council liked his plan. Some doubted whether it was worth the effort. They argued that the street would be clean for one day and then go back to being dirty again after a few days. At the next meeting, however, he continued explaining the importance of this event. He argued that once the street became clean, those in the community would do their best to keep it clean. In the end, all the members agreed to hold the event.",
+      ja: "生徒会の会議で、ケンは週末の清掃イベントを企画する提案をしました。最初、生徒会全員がこの計画を気に入ったわけではありませんでした。一部のメンバーは、その努力に値するか疑問視しました。1日きれいになっても、数日後にはまた汚くなると主張したのです。しかし次の会議で、ケンはこのイベントの重要性を説明し続けました。一度きれいになれば、地域の人たちもきれいに保とうと頑張るはずだと主張したのです。最終的に、全員が開催に同意しました。"
+    },
+    {
+      summary: "当日多くの人が集まり交流",
+      en: "On the day of the clean-up, Ken was pleasantly surprised to see so many people come out. Students, teachers, parents, and even local residents came with their gloves and trash bags to pick up garbage. As they cleaned, they talked with each other about the school and community. Ken realized that cleaning up the street did not just make the school area look better; it also brought people together and built a sense of community among them.",
+      ja: "清掃当日、ケンは多くの人々が集まったことに嬉しい驚きを覚えました。生徒、先生、親、さらには地元住民まで、手袋とゴミ袋を持ってゴミを拾いに来たのです。掃除しながら、お互いに学校や地域について話し合いました。ケンは、通りを清掃することは学校周辺をきれいに見せるだけでなく、人々を結び付け、地域意識を育てることにも気づきました。"
+    },
+    {
+      summary: "イベント成功と学んだこと",
+      en: "The clean-up event was a great success. The street became clean again, and the participants felt a stronger connection to their school and community. Ken felt a sense of accomplishment as a leader. This experience taught him that positive changes in the community begin with individuals who are determined to make a difference.",
+      ja: "清掃イベントは大成功でした。通りは再びきれいになり、参加者は学校や地域とのより強いつながりを感じました。ケンはリーダーとしての達成感を味わいました。この経験は、地域における前向きな変化は、変化を起こそうと決意した個人から始まるということを彼に教えてくれました。"
+    }
+  ],
+  questions: [
+    {
+      no:1, qNum:21, paraIdx:0, color:"p1",
+      qPre: "On the way to school, Ken",
+      qPost: "",
+      qPreJa: "通学途中、ケンは",
+      qPostJa: "",
+      choices: [
+        "decided to be a member of the student council.",
+        "worried about the students in his school.",
+        "saw lots of trash along the street.",
+        "had to talk with some of the students."
+      ],
+      choicesJa: [
+        "生徒会のメンバーになることを決めた",
+        "学校の生徒たちのことを心配した",
+        "通りに沢山のゴミを見た",
+        "何人かの生徒と話さなければならなかった"
+      ],
+      answer: 3,
+      keyWords: [
+        {w:"hardworking", mean:"勤勉な", kana:"ハードワーキング", ac:"ハー"},
+        {w:"student council", mean:"生徒会", kana:"スチューデントカウンスル", ac:"カ"},
+        {w:"noticed", mean:"気づいた", kana:"ノウティスト", ac:"ノウ"},
+        {w:"dirtier", mean:"より汚い", kana:"ダーティアー", ac:"ダー"},
+        {w:"plastic bottles", mean:"プラスチック瓶", kana:"プラスティックボトルズ", ac:"プラ"},
+        {w:"scraps", mean:"くず", kana:"スクラップス", ac:"スク"},
+        {w:"scattered", mean:"散らばった", kana:"スキャタード", ac:"スキャ"},
+        {w:"trash", mean:"ゴミ", kana:"トラッシュ", ac:"トラ"},
+        {w:"shared his concern", mean:"同じ懸念を抱いた", kana:"シェアドヒズコンサーン", ac:"サー"}
+      ],
+      hints: [
+        "<p>長文読解は<b>「対応段落だけ読む」</b>のがコツ。第1段落のカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>walking from the train station to school</td><td class='ja'>駅から学校へ歩く（=通学途中）</td></tr><tr><td class='en'>noticed</td><td class='ja'>気づいた</td></tr><tr><td class='en'>dirtier</td><td class='ja'>より汚い</td></tr><tr><td class='en'>plastic bottles, cans, scraps of food</td><td class='ja'>ペットボトル、缶、食べ物のかす（=ゴミ）</td></tr><tr><td class='en'>scattered along the street</td><td class='ja'>通りに散らばっている</td></tr></table>",
+        "<p>長文読解の<b>3つのコツ</b>を覚えましょう。</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問は<b>段落順</b>に並んでいる<span class='think-arrow'>→</span>設問1=第1段落<br>② 質問の<b>キーワード</b>を本文で探す<span class='think-arrow'>→</span>同じ表現や同じ意味の語句が答えのヒント<br>③ 設問の<b>主語</b>と<b>時間</b>を確認<span class='think-arrow'>→</span>「On the way to school」=通学途中</div><div class='step'>設問は <span class='signal-word'>On the way to school</span>（通学途中）。第1段落の <span class='signal-word'>walking from the train station to school</span> の場面と一致！この場面で何があったかを本文で確認。</div><div class='step'>第1段落の重要部分：<span class='signal-word'>he noticed that the street had become dirtier ... plastic bottles, cans, and even scraps of food scattered</span>（ペットボトルや缶、食べ物のかすが散らばっているのに気づいた）<span class='think-arrow'>→</span>これは<b>ゴミ</b>を見たということ。</div>"
+      ],
+      explain: '<p>第1段落から答えを探す問題です。</p><div class="ans-key">✅ 正解：③ saw lots of trash along the street</div><div class="clue-quote">he noticed that the street had become dirtier than before. There were plastic bottles, cans, and even scraps of food scattered along the street.</div><p><b>本文の <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">plastic bottles, cans, scraps of food</span>（ペットボトル・缶・食べかす）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">trash</span>（ゴミ）</b>。本文の具体的な物が、選択肢では <b>trash</b>（ゴミ）という総称で言い換えられています。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 生徒会メンバーになる決意</td><td>「a member of the student council」と既に書かれている（過去にすでに所属）</td><td class="ng">×</td></tr><tr><td>② 生徒たちを心配</td><td>心配したのは「ゴミ問題」であって生徒ではない</td><td class="ng">×</td></tr><tr><td>③ 通りでゴミを見た</td><td>「scattered along the street」と一致</td><td class="ok">○</td></tr><tr><td>④ 生徒と話さなければ</td><td>友達と話したのは <b>at school</b>（学校で）。「on the way to school」（通学途中）ではない</td><td class="ng">×</td></tr></table><p><b>判断のポイント：時間と場所を確認する</b><br>設問の <b>On the way to school</b>（通学途中）は、本文の <b>walking from the train station to school</b> と同じ場面。この場面で何があったかが答え。④の「生徒と話す」は<b>学校に着いてから</b>のことなので場面違い。</p><p><b>覚えておきたい単語</b>：<b>noticed</b>（気づいた）、<b>scattered</b>（散らばった）、<b>trash</b>（ゴミ）、<b>concern</b>（懸念）。</p>'
+    },
+    {
+      no:2, qNum:22, paraIdx:1, color:"p2",
+      qPre: "When Ken first talked about his idea at the student council meeting,",
+      qPost: "",
+      qPreJa: "ケンが生徒会の会議で初めて自分の考えを話したとき、",
+      qPostJa: "",
+      choices: [
+        "he did not want to hold a weekend event.",
+        "he showed a poster of volunteers to everyone.",
+        "some members did not think the plan was a good idea.",
+        "some members were surprised to hear the schedule."
+      ],
+      choicesJa: [
+        "週末イベントを開きたくなかった",
+        "皆にボランティアのポスターを見せた",
+        "一部のメンバーはその計画が良い案だと思わなかった",
+        "一部のメンバーはスケジュールを聞いて驚いた"
+      ],
+      answer: 3,
+      keyWords: [
+        {w:"proposed", mean:"提案した", kana:"プロポウズド", ac:"ポウ"},
+        {w:"organize", mean:"企画する", kana:"オーガナイズ", ac:"オー"},
+        {w:"clean-up event", mean:"清掃イベント", kana:"クリーンアップイヴェント", ac:"クリー"},
+        {w:"Initially", mean:"最初は", kana:"イニシャリー", ac:"ニ"},
+        {w:"doubted", mean:"疑った", kana:"ダウティド", ac:"ダウ"},
+        {w:"worth the effort", mean:"努力に値する", kana:"ワースズィエフォート", ac:"ワー"},
+        {w:"argued", mean:"主張した", kana:"アーギュード", ac:"アー"},
+        {w:"agreed", mean:"同意した", kana:"アグリード", ac:"グリー"}
+      ],
+      hints: [
+        "<p>第2段落のカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>proposed</td><td class='ja'>提案した</td></tr><tr><td class='en'>Initially</td><td class='ja'>最初は</td></tr><tr><td class='en'>not everyone liked his plan</td><td class='ja'>全員が気に入ったわけではない</td></tr><tr><td class='en'>doubted</td><td class='ja'>疑った</td></tr><tr><td class='en'>worth the effort</td><td class='ja'>努力に値する</td></tr></table>",
+        "<p>「最初の反応」を聞いている問題です。</p><div class='strategy'><b>このタイプの読解ルール：</b><br>① 設問の<b>「first」や「Initially」</b>（最初は）に注目<br>② <b>反応</b>を表す動詞・形容詞を本文から探す<span class='think-arrow'>→</span>liked, doubted, agreed など<br>③ <b>反対意見</b>と<b>賛成意見</b>を区別する</div><div class='step'>第2段落 <span class='signal-word'>Initially, not everyone on the student council liked his plan</span>（最初は、生徒会の<b>全員が気に入ったわけではなかった</b>）<span class='think-arrow'>→</span>つまり<b>反対した人もいた</b>。</div><div class='step'>続いて <span class='signal-word'>Some doubted whether it was worth the effort</span>（一部は、努力に値するか<b>疑った</b>）<span class='think-arrow'>→</span><b>「良い計画だと思わなかった」</b>と同じ意味。</div>"
+      ],
+      explain: '<p>第2段落「最初の反応」を聞く問題です。</p><div class="ans-key">✅ 正解：③ some members did not think the plan was a good idea</div><div class="clue-quote">Initially, not everyone on the student council liked his plan. Some doubted whether it was worth the effort.</div><p><b>本文の <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">not everyone liked his plan</span>（全員が気に入ったわけではない）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">some did not think the plan was a good idea</span>（一部は良い考えだと思わなかった）</b>。同じ内容を別の言葉で言い換えています。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 週末イベントを開きたくなかった</td><td>提案したのはケン本人。彼は開きたかった</td><td class="ng">×</td></tr><tr><td>② ボランティアのポスターを見せた</td><td>ポスターは<b>1ヶ月前に</b>作った（最初の会議ではない）</td><td class="ng">×</td></tr><tr><td>③ 一部メンバーが良くない案と思った</td><td>「not everyone liked」「Some doubted」と一致</td><td class="ok">○</td></tr><tr><td>④ スケジュールを聞いて驚いた</td><td>驚きの記述なし。論点はスケジュールではなく効果</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「not everyone liked」の意味</b><br>直訳「全員が気に入ったわけではない」=「気に入らない人もいた」。これは<b>部分否定</b>と呼ばれる重要表現で、つまり<b>反対者もいた</b>という意味。</p><p><b>判断のポイント2：時系列の確認</b><br>本文の流れ：<b>最初の会議</b>（反対あり）→<b>次の会議</b>（説得）→<b>最終的に同意</b>→<b>1ヶ月前にポスター</b>。②のポスターは<b>後の話</b>なので「first talked about his idea」（初めて話したとき）には該当しません。</p><p><b>覚えておきたい単語</b>：<b>Initially</b>（最初は）、<b>doubt</b>（疑う）、<b>not everyone</b>（全員が〜なわけではない＝部分否定）、<b>worth ~ing</b>（〜に値する）。</p>'
+    },
+    {
+      no:3, qNum:23, paraIdx:2, color:"p3",
+      qPre: "On the day of the clean-up event, people who joined it",
+      qPost: "",
+      qPreJa: "清掃イベント当日、参加した人々は",
+      qPostJa: "",
+      choices: [
+        "built a good relationship with each other.",
+        "had no time to talk because they were busy.",
+        "were upset at the local people's attitude.",
+        "worked very hard to earn some money."
+      ],
+      choicesJa: [
+        "お互いに良い関係を築いた",
+        "忙しすぎて話す時間がなかった",
+        "地元の人の態度に腹を立てた",
+        "お金を稼ぐためにとても頑張って働いた"
+      ],
+      answer: 1,
+      keyWords: [
+        {w:"pleasantly surprised", mean:"嬉しい驚き", kana:"プレザントリー", ac:"プレ"},
+        {w:"residents", mean:"住民", kana:"レジデンツ", ac:"レ"},
+        {w:"gloves", mean:"手袋", kana:"グラヴズ", ac:"グラ"},
+        {w:"trash bags", mean:"ゴミ袋", kana:"トラッシュバッグズ", ac:"トラ"},
+        {w:"talked with each other", mean:"互いに話し合った", kana:"トークドウィズイーチアザー", ac:"イー"},
+        {w:"brought people together", mean:"人々を結びつけた", kana:"ブロートピープルトゥゲザー", ac:"ゲ"},
+        {w:"sense of community", mean:"地域意識", kana:"センスオブコミュニティ", ac:"セン"}
+      ],
+      hints: [
+        "<p>第3段落「当日のようす」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>pleasantly surprised</td><td class='ja'>嬉しい驚き</td></tr><tr><td class='en'>talked with each other</td><td class='ja'>互いに話した</td></tr><tr><td class='en'>brought people together</td><td class='ja'>人々を結びつけた</td></tr><tr><td class='en'>sense of community</td><td class='ja'>地域意識・連帯感</td></tr><tr><td class='en'>relationship</td><td class='ja'>関係</td></tr></table>",
+        "<p>「当日に何が起きたか」を聞く問題は<b>具体的な行動・出来事</b>を本文で探します。</p><div class='strategy'><b>このタイプの読解ルール：</b><br>① 設問の<b>場面（On the day of...）</b>を本文で見つける<br>② <b>動詞</b>に注目（talked, brought, builtなど）<br>③ <b>反対の意味</b>の選択肢は ×</div><div class='step'>第3段落 <span class='signal-word'>they talked with each other ... it also brought people together and built a sense of community</span>（互いに話し合い、人々を結びつけ、地域意識を育てた）<span class='think-arrow'>→</span><b>「良い関係を築いた」</b>と同じ意味。</div><div class='step'><b>注意</b>：「<span class='signal-word'>build a sense of community</span>」と選択肢の「<span class='signal-word'>built a good relationship</span>」は<b>同じ意味の言い換え</b>です。</div>"
+      ],
+      explain: '<p>第3段落「当日の様子」を聞く問題です。</p><div class="ans-key">✅ 正解：① built a good relationship with each other</div><div class="clue-quote">As they cleaned, they talked with each other about the school and community. Ken realized that cleaning up the street did not just make the school area look better; it also brought people together and built a sense of community among them.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">talked with each other</span>（互いに話した）+ <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">brought people together</span>（人々を結びつけた）+ <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">built a sense of community</span>（地域意識を育てた）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">built a good relationship</span>（良い関係を築いた）</b>。同じ趣旨を別の言葉で言い換えています。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 良い関係を築いた</td><td>「talked with each other」「brought people together」と一致</td><td class="ok">○</td></tr><tr><td>② 忙しすぎて話す時間なし</td><td>本文「talked with each other」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 地元の人の態度に腹を立てた</td><td>地元の人も<b>協力者</b>として参加。怒りの記述なし</td><td class="ng">×</td></tr><tr><td>④ お金を稼ぐため</td><td>本文に金銭の話なし。これはボランティア活動</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「relationship」と「community」</b><br><b>build a relationship</b>=関係を築く、<b>build a sense of community</b>=地域意識を育てる。どちらも<b>「人と人とのつながり」</b>を意味します。意味が近い表現を見抜くのが長文読解のコツ。</p><p><b>判断のポイント2：「busy」の罠</b><br>清掃イベント=忙しいイメージがあるので、②「忙しすぎて話せない」を選びそうになりますが、本文には<b>「話し合った」</b>とハッキリ書かれているので ×。<b>イメージではなく本文に書いてあること</b>を信じることが大切。</p><p><b>覚えておきたい単語</b>：<b>relationship</b>（関係）、<b>community</b>（地域・共同体）、<b>brought together</b>（結びつけた）、<b>residents</b>（住民）。</p>'
+    },
+    {
+      no:4, qNum:24, paraIdx:3, color:"p4",
+      qPre: "Through the clean-up event, Ken learned that",
+      qPost: "",
+      qPreJa: "清掃イベントを通じてケンが学んだのは、",
+      qPostJa: "",
+      choices: [
+        "a lot of people always clean the street for the community.",
+        "community leaders are not necessary to achieve a big goal.",
+        "the environment around his community cannot change.",
+        "a person's determination can make a difference in the community."
+      ],
+      choicesJa: [
+        "多くの人が地域のためにいつも通りを清掃している",
+        "大きな目標達成には地域リーダーは必要ない",
+        "地域環境は変わりえない",
+        "個人の決意が地域に違いを生み出すことができる"
+      ],
+      answer: 4,
+      keyWords: [
+        {w:"great success", mean:"大成功", kana:"グレイトサクセス", ac:"サ"},
+        {w:"connection", mean:"つながり", kana:"コネクション", ac:"ネ"},
+        {w:"sense of accomplishment", mean:"達成感", kana:"アカンプリッシュメント", ac:"プ"},
+        {w:"positive changes", mean:"前向きな変化", kana:"ポジティヴチェンジズ", ac:"ポ"},
+        {w:"individuals", mean:"個人", kana:"インディヴィジュアルズ", ac:"ヴィ"},
+        {w:"determined", mean:"決意した", kana:"ディターミンド", ac:"ター"},
+        {w:"make a difference", mean:"違いを生む・影響を与える", kana:"メイクアディフェレンス", ac:"ディ"}
+      ],
+      hints: [
+        "<p>第4段落「最後に学んだこと」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>positive changes</td><td class='ja'>前向きな変化</td></tr><tr><td class='en'>individuals</td><td class='ja'>個人</td></tr><tr><td class='en'>determined to make a difference</td><td class='ja'>違いを生むと決意した</td></tr><tr><td class='en'>determination</td><td class='ja'>決意</td></tr><tr><td class='en'>make a difference</td><td class='ja'>違いを生む・変化をもたらす</td></tr></table>",
+        "<p>「学んだこと」「気づいたこと」は<b>最終段落</b>に書かれていることが多い！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① <b>最終段落</b>に「learned」「realized」「taught」など<span class='think-arrow'>→</span>結論・教訓<br>② 設問の<b>キーワード</b>を本文の最終文で探す<br>③ <b>本文と同じ言葉</b>が選択肢にあるかチェック</div><div class='step'>第4段落の最終文 <span class='signal-word'>This experience taught him that positive changes in the community begin with individuals who are determined to make a difference</span>（地域での前向きな変化は、変化を起こす決意をした個人から始まる）<span class='think-arrow'>→</span>これがケンの学び。</div><div class='step'>キーワードに注目！<b>determined to make a difference</b>（違いを生む決意）が選択肢の <b>determination can make a difference</b>（決意が違いを生む）と<b>同じ意味</b>。</div>"
+      ],
+      explain: '<p>第4段落「ケンが学んだこと」を聞く問題です。</p><div class="ans-key">✅ 正解：④ a person\'s determination can make a difference in the community</div><div class="clue-quote">This experience taught him that positive changes in the community begin with individuals who are determined to make a difference.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">individuals who are determined to make a difference</span>（違いを生む決意をした個人）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">a person\'s determination can make a difference</span>（個人の決意が違いを生む）</b>。同じ要素（決意・個人・違いを生む）を語順を変えて言い換えています。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 多くの人が常に通りを清掃</td><td>本文に「常に清掃」の記述なし</td><td class="ng">×</td></tr><tr><td>② 地域リーダーは不要</td><td>ケン自身が<b>リーダー</b>として動いた。本文と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 地域環境は変えられない</td><td>本文「<b>positive changes ... begin</b>」（変化が始まる）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 個人の決意が違いを生む</td><td>「individuals determined to make a difference」と完全一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「learned」「taught」のサイン</b><br>長文読解の最終段落に「learned」（学んだ）、「taught」（教えた）、「realized」（気づいた）が出てきたら、<b>そこに教訓・結論</b>があります。設問4の答えは大体ここに書いてあります。</p><p><b>判断のポイント2：「make a difference」の意味</b><br>これは決まり文句で<b>「違いを生む・大きな影響を与える」</b>という意味。本文でも選択肢でも同じ表現が使われていれば、それが正解の手がかりです。</p><p><b>判断のポイント3：話の流れと矛盾しない選択肢</b><br>ケン1人が動き出して→生徒会を説得→大成功。だから「個人の力」が成功の原因。「リーダー不要」（②）や「変えられない」（③）は話の流れと<b>正反対</b>。</p><p><b>覚えておきたい単語</b>：<b>determination</b>（決意）、<b>make a difference</b>（違いを生む）、<b>individuals</b>（個人）、<b>positive changes</b>（前向きな変化）。</p>'
+    }
+  ]
+},
+
+// ============================================================
+// R7-2：Sachiのバドミントン大会（部活・成長）
+// ============================================================
+"R7-2": {
+  storyTitle: "Sachi's First Tournament",
+  topicJa: "サチの初めての大会",
+  paragraphs: [
+    {
+      summary: "大会前夜の不安と眠れぬ夜",
+      en: "Sachi was lying awake in her bed. She had recently started playing badminton in middle school. Her first tournament was going to be held the following day and she was filled with anxiety. She was paired with a senior, and the fear of making mistakes and disappointing her senior partner filled her. As the clock continued to tick, she could not get any sleep. Before she knew it, morning had arrived.",
+      ja: "サチはベッドで目を覚ましたまま横たわっていました。中学校で最近バドミントンを始めたばかりでした。翌日が初めての大会で、不安でいっぱいでした。先輩とペアを組んでおり、ミスをして先輩を失望させる恐怖で頭がいっぱいだったのです。時計が時を刻み続ける中、彼女は眠ることができませんでした。気づくと朝になっていました。"
+    },
+    {
+      summary: "父の朝食でアドバイス",
+      en: "Sachi got out of bed and went to the dining room. Her father was making breakfast as usual. He was also making sandwiches for her lunch. While she was eating breakfast, he said, \"Today is the big day! Did you sleep well?\" Sachi answered honestly, \"No, I didn't. I was too nervous about today's tournament.\" Her father responded, \"I see. Being nervous means you're not fully focused. The more you concentrate on giving your best on the court, the less anxious you'll be. Then you'll start feeling a kind of excitement.\" Sachi replied, \"I see,\" but in her mind, she thought, \"That's impossible. There's no way I'll feel excited.\"",
+      ja: "サチはベッドから出てダイニングへ行きました。父はいつも通り朝食を作っていました。サチのお弁当用のサンドイッチも作っていました。朝食を食べている間、父は「今日は大事な日だね！よく眠れた？」と言いました。サチは正直に「いいえ、眠れませんでした。大会のことが心配で」と答えました。父は「そうか。緊張しているのは、まだ完全に集中していないということだよ。コートで全力を出すことに集中すればするほど、不安は減る。そしてある種のワクワクを感じ始めるはずだ」と応じました。サチは「そうですか」と返しましたが、心の中では「無理。ワクワクなんて絶対に感じない」と思っていました。"
+    },
+    {
+      summary: "大会会場で父の言葉を思い出す",
+      en: "The tournament was held at the gym at Sachi's school. As she was practicing, she also observed other players who all appeared so much stronger than her. The sounds of their warm-up swings were sharper, too. Sachi's nervousness continued to get stronger. She wanted to run away. During the lunch break, she opened her lunchbox and saw the sandwiches her father made. While eating them, she remembered her father's words about focusing on doing her best. As she repeated his words to herself, excitement began to overcome her anxiety. Sachi wondered, \"Is this what my father meant?\"",
+      ja: "大会はサチの学校の体育館で開催されました。練習しながら、他の選手たちが自分よりずっと強そうに見えました。彼らのウォームアップの素振りの音もより鋭く聞こえました。サチの緊張は強まる一方でした。逃げ出したくなりました。昼食休憩中、お弁当箱を開けると、父が作ったサンドイッチが見えました。それを食べながら、最善を尽くすことに集中する、という父の言葉を思い出しました。彼の言葉を心の中で繰り返すうちに、ワクワクが不安を上回り始めたのです。サチは「これがお父さんの言いたかったことなのかな？」と思いました。"
+    },
+    {
+      summary: "試合は負けたが大切なことを学ぶ",
+      en: "Sachi's match was in the afternoon. Despite their best efforts, Sachi and her partner lost. The result was certainly disappointing, but at the same time, she felt good about herself. She realized that she had found something more important than just winning the tournament: focusing on giving her best performance, rather than the final result. Sachi left the gym with a sense of fulfillment.",
+      ja: "サチの試合は午後でした。最善を尽くしましたが、サチとパートナーは負けてしまいました。結果は確かに残念でしたが、同時に自分自身を誇らしく感じました。大会で勝つことより大切なものを見つけたのです。それは、最終結果ではなく、最善を尽くすことに集中することでした。サチは充実感とともに体育館を後にしました。"
+    }
+  ],
+  questions: [
+    {
+      no:1, qNum:21, paraIdx:0, color:"p1",
+      qPre: "Sachi could not sleep because",
+      qPost: "",
+      qPreJa: "サチが眠れなかったのは、",
+      qPostJa: "",
+      choices: [
+        "she was worried about the badminton match.",
+        "she was not sure if she could get up on time.",
+        "she did not know how to apologize to her father.",
+        "she broke her leg while playing badminton."
+      ],
+      choicesJa: [
+        "バドミントンの試合のことが心配だったから",
+        "時間通りに起きられるか不安だったから",
+        "父にどう謝れば良いか分からなかったから",
+        "バドミントン中に足を骨折したから"
+      ],
+      answer: 1,
+      keyWords: [
+        {w:"lying awake", mean:"目を覚まして横たわる", kana:"ライイングアウェイク", ac:"ウェイ"},
+        {w:"tournament", mean:"大会", kana:"トーナメント", ac:"トー"},
+        {w:"anxiety", mean:"不安", kana:"アングザイアティ", ac:"ザイ"},
+        {w:"paired with", mean:"〜とペアを組む", kana:"ペアードウィズ", ac:"ペ"},
+        {w:"senior", mean:"先輩", kana:"シーニア", ac:"シー"},
+        {w:"fear", mean:"恐怖", kana:"フィア", ac:"フィ"},
+        {w:"making mistakes", mean:"ミスをする", kana:"メイキングミステイクス", ac:"テ"},
+        {w:"disappointing", mean:"がっかりさせる", kana:"ディサポインティング", ac:"ポイ"}
+      ],
+      hints: [
+        "<p>第1段落のカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>lying awake</td><td class='ja'>目を覚まして寝ている</td></tr><tr><td class='en'>tournament</td><td class='ja'>大会</td></tr><tr><td class='en'>anxiety</td><td class='ja'>不安</td></tr><tr><td class='en'>fear of making mistakes</td><td class='ja'>ミスをする恐怖</td></tr><tr><td class='en'>could not get any sleep</td><td class='ja'>眠れなかった</td></tr></table>",
+        "<p>「なぜ〜なのか」を聞く問題は<b>「because（〜なので）」</b>に注目！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の<b>becauseの後</b>=理由が入る<br>② 本文の<b>原因・感情</b>を表す語を探す<span class='think-arrow'>→</span>worried, anxiety, fear など<br>③ <b>本文に書かれていない</b>選択肢は ×</div><div class='step'>第1段落 <span class='signal-word'>Her first tournament was going to be held the following day and she was filled with anxiety</span>（翌日初めての大会で不安でいっぱい）<span class='think-arrow'>→</span><b>大会のことが心配で眠れない</b>と分かります。</div><div class='step'><b>注意</b>：本文の <b>anxiety</b>（不安）= 選択肢の <b>worried</b>（心配）。同じ意味の言い換え。</div>"
+      ],
+      explain: '<p>第1段落「眠れない理由」を聞く問題です。</p><div class="ans-key">✅ 正解：① she was worried about the badminton match</div><div class="clue-quote">Her first tournament was going to be held the following day and she was filled with anxiety. ... the fear of making mistakes and disappointing her senior partner filled her. As the clock continued to tick, she could not get any sleep.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">anxiety</span>（不安）+ <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">fear</span>（恐怖）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">worried</span>（心配）</b>。本文の <b>tournament</b>（大会）= 選択肢の <b>match</b>（試合）も同じ意味。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 試合のことが心配</td><td>「filled with anxiety」「fear of making mistakes」と一致</td><td class="ok">○</td></tr><tr><td>② 時間通りに起きられるか不安</td><td>本文に起床時刻の不安なし</td><td class="ng">×</td></tr><tr><td>③ 父への謝罪方法</td><td>本文に謝罪の話なし</td><td class="ng">×</td></tr><tr><td>④ 足の骨折</td><td>本文に怪我の記述なし</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：感情の言い換えに気づく</b><br><b>anxiety</b>（不安）と <b>worried</b>（心配）、<b>fear</b>（恐怖）と <b>worried</b>（心配）は<b>近い意味</b>の単語です。長文読解では、本文の単語と選択肢の単語が<b>同じ単語ではない</b>ことが多いので、<b>意味の近い単語</b>を結びつける力が大切。</p><p><b>判断のポイント2：「tournament」と「match」の違い</b><br><b>tournament</b>=大会全体、<b>match</b>=個別の試合。ここではどちらも「試合・大会」のニュアンスで使われています。</p><p><b>覚えておきたい単語</b>：<b>anxiety / worried</b>（不安／心配）、<b>fear</b>（恐怖）、<b>tournament / match</b>（大会／試合）、<b>senior</b>（先輩）。</p>'
+    },
+    {
+      no:2, qNum:22, paraIdx:1, color:"p2",
+      qPre: "When Sachi's father advised her, she",
+      qPost: "",
+      qPreJa: "サチの父がアドバイスしたとき、サチは",
+      qPostJa: "",
+      choices: [
+        "thought she had heard the idea before.",
+        "did not think he would eat his breakfast.",
+        "thought the advice was easy to follow.",
+        "did not think the advice would help her."
+      ],
+      choicesJa: [
+        "その考えを以前にも聞いたことがあると思った",
+        "父が朝食を食べないと思った",
+        "アドバイスは従いやすいと思った",
+        "アドバイスは自分の役に立たないと思った"
+      ],
+      answer: 4,
+      keyWords: [
+        {w:"advised", mean:"助言した", kana:"アドヴァイズド", ac:"ヴァイ"},
+        {w:"concentrate", mean:"集中する", kana:"コンセントレイト", ac:"コ"},
+        {w:"giving your best", mean:"全力を尽くす", kana:"ギヴィングユアベスト", ac:"ベ"},
+        {w:"anxious", mean:"不安な", kana:"アンクシャス", ac:"アン"},
+        {w:"excitement", mean:"ワクワク", kana:"エクサイトメント", ac:"サイ"},
+        {w:"impossible", mean:"不可能", kana:"インポッスィブル", ac:"ポ"},
+        {w:"There's no way", mean:"絶対〜ない", kana:"ゼアズノウェイ", ac:"ノウ"}
+      ],
+      hints: [
+        "<p>第2段落「父のアドバイスに対するサチの反応」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>concentrate / focus</td><td class='ja'>集中する</td></tr><tr><td class='en'>excitement</td><td class='ja'>ワクワク</td></tr><tr><td class='en'>impossible</td><td class='ja'>不可能</td></tr><tr><td class='en'>There's no way</td><td class='ja'>絶対〜ない</td></tr><tr><td class='en'>I see (but in her mind...)</td><td class='ja'>「そうですか」（でも心の中では…）</td></tr></table>",
+        "<p>「<b>表面的な返事</b>」と「<b>心の中の本音</b>」を区別する問題！</p><div class='strategy'><b>このタイプの読解ルール：</b><br>① <b>but in her mind</b>（しかし心の中で）の後<span class='think-arrow'>→</span>本音<br>② <b>表面の返事</b>と<b>本音</b>が違う場合、本音が答え<br>③ <b>impossible / no way</b>はネガティブな反応のサイン</div><div class='step'>第2段落 <span class='signal-word'>but in her mind, she thought, \"That\'s impossible. There\'s no way I\'ll feel excited.\"</span>（しかし心の中で「無理。ワクワクなんて絶対感じない」と思った）<span class='think-arrow'>→</span><b>アドバイスは自分の役に立たない</b>と思っている。</div><div class='step'><b>注意</b>：「I see（そうですか）」は<b>表面的な相づち</b>。本当の気持ちは<b>but in her mind</b>の後にあります。</div>"
+      ],
+      explain: '<p>第2段落「父のアドバイスに対するサチの本音」を聞く問題です。</p><div class="ans-key">✅ 正解：④ did not think the advice would help her</div><div class="clue-quote">Sachi replied, "I see," but in her mind, she thought, "That\'s impossible. There\'s no way I\'ll feel excited."</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">That\'s impossible. There\'s no way I\'ll feel excited.</span>（無理。絶対ワクワクなんて感じない）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">did not think the advice would help her</span>（アドバイスは役に立たない）</b>。「ワクワクなんて感じない」=父のアドバイスは効かない、と否定しています。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 以前聞いたことがある</td><td>初めて聞いた話で、再聴の記述なし</td><td class="ng">×</td></tr><tr><td>② 父が朝食を食べないと思った</td><td>本文に父の食事の話なし</td><td class="ng">×</td></tr><tr><td>③ 従いやすいと思った</td><td>本文「That\'s impossible」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 役に立たないと思った</td><td>「impossible」「no way」と一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「but in her mind」が決定的</b><br>登場人物の<b>本音</b>を聞かれているときは、「<b>but in her mind</b>」「<b>she thought</b>」「<b>secretly</b>」などの<b>後</b>に書かれている内容が答え。表面的な「I see」は無視。</p><p><b>判断のポイント2：感情の方向性をつかむ</b><br><b>impossible</b>（不可能）+ <b>no way</b>（絶対ない）= <b>否定の感情</b>。だから③「従いやすい」（肯定）は不適切で、④「役に立たない」（否定）が正解。</p><p><b>判断のポイント3：第3段落とのつながり</b><br>第3段落でサチは父の言葉を思い出して<b>気持ちが変わる</b>。これは第2段落で<b>最初は信じていなかった</b>から<b>変化が起きる</b>のが自然。④の「役に立たないと思った」は、後の変化と物語的に整合します。</p><p><b>覚えておきたい単語</b>：<b>impossible</b>（不可能）、<b>no way</b>（絶対〜ない）、<b>concentrate / focus</b>（集中する）、<b>excitement</b>（ワクワク）。</p>'
+    },
+    {
+      no:3, qNum:23, paraIdx:2, color:"p3",
+      qPre: "Sachi got excited when she",
+      qPost: "",
+      qPreJa: "サチがワクワクしたのは、",
+      qPostJa: "",
+      choices: [
+        "arrived at her school gym in the morning.",
+        "listened to her favorite song on her phone.",
+        "saw other players on the badminton court.",
+        "remembered what her father said to her."
+      ],
+      choicesJa: [
+        "朝、学校の体育館に着いたとき",
+        "携帯で好きな歌を聴いたとき",
+        "コートで他の選手たちを見たとき",
+        "父が言った言葉を思い出したとき"
+      ],
+      answer: 4,
+      keyWords: [
+        {w:"observed", mean:"観察した", kana:"オブザーヴド", ac:"ザー"},
+        {w:"appeared", mean:"〜のように見えた", kana:"アピアード", ac:"ピア"},
+        {w:"nervousness", mean:"緊張", kana:"ナーヴァスネス", ac:"ナー"},
+        {w:"run away", mean:"逃げる", kana:"ランアウェイ", ac:"ラン"},
+        {w:"lunch break", mean:"昼食休憩", kana:"ランチブレイク", ac:"ラン"},
+        {w:"remembered", mean:"思い出した", kana:"リメンバード", ac:"メ"},
+        {w:"repeated", mean:"繰り返した", kana:"リピーティド", ac:"ピー"},
+        {w:"overcome", mean:"打ち勝つ", kana:"オウヴァカム", ac:"カ"}
+      ],
+      hints: [
+        "<p>第3段落「サチがワクワクし始めた瞬間」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>nervousness</td><td class='ja'>緊張</td></tr><tr><td class='en'>got stronger</td><td class='ja'>強くなった</td></tr><tr><td class='en'>remembered her father's words</td><td class='ja'>父の言葉を思い出した</td></tr><tr><td class='en'>excitement began to overcome her anxiety</td><td class='ja'>ワクワクが不安を上回り始めた</td></tr></table>",
+        "<p>「いつ・何がきっかけで」変化したかを聞く問題！</p><div class='strategy'><b>このタイプの読解ルール：</b><br>① 設問「got excited」（ワクワクした）<span class='think-arrow'>→</span>感情の変化のきっかけを探す<br>② 本文の<b>感情の変化</b>を表す表現を見つける（began to, started to）<br>③ 変化の<b>直前</b>に書かれている行動が原因</div><div class='step'>第3段落の流れ：<br>・最初：<span class='signal-word'>nervousness continued to get stronger</span>（緊張が強まった）<br>・休憩中：<span class='signal-word'>remembered her father\'s words</span>（父の言葉を思い出した）<br>・直後：<span class='signal-word'>excitement began to overcome her anxiety</span>（ワクワクが不安を上回り始めた）<span class='think-arrow'>→</span><b>父の言葉を思い出したことがきっかけ</b>！</div><div class='step'><b>注意</b>：選択肢③の「コートで他の選手を見た」は本文の<b>nervousness（緊張）が強まる</b>場面なので、ワクワクの原因ではありません。</div>"
+      ],
+      explain: '<p>第3段落「ワクワクし始めた瞬間」を聞く問題です。</p><div class="ans-key">✅ 正解：④ remembered what her father said to her</div><div class="clue-quote">she remembered her father\'s words about focusing on doing her best. As she repeated his words to herself, excitement began to overcome her anxiety.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">remembered her father\'s words</span>（父の言葉を思い出した）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">remembered what her father said to her</span>（父が言ったことを思い出した）</b>。表現は違うが意味は同じ。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 体育館に着いたとき</td><td>会場到着時は<b>緊張が強まった</b>。ワクワクではない</td><td class="ng">×</td></tr><tr><td>② 好きな歌を聴いた</td><td>本文に音楽の記述なし</td><td class="ng">×</td></tr><tr><td>③ 他の選手を見た</td><td>「nervousness got stronger」=逆効果</td><td class="ng">×</td></tr><tr><td>④ 父の言葉を思い出した</td><td>「remembered her father\'s words」と一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：感情変化のサイン</b><br><b>began to overcome</b>（〜を上回り始める）は感情の変化を表す重要表現。直前の行動「<b>remembered his words</b>」が変化のきっかけ。</p><p><b>判断のポイント2：場面と感情を結びつける</b><br>第3段落の感情の流れ：<br>・到着時：<b>nervousness（緊張）</b>増大<br>・他の選手を見て：<b>nervousness（緊張）</b>さらに増大<br>・<b>父の言葉を思い出して</b>：<b>excitement（ワクワク）</b>が緊張を上回る<br>これを順番に追えば、③の選手を見た場面が逆効果だと分かります。</p><p><b>判断のポイント3：本文にないものは選ばない</b><br>②「favorite song（好きな歌）」は本文に一切登場しません。<b>本文にない物</b>が出てくる選択肢は<b>必ず ×</b>。</p><p><b>覚えておきたい単語</b>：<b>remembered</b>（思い出した）、<b>overcome</b>（打ち勝つ）、<b>excitement</b>（ワクワク）、<b>nervousness</b>（緊張）。</p>'
+    },
+    {
+      no:4, qNum:24, paraIdx:3, color:"p4",
+      qPre: "After the tournament, Sachi was",
+      qPost: "",
+      qPreJa: "大会の後、サチは",
+      qPostJa: "",
+      choices: [
+        "surprised at the result of her game.",
+        "delighted she won some matches on the day.",
+        "sure she had learned an important lesson.",
+        "unhappy to go home without a trophy."
+      ],
+      choicesJa: [
+        "試合結果に驚いていた",
+        "その日いくつかの試合に勝てて喜んでいた",
+        "大切な教訓を学んだと確信していた",
+        "トロフィーなしで帰ることに不満だった"
+      ],
+      answer: 3,
+      keyWords: [
+        {w:"despite", mean:"〜にもかかわらず", kana:"ディスパイト", ac:"パイ"},
+        {w:"best efforts", mean:"最善の努力", kana:"ベストエフォーツ", ac:"フォー"},
+        {w:"lost", mean:"負けた", kana:"ロスト", ac:"ロ"},
+        {w:"disappointing", mean:"残念な", kana:"ディサポインティング", ac:"ポイ"},
+        {w:"realized", mean:"気づいた", kana:"リアライズド", ac:"アラ"},
+        {w:"more important than", mean:"〜より大切", kana:"モアインポータントザン", ac:"ポー"},
+        {w:"focusing on", mean:"〜に集中する", kana:"フォウカスィングオン", ac:"フォウ"},
+        {w:"sense of fulfillment", mean:"充実感", kana:"フルフィルメント", ac:"フィル"}
+      ],
+      hints: [
+        "<p>第4段落「大会後のサチの気持ち」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>lost</td><td class='ja'>負けた</td></tr><tr><td class='en'>disappointing</td><td class='ja'>残念な</td></tr><tr><td class='en'>felt good about herself</td><td class='ja'>自分自身に満足を感じた</td></tr><tr><td class='en'>realized</td><td class='ja'>気づいた</td></tr><tr><td class='en'>something more important</td><td class='ja'>もっと大切なもの</td></tr><tr><td class='en'>sense of fulfillment</td><td class='ja'>充実感</td></tr></table>",
+        "<p>「学んだこと」「教訓」を聞く問題は<b>最終段落</b>がカギ！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 最終段落の <b>realized / learned / found</b><span class='think-arrow'>→</span>気づき・学び<br>② <b>more important than</b>（〜より大切）<span class='think-arrow'>→</span>教訓のサイン<br>③ <b>勝ち負け</b>と<b>気持ち</b>を区別する</div><div class='step'>第4段落の流れ：<br>・<span class='signal-word'>they lost</span>（負けた）<br>・<span class='signal-word'>The result was certainly disappointing</span>（結果は残念）<br>・<span class='signal-word'>but at the same time, she felt good about herself</span>（しかし同時に自分自身に満足）<br>・<span class='signal-word'>realized that she had found something more important</span>（もっと大切なものを見つけたと気づいた）<span class='think-arrow'>→</span><b>大切な教訓を学んだ</b>！</div><div class='step'><b>注意</b>：「<span class='signal-word'>lost</span>」（負けた）なので、選択肢②「won some matches（いくつか勝った）」は<b>×</b>。</div>"
+      ],
+      explain: '<p>第4段落「大会後のサチの心境」を聞く問題です。</p><div class="ans-key">✅ 正解：③ sure she had learned an important lesson</div><div class="clue-quote">She realized that she had found something more important than just winning the tournament: focusing on giving her best performance, rather than the final result. Sachi left the gym with a sense of fulfillment.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">realized that she had found something more important</span>（もっと大切なものを見つけたと気づいた）+ <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">sense of fulfillment</span>（充実感）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">sure she had learned an important lesson</span>（大切な教訓を学んだと確信）</b>。「気づき+充実感」=「教訓を学んで満足」という流れ。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 結果に驚いた</td><td>本文に「驚き」の記述なし。「disappointing」だが想定内</td><td class="ng">×</td></tr><tr><td>② 試合に勝てて喜んだ</td><td>本文「they lost」（負けた）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 大切な教訓を学んだと確信</td><td>「realized ... something more important」と一致</td><td class="ok">○</td></tr><tr><td>④ トロフィーなしで不満</td><td>本文「felt good about herself」と<b>反対</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「lost」の事実</b><br>本文「<b>they lost</b>」（彼らは負けた）。これがあるので②の「won some matches（いくつか勝った）」は<b>絶対×</b>。本文と<b>反対の事実</b>を述べる選択肢は必ず除外。</p><p><b>判断のポイント2：感情の二面性</b><br>「<b>disappointing</b>（残念）」と「<b>felt good about herself</b>（満足）」が同時に書かれているのが面白いところ。<b>結果は残念だけど気持ちは満足</b>という二面性。④「unhappy（不満）」は感情の<b>満足</b>側を無視しているので ×。</p><p><b>判断のポイント3：「something more important」のメッセージ</b><br>大会で勝つこと<b>より</b>大切なもの=<b>「最善を尽くすこと」</b>を見つけた、というのがこの物語の教訓。これを<b>important lesson</b>（大切な教訓）と言い換えています。</p><p><b>覚えておきたい単語</b>：<b>realized</b>（気づいた）、<b>more important than</b>（〜より大切）、<b>sense of fulfillment</b>（充実感）、<b>lesson</b>（教訓）。</p>'
+    }
+  ]
+}
+
+};
+
+
+// R6-1, R6-2 を QUESTIONS_DATA に追加
+
+QUESTIONS_DATA["R6-1"] = {
+  storyTitle: "Kazuo's Return to His Hometown",
+  topicJa: "カズオの帰郷と父の夢",
+  paragraphs: [
+    {
+      summary: "高校〜銀行員時代の生活",
+      en: "Kazuo was born and raised in the countryside. He liked to go fishing and surfing with his friends. In high school, he started a rock band and began to dream of performing in a big city. So, he decided to study at a college in Tokyo. In college, he had several chances to perform in a band with new friends. After he started working at a bank, he also spent his days off playing in the band. He enjoyed both his work and private life.",
+      ja: "カズオは田舎で生まれ育ちました。友達と釣りやサーフィンをするのが好きでした。高校時代、ロックバンドを始め、大都市で演奏することを夢見るようになりました。そこで東京の大学で勉強することを決めました。大学時代、新しい友達と何度かバンドで演奏する機会がありました。銀行で働き始めてからも、休日にバンド活動を続けました。仕事も私生活も楽しんでいました。"
+    },
+    {
+      summary: "同窓会で地元の魅力に気づく",
+      en: "One day, Kazuo went back to his hometown to attend his high school class reunion. He talked with his classmates for the first time in a long time. Some classmates were working for local companies, and some were taking over their parents' jobs in the town. They seemed to enjoy living and working there. They even seemed proud of themselves for contributing to the local community. He began to think that life in his hometown might not be so bad.",
+      ja: "ある日、カズオは高校の同窓会に出席するため地元に帰りました。久しぶりに同級生たちと話しました。地元の会社で働いている人もいれば、町で親の仕事を継いでいる人もいました。みんなそこで暮らし働くことを楽しんでいるようでした。地域社会に貢献していることを誇りにしているようにさえ見えました。カズオは地元での生活もそれほど悪くないかもしれないと思い始めました。"
+    },
+    {
+      summary: "父の高齢化と農業継承",
+      en: "Kazuo's father is a farmer and grows rice. Since he was getting old, it was obvious that it would be harder for him to work on the farm by himself. Kazuo and his brother thought that one of them should take over their father's farm. Kazuo's brother said he would take it over. Kazuo also considered returning to his hometown and farming with his brother.",
+      ja: "カズオの父は農家で米を作っています。年を取ってきていたので、一人で農作業を続けるのが難しくなることは明らかでした。カズオと兄弟はどちらかが父の農場を継ぐべきだと考えました。兄弟が「自分が継ぐ」と言いました。カズオも地元に帰って兄弟と一緒に農業をすることを考えました。"
+    },
+    {
+      summary: "1年後、父の夢を継ぐ決意",
+      en: "A year later, Kazuo returned to his home and found that his brother had successfully taken over his father's business. During this visit, Kazuo's father told him about the dream he had when he was young. He had wanted to teach Japanese agricultural techniques in developing countries, but he never had the chance to go abroad. When Kazuo heard that, he felt a desire to fulfill his father's dream. He now wants to learn rice farming from his father and brother, and then teach agriculture abroad in the future. He hopes that he will realize his father's unfulfilled dream one day.",
+      ja: "1年後、カズオは家に帰り、兄弟が父の事業を見事に引き継いだことを知りました。この帰省中、カズオの父は若い頃の夢について話しました。父は発展途上国で日本の農業技術を教えたかったのですが、海外に行く機会はありませんでした。それを聞いたカズオは、父の夢を叶えたいという気持ちが湧いてきました。今は父と兄弟から稲作を学び、将来は海外で農業を教えたいと思っています。いつか父の叶わなかった夢を実現したいと願っています。"
+    }
+  ],
+  questions: [
+    {
+      no:1, qNum:21, paraIdx:0, color:"p1",
+      qPre: "When Kazuo was a high school student, he",
+      qPost: "",
+      qPreJa: "カズオが高校生だったとき、彼は",
+      qPostJa: "",
+      choices: [
+        "began to play in a rock band.",
+        "loved helping his father with his work.",
+        "studied hard to get into college.",
+        "thought of running a company with his friends."
+      ],
+      choicesJa: [
+        "ロックバンドで演奏を始めた",
+        "父の仕事を手伝うのが大好きだった",
+        "大学に入るために一生懸命勉強した",
+        "友達と会社経営をすることを考えた"
+      ],
+      answer: 1,
+      keyWords: [
+        {w:"countryside", mean:"田舎", kana:"カントリーサイド", ac:"カ"},
+        {w:"fishing", mean:"釣り", kana:"フィッシング", ac:"フィ"},
+        {w:"surfing", mean:"サーフィン", kana:"サーフィング", ac:"サー"},
+        {w:"started a rock band", mean:"ロックバンドを始めた", kana:"スターティドアロックバンド", ac:"スター"},
+        {w:"dream of performing", mean:"演奏する夢", kana:"ドリームオブパフォーミング", ac:"フォー"},
+        {w:"college in Tokyo", mean:"東京の大学", kana:"カレッジインドウキョウ", ac:"カ"}
+      ],
+      hints: [
+        "<p>第1段落のカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>countryside</td><td class='ja'>田舎</td></tr><tr><td class='en'>started a rock band</td><td class='ja'>ロックバンドを始めた</td></tr><tr><td class='en'>dream of performing</td><td class='ja'>演奏する夢</td></tr><tr><td class='en'>college in Tokyo</td><td class='ja'>東京の大学</td></tr></table>",
+        "<p>長文読解の<b>3つのコツ</b>を覚えましょう。</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問は<b>段落順</b>に並んでいる<span class='think-arrow'>→</span>設問1=第1段落<br>② 質問の<b>キーワード</b>を本文で探す<br>③ 設問の<b>時間（high school student）</b>を確認</div><div class='step'>設問の <span class='signal-word'>When Kazuo was a high school student</span>（高校生のとき）に注目！<br>第1段落 <span class='signal-word'>In high school, he started a rock band</span>（高校でロックバンドを始めた）<span class='think-arrow'>→</span>これがピタリ！</div><div class='step'><b>注意</b>：本文「<b>started a rock band</b>」=選択肢「<b>began to play in a rock band</b>」（ロックバンドで演奏を始めた）。<b>started</b>と<b>began</b>は同じ意味。</div>"
+      ],
+      explain: '<p>第1段落「高校生時代のカズオ」を聞く問題です。</p><div class="ans-key">✅ 正解：① began to play in a rock band</div><div class="clue-quote">In high school, he started a rock band and began to dream of performing in a big city.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">started a rock band</span>（ロックバンドを始めた）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">began to play in a rock band</span>（ロックバンドで演奏を始めた）</b>。<b>start</b>と<b>begin</b>は同じ意味です。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① ロックバンドで演奏を始めた</td><td>「started a rock band」と一致</td><td class="ok">○</td></tr><tr><td>② 父の仕事を手伝うのが好き</td><td>本文に父の手伝いの記述なし</td><td class="ng">×</td></tr><tr><td>③ 一生懸命勉強した</td><td>本文に勉強の話なし。バンドの話のみ</td><td class="ng">×</td></tr><tr><td>④ 友達と会社経営を考えた</td><td>本文に会社経営の話なし</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：時間の指定を確認</b><br>設問「<b>When Kazuo was a high school student</b>」（高校生のとき）。本文の「<b>In high school</b>」と一致する場面の出来事を答える。</p><p><b>判断のポイント2：本文にない情報は選ばない</b><br>②「父の手伝い」、③「勉強」、④「会社経営」はいずれも本文に出てこない情報。本文にない選択肢は<b>必ず ×</b>。</p><p><b>覚えておきたい単語</b>：<b>started / began</b>（始めた・〜し始めた）、<b>countryside</b>（田舎）、<b>perform</b>（演奏する）、<b>college</b>（大学）。</p>'
+    },
+    {
+      no:2, qNum:22, paraIdx:1, color:"p2",
+      qPre: "At the class reunion, Kazuo",
+      qPost: "",
+      qPreJa: "同窓会で、カズオは",
+      qPostJa: "",
+      choices: [
+        "realized that his hometown was not attractive.",
+        "found that some of his friends wanted to live in a big city.",
+        "did not have a chance to talk with his classmates.",
+        "felt his classmates enjoyed their lives in the town."
+      ],
+      choicesJa: [
+        "地元は魅力的ではないと気づいた",
+        "何人かの友人が大都市に住みたがっているのを知った",
+        "同級生と話す機会がなかった",
+        "同級生たちが町での暮らしを楽しんでいると感じた"
+      ],
+      answer: 4,
+      keyWords: [
+        {w:"class reunion", mean:"同窓会", kana:"クラスリユーニオン", ac:"ユー"},
+        {w:"local companies", mean:"地元の会社", kana:"ロウカルカンパニーズ", ac:"ロウ"},
+        {w:"taking over", mean:"継ぐ", kana:"テイキングオウヴァー", ac:"テイ"},
+        {w:"seemed to enjoy", mean:"楽しんでいるようだった", kana:"スィームドトゥエンジョイ", ac:"スィー"},
+        {w:"proud", mean:"誇りに思う", kana:"プラウド", ac:"プラウ"},
+        {w:"contributing to", mean:"〜に貢献する", kana:"コントリビューティング", ac:"ビュー"}
+      ],
+      hints: [
+        "<p>第2段落「同窓会の場面」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>class reunion</td><td class='ja'>同窓会</td></tr><tr><td class='en'>local companies</td><td class='ja'>地元の会社</td></tr><tr><td class='en'>seemed to enjoy living and working there</td><td class='ja'>そこで暮らし働くのを楽しんでいるようだった</td></tr><tr><td class='en'>proud of contributing to the local community</td><td class='ja'>地域社会に貢献することを誇りに</td></tr></table>",
+        "<p>「他人の様子」を聞く問題は<b>動詞・形容詞</b>に注目！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の<b>主語</b>を確認（Kazuo＝主人公）<br>② 主人公が<b>感じたこと</b>を本文から探す（felt, realized, began to think）<br>③ <b>seemed to ...</b>（〜のように見えた）は印象を表す</div><div class='step'>第2段落 <span class='signal-word'>They seemed to enjoy living and working there</span>（彼らはそこで暮らし働くのを楽しんでいるようだった）<span class='think-arrow'>→</span>カズオが感じた印象。<br>続いて <span class='signal-word'>life in his hometown might not be so bad</span>（地元での生活もそれほど悪くないかも）と思い始めた。</div><div class='step'><b>注意</b>：本文「<b>seemed to enjoy</b>」=選択肢「<b>felt his classmates enjoyed</b>」（同級生たちが楽しんでいると感じた）。同じ意味の言い換え。</div>"
+      ],
+      explain: '<p>第2段落「同窓会で感じたこと」を聞く問題です。</p><div class="ans-key">✅ 正解：④ felt his classmates enjoyed their lives in the town</div><div class="clue-quote">They seemed to enjoy living and working there. They even seemed proud of themselves for contributing to the local community. He began to think that life in his hometown might not be so bad.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">They seemed to enjoy living and working there</span>（楽しんでいるようだった）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">felt his classmates enjoyed their lives in the town</span>（町での暮らしを楽しんでいると感じた）</b>。同じ事実を「seemed to enjoy」（楽しんでいるように見えた）と「felt ... enjoyed」（楽しんでいると感じた）で言い換え。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 地元は魅力的ではないと気づいた</td><td>本文「life in hometown might not be so bad」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>② 大都市に住みたがる友人がいた</td><td>同級生は地元で生活。大都市の話なし</td><td class="ng">×</td></tr><tr><td>③ 同級生と話す機会がなかった</td><td>本文「talked with his classmates」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 同級生たちが楽しんでいると感じた</td><td>「seemed to enjoy」と一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「seemed to」と「felt ... ~ed」は同じ意味</b><br><b>seemed to enjoy</b>（楽しんでいるようだった）は<b>カズオの印象</b>。それを「felt ... enjoyed」（楽しんでいると感じた）と言い換えています。<b>第三者の様子</b>を聞かれたら、<b>主人公の印象</b>を表す表現を探すのがコツ。</p><p><b>判断のポイント2：「might not be so bad」がヒント</b><br>カズオが「<b>地元も悪くないかも</b>」と思い始めたのは、<b>同級生たちが楽しそうだから</b>。①「魅力的ではない」とは正反対。</p><p><b>覚えておきたい単語</b>：<b>class reunion</b>（同窓会）、<b>seemed to ...</b>（〜のように見えた）、<b>contributing to</b>（〜に貢献）、<b>proud</b>（誇りに思う）。</p>'
+    },
+    {
+      no:3, qNum:23, paraIdx:2, color:"p3",
+      qPre: "Since his father was too old to work by himself, Kazuo",
+      qPost: "",
+      qPreJa: "父が一人で働くには年を取りすぎていたので、カズオは",
+      qPostJa: "",
+      choices: [
+        "told his father to retire from his job.",
+        "thought someone would have to take over his father's farm.",
+        "sold the farm to his friend and returned to Tokyo.",
+        "helped his brother give away the farmland."
+      ],
+      choicesJa: [
+        "父に仕事を引退するよう言った",
+        "誰かが父の農場を継がなければならないと考えた",
+        "農場を友人に売って東京に戻った",
+        "兄弟が農地を譲るのを手伝った"
+      ],
+      answer: 2,
+      keyWords: [
+        {w:"farmer", mean:"農家", kana:"ファーマー", ac:"ファー"},
+        {w:"grows rice", mean:"米を作る", kana:"グロウズライス", ac:"グロウ"},
+        {w:"getting old", mean:"年を取る", kana:"ゲティングオウルド", ac:"オウ"},
+        {w:"obvious", mean:"明らかな", kana:"オブヴィアス", ac:"オ"},
+        {w:"by himself", mean:"一人で", kana:"バイヒムセルフ", ac:"セ"},
+        {w:"take over", mean:"引き継ぐ", kana:"テイクオウヴァー", ac:"テイ"},
+        {w:"considered", mean:"検討した", kana:"コンスィダード", ac:"スィ"}
+      ],
+      hints: [
+        "<p>第3段落「父の仕事の継承」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>farmer</td><td class='ja'>農家</td></tr><tr><td class='en'>getting old</td><td class='ja'>年を取る</td></tr><tr><td class='en'>by himself</td><td class='ja'>一人で</td></tr><tr><td class='en'>take over</td><td class='ja'>引き継ぐ</td></tr><tr><td class='en'>one of them should take over</td><td class='ja'>どちらかが継ぐべき</td></tr></table>",
+        "<p>「考えたこと」を聞く問題は<b>thought</b>（思った）に注目！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の主語の<b>動詞</b>を本文で探す（thought, considered, decided）<br>② <b>should</b>（〜すべき）は判断・必要性を表す<br>③ <b>本文の事実</b>と<b>反対の選択肢</b>は ×</div><div class='step'>第3段落 <span class='signal-word'>Kazuo and his brother thought that one of them should take over their father\'s farm</span>（カズオと兄弟は、どちらかが父の農場を継ぐべきだと考えた）<span class='think-arrow'>→</span>これが正解の根拠！</div><div class='step'><b>注意</b>：本文「<b>one of them should take over</b>」=選択肢「<b>someone would have to take over</b>」。「<b>one of them</b>」（どちらか）と「<b>someone</b>」（誰か）、「<b>should</b>」と「<b>would have to</b>」は同じ意味。</div>"
+      ],
+      explain: '<p>第3段落「父の農業継承についての考え」を聞く問題です。</p><div class="ans-key">✅ 正解：② thought someone would have to take over his father\'s farm</div><div class="clue-quote">Kazuo and his brother thought that one of them should take over their father\'s farm.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">one of them should take over</span>（どちらかが継ぐべきだ）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">someone would have to take over</span>（誰かが継がなければならない）</b>。「one of them」（彼らのうちの誰か）と「someone」（誰か）、「should」（すべき）と「would have to」（しなければならない）は同じ意味。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 父に引退を言った</td><td>本文に「引退」発言の記述なし</td><td class="ng">×</td></tr><tr><td>② 誰かが継がなければと考えた</td><td>「one of them should take over」と一致</td><td class="ok">○</td></tr><tr><td>③ 農場を売って東京に戻った</td><td>本文に売却の話なし。兄弟が継いだ</td><td class="ng">×</td></tr><tr><td>④ 農地を譲るのを手伝った</td><td>「give away」（譲る）は本文にない。兄弟が「take over」（継いだ）</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「take over」と「give away」は逆</b><br><b>take over</b>=継ぐ・引き継ぐ／<b>give away</b>=譲る・手放す。本文は<b>take over</b>（継ぐ）の話なので、<b>give away</b>を使う④は ×。</p><p><b>判断のポイント2：「one of them」と「someone」</b><br>本文の「one of them」=「彼ら（=カズオと兄弟）のうちの誰か」。これを「someone」（誰か）と一般化して言い換えています。</p><p><b>判断のポイント3：本文と選択肢の動詞の対応</b><br>本文「<b>should take over</b>」=「継ぐべき」、選択肢「<b>would have to take over</b>」=「継がなければ」。どちらも<b>必要性</b>を表す表現で同じ意味。</p><p><b>覚えておきたい単語</b>：<b>take over</b>（引き継ぐ）、<b>by himself</b>（一人で）、<b>obvious</b>（明らか）、<b>should / have to</b>（〜すべき／〜しなければ）。</p>'
+    },
+    {
+      no:4, qNum:24, paraIdx:3, color:"p4",
+      qPre: "Kazuo hopes that he can",
+      qPost: "",
+      qPreJa: "カズオが望んでいるのは、",
+      qPostJa: "",
+      choices: [
+        "work for a big bank in his hometown.",
+        "perform with his band members abroad.",
+        "teach agriculture in foreign countries.",
+        "run a company with his brother in Tokyo."
+      ],
+      choicesJa: [
+        "地元の大きな銀行で働くこと",
+        "バンドメンバーと海外で演奏すること",
+        "海外の国々で農業を教えること",
+        "東京で兄弟と会社を経営すること"
+      ],
+      answer: 3,
+      keyWords: [
+        {w:"agricultural techniques", mean:"農業技術", kana:"アグリカルチュラル", ac:"カ"},
+        {w:"developing countries", mean:"発展途上国", kana:"ディヴェロピングカントリーズ", ac:"ヴェ"},
+        {w:"go abroad", mean:"海外に行く", kana:"ゴウアブロード", ac:"ブロー"},
+        {w:"desire", mean:"願い・欲求", kana:"ディザイア", ac:"ザイ"},
+        {w:"fulfill", mean:"叶える", kana:"フルフィル", ac:"フィ"},
+        {w:"agriculture", mean:"農業", kana:"アグリカルチャー", ac:"カ"},
+        {w:"unfulfilled dream", mean:"叶わなかった夢", kana:"アンフルフィルドドリーム", ac:"フィ"}
+      ],
+      hints: [
+        "<p>第4段落「カズオの将来の希望」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>agricultural techniques</td><td class='ja'>農業技術</td></tr><tr><td class='en'>developing countries</td><td class='ja'>発展途上国</td></tr><tr><td class='en'>fulfill his father\'s dream</td><td class='ja'>父の夢を叶える</td></tr><tr><td class='en'>teach agriculture abroad</td><td class='ja'>海外で農業を教える</td></tr></table>",
+        "<p>「希望・将来」を聞く問題は<b>hope, want, wish</b>に注目！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の<b>hopes（希望）</b>と一致する動詞を本文で探す<br>② <b>in the future / one day</b>（将来）の表現がヒント<br>③ <b>本文と矛盾</b>する選択肢は ×</div><div class='step'>第4段落 <span class='signal-word'>He now wants to learn rice farming from his father and brother, and then teach agriculture abroad in the future</span>（今は父と兄弟から稲作を学び、将来は海外で農業を教えたい）<span class='think-arrow'>→</span>カズオの将来の希望！</div><div class='step'><b>注意</b>：本文「<b>teach agriculture abroad</b>」=選択肢「<b>teach agriculture in foreign countries</b>」。「<b>abroad</b>」（海外）=「<b>foreign countries</b>」（外国）と同じ意味。</div>"
+      ],
+      explain: '<p>第4段落「カズオの将来の希望」を聞く問題です。</p><div class="ans-key">✅ 正解：③ teach agriculture in foreign countries</div><div class="clue-quote">He now wants to learn rice farming from his father and brother, and then teach agriculture abroad in the future. He hopes that he will realize his father\'s unfulfilled dream one day.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">teach agriculture abroad</span>（海外で農業を教える）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">teach agriculture in foreign countries</span>（外国で農業を教える）</b>。<b>abroad</b>=<b>in foreign countries</b>。同じ意味の言い換え。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 地元の銀行で働く</td><td>銀行の仕事は過去の話。今は農業の道へ</td><td class="ng">×</td></tr><tr><td>② バンドメンバーと海外で演奏</td><td>バンドは過去の話。本文に海外演奏の記述なし</td><td class="ng">×</td></tr><tr><td>③ 海外で農業を教える</td><td>「teach agriculture abroad」と一致</td><td class="ok">○</td></tr><tr><td>④ 東京で兄弟と会社経営</td><td>本文に会社経営の話なし。兄弟は地元で農業</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「abroad」=「foreign countries」</b><br><b>abroad</b>（海外で）と<b>in foreign countries</b>（外国で）は同じ意味。長文読解では、本文の単語と選択肢の単語が違っても、<b>同じ意味の言い換え</b>を見抜くのがカギ。</p><p><b>判断のポイント2：時間軸の確認</b><br>カズオの人生：<b>過去</b>＝バンド+銀行員 → <b>現在</b>＝考えが変わる → <b>将来</b>＝海外で農業を教えたい。<br>設問は<b>将来の希望</b>（hopes that he can）なので、過去の話（①銀行、②バンド）は ×。</p><p><b>判断のポイント3：父の夢の継承</b><br>父の夢=「<b>teach Japanese agricultural techniques in developing countries</b>」（発展途上国で農業技術を教える）。カズオはこの夢を引き継ぐ＝<b>teach agriculture abroad</b>。物語のテーマと一致する選択肢が正解。</p><p><b>覚えておきたい単語</b>：<b>abroad</b>（海外で）、<b>foreign countries</b>（外国）、<b>agriculture</b>（農業）、<b>fulfill</b>（叶える）、<b>unfulfilled</b>（叶わなかった）。</p>'
+    }
+  ]
+};
+
+QUESTIONS_DATA["R6-2"] = {
+  storyTitle: "Sam and Vince's Wheelchair",
+  topicJa: "サムと愛犬ヴィンスの車椅子",
+  paragraphs: [
+    {
+      summary: "サムと愛犬ヴィンスの絆",
+      en: "Sam has a dog named Vince. They have been good friends since Vince was a puppy. They go for a walk every day, play in the backyard on weekends, and often sleep together in Sam's bed. Vince especially likes to play with a ball. He runs around chasing the ball, and they always have a wonderful time together.",
+      ja: "サムにはヴィンスという犬がいます。ヴィンスが子犬の頃からの仲良しです。毎日一緒に散歩に行き、週末は裏庭で遊び、サムのベッドで一緒に寝ることもよくあります。ヴィンスは特にボール遊びが大好きです。ボールを追いかけて走り回り、いつも一緒に素敵な時間を過ごしています。"
+    },
+    {
+      summary: "ヴィンスの足の怪我とショック",
+      en: "One day, when Sam took Vince for a walk, he realized that Vince was dragging his back leg. At the dog park, Vince tried to chase his ball, but he could not run. Sam became worried about Vince and took him to an animal hospital. There, the doctor said that Vince's right back leg was injured. She also told Sam that it would be difficult for Vince to walk anymore without dragging his leg. Sam was shocked and sad. He knew that Vince would be disappointed if he could not play with a ball. Also, Sam thought Vince would get weaker if he could not exercise as he normally did. Sam wanted to help Vince, but he did not know what to do.",
+      ja: "ある日、サムがヴィンスを散歩に連れ出したとき、ヴィンスが後ろ足を引きずっていることに気づきました。ドッグパークで、ヴィンスはボールを追いかけようとしましたが、走ることができませんでした。サムは心配になり動物病院に連れて行きました。そこで医師は、ヴィンスの右後ろ足が損傷していると言いました。さらに、足を引きずらずに歩くのは難しいだろうとも告げました。サムはショックで悲しい気持ちでした。ボールで遊べなくなったヴィンスが落ち込むだろうと知っていました。また、いつもの運動ができなければヴィンスは弱ってしまうだろうとも考えました。助けたいけれど、どうすればいいか分かりませんでした。"
+    },
+    {
+      summary: "車椅子ラグビーの番組から着想",
+      en: "The next morning, when Sam was watching TV with Vince on his lap, he saw a news program about wheelchair sports. In the beginning, Sam thought it would be difficult to play aggressive sports such as rugby in a wheelchair. However, he soon realized he was wrong. The wheelchair rugby players were fast and strong, and the game was impressive. Sam learned that there are special wheelchairs for each sport. Watching this story, he thought that he could find a wheelchair for Vince.",
+      ja: "翌朝、サムがヴィンスを膝に乗せてテレビを見ていると、車椅子スポーツについてのニュース番組を見ました。最初、サムはラグビーのような激しいスポーツを車椅子でやるのは難しいだろうと思いました。しかしすぐに、それが間違いだと気づきました。車椅子ラグビーの選手たちは速く強く、試合は感動的でした。サムは、各スポーツ専用の車椅子があることを知りました。この番組を見て、ヴィンス用の車椅子も見つけられるかもしれないと思いました。"
+    },
+    {
+      summary: "特注車椅子で再び元気に",
+      en: "Sam started to look for wheelchairs for dogs. After doing some research, he found a company which makes customized wheelchairs for pets. He called the company and ordered one for Vince. A few weeks later, the wheelchair arrived. Sam was worried that Vince would be uncomfortable in his wheelchair, but fortunately, the customized wheelchair was perfect for Vince. As soon as Vince was put in his wheelchair, he started running around excitedly. Sam was happy to see his best friend acting energetically. Today, they both enjoy playing with a ball just like before.",
+      ja: "サムは犬用の車椅子を探し始めました。調べているうちに、ペット用のカスタム車椅子を作る会社を見つけました。会社に電話してヴィンス用に注文しました。数週間後、車椅子が届きました。サムはヴィンスが車椅子で違和感を覚えるのではないかと心配しましたが、幸いカスタム車椅子はヴィンスにピッタリでした。車椅子に乗せた途端、ヴィンスは興奮して走り回り始めました。サムは親友が元気に動く姿を見て嬉しかったです。今ではふたりで前と同じようにボール遊びを楽しんでいます。"
+    }
+  ],
+  questions: [
+    {
+      no:1, qNum:21, paraIdx:0, color:"p1",
+      qPre: "Vince",
+      qPost: "",
+      qPreJa: "ヴィンスは",
+      qPostJa: "",
+      choices: [
+        "was a rescue dog before.",
+        "loves playing with a ball.",
+        "sleeps outside with other dogs.",
+        "recently became Sam's friend."
+      ],
+      choicesJa: [
+        "以前は保護犬だった",
+        "ボール遊びが大好き",
+        "他の犬たちと外で寝る",
+        "最近サムの友達になった"
+      ],
+      answer: 2,
+      keyWords: [
+        {w:"puppy", mean:"子犬", kana:"パピー", ac:"パ"},
+        {w:"backyard", mean:"裏庭", kana:"バックヤード", ac:"バ"},
+        {w:"sleep together", mean:"一緒に寝る", kana:"スリープトゥゲザー", ac:"スリー"},
+        {w:"especially", mean:"特に", kana:"イスペシャリー", ac:"ペ"},
+        {w:"play with a ball", mean:"ボールで遊ぶ", kana:"プレイウィズアボール", ac:"ボー"},
+        {w:"chasing", mean:"追いかける", kana:"チェイシング", ac:"チェイ"}
+      ],
+      hints: [
+        "<p>第1段落「ヴィンスについて」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>puppy</td><td class='ja'>子犬</td></tr><tr><td class='en'>especially likes</td><td class='ja'>特に好き</td></tr><tr><td class='en'>play with a ball</td><td class='ja'>ボールで遊ぶ</td></tr><tr><td class='en'>rescue dog</td><td class='ja'>保護犬</td></tr><tr><td class='en'>sleep together</td><td class='ja'>一緒に寝る</td></tr></table>",
+        "<p>「真偽判定」型の長文問題です。本文と1つずつ照合！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 第1段落の<b>事実</b>を1つずつチェック<br>② <b>especially</b>（特に）など<b>強調</b>に注目<br>③ <b>本文に書かれていない</b>選択肢は ×</div><div class='step'>第1段落 <span class='signal-word'>Vince especially likes to play with a ball</span>（ヴィンスは特にボール遊びが大好き）<span class='think-arrow'>→</span>選択肢②と一致！</div><div class='step'><b>注意</b>：選択肢の単語と本文の単語：<br>・本文「<b>since Vince was a puppy</b>」（子犬の頃から）<span class='think-arrow'>→</span><b>長い付き合い</b>=「最近友達になった」とは反対<br>・本文「<b>sleep together in Sam\'s bed</b>」（サムのベッドで一緒に寝る）<span class='think-arrow'>→</span>「外で他の犬と寝る」とは反対</div>"
+      ],
+      explain: '<p>第1段落「ヴィンスの特徴」を聞く問題です。</p><div class="ans-key">✅ 正解：② loves playing with a ball</div><div class="clue-quote">Vince especially likes to play with a ball. He runs around chasing the ball, and they always have a wonderful time together.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">especially likes to play with a ball</span>（特にボール遊びが大好き）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">loves playing with a ball</span>（ボール遊びが大好き）</b>。<b>especially likes</b>（特に好き）と <b>loves</b>（大好き）は同じ意味。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 以前は保護犬だった</td><td>本文に保護犬の記述なし</td><td class="ng">×</td></tr><tr><td>② ボール遊びが大好き</td><td>「especially likes to play with a ball」と一致</td><td class="ok">○</td></tr><tr><td>③ 他の犬と外で寝る</td><td>本文「sleep together in Sam\'s bed」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 最近サムの友達に</td><td>本文「since Vince was a puppy」（子犬の頃から）と<b>反対</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「especially」の強調</b><br><b>especially likes</b>（特に好き）は「<b>love</b>」（大好き）と同じ。本文で<b>強調されている</b>事実が、選択肢では<b>love</b>のような強い動詞で言い換えられることが多いです。</p><p><b>判断のポイント2：時系列の確認</b><br>本文「<b>since Vince was a puppy</b>」（子犬の頃から）=長い付き合い。④の「<b>recently became Sam\'s friend</b>」（最近友達になった）は<b>反対</b>なので ×。</p><p><b>覚えておきたい単語</b>：<b>especially</b>（特に）、<b>puppy</b>（子犬）、<b>chasing</b>（追いかける）、<b>backyard</b>（裏庭）。</p>'
+    },
+    {
+      no:2, qNum:22, paraIdx:1, color:"p2",
+      qPre: "Sam was shocked and unhappy because",
+      qPost: "",
+      qPreJa: "サムがショックで悲しかったのは、",
+      qPostJa: "",
+      choices: [
+        "Vince could not run as he used to anymore.",
+        "Vince had to stay in hospital for several months.",
+        "he got injured while playing rugby.",
+        "he could not live with Vince anymore."
+      ],
+      choicesJa: [
+        "ヴィンスがもう以前のように走れなくなったから",
+        "ヴィンスが数ヶ月入院しなければならなかったから",
+        "彼がラグビー中に怪我したから",
+        "彼がもうヴィンスと一緒に暮らせないから"
+      ],
+      answer: 1,
+      keyWords: [
+        {w:"dragging", mean:"引きずる", kana:"ドラギング", ac:"ドラ"},
+        {w:"back leg", mean:"後ろ足", kana:"バックレッグ", ac:"バ"},
+        {w:"injured", mean:"怪我した", kana:"インジャード", ac:"イン"},
+        {w:"shocked", mean:"ショックを受けた", kana:"ショックト", ac:"ショ"},
+        {w:"disappointed", mean:"がっかり", kana:"ディサポインティド", ac:"ポイ"},
+        {w:"weaker", mean:"より弱い", kana:"ウィーカー", ac:"ウィー"},
+        {w:"normally", mean:"普段", kana:"ノーマリー", ac:"ノー"}
+      ],
+      hints: [
+        "<p>第2段落「サムがショックを受けた理由」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>dragging his back leg</td><td class='ja'>後ろ足を引きずる</td></tr><tr><td class='en'>could not run</td><td class='ja'>走れなかった</td></tr><tr><td class='en'>injured</td><td class='ja'>怪我した</td></tr><tr><td class='en'>difficult to walk anymore without dragging</td><td class='ja'>引きずらずに歩くのは難しい</td></tr><tr><td class='en'>shocked and sad</td><td class='ja'>ショックで悲しい</td></tr></table>",
+        "<p>「なぜ〜なのか」を聞く問題は<b>原因</b>を本文から探します！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の<b>感情（shocked, unhappy）</b>の<b>原因</b>を本文で探す<br>② <b>事実</b>と<b>感情の関係</b>を確認<br>③ <b>本文に書かれていない</b>事実は ×</div><div class='step'>第2段落の流れ：<br>・<span class='signal-word'>Vince could not run</span>（走れなかった）<br>・<span class='signal-word'>injured</span>（怪我した）<br>・<span class='signal-word'>difficult to walk anymore without dragging</span>（引きずらずに歩くのは難しい）<br>・<span class='signal-word'>Sam was shocked and sad</span>（ショックで悲しい）<span class='think-arrow'>→</span>つまり<b>ヴィンスが以前のように走れなくなった</b>のがショックの原因！</div><div class='step'><b>注意</b>：選択肢の<b>he</b>に注意！文脈上の<b>he = Sam</b>（サム）。「彼（=サム）がラグビー中に怪我」「彼（=サム）がもう一緒に暮らせない」は本文と関係なし。</div>"
+      ],
+      explain: '<p>第2段落「サムがショックを受けた理由」を聞く問題です。</p><div class="ans-key">✅ 正解：① Vince could not run as he used to anymore</div><div class="clue-quote">Vince tried to chase his ball, but he could not run. ... it would be difficult for Vince to walk anymore without dragging his leg. Sam was shocked and sad.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">Vince could not run</span>（ヴィンスは走れなかった）+ <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">difficult to walk without dragging</span>（引きずらずに歩けない）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">could not run as he used to anymore</span>（もう以前のように走れない）</b>。「もう走れない」+「以前のように」=「以前のように走れない」という言い換え。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 以前のように走れない</td><td>「could not run」「difficult to walk」と一致</td><td class="ok">○</td></tr><tr><td>② 数ヶ月入院</td><td>本文に長期入院の記述なし</td><td class="ng">×</td></tr><tr><td>③ ラグビー中の怪我</td><td>怪我したのは犬。ラグビーの話は別段落（テレビで見ただけ）</td><td class="ng">×</td></tr><tr><td>④ 一緒に暮らせない</td><td>本文「Sam wanted to help Vince」=一緒に暮らし続ける</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「he」の指す相手</b><br>選択肢③④の <b>he</b> はサムを指します。<b>「ラグビー中に怪我」はサムが怪我？</b>本文ではラグビーは<b>テレビで見た</b>だけで、サムが怪我した話はありません。</p><p><b>判断のポイント2：「used to」=「以前は」</b><br><b>used to ~</b>=「以前は〜していた」。<b>could not run as he used to anymore</b>=「以前のようには走れない」。本文の「<b>could not run</b>」と「<b>difficult to walk</b>」を合わせた意味。</p><p><b>判断のポイント3：ストーリーの流れ</b><br>サム＆ヴィンスは元気に過ごしていた → ヴィンスが怪我 → サムショック → 解決策を探す。④「もう一緒に暮らせない」は物語の流れと矛盾（一緒に暮らし続けて車椅子で解決）。</p><p><b>覚えておきたい単語</b>：<b>injured</b>（怪我した）、<b>used to ~</b>（以前は〜した）、<b>shocked</b>（ショック）、<b>dragging</b>（引きずる）。</p>'
+    },
+    {
+      no:3, qNum:23, paraIdx:2, color:"p3",
+      qPre: "Watching a news program on TV, Sam",
+      qPost: "",
+      qPreJa: "テレビのニュース番組を見て、サムは",
+      qPostJa: "",
+      choices: [
+        "decided to play rugby with his friends.",
+        "tried to sell a special wheelchair for Vince.",
+        "thought Vince might be able to use a wheelchair.",
+        "learned that dogs are able to play sports such as rugby."
+      ],
+      choicesJa: [
+        "友達とラグビーをすることを決めた",
+        "ヴィンス用の特別な車椅子を売ろうとした",
+        "ヴィンスも車椅子を使えるかもしれないと思った",
+        "犬がラグビーのようなスポーツができることを学んだ"
+      ],
+      answer: 3,
+      keyWords: [
+        {w:"news program", mean:"ニュース番組", kana:"ニューズプログラム", ac:"ニュー"},
+        {w:"wheelchair", mean:"車椅子", kana:"ウィールチェア", ac:"ウィー"},
+        {w:"aggressive", mean:"激しい", kana:"アグレッスィヴ", ac:"グレ"},
+        {w:"impressive", mean:"感動的", kana:"インプレッスィヴ", ac:"プレ"},
+        {w:"special wheelchairs", mean:"特別な車椅子", kana:"スペシャルウィールチェアズ", ac:"ス"},
+        {w:"find a wheelchair for Vince", mean:"ヴィンス用の車椅子を見つける", kana:"ファインドアウィールチェアフォーヴィンス", ac:"ファ"}
+      ],
+      hints: [
+        "<p>第3段落「テレビ番組から得た着想」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>wheelchair</td><td class='ja'>車椅子</td></tr><tr><td class='en'>aggressive sports</td><td class='ja'>激しいスポーツ</td></tr><tr><td class='en'>special wheelchairs for each sport</td><td class='ja'>各スポーツ用の特別な車椅子</td></tr><tr><td class='en'>find a wheelchair for Vince</td><td class='ja'>ヴィンス用の車椅子を見つける</td></tr></table>",
+        "<p>「考えたこと・気づいたこと」を聞く問題は<b>thought / realized</b>に注目！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の場面（Watching a news program）を本文で見つける<br>② <b>he thought / he realized / he learned</b>の後を確認<br>③ <b>might</b>（〜かもしれない）は<b>可能性</b>を表す</div><div class='step'>第3段落の最終文 <span class='signal-word'>he thought that he could find a wheelchair for Vince</span>（ヴィンス用の車椅子を見つけられるかもしれないと思った）<span class='think-arrow'>→</span><b>ヴィンスも車椅子を使えるかも</b>と考えた！</div><div class='step'><b>注意</b>：本文「<b>he could find a wheelchair for Vince</b>」=選択肢「<b>Vince might be able to use a wheelchair</b>」。同じ意味の言い換え。</div>"
+      ],
+      explain: '<p>第3段落「テレビ番組を見て考えたこと」を聞く問題です。</p><div class="ans-key">✅ 正解：③ thought Vince might be able to use a wheelchair</div><div class="clue-quote">Sam learned that there are special wheelchairs for each sport. Watching this story, he thought that he could find a wheelchair for Vince.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">he could find a wheelchair for Vince</span>（ヴィンス用の車椅子を見つけられる）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">Vince might be able to use a wheelchair</span>（ヴィンスは車椅子を使えるかも）</b>。「車椅子を見つけられる」=「車椅子を使える」と意味的に同じ。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 友達とラグビーする決意</td><td>サムはラグビーをするわけではない。テレビで見ただけ</td><td class="ng">×</td></tr><tr><td>② ヴィンス用車椅子を<b>売ろう</b>とした</td><td>本文「<b>find</b>（探す）」を「<b>sell</b>（売る）」に書き換えた誤り</td><td class="ng">×</td></tr><tr><td>③ ヴィンスも車椅子を使えるかも</td><td>「could find a wheelchair for Vince」と一致</td><td class="ok">○</td></tr><tr><td>④ 犬がラグビーをできる</td><td>本文ではラグビーは<b>人間</b>のスポーツ</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「could」と「might be able to」</b><br><b>could find</b>=「見つけられる」、<b>might be able to</b>=「〜できるかもしれない」。どちらも<b>可能性</b>を表す表現で同じ意味。</p><p><b>判断のポイント2：「sell」と「find」を混同しない</b><br>②は<b>find（探す）</b>を<b>sell（売る）</b>にすり替えた<b>引っかけ</b>。サムは<b>探した</b>のであって<b>売った</b>のではありません。本文の動詞を正確に読み取ることが大切。</p><p><b>判断のポイント3：本文で誰が何をしたかを区別</b><br>本文ではラグビーをするのは<b>テレビ番組の選手たち</b>。サム自身ではないし、犬でもない。①④はこの区別を間違えています。</p><p><b>覚えておきたい単語</b>：<b>wheelchair</b>（車椅子）、<b>might be able to ~</b>（〜できるかも）、<b>find</b>（見つける）、<b>impressive</b>（感動的）。</p>'
+    },
+    {
+      no:4, qNum:24, paraIdx:3, color:"p4",
+      qPre: "Sam was happy to",
+      qPost: "",
+      qPreJa: "サムが嬉しかったのは、",
+      qPostJa: "",
+      choices: [
+        "see Vince full of energy once again.",
+        "move around in his new wheelchair.",
+        "hear Vince was fully recovered from the injury.",
+        "find that the wheelchair was cheap."
+      ],
+      choicesJa: [
+        "ヴィンスが再び元気いっぱいなのを見ること",
+        "新しい車椅子で動き回ること",
+        "ヴィンスが怪我から完全に回復したと聞いたこと",
+        "車椅子が安いと知ったこと"
+      ],
+      answer: 1,
+      keyWords: [
+        {w:"customized", mean:"カスタムされた", kana:"カスタマイズド", ac:"カ"},
+        {w:"ordered", mean:"注文した", kana:"オーダード", ac:"オー"},
+        {w:"uncomfortable", mean:"不快な", kana:"アンカンファタブル", ac:"カン"},
+        {w:"fortunately", mean:"幸いに", kana:"フォーチュナトリー", ac:"フォー"},
+        {w:"as soon as", mean:"〜するとすぐに", kana:"アズスーンアズ", ac:"スー"},
+        {w:"excitedly", mean:"興奮して", kana:"エクサイティドリー", ac:"サイ"},
+        {w:"acting energetically", mean:"元気に振る舞う", kana:"アクティングエナジェティカリー", ac:"ナ"}
+      ],
+      hints: [
+        "<p>第4段落「車椅子が届いた後の喜び」を聞く問題。カギの単語を確認！</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>customized wheelchair</td><td class='ja'>特注の車椅子</td></tr><tr><td class='en'>perfect for Vince</td><td class='ja'>ヴィンスにピッタリ</td></tr><tr><td class='en'>running around excitedly</td><td class='ja'>興奮して走り回る</td></tr><tr><td class='en'>acting energetically</td><td class='ja'>元気に振る舞う</td></tr><tr><td class='en'>full of energy</td><td class='ja'>元気いっぱい</td></tr></table>",
+        "<p>「嬉しかった理由」を聞く問題は<b>happy to ...</b>に注目！</p><div class='strategy'><b>長文読解の黄金ルール：</b><br>① 設問の<b>happy to ~</b>=「〜して嬉しい」<br>② サムの嬉しい<b>原因</b>を本文から探す<br>③ <b>本文と矛盾</b>する選択肢は ×</div><div class='step'>第4段落 <span class='signal-word'>Sam was happy to see his best friend acting energetically</span>（サムは親友が元気に振る舞うのを見て嬉しかった）<span class='think-arrow'>→</span><b>ヴィンスが元気いっぱい</b>なのが嬉しい理由！</div><div class='step'><b>注意</b>：本文「<b>acting energetically</b>」=選択肢「<b>full of energy</b>」（元気いっぱい）。同じ意味の言い換え。</div>"
+      ],
+      explain: '<p>第4段落「サムが嬉しかった理由」を聞く問題です。</p><div class="ans-key">✅ 正解：① see Vince full of energy once again</div><div class="clue-quote">As soon as Vince was put in his wheelchair, he started running around excitedly. Sam was happy to see his best friend acting energetically.</div><p><b>本文 <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">running around excitedly</span>（興奮して走り回る）+ <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">acting energetically</span>（元気に振る舞う）= <span style="background:#fff5d6;padding:1px 5px;border-radius:3px;color:#d94f4f;font-weight:700;font-family:Georgia,serif">full of energy</span>（元気いっぱい）</b>。「興奮して走り回る」+「元気に振る舞う」=「元気いっぱい」と要約。</p><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① ヴィンスが再び元気いっぱい</td><td>「acting energetically」と一致</td><td class="ok">○</td></tr><tr><td>② 新しい車椅子で動き回ること</td><td>動き回ったのは<b>ヴィンス</b>。<b>サム</b>ではない</td><td class="ng">×</td></tr><tr><td>③ 怪我から完全回復</td><td>本文に「fully recovered」の記述なし。車椅子で対応</td><td class="ng">×</td></tr><tr><td>④ 車椅子が安かった</td><td>本文に価格の話なし</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：誰が動いたかの確認</b><br>本文「<b>he started running around</b>」の<b>he</b>=<b>Vince</b>（ヴィンス）。サムは<b>見て嬉しかった</b>のであって、サム自身が動いたわけではありません。②は主語のすり替え。</p><p><b>判断のポイント2：「fully recovered」と「acting energetically」の違い</b><br><b>fully recovered</b>（完全回復）=怪我が治る。本文ではヴィンスは怪我が治ったわけではなく、<b>車椅子で動けるようになった</b>のです。状態は違うので③は ×。</p><p><b>判断のポイント3：「once again」（再び）の意味</b><br>選択肢①の「<b>once again</b>」=以前のように再び元気に。本文の流れ「以前は元気→怪我→車椅子で<b>再び元気</b>」と一致します。</p><p><b>覚えておきたい単語</b>：<b>energetically / full of energy</b>（元気に／元気いっぱい）、<b>customized</b>（特注の）、<b>fortunately</b>（幸いに）、<b>as soon as</b>（〜するとすぐに）。</p>'
+    }
+  ]
+};
+
+
+// ==================== 状態管理 ====================
+let currentYear = "R7-1";
+let currentQ = 0;
+let currentMode = "hint";
+let answeredMap = {};
+let savedWords = [];
+let storyExpanded = true; // 俯瞰ビューの展開状態
+
+function getKey(year, q){ return year + "_" + q; }
+
+// ==================== 年タブ ====================
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  ["R7-1","R7-2","R6-1","R6-2"].forEach(y=>{
+    if(QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = `令和${y[1]}年 第${y[3]}回`;
+      if(y === currentYear) b.classList.add('on');
+      b.onclick = ()=>{
+        stopAllPlay();
+        currentYear = y; currentQ = 0;
+        renderYearPick(); renderStoryOverview(); renderTabs(); renderQuestion();
+      };
+      yp.appendChild(b);
+    }
+  });
+}
+
+// ==================== 段落俯瞰ビュー ====================
+function renderStoryOverview(){
+  const el = document.getElementById('storyOverview');
+  const data = QUESTIONS_DATA[currentYear];
+  const paras = data.paragraphs;
+
+  let parasHtml = '';
+  paras.forEach((p, i)=>{
+    const colorClass = `p${i+1}`;
+    parasHtml += `
+      <div class="para-row">
+        <div class="para-tag ${colorClass}">
+          §<span class="ptag-num">${i+1}</span>
+          <span class="ptag-q">設問${i+1}</span>
+        </div>
+        <div class="para-body ${colorClass}">${highlightWord(p.en, data.questions[i].keyWords)}</div>
+      </div>
+    `;
+  });
+
+  el.innerHTML = `
+    <div class="ov-head">
+      <h3>📖 本文全体（段落と設問の対応）</h3>
+      <div class="ov-controls">
+        <button class="ov-play" onclick="playStory()">🔊 全文</button>
+        <button class="ov-toggle" onclick="toggleStory()">${storyExpanded ? '▲ 畳む' : '▼ 開く'}</button>
+      </div>
+    </div>
+    <div class="story-title">${data.storyTitle}</div>
+    <div class="story-content ${storyExpanded ? '' : 'collapsed'}" id="storyContent">
+      ${parasHtml}
+    </div>
+  `;
+}
+
+function toggleStory(){
+  storyExpanded = !storyExpanded;
+  renderStoryOverview();
+}
+
+// ==================== 設問タブ ====================
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML = '';
+  data.questions.forEach((q, i)=>{
+    const t = document.createElement('button');
+    const colorClass = `qt${i+1}`;
+    t.className = 'q-tab ' + colorClass + (i === currentQ ? ' active' : '');
+    t.innerHTML = `問${q.no} <span class="qt-num">No.${q.qNum}</span>`;
+    t.onclick = ()=>{ stopAllPlay(); currentQ = i; renderTabs(); renderQuestion(); };
+    tabs.appendChild(t);
+  });
+}
+
+// ==================== キーワードハイライト ====================
+function highlightWord(text, words){
+  if(!words || words.length === 0) return text;
+  const sorted = [...words].sort((a,b) => b.w.length - a.w.length);
+  let result = text;
+  const replaced = new Set();
+  sorted.forEach(kw => {
+    if(replaced.has(kw.w.toLowerCase())) return;
+    const safe = kw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b(${safe})\\b`, 'i');
+    if(result.match(regex)){
+      const opts = JSON.stringify({m:kw.mean, k:kw.kana, a:kw.ac});
+      const escapedOpts = opts.replace(/"/g, '&quot;');
+      result = result.replace(regex, 
+        `<span class="word" data-opts="${escapedOpts}" onclick="showVwPop(this,event)">$1</span>`);
+      replaced.add(kw.w.toLowerCase());
+    }
+  });
+  return result;
+}
+
+// ==================== 設問本体 ====================
+function renderQuestion(){
+  const data = QUESTIONS_DATA[currentYear];
+  const q = data.questions[currentQ];
+  const para = data.paragraphs[q.paraIdx];
+  const c = document.getElementById('qContainer');
+
+  const pIdx = q.paraIdx + 1;
+  const pColor = `p${pIdx}`;
+  const tColor = `t${pIdx}`;
+  const sColor = `s${pIdx}`;
+  const qcColor = `qc${pIdx}`;
+
+  // 段落本文（キーワードハイライト適用）
+  const decoratedPara = highlightWord(para.en, q.keyWords);
+  // 質問文・選択肢にもハイライト
+  const decoratedQpre = highlightWord(q.qPre, q.keyWords);
+  const decoratedQpost = highlightWord(q.qPost || '', q.keyWords);
+  const decoratedChoices = q.choices.map(ch => highlightWord(ch, q.keyWords));
+
+  // 選択肢
+  let choicesHtml = '';
+  decoratedChoices.forEach((ch, i)=>{
+    choicesHtml += `<button class="choice" data-idx="${i}" onclick="pickChoice(${i})">
+      <span class="num">${i+1}</span>${ch}
+    </button>`;
+  });
+
+  // ヒント
+  let hintsHtml = '';
+  q.hints.forEach((h, i)=>{
+    hintsHtml += `<div class="hint-box" id="hint${i}"><span class="hint-num">ヒント${i+1}</span><div>${h}</div></div>`;
+  });
+
+  c.innerHTML = `
+    <div class="qcard ${qcColor}">
+      <div class="topic ${tColor}">📖 設問${q.no}：${getQTopicLabel(q.no)}</div>
+      <div class="q-instruction">
+        次の英文を読み、 <span style="background:#fff5d6;border:1px dashed #e8a838;padding:0 6px;border-radius:3px;color:#e8a838;font-weight:800">${q.qNum}</span> 内に入れるのに最も適当なものを 1〜4 から一つ選びなさい。<br>
+        <b style="color:var(--${pColor})">この問題は第${pIdx}段落（§${pIdx}）に対応しています。</b>
+      </div>
+
+      <div class="related-para ${pColor}">
+        <div class="rp-head">
+          <span>📍 第${pIdx}段落 — ${para.summary}</span>
+          <button class="rp-play" onclick="playParagraph(${q.paraIdx})">🔊 段落を読み上げ</button>
+        </div>
+        ${decoratedPara}
+        <div class="para-ja" id="paraJa">${para.ja}</div>
+      </div>
+
+      <button class="toggle-ja" onclick="toggleParaJa()">📝 日本語訳を表示／非表示</button>
+
+      <div class="qsec">
+        <div class="qsec-head">
+          <span class="qsec-num ${sColor}">設問 No.${q.qNum}</span>
+        </div>
+        <div class="qsec-question">
+          ${decoratedQpre} <span class="blank-num">${q.qNum}</span>${decoratedQpost ? ' ' + decoratedQpost : ''}
+        </div>
+        <div style="font-size:.82rem;color:#666;margin-bottom:6px">${q.qPreJa}<b>　〜</b>${q.qPostJa || ''}</div>
+        <div class="choices" id="choicesBox">${choicesHtml}</div>
+        <div class="result-msg" id="resultMsg"></div>
+      </div>
+
+      <div class="mode-tabs">
+        <button class="mode-btn ${currentMode==='hint'?'active':''}" onclick="setMode('hint')">💡 ヒントモード</button>
+        <button class="mode-btn ${currentMode==='explain'?'active':''}" onclick="setMode('explain')">📚 詳しい解説</button>
+      </div>
+
+      <div class="mode-panel ${currentMode==='hint'?'show':''}" id="hintPanel">
+        <h3>💡 段階的ヒント（長文読解のコツ）</h3>
+        <div class="hint-notice">
+          ⚠️ <b>このヒントは「合格点（40点〜）を取るための戦略」です。</b>本番で安定して点を取るには、<b>中学英単語・中学英文法</b>の基礎力が必要です。
+        </div>
+        <div class="hint-buttons">
+          <button class="hint-btn" onclick="showHint(0)">①カギの単語</button>
+          <button class="hint-btn" onclick="showHint(1)">②段落の見方</button>
+          <button class="hint-btn" onclick="showHint(2)">③消去法</button>
+        </div>
+        ${hintsHtml}
+      </div>
+
+      <div class="mode-panel ${currentMode==='explain'?'show':''}" id="explainPanel">
+        <h3>📚 詳しい解説</h3>
+        <div class="explain-box">${q.explain}</div>
+        <div class="study-rec">
+          <h4>📖 もっと安定して点を取りたい方へ</h4>
+          このアプリのヒントは「<b>段落と設問の対応を使って解く戦略</b>」を紹介しています。本番でもっと余裕を持って解きたい方は、<b>中学英単語・中学英文法</b>のアプリで基礎を固めましょう。基礎ができれば、ヒントなしでも安定して解けるようになります。<br>
+          <a href="https://realizefield.github.io/j-engglish-word/" target="_blank">📚 中学英単語アプリ</a>
+          <a href="https://realizefield.github.io/j-english/" target="_blank">📝 中学英文法アプリ</a>
+          <a href="https://realizefield.github.io/kounin_eng_grammer/kounineng-index.html" target="_blank">🎯 高認英文法アプリ</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined){
+    revealAnswer(answeredMap[k], false);
+  }
+}
+
+function getQTopicLabel(no){
+  const labels = {
+    1: "第1段落の内容",
+    2: "第2段落の内容",
+    3: "第3段落の内容",
+    4: "第4段落・全体テーマ"
+  };
+  return labels[no] || "段落内容";
+}
+
+// ==================== 日本語訳トグル ====================
+function toggleParaJa(){
+  const el = document.getElementById('paraJa');
+  if(el) el.classList.toggle('show');
+}
+
+// ==================== モード切替 ====================
+function setMode(m){
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  if(event && event.target) event.target.classList.add('active');
+  const hp = document.getElementById('hintPanel');
+  const ep = document.getElementById('explainPanel');
+  if(hp) hp.classList.toggle('show', m === 'hint');
+  if(ep) ep.classList.toggle('show', m === 'explain');
+}
+
+function showHint(i){
+  const box = document.getElementById('hint' + i);
+  if(box) box.classList.toggle('show');
+}
+
+// ==================== 選択肢 ====================
+function pickChoice(i){
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined) return;
+  answeredMap[k] = i;
+  revealAnswer(i, true);
+}
+
+function revealAnswer(picked, showMsg){
+  const data = QUESTIONS_DATA[currentYear];
+  const q = data.questions[currentQ];
+  const ans = q.answer - 1;
+  const choicesEl = document.getElementById('choicesBox');
+  if(!choicesEl) return;
+  const buttons = choicesEl.querySelectorAll('.choice');
+  buttons.forEach((btn, i)=>{
+    if(i === ans) btn.classList.add('correct');
+    else if(i === picked) btn.classList.add('wrong');
+  });
+  if(showMsg){
+    const msg = document.getElementById('resultMsg');
+    if(picked === ans){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `残念。正解は ${q.answer} 番です。`;
+    }
+  }
+}
+
+// ==================== vw popup ====================
+let activeWordPop = null;
+
+function showVwPop(el, ev){
+  if(ev) ev.stopPropagation();
+  if(activeWordPop && activeWordPop !== el){
+    closeVwPop(activeWordPop);
+  }
+  if(el.classList.contains('tapped')){
+    closeVwPop(el);
+    return;
+  }
+  el.classList.add('tapped');
+  const opts = JSON.parse(el.getAttribute('data-opts').replace(/&quot;/g, '"'));
+  const word = el.textContent;
+  const isSaved = savedWords.some(w => w.w === word);
+
+  const pop = document.createElement('span');
+  pop.className = 'word-pop show';
+  pop.innerHTML = `
+    <div class="pop-row">
+      <div>
+        <div><b>${word}</b> [${opts.k}] ${opts.a ? `<span class="accent">▶${opts.a}</span>` : ''}</div>
+        <div>${opts.m}</div>
+      </div>
+      <div class="pop-buttons">
+        <button class="speak" onclick="event.stopPropagation();speakWord('${word.replace(/'/g, "\\'")}')">🔊</button>
+        <button class="${isSaved ? 'saved' : 'save'}" onclick="event.stopPropagation();saveWord('${word.replace(/'/g, "\\'")}','${opts.m.replace(/'/g, "\\'")}','${opts.k.replace(/'/g, "\\'")}',this)">${isSaved ? '✓' : '保存'}</button>
+      </div>
+    </div>
+  `;
+  el.appendChild(pop);
+  activeWordPop = el;
+}
+
+function closeVwPop(el){
+  el.classList.remove('tapped');
+  const pop = el.querySelector('.word-pop');
+  if(pop) pop.remove();
+  if(activeWordPop === el) activeWordPop = null;
+}
+
+document.addEventListener('click', e => {
+  if(activeWordPop && !activeWordPop.contains(e.target)){
+    closeVwPop(activeWordPop);
+  }
+});
+
+function saveWord(w, m, k, btn){
+  if(savedWords.some(x => x.w === w)) return;
+  const data = QUESTIONS_DATA[currentYear];
+  const q = data.questions[currentQ];
+  savedWords.push({w, m, k, year:currentYear, qNo:q.no});
+  btn.textContent = '✓';
+  btn.className = 'saved';
+  document.getElementById('reviewCount').textContent = savedWords.length;
+}
+
+// ==================== 音声合成 ====================
+let voices = [];
+let currentSpeech = null;
+
+function loadVoices(){
+  voices = window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function pickVoice(){
+  if(voices.length === 0) loadVoices();
+  const priorityNames = ['Samantha','Karen','Zira','Google US English','Google UK English Female','Microsoft Zira','Allison','Ava','Susan'];
+  for(const name of priorityNames){
+    const v = voices.find(voice => voice.name.includes(name) && /en-US|en-GB|en-AU/i.test(voice.lang));
+    if(v) return v;
+  }
+  const femaleByName = voices.find(v => /en-US|en-GB|en-AU/i.test(v.lang) && /female|woman/i.test(v.name));
+  if(femaleByName) return femaleByName;
+  const maleNames = /male|man|David|Daniel|Alex|Tom|James|Mark|George|Fred/i;
+  const nonMaleEn = voices.find(v => /en-US|en-GB|en-AU/i.test(v.lang) && !maleNames.test(v.name));
+  if(nonMaleEn) return nonMaleEn;
+  return voices.find(v => /en/i.test(v.lang)) || voices[0];
+}
+
+function speakWord(word){
+  if(!('speechSynthesis' in window)){ alert('お使いのブラウザは音声非対応'); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1.15;
+  speechSynthesis.speak(u);
+}
+
+function playParagraph(paraIdx){
+  if(!('speechSynthesis' in window)){ alert('お使いのブラウザは音声非対応'); return; }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear];
+  const text = data.paragraphs[paraIdx].en;
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US'; u.rate = 0.9; u.pitch = 1.15;
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function playStory(){
+  if(!('speechSynthesis' in window)){ alert('お使いのブラウザは音声非対応'); return; }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear];
+  const text = data.paragraphs.map(p => p.en).join(' ');
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US'; u.rate = 0.9; u.pitch = 1.15;
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function stopAllPlay(){
+  if('speechSynthesis' in window){ speechSynthesis.cancel(); }
+  currentSpeech = null;
+}
+
+// ==================== 復習リスト ====================
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(savedWords.length === 0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:20px">まだ単語が保存されていません。<br>本文中の<span style="color:var(--accent2);text-decoration:underline">下線つきの単語</span>をタップして「保存」ボタンを押してください。</p>';
+  } else {
+    body.innerHTML = savedWords.map((w, i)=>`
+      <div class="review-card">
+        <div class="review-word">${w.w}</div>
+        <div class="review-q">[${w.k}] ${w.m}</div>
+        <div style="font-size:.75rem;color:#888;">令和${w.year[1]}年 第${w.year[3]}回 問${w.qNo}より</div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="removeWord(${i})">✓ 覚えた</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+function removeWord(i){
+  savedWords.splice(i, 1);
+  document.getElementById('reviewCount').textContent = savedWords.length;
+  openReview();
+}
+
+// ==================== 初期化 ====================
+renderYearPick();
+renderStoryOverview();
+renderTabs();
+renderQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高認英語 第5問 攻略 | GAMBA</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.tip-banner{background:linear-gradient(135deg,#e8f4ff,#d4eaff);border:1px solid #a0c8e8;padding:10px 14px;border-radius:10px;font-size:.82rem;color:#1a4870;margin-bottom:12px;line-height:1.6}
+.tip-banner b{color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink)}
+.q-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.topic{background:var(--soft);padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px}
+
+.q-instruction{font-size:.82rem;color:#666;margin-bottom:8px;background:#fffcf3;padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3);line-height:1.5}
+
+/* お知らせ枠：q4のframeに相当 */
+.notice-box{font-size:.92rem;line-height:1.85;font-family:"Georgia",serif;padding:14px;background:#fdf8f0;border-radius:10px;border:1px dashed var(--line);margin-bottom:10px;max-height:48vh;overflow-y:auto}
+.notice-box .notice-title{font-weight:800;text-align:center;font-size:1.05rem;color:var(--accent2);margin:0 0 12px;padding:8px 0;border-top:2px solid var(--accent2);border-bottom:2px solid var(--accent2);font-family:"Georgia",serif}
+.notice-box p{margin-bottom:8px}
+.notice-box table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.86rem}
+.notice-box table th,.notice-box table td{border:1px solid #c8b894;padding:5px 7px;vertical-align:top;text-align:left}
+.notice-box table th{background:#f0e4ce;font-weight:bold}
+.notice-box .info-block{background:#fff7e6;border-left:3px solid var(--accent3);padding:8px 12px;margin:8px 0;border-radius:4px}
+.notice-box .info-block ul{margin:2px 0;padding-left:20px}
+.notice-box .info-block li{margin-bottom:3px}
+.notice-box .info-block h3{font-size:.92rem;margin:2px 0 6px;color:var(--accent2);font-family:"Hiragino Maru Gothic ProN",sans-serif}
+.notice-box::-webkit-scrollbar{width:6px}
+.notice-box::-webkit-scrollbar-track{background:var(--soft)}
+.notice-box::-webkit-scrollbar-thumb{background:#c8b894;border-radius:3px}
+
+.toggle-ja{margin-bottom:10px;padding:6px 12px;background:var(--paper);border:1.5px solid var(--accent2);color:var(--accent2);border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit}
+
+.sentence-play{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 2px 6px rgba(217,79,79,.3);display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:inherit}
+.sentence-play:active{transform:scale(.98)}
+
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+.word-pop button.speak{background:var(--accent2);font-size:.85rem;padding:3px 9px}
+.word-pop button.speak:active{background:#1a4870}
+.word-pop .pop-buttons{display:flex;gap:4px;flex-direction:column}
+
+/* 第5問特有：質問エリア */
+.qsec{background:#fafafa;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
+.qsec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qsec-num{display:inline-block;background:var(--accent2);color:#fff;font-weight:800;padding:3px 10px;border-radius:6px;font-size:.78rem}
+.qsec-question{font-family:"Georgia",serif;font-size:.95rem;line-height:1.6;margin-bottom:8px;color:var(--ink)}
+.qsec-situation{background:#fff7e6;border-left:3px solid var(--accent3);padding:8px 10px;border-radius:5px;margin:6px 0 10px;font-size:.85rem;line-height:1.5;font-family:"Hiragino Maru Gothic ProN",sans-serif;color:#5a3a10}
+.qsec-situation b{color:var(--accent)}
+
+.choices{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.92rem;cursor:pointer;text-align:left;font-family:"Georgia",serif;color:var(--ink);transition:all .15s;line-height:1.45;font-weight:600}
+.choice .num{display:inline-block;background:var(--soft);color:var(--accent2);font-weight:800;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;margin-right:8px;font-size:.78rem;font-family:sans-serif;vertical-align:middle}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+.hint-box .strategy{margin-top:8px;padding:10px 12px;background:#e8f4ff;border-radius:6px;border-left:3px solid var(--accent2)}
+.hint-box .strategy b{color:var(--accent2)}
+.hint-box .ng-mark{color:var(--accent);font-weight:800}
+.hint-box .ok-mark{color:var(--good);font-weight:800}
+.hint-box .signal-word{background:#fff5d6;padding:1px 6px;border-radius:4px;font-weight:800;color:var(--accent);font-family:"Georgia",serif}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+.explain-box{background:var(--paper);padding:14px;border-radius:8px;border-left:4px solid var(--accent3);font-size:.9rem;line-height:1.85}
+.explain-box p{margin-bottom:10px}
+.explain-box p:last-child{margin-bottom:0}
+.explain-box b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+.explain-box .ans-key{display:inline-block;background:#fffcf3;border:1.5px solid var(--good);color:var(--good);padding:3px 10px;border-radius:6px;font-weight:800;margin-bottom:8px;font-size:.92rem}
+.explain-box .check-table{width:100%;border-collapse:collapse;margin:10px 0;background:#fafafa;border-radius:6px;overflow:hidden;font-size:.85rem}
+.explain-box .check-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-size:.78rem}
+.explain-box .check-table td{padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.explain-box .check-table tr:last-child td{border-bottom:none}
+.explain-box .check-table .ng{color:var(--accent);font-weight:700}
+.explain-box .check-table .ok{color:var(--good);font-weight:700}
+.explain-box .ja-trans{background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:10px;border-left:3px solid var(--accent2)}
+.explain-box .ja-trans b{color:var(--accent2);background:transparent;padding:0}
+
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+/* ヒントモード冒頭の注意書き */
+.hint-notice{background:#fff8e1;border:1px solid #ffd982;padding:10px 12px;border-radius:8px;font-size:.8rem;color:#806000;margin-bottom:10px;line-height:1.55}
+.hint-notice b{color:#a05000}
+
+/* 解説末尾の学習のすすめ */
+.study-rec{background:linear-gradient(135deg,#f0f8e8,#dcefcd);border:1px solid #a5c97c;padding:12px 14px;border-radius:10px;font-size:.85rem;color:#3a5a1f;margin-top:14px;line-height:1.7}
+.study-rec b{color:#2c4a14}
+.study-rec h4{color:#2c4a14;margin-bottom:6px;font-size:.92rem}
+.study-rec a{display:inline-block;background:#5a8a2c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:.82rem;margin:4px 4px 0 0;font-family:inherit}
+.study-rec a:hover{background:#3e6a14}
+
+@media (max-width:480px){
+  .notice-box{font-size:.88rem;max-height:42vh}
+  .notice-box .notice-title{font-size:1rem}
+  .qsec-question{font-size:.9rem}
+  .choice{font-size:.88rem;padding:9px 10px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 高認英語 第5問 攻略</h1>
+  <p><span class="badge">お知らせ読解</span>本文に答えが書いてある！見つけ方を学ぼう</p>
+</header>
+
+<div class="tip-banner">
+  💡 <b>このヒントの使い方</b><br>
+  これは<b>「英語が苦手な方が 40点合格を取る」ための戦略的ヒント</b>です。<b>満点用ではありません</b>。確実に得点を伸ばすには、まず<b>中学英単語・中学英文法</b>を学んだうえで、このヒントを補助として使ってください。
+</div>
+
+<div class="year-pick" id="yearPick"></div>
+<div class="q-tabs" id="qTabs"></div>
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+
+<script>
+const QUESTIONS_DATA = {
+
+// ============================================================
+// R7-1：Help Us Find Lara, Our Beloved Dog!（迷い犬探し）
+// ============================================================
+"R7-1": [
+  {
+    no:1, qNum:18, topic:"迷い犬ララを探して（目的）",
+    noticeTitle: "Help Us Find Lara, Our Beloved Dog!",
+    noticeBody: `
+<p>Lara has been missing since <b>April 5th</b>. She was last seen at Sakura Park around 4 p.m. on that day. We are deeply concerned about her well-being and seeking your assistance in bringing her back home.</p>
+<p>Please keep an eye out for Lara and share this notice with everyone you know.</p>
+<div class="info-block">
+<h3>🐕 Lara's Profile</h3>
+<ul>
+<li><b>Breed</b>: Mixed breed（雑種）</li>
+<li><b>Size</b>: Large (about 20 kg)</li>
+<li><b>Color</b>: Black</li>
+<li><b>Age</b>: 5 (adult dog)</li>
+<li><b>Gender</b>: Female</li>
+<li><b>Distinctive Feature</b>: <b>Red collar</b> around her neck（赤い首輪）</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>📞 Contact Information</h3>
+<ul>
+<li><b>Daytime contact</b>: Please <b>CALL</b> Mike Smith at 000-123-4567.</li>
+<li><b>Evening contact</b>: Please <b>TEXT</b> Elaine Smith at 111-222-3333.</li>
+</ul>
+</div>
+<p>Lara is shy. So, if you find her, please do <b>not chase or approach</b> her. Instead, please contact us immediately.</p>
+`,
+    noticeBodyJa: "ララは4月5日から行方不明です。その日の午後4時頃、サクラ公園で最後に目撃されました。健康状態が心配で、家に連れ戻すお手伝いをお願いしています。ララに気を配り、知り合いにこのお知らせを共有してください。【ララのプロフィール】雑種・大型（約20kg）・黒色・5歳（成犬）・メス・首に赤い首輪。【連絡先】日中はマイク・スミスに電話、夕方〜夜はエレイン・スミスにメッセージ。ララは臆病なので、見つけても追いかけたり近づいたりせず、すぐに連絡してください。",
+    question: "What is the main purpose of the notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To tell children about how to keep a pet happy",
+      "To get help finding a missing animal",
+      "To find an owner for newborn puppies",
+      "To introduce a world-famous rescue dog"
+    ],
+    choicesJa: [
+      "ペットを幸せにする方法を子どもたちに伝えるため",
+      "迷子の動物を見つけるための手伝いを得るため",
+      "生まれたばかりの子犬の飼い主を探すため",
+      "世界的に有名な救助犬を紹介するため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"missing", mean:"行方不明の", kana:"ミッシング", ac:"ミ"},
+      {w:"concerned", mean:"心配している", kana:"コンサーンド", ac:"サー"},
+      {w:"keep an eye out", mean:"気をつけて見ておく", kana:"キープアンアイアウト", ac:"アイ"},
+      {w:"shy", mean:"臆病な", kana:"シャイ", ac:"シャ"},
+      {w:"chase", mean:"追いかける", kana:"チェイス", ac:"チェイ"},
+      {w:"approach", mean:"近づく", kana:"アプロウチ", ac:"プロウ"},
+      {w:"missing animal", mean:"行方不明の動物", kana:"ミッシングアニマル", ac:"ミ"},
+      {w:"rescue dog", mean:"救助犬", kana:"レスキュードッグ", ac:"レス"},
+      {w:"newborn puppies", mean:"生まれたての子犬", kana:"ニューボーンパピーズ", ac:"ニュー"}
+    ],
+    hints: [
+      "<p>第5問は<b>「お知らせの中に答えが必ず書いてある」</b>問題です。まずカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>missing</td><td class='ja'>行方不明の</td></tr><tr><td class='en'>help finding</td><td class='ja'>見つける手伝い</td></tr><tr><td class='en'>keep a pet happy</td><td class='ja'>ペットを幸せに飼う</td></tr><tr><td class='en'>newborn puppies</td><td class='ja'>生まれたての子犬</td></tr><tr><td class='en'>rescue dog</td><td class='ja'>救助犬</td></tr></table>",
+      "<p>「目的を問う問題」は <b>3つのコツ</b> で解けます。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<span class='think-arrow'>→</span>大きなヒントが書いてある<br>② <b>冒頭の1〜2文</b>を見る<span class='think-arrow'>→</span>「何の話か」が書いてある<br>③ 全部訳さない！<b>キーワード</b>を一致させる</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Help Us Find Lara</span>（ララを見つけるのを手伝って）<span class='think-arrow'>→</span>「<b>find（見つける）</b>」が大きなヒント！<br><b>冒頭</b>: <span class='signal-word'>Lara has been missing</span>（ララは行方不明）<span class='think-arrow'>→</span>「<b>missing（行方不明）</b>」がキーワード！</div><div class='step'>選択肢を見て、<b>タイトルや冒頭の単語</b>と<b>同じ意味</b>のものを探してください。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <span class='signal-word'>missing</span>（行方不明）と同じ意味の語が選択肢にあるか？<span class='think-arrow'>→</span><b>missing animal</b>（行方不明の動物）が出てくる選択肢がある！<br>② 「<b>飼い方の説明</b>」「<b>子犬の里親</b>」「<b>救助犬の紹介</b>」は本文にあるか？<span class='think-arrow'>→</span>本文には書かれていない</div><div class='step'><b>例えば：</b> ④「a world-famous rescue dog（世界的に有名な救助犬）」を見てください。<br>本文に「<span class='signal-word'>world-famous</span>」「<span class='signal-word'>rescue dog</span>」は出てきますか？<span class='think-arrow'>→</span><b>出てこない</b>。これは<b>×</b>。</div><p>同じ要領で、本文に<b>書かれていない選択肢</b>を全部 × にしてください。残るのが正解です。</p>"
+    ],
+    explain: '<p>このお知らせは <b>飼い犬ララが行方不明になり、見つけるのを手伝ってほしい</b> という内容です。</p><div class="ans-key">✅ 正解：② To get help finding a missing animal</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Help Us Find Lara</b></td><td>「ララを見つけるのを手伝って」</td></tr><tr><td><b>冒頭</b></td><td><b>Lara has been missing</b></td><td>「ララは行方不明」</td></tr><tr><td><b>2段落目</b></td><td><b>seeking your assistance in bringing her back home</b></td><td>「家に連れ戻すお手伝いを求めている」</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① ペットを幸せに飼う方法</td><td>飼い方の説明はない</td><td class="ng">×</td></tr><tr><td>② 迷子の動物を見つける手伝い</td><td>「missing」「help finding」と一致</td><td class="ok">○</td></tr><tr><td>③ 子犬の里親探し</td><td>ララは5歳の成犬</td><td class="ng">×</td></tr><tr><td>④ 世界的に有名な救助犬の紹介</td><td>救助犬ではない</td><td class="ng">×</td></tr></table><p><b>覚えておきたい単語</b>：<b>missing</b>（行方不明の）、<b>find</b>（見つける）、<b>help finding 〜</b>（〜を見つけるのを手伝う）。</p><div class="ja-trans"><b>お知らせ全体の意味：</b>ララは4月5日から行方不明です。サクラ公園で午後4時頃に最後に目撃されました。家に連れ戻すお手伝いをお願いしています。【ララの特徴】雑種・大型（約20kg）・黒色・5歳・メス・首に赤い首輪。【連絡先】日中はマイクに電話、夕方はエレインにメッセージ。ララは臆病なので、追いかけずすぐに連絡してください。</div>'
+  },
+  {
+    no:2, qNum:19, topic:"迷い犬ララの特徴（真偽判定）",
+    sharedNotice:"R7-1_notice", // 同じお知らせを使う
+    question: "Which of the following is true about Lara?",
+    questionJa: "ララについて正しいものは次のうちどれですか？",
+    choices: [
+      "She misses her young children.",
+      "She is strong and aggressive.",
+      "She disappeared at a park.",
+      "She was born four years ago."
+    ],
+    choicesJa: [
+      "彼女は自分の幼い子どもたちを恋しがっている",
+      "彼女は強くて攻撃的だ",
+      "彼女は公園で姿を消した",
+      "彼女は4年前に生まれた"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"miss", mean:"恋しく思う", kana:"ミス", ac:"ミ"},
+      {w:"young children", mean:"幼い子どもたち", kana:"ヤングチルドレン", ac:"ヤン"},
+      {w:"aggressive", mean:"攻撃的な", kana:"アグレッスィヴ", ac:"グレッ"},
+      {w:"disappeared", mean:"姿を消した", kana:"ディサピアド", ac:"ピ"},
+      {w:"was born", mean:"生まれた", kana:"ワズボーン", ac:"ボー"},
+      {w:"four years ago", mean:"4年前に", kana:"フォーイヤーズアゴウ", ac:"フォー"},
+      {w:"adult dog", mean:"成犬", kana:"アダルトドッグ", ac:"ア"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題です。<b>選択肢を1つずつ本文と照合</b>します。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>miss</td><td class='ja'>恋しく思う</td></tr><tr><td class='en'>aggressive</td><td class='ja'>攻撃的な</td></tr><tr><td class='en'>disappeared</td><td class='ja'>姿を消した（=missing）</td></tr><tr><td class='en'>was born</td><td class='ja'>生まれた</td></tr><tr><td class='en'>at a park</td><td class='ja'>公園で</td></tr></table>",
+      "<p>真偽判定の <b>3つのコツ</b> を覚えましょう。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の <b>キーワード</b> を本文の中で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ 本文に<b>書かれていない</b>ことを言う選択肢も ×</div><div class='step'>このお知らせの<b>「Profile（プロフィール）」</b>欄を集中して見ましょう！<br>・<b>Age: 5</b>（5歳）<span class='think-arrow'>→</span>5年前に生まれた<br>・<b>Lara is shy</b>（ララは臆病）<span class='think-arrow'>→</span>攻撃的ではない<br>・<b>last seen at Sakura Park</b>（サクラ公園で最後に目撃）<span class='think-arrow'>→</span>公園で行方不明</div><div class='step'><b>注意</b>：「<span class='signal-word'>miss</span>」は<b>「人や物を恋しく思う」</b>という意味。本文の<b>We miss her dearly</b>は <b>飼い主側</b>がララを恋しがっている、という意味です。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>① miss her young children</b>（自分の子を恋しがる）<span class='think-arrow'>→</span>本文には子どもの記述なし<br>② <b>② strong and aggressive</b>（強くて攻撃的）<span class='think-arrow'>→</span>本文は <b>shy</b>（臆病）。<b>反対の意味</b>なので ×<br>③ <b>③ disappeared at a park</b>（公園で姿を消した）<span class='think-arrow'>→</span>本文の <b>last seen at Sakura Park</b>（公園で最後に目撃）と<b>同じ意味</b><br>④ <b>④ born four years ago</b>（4年前生まれ）<span class='think-arrow'>→</span>本文は <b>Age: 5</b>。4年前ではなく<b>5年前</b>。×</div><div class='step'><b>例えば：</b> ②「strong and aggressive」を本文と照合してみると…<br>本文に「<span class='signal-word'>Lara is shy</span>」と書いてある。<span class='think-arrow'>→</span>「shy（臆病）」と「aggressive（攻撃的）」は<b>正反対</b>。だから②は<b>×</b>。</div><p>残った選択肢の中で、本文と<b>確実に一致するもの</b>が正解です。</p>"
+    ],
+    explain: '<p>「Lara について本文と一致するもの」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：③ She disappeared at a park.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① miss her young children<br>（子どもを恋しがる）</td><td>「miss」しているのは<b>飼い主側</b>。ララに子どもの記述なし</td><td class="ng">×</td></tr><tr><td>② strong and aggressive<br>（強くて攻撃的）</td><td>本文「<b>Lara is shy</b>」（臆病）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ disappeared at a park<br>（公園で姿を消した）</td><td>本文「<b>last seen at Sakura Park</b>」と一致</td><td class="ok">○</td></tr><tr><td>④ born four years ago<br>（4年前生まれ）</td><td>本文「<b>Age: 5</b>」<span class="ng"></span>5年前生まれ</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「miss」の主語に注意</b><br>本文の<b>We miss her dearly</b>は「私たちは（彼女＝ララを）とても恋しく思う」。<b>飼い主が</b>ララを恋しがっているという意味。「Lara が誰かを miss している」のではありません。</p><p><b>判断のポイント2：「disappeared」と「missing」「last seen」は同じ意味</b><br>本文の <b>has been missing</b>（行方不明）や <b>last seen at Sakura Park</b>（公園で最後に目撃）は、選択肢③ <b>disappeared at a park</b>（公園で姿を消した）と<b>同じ内容</b>を表しています。</p><p><b>判断のポイント3：年齢の計算</b><br>「<b>Age: 5</b>」は今5歳という意味。つまり<b>5年前生まれ</b>。「4年前」ではないので④は ×。</p><p><b>覚えておきたい単語</b>：<b>missing = disappeared</b>（行方不明=姿を消した）、<b>shy</b>（臆病な）⇔<b>aggressive</b>（攻撃的な）、<b>last seen</b>（最後に目撃された）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"迷い犬を見つけたら（状況判断）",
+    sharedNotice:"R7-1_notice",
+    question: "In the following situation, what are you asked to do?",
+    questionJa: "次の状況では、何をするよう求められていますか？",
+    situation: "You see a large black dog with a red collar at <b>10 a.m.</b>",
+    situationJa: "<b>午前10時</b>に、首に赤い首輪をした大きな黒い犬を見かけました。",
+    choices: [
+      "Call the police",
+      "Chase the dog",
+      "Contact Mike Smith",
+      "Text Elaine's cell phone"
+    ],
+    choicesJa: [
+      "警察に電話する",
+      "その犬を追いかける",
+      "マイク・スミスに連絡する",
+      "エレインの携帯にメッセージを送る"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"daytime", mean:"日中", kana:"デイタイム", ac:"デイ"},
+      {w:"evening", mean:"夕方〜夜", kana:"イーヴニング", ac:"イー"},
+      {w:"contact", mean:"連絡する", kana:"コンタクト", ac:"コン"},
+      {w:"text", mean:"メッセージを送る（動詞）", kana:"テキスト", ac:"テ"},
+      {w:"call", mean:"電話する", kana:"コール", ac:"コー"},
+      {w:"police", mean:"警察", kana:"ポリース", ac:"リー"},
+      {w:"red collar", mean:"赤い首輪", kana:"レッドカラー", ac:"カ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を確認</b>してから本文の該当部分を見ましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>10 a.m.</td><td class='ja'>午前10時 = 日中</td></tr><tr><td class='en'>Daytime</td><td class='ja'>日中</td></tr><tr><td class='en'>Evening</td><td class='ja'>夕方〜夜</td></tr><tr><td class='en'>CALL</td><td class='ja'>電話する</td></tr><tr><td class='en'>TEXT</td><td class='ja'>メッセージを送る</td></tr></table>",
+      "<p>状況問題は <b>2つのコツ</b> で解けます。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① 状況の<b>キー条件</b>を見つける<span class='think-arrow'>→</span>今回は<b>「午前10時」</b><br>② 本文の<b>「Contact」「ルール」欄</b>を見る<span class='think-arrow'>→</span>連絡先や指示が書いてある</div><div class='step'>このお知らせの<b>「Contact Information」</b>欄を確認！<br>・<b>Daytime</b>（日中）<span class='think-arrow'>→</span><b>CALL</b> Mike Smith<br>・<b>Evening</b>（夕方〜夜）<span class='think-arrow'>→</span><b>TEXT</b> Elaine Smith<br><b>午前10時</b>は<b>Daytime</b>（日中）ですね。</div><div class='step'><b>注意</b>：本文最後に「<b>do not chase or approach</b>」（追いかけたり近づいたりしない）という指示もあります。これに反する選択肢は<b>×</b>。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① 本文に <b>warn the police</b>（警察）の指示があるか？<span class='think-arrow'>→</span>ない<br>② <b>chase</b>（追いかける）は本文で <b>do not chase</b> と禁止されている<br>③ <b>午前10時</b>=<b>Daytime</b>=<b>Mike Smith に CALL</b><br>④ <b>Elaine</b>への<b>TEXT</b>は<b>Evening</b>のみ</div><div class='step'><b>例えば：</b> ②「Chase the dog」を見てください。<br>本文「<span class='signal-word'>do not chase or approach</span>」（追いかけない）と<b>反対</b>。<span class='think-arrow'>→</span>これは<b>×</b>。</div><p>条件「午前10時 = Daytime」と本文の指示が<b>一致する選択肢</b>が正解です。</p>"
+    ],
+    explain: '<p>「午前10時に犬を見つけた場合、何をすべきか」を本文から判断する <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：③ Contact Mike Smith</div><p><b>条件と本文の照合：</b></p><table class="check-table"><tr><th>条件</th><th>本文の指示</th><th>該当する行動</th></tr><tr><td><b>午前10時</b>（=日中）</td><td>「Daytime contact: Please <b>CALL</b> Mike Smith」</td><td><b>Mike Smith に電話</b></td></tr><tr><td>犬を見つけたら</td><td>「<b>do not chase or approach</b>」（追いかけない）</td><td>追いかけ ×</td></tr><tr><td>連絡先</td><td>飼い主のみ（警察の記載なし）</td><td>警察 ×</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① Call the police（警察に電話）</td><td>本文に警察への連絡指示なし</td><td class="ng">×</td></tr><tr><td>② Chase the dog（犬を追う）</td><td>「do not chase」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ Contact Mike Smith</td><td>10時=Daytime → Mikeへ CALL と一致</td><td class="ok">○</td></tr><tr><td>④ Text Elaine\'s cell phone</td><td>Elaineへの TEXT は <b>Evening</b> 専用</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「Daytime」と「Evening」を読み分ける</b><br>本文の連絡先は<b>時間帯で2つに分かれて</b>います。<b>午前10時</b>は明らかに<b>Daytime（日中）</b>。だから Daytime 担当の Mike Smith に連絡。</p><p><b>判断のポイント2：「CALL」と「TEXT」を読み分ける</b><br><b>CALL</b>=電話する、<b>TEXT</b>=メッセージを送る。日中は<b>CALL</b>、夕方は<b>TEXT</b>と指定されています。</p><p><b>判断のポイント3：禁止事項にも注意</b><br>本文最後に「<b>do not chase or approach</b>（追いかけない・近づかない）」とあるので、②は<b>絶対に×</b>。</p><p><b>覚えておきたい単語</b>：<b>Daytime</b>（日中）／<b>Evening</b>（夕方〜夜）、<b>contact</b>（連絡する）、<b>call</b>（電話する）／<b>text</b>（メッセージを送る）。</p>'
+  }
+],
+
+// ============================================================
+// R7-2：SAKURA CITY MARATHON（マラソンボランティア）
+// ============================================================
+"R7-2": [
+  {
+    no:1, qNum:18, topic:"サクラ市マラソン（目的）",
+    noticeTitle: "Support Needed! — SAKURA CITY MARATHON",
+    noticeBody: `
+<p><b>The Race Day: December 6, 2025</b></p>
+<p>Volunteer registration is open for the <b>first-ever</b> Sakura City Marathon! If you want to be part of this new event without running 42.195 km, the best way is to volunteer. Click here to sign up!</p>
+<table>
+<tr><th>Role</th><th>Description &amp; Age Limit</th></tr>
+<tr><td><b>Water Stops</b><br>給水所</td><td>Pass out water and cheer on runners.<br><b>13 or older</b>.</td></tr>
+<tr><td><b>Course Marshals</b><br>コース誘導員</td><td>Guide runners in the right direction.<br><b>16 or older</b>.</td></tr>
+<tr><td><b>Information Booth</b><br>案内係</td><td>Provide information to runners and spectators.<br><b>16 or older</b>. <b>Training</b> will be held before the race day.</td></tr>
+<tr><td><b>Runners' Check-in</b><br>受付</td><td>Help runners check in.<br><b>13 or older</b>. <b>Training</b> will be held before the race day.</td></tr>
+</table>
+<div class="info-block">
+<h3>📋 Notes</h3>
+<ul>
+<li>Volunteers who are <b>17 or younger</b> must have a parent or legal guardian fill out and sign an agreement form.</li>
+<li>Email questions to volunteer@sakuracitymarathon.com</li>
+</ul>
+</div>
+`,
+    noticeBodyJa: "【レース当日：2025年12月6日】初開催のサクラ市マラソンのボランティア募集中！42.195kmを走らずにこの新イベントに参加したい方は、ボランティアが一番です。【役割】①給水所（13歳以上）②コース誘導員（16歳以上）③案内係（16歳以上・事前研修あり）④ランナー受付（13歳以上・事前研修あり）。【注意】17歳以下は保護者の同意書必須。",
+    question: "What is the main purpose of the notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To provide information to marathon runners",
+      "To find tour guide volunteers in Sakura City",
+      "To encourage people to volunteer for an event",
+      "To inform that the marathon has been cancelled"
+    ],
+    choicesJa: [
+      "マラソンランナーに情報を提供するため",
+      "サクラ市の観光ガイドボランティアを探すため",
+      "イベントのボランティアになることを促すため",
+      "マラソンが中止になったことを知らせるため"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"volunteer", mean:"ボランティア（をする）", kana:"ヴォランティア", ac:"ヴォ"},
+      {w:"first-ever", mean:"史上初の", kana:"ファーストエヴァー", ac:"ファー"},
+      {w:"registration", mean:"登録", kana:"レジストレイション", ac:"レイ"},
+      {w:"encourage", mean:"促す・呼びかける", kana:"エンカリッジ", ac:"カ"},
+      {w:"tour guide", mean:"観光ガイド", kana:"ツアーガイド", ac:"ツア"},
+      {w:"cancelled", mean:"中止された", kana:"キャンセルド", ac:"キャ"}
+    ],
+    hints: [
+      "<p>「目的を問う問題」です。まずカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>volunteer</td><td class='ja'>ボランティア（をする）</td></tr><tr><td class='en'>encourage</td><td class='ja'>促す・呼びかける</td></tr><tr><td class='en'>first-ever</td><td class='ja'>史上初の</td></tr><tr><td class='en'>tour guide</td><td class='ja'>観光ガイド</td></tr><tr><td class='en'>cancelled</td><td class='ja'>中止された</td></tr></table>",
+      "<p>「目的問題」は <b>タイトル＋冒頭</b> がカギです。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<span class='think-arrow'>→</span>大きなヒントが書いてある<br>② <b>冒頭の1〜2文</b>を見る<span class='think-arrow'>→</span>「何の話か」が書いてある</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Support Needed!</span>（助けが必要！）<span class='think-arrow'>→</span>「<b>助けがほしい</b>」<br><b>冒頭</b>: <span class='signal-word'>Volunteer registration is open</span>（ボランティア登録受付中）<span class='think-arrow'>→</span>「<b>volunteer（ボランティア）</b>」が大きなキーワード</div><div class='step'>選択肢に <b>volunteer</b> という単語が出てくるものがあります。それが正解の候補です。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <span class='signal-word'>marathon runners</span>（マラソンランナー）への情報？<span class='think-arrow'>→</span>本文はランナーではなくボランティア向け<br>② <span class='signal-word'>tour guide</span>（観光ガイド）？<span class='think-arrow'>→</span>本文は観光ではなくマラソン<br>③ <span class='signal-word'>volunteer</span>（ボランティア）になることを促す？<span class='think-arrow'>→</span>タイトル・冒頭と一致<br>④ <span class='signal-word'>cancelled</span>（中止）？<span class='think-arrow'>→</span>本文は<b>開催予定</b>（12/6）</div><div class='step'><b>例えば：</b> ④「has been cancelled（中止）」を見てください。<br>本文に「<span class='signal-word'>The Race Day: December 6, 2025</span>」とある。<span class='think-arrow'>→</span>レース当日が決まっている=<b>中止ではない</b>。だから④は<b>×</b>。</div>"
+    ],
+    explain: '<p>このお知らせは <b>サクラ市マラソンのボランティアを募集</b> する内容です。</p><div class="ans-key">✅ 正解：③ To encourage people to volunteer for an event</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Support Needed!</b></td><td>「助けが必要！」</td></tr><tr><td><b>冒頭</b></td><td><b>Volunteer registration is open</b></td><td>「ボランティア登録受付中」</td></tr><tr><td><b>2文目</b></td><td><b>the best way is to volunteer</b></td><td>「ボランティアが一番の方法」</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① ランナーへの情報提供</td><td>対象はランナーではなくボランティア希望者</td><td class="ng">×</td></tr><tr><td>② 観光ガイドの募集</td><td>観光ではなくマラソンのボランティア</td><td class="ng">×</td></tr><tr><td>③ イベントのボランティアを促す</td><td>「Volunteer registration is open」と一致</td><td class="ok">○</td></tr><tr><td>④ マラソンが中止</td><td>レース当日が決まっており、開催予定</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：タイトルが最大のヒント</b><br>「<b>Support Needed</b>（助けが必要）」は、<b>「人手がほしい」=ボランティア募集</b>を意味します。</p><p><b>判断のポイント2：「volunteer」のサインを見つける</b><br>本文には<b>volunteer</b>（ボランティア）という単語が何度も出てきます。これがお知らせのテーマです。</p><p><b>判断のポイント3：開催情報の確認</b><br>「The Race Day: December 6, 2025」とレース当日が指定されている=<b>中止ではない</b>。④の cancelled は<b>正反対</b>。</p><p><b>覚えておきたい単語</b>：<b>volunteer</b>（ボランティア／動詞・名詞）、<b>encourage</b>（促す）、<b>first-ever</b>（史上初の）、<b>cancelled</b>（中止された）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"サクラ市マラソン（真偽判定）",
+    sharedNotice:"R7-2_notice",
+    question: "Which of the following is true?",
+    questionJa: "次のうち正しいものはどれですか？",
+    choices: [
+      "The Sakura City Marathon has been held for many years.",
+      "Marathon registration will start on December 6th, 2025.",
+      "People should call to sign up as a volunteer.",
+      "Some people need their parent's permission to volunteer."
+    ],
+    choicesJa: [
+      "サクラ市マラソンは何年も開催されてきた",
+      "マラソンの登録は2025年12月6日に始まる",
+      "ボランティア申込には電話するべきだ",
+      "ボランティアには親の許可が必要な人もいる"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"first-ever", mean:"史上初の", kana:"ファーストエヴァー", ac:"ファー"},
+      {w:"legal guardian", mean:"法的保護者", kana:"リーガルガーディアン", ac:"リー"},
+      {w:"agreement form", mean:"同意書", kana:"アグリーメントフォーム", ac:"グリー"},
+      {w:"permission", mean:"許可", kana:"パーミッション", ac:"ミ"},
+      {w:"sign up", mean:"申し込む", kana:"サインアップ", ac:"サイ"},
+      {w:"held", mean:"開催される", kana:"ヘルド", ac:"ヘル"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題です。選択肢を1つずつ本文と照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>has been held</td><td class='ja'>（ずっと）開催されてきた</td></tr><tr><td class='en'>first-ever</td><td class='ja'>史上初の</td></tr><tr><td class='en'>permission</td><td class='ja'>許可</td></tr><tr><td class='en'>parent</td><td class='ja'>親</td></tr><tr><td class='en'>legal guardian</td><td class='ja'>法的保護者</td></tr><tr><td class='en'>17 or younger</td><td class='ja'>17歳以下</td></tr></table>",
+      "<p>真偽判定の <b>3つのコツ</b> を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の <b>キーワード</b> を本文で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ <b>数字や日付</b>はよく見る（ひっかけが多い）</div><div class='step'>本文の<b>「Notes」</b>欄に注目！<br>・「<span class='signal-word'>17 or younger must have a parent ... sign an agreement form</span>」<span class='think-arrow'>→</span>17歳以下は親の同意書が必要</div><div class='step'><b>注意</b>：「<span class='signal-word'>first-ever</span>」は「<b>初開催</b>」という意味。「何年も開催されてきた」と言ったら <b>反対の意味</b> になります。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>has been held for many years</b>（何年も開催）<span class='think-arrow'>→</span>本文 <b>first-ever</b>（初開催）と<b>反対</b><br>② <b>registration will start on December 6th</b>（12/6に登録開始）<span class='think-arrow'>→</span>12/6は<b>レース当日</b>。登録は<b>もう開始済み</b>（is open）<br>③ <b>call to sign up</b>（電話で申込）<span class='think-arrow'>→</span>本文 <b>Click here to sign up</b>（ネットで申込）<br>④ <b>parent\'s permission</b>（親の許可）<span class='think-arrow'>→</span>本文「17歳以下は<b>parent</b>... agreement form」と一致</div><div class='step'><b>例えば：</b> ②「registration will start on December 6th」を本文と照合してみると…<br>本文「<span class='signal-word'>Volunteer registration is open</span>」（登録受付中）と「<span class='signal-word'>The Race Day: December 6, 2025</span>」（レース当日）。<span class='think-arrow'>→</span>12/6は<b>レース当日</b>であって<b>登録開始日ではない</b>。だから②は<b>×</b>。</div>"
+    ],
+    explain: '<p>「本文と一致する選択肢」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：④ Some people need their parent\'s permission to volunteer.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 何年も開催されてきた</td><td>本文「<b>first-ever</b>」（初開催）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>② 12/6に登録開始</td><td>12/6は<b>レース当日</b>。登録は<b>すでに開始</b>（is open）</td><td class="ng">×</td></tr><tr><td>③ 電話で申込</td><td>本文「<b>Click here to sign up</b>」（ネットで申込）</td><td class="ng">×</td></tr><tr><td>④ 親の許可が必要な人もいる</td><td>「17歳以下は<b>parent</b>...<b>sign an agreement form</b>」と一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「first-ever」は「初めて」</b><br><b>first-ever</b>=「<b>史上初の</b>」。これがあると<b>「以前は開催されていない」</b>という意味になります。①の「何年も開催」とは正反対。</p><p><b>判断のポイント2：日付は何の日？を確認</b><br><b>The Race Day</b>=「レース当日」。<b>12月6日 = 当日</b>であって、登録開始日ではありません。本文「<b>registration is open</b>（登録受付中）」=もう登録できる、という意味。</p><p><b>判断のポイント3：申込方法は「Click here」</b><br>本文の <b>Click here to sign up</b> は「ここをクリックして申込」=<b>ネット経由</b>。電話の指示はありません。</p><p><b>判断のポイント4：「parent\'s permission」の言い換え</b><br>本文の <b>parent or legal guardian fill out and sign an agreement form</b>（親または保護者が同意書に記入・署名）は、選択肢④の <b>parent\'s permission</b>（親の許可）と同じ意味。「Some people」=「17歳以下の人たち」を指しています。</p><p><b>覚えておきたい単語</b>：<b>first-ever</b>（史上初の）、<b>permission</b>（許可）、<b>agreement form</b>（同意書）、<b>sign up</b>（申し込む）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"サクラ市マラソン（状況判断）",
+    sharedNotice:"R7-2_notice",
+    question: "In the following situation, which role would you sign up for?",
+    questionJa: "次の状況では、どの役割に申し込みますか？",
+    situation: "You are <b>14 years old</b>. You are available <b>only on the race day</b>.",
+    situationJa: "あなたは<b>14歳</b>で、<b>レース当日のみ</b>参加可能です。",
+    choices: [
+      "Water Stops",
+      "Course Marshals",
+      "Information Booth",
+      "Runners' Check-in"
+    ],
+    choicesJa: [
+      "給水所",
+      "コース誘導員",
+      "案内係",
+      "ランナー受付"
+    ],
+    answer: 1,
+    keyWords: [
+      {w:"age limit", mean:"年齢制限", kana:"エイジリミット", ac:"エイ"},
+      {w:"training", mean:"事前研修", kana:"トレイニング", ac:"トレイ"},
+      {w:"available", mean:"参加可能", kana:"アヴェイラブル", ac:"ヴェイ"},
+      {w:"race day", mean:"レース当日", kana:"レイスデイ", ac:"レイ"},
+      {w:"older", mean:"以上", kana:"オウルダー", ac:"オウ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を整理</b>してから本文と照合しましょう。</p><table class='word-table'><tr><th>条件</th><th>意味</th></tr><tr><td class='en'>14 years old</td><td class='ja'>14歳</td></tr><tr><td class='en'>only on the race day</td><td class='ja'>レース当日のみ参加可（事前研修は不可）</td></tr><tr><td class='en'>13 or older</td><td class='ja'>13歳以上</td></tr><tr><td class='en'>16 or older</td><td class='ja'>16歳以上</td></tr><tr><td class='en'>training</td><td class='ja'>事前研修</td></tr></table>",
+      "<p>状況問題は <b>条件を1つずつチェック</b> します。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① 条件を<b>2つに分ける</b>：今回は ①14歳 ②当日のみ<br>② 各役割を<b>2つの条件で判定</b>：両方クリアしたものが正解</div><div class='step'>4つの役割を表で整理してみましょう。<br><b>① Water Stops</b>: 13歳以上 ✓ 研修不要 ✓ <span class='think-arrow'>→</span>両方OK<br><b>② Course Marshals</b>: 16歳以上必要 <span class='think-arrow'>→</span>14歳は<b>×</b><br><b>③ Information Booth</b>: 16歳以上+研修必要 <span class='think-arrow'>→</span>両方<b>×</b><br><b>④ Runners\' Check-in</b>: 13歳以上 ✓ <b>研修必要</b> <span class='think-arrow'>→</span>当日のみは<b>×</b></div><div class='step'><b>注意</b>：「<span class='signal-word'>only on the race day</span>」（当日のみ）は、<b>事前研修に行けない</b>という意味です。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>16歳以上</b>必要なものは<b>×</b>（②③）<br>② <b>事前研修必要</b>なものは<b>×</b>（③④）<br>③ <b>13歳以上OK</b>かつ<b>研修不要</b>なものが正解</div><div class='step'><b>例えば：</b> ④「Runners\' Check-in」を見てください。<br>「<span class='signal-word'>13 or older</span>」<span class='think-arrow'>→</span>14歳はOK。<br>でも「<span class='signal-word'>Training will be held before the race day</span>」<span class='think-arrow'>→</span><b>事前研修必要</b>。<br>条件「当日のみ参加」では<b>研修に行けない</b>から×。</div><p>「年齢」と「研修」の<b>両方の条件</b>をクリアできるのは<b>1つだけ</b>です。</p>"
+    ],
+    explain: '<p>「14歳・当日のみ参加可」の状況で適切な役割を選ぶ <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：① Water Stops</div><p><b>各役割を2つの条件で判定：</b></p><table class="check-table"><tr><th>役割</th><th>14歳OK?</th><th>当日のみOK?</th><th>判定</th></tr><tr><td>① Water Stops</td><td>13歳以上 ✓</td><td>研修不要 ✓</td><td class="ok">○</td></tr><tr><td>② Course Marshals</td><td><b>16歳以上</b>必要</td><td>—</td><td class="ng">×</td></tr><tr><td>③ Information Booth</td><td><b>16歳以上</b>必要</td><td>研修必要</td><td class="ng">×</td></tr><tr><td>④ Runners\' Check-in</td><td>13歳以上 ✓</td><td><b>研修必要</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント1：年齢条件を確認</b><br>本文の表に各役割の<b>年齢制限</b>が書かれています。「<b>13 or older</b>」=「13歳以上」、「<b>16 or older</b>」=「16歳以上」。14歳の場合、<b>13歳以上</b>の役割しか選べません。</p><p><b>判断のポイント2：「only on the race day」の意味</b><br>「当日のみ参加」=<b>事前研修には行けない</b>という意味。本文に「<b>Training will be held before the race day</b>」（事前に研修あり）と書かれている役割は<b>×</b>。</p><p><b>判断のポイント3：両方の条件をクリアする役割は1つだけ</b><br>14歳OK＆研修不要、両方を満たすのは<b>① Water Stops</b>のみ。</p><p><b>覚えておきたい単語</b>：<b>13 or older</b>（13歳以上）、<b>training</b>（事前研修）、<b>available</b>（参加可能）、<b>race day</b>（レース当日）。</p>'
+  }
+],
+
+// ============================================================
+// R6-1：Summer Programs 2024 - Spread Your Wings（夏期就業体験）
+// ============================================================
+"R6-1": [
+  {
+    no:1, qNum:18, topic:"夏期プログラム（目的）",
+    noticeTitle: "Summer Programs 2024 — &ldquo;Spread Your Wings&rdquo;",
+    noticeBody: `
+<p>We will offer programs for <b>junior and senior high school students</b> in Hamilton during the summer holidays. Through each program, you can get valuable <b>work experience</b> that will give you a chance to think about your future. Join a program, and spread your wings!</p>
+<p>All programs are <b>free of charge</b>. These programs require you to sign up in advance. Click here and register at least <b>one week</b> before the start date.</p>
+<table>
+<tr><th>Date &amp; Time</th><th>Participants</th><th>Program</th></tr>
+<tr><td>August 8-9<br>10:00-15:00</td><td>SHSS</td><td><b>Virtual World</b><br>Engineers at ND Cyber Corp.<br>(Need basic programming knowledge)</td></tr>
+<tr><td>August 9<br>13:00-20:00</td><td>JHSS / SHSS</td><td><b>Music Tells You</b><br>Southern Cross Theater Company.</td></tr>
+<tr><td>August 9-10<br>10:00-17:00</td><td>JHSS / SHSS</td><td><b>Book Worms</b><br>Hamilton City Library.</td></tr>
+<tr><td>August 11<br>6:00-11:00</td><td>JHSS</td><td><b>Bonbons</b><br>ABC Bakery.</td></tr>
+</table>
+<p style="font-size:.85em;color:#666"><b>JHSS</b> = junior high school student（中学生） / <b>SHSS</b> = senior high school student（高校生）</p>
+`,
+    noticeBodyJa: "夏休みにハミルトン在住の中高生向けプログラムを開催します。各プログラムで貴重な就業体験ができ、将来を考える機会になります。すべて無料、要事前申込（開始日の1週間以上前）。【プログラム一覧】①Virtual World（8/8-9・高校生・プログラミング基礎要）②Music Tells You（8/9・中高生・劇団体験）③Book Worms（8/9-10・中高生・図書館）④Bonbons（8/11朝のみ・中学生・パン作り）",
+    question: "What is the main purpose of the notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To ask university students to work in Hamilton",
+      "To encourage students to get work experience",
+      "To tell local residents what they must do during holidays",
+      "To gather people for a volunteer project"
+    ],
+    choicesJa: [
+      "大学生にハミルトンで働くよう依頼するため",
+      "生徒に就業体験するよう勧めるため",
+      "地元住民に休暇中にすべきことを伝えるため",
+      "ボランティアプロジェクトのために人を集めるため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"work experience", mean:"就業体験", kana:"ワークエクスピリエンス", ac:"ピ"},
+      {w:"junior and senior", mean:"中学生・高校生", kana:"ジュニアアンドシーニア", ac:"ジュ"},
+      {w:"university students", mean:"大学生", kana:"ユニバースィティスチューデンツ", ac:"バー"},
+      {w:"encourage", mean:"勧める", kana:"エンカリッジ", ac:"カ"},
+      {w:"local residents", mean:"地元住民", kana:"ロウカルレジデンツ", ac:"レ"},
+      {w:"volunteer", mean:"ボランティア", kana:"ヴォランティア", ac:"ヴォ"}
+    ],
+    hints: [
+      "<p>「目的問題」です。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>work experience</td><td class='ja'>就業体験</td></tr><tr><td class='en'>encourage</td><td class='ja'>勧める</td></tr><tr><td class='en'>university</td><td class='ja'>大学</td></tr><tr><td class='en'>local residents</td><td class='ja'>地元住民</td></tr><tr><td class='en'>volunteer project</td><td class='ja'>ボランティアプロジェクト</td></tr></table>",
+      "<p>「目的問題」は <b>タイトル＋冒頭</b> がカギです。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<span class='think-arrow'>→</span>テーマがわかる<br>② <b>冒頭</b>を見る<span class='think-arrow'>→</span>「誰に・何を・何のため」が書いてある</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Summer Programs 2024</span>（2024年夏のプログラム）<br><b>冒頭</b>: <span class='signal-word'>programs for junior and senior high school students</span>（中高生向けプログラム）／<span class='signal-word'>get valuable work experience</span>（貴重な就業体験ができる）</div><div class='step'>キーワードは<b>「work experience（就業体験）」</b>。これが選択肢に出てくるものを探しましょう。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① 対象は<b>中高生</b>（junior/senior high）→<b>大学生（university）はない</b>＝①は×<br>② <b>work experience</b>（就業体験）が出てくる選択肢を探す→<b>encourage students to get work experience</b><br>③ 「<b>住民への指示</b>」「<b>ボランティア募集</b>」は本文にない</div><div class='step'><b>例えば：</b> ④「volunteer project（ボランティアプロジェクト）」を見てください。<br>本文に <b>volunteer</b>（ボランティア）という言葉は<b>出てこない</b>。プログラムは<b>就業体験</b>であって<b>ボランティアではない</b>。<span class='think-arrow'>→</span>④は<b>×</b>。</div>"
+    ],
+    explain: '<p>このお知らせは <b>中高生向けの夏期就業体験プログラム</b> を案内する内容です。</p><div class="ans-key">✅ 正解：② To encourage students to get work experience</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Summer Programs 2024</b></td><td>「2024年夏のプログラム」</td></tr><tr><td><b>冒頭</b></td><td><b>programs for junior and senior high school students</b></td><td>「中高生向けプログラム」</td></tr><tr><td><b>主旨</b></td><td><b>get valuable work experience</b></td><td>「貴重な就業体験」</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① 大学生に働くよう依頼</td><td>対象は<b>中高生</b>（university student ではない）</td><td class="ng">×</td></tr><tr><td>② 生徒に就業体験を勧める</td><td>「work experience」「students」と一致</td><td class="ok">○</td></tr><tr><td>③ 住民への指示</td><td>住民への指示の話はない</td><td class="ng">×</td></tr><tr><td>④ ボランティア募集</td><td>「volunteer」の語なし。就業体験プログラム</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：対象を確認</b><br>本文「<b>junior and senior high school students</b>」=中高生。<b>university students</b>（大学生）ではないので、①はすぐ ×。</p><p><b>判断のポイント2：「work experience」がキーワード</b><br>本文に何度も<b>work experience</b>（就業体験）という言葉が出てきます。これが<b>テーマ</b>。同じ語が選択肢②にあるので、それが正解。</p><p><b>判断のポイント3：「volunteer」と「work experience」の違い</b><br><b>volunteer</b>=無償の奉仕活動、<b>work experience</b>=仕事体験（インターンシップ）。本文は<b>work experience</b>であって、ボランティアではないので④は ×。</p><p><b>覚えておきたい単語</b>：<b>work experience</b>（就業体験）、<b>encourage</b>（勧める）、<b>junior/senior high school</b>（中学/高校）、<b>volunteer</b>（ボランティア）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"夏期プログラム（真偽判定）",
+    sharedNotice:"R6-1_notice",
+    question: "Which of the following statements is true?",
+    questionJa: "次の文のうち正しいものはどれですか？",
+    choices: [
+      "You need to ask your parents to sign up for you.",
+      "You must pay a registration fee for each program.",
+      "You have to sign up at least one month in advance.",
+      "You can register for the programs online."
+    ],
+    choicesJa: [
+      "親に申し込んでもらう必要がある",
+      "各プログラムに登録料を払わなければならない",
+      "少なくとも1ヶ月前までに申し込まなければならない",
+      "オンラインでプログラムに登録できる"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"sign up", mean:"申し込む", kana:"サインアップ", ac:"サイ"},
+      {w:"register", mean:"登録する", kana:"レジスター", ac:"レ"},
+      {w:"fee", mean:"料金", kana:"フィー", ac:"フィー"},
+      {w:"in advance", mean:"前もって", kana:"インアドヴァンス", ac:"ヴァ"},
+      {w:"free of charge", mean:"無料", kana:"フリーオブチャージ", ac:"フリー"},
+      {w:"one week before", mean:"1週間前までに", kana:"ワンウィークビフォー", ac:"ウィー"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題。本文と1つずつ照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>free of charge</td><td class='ja'>無料</td></tr><tr><td class='en'>register / sign up</td><td class='ja'>登録する／申し込む</td></tr><tr><td class='en'>one week before</td><td class='ja'>1週間前までに</td></tr><tr><td class='en'>Click here</td><td class='ja'>ここをクリック（=オンライン）</td></tr><tr><td class='en'>parents</td><td class='ja'>親</td></tr><tr><td class='en'>fee</td><td class='ja'>料金</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② <b>数字や金額</b>はよく見る（ひっかけ多い）<br>③ <b>反対の意味</b>の選択肢は ×</div><div class='step'>本文の<b>申込ルール</b>に注目！<br>・「<span class='signal-word'>All programs are free of charge</span>」<span class='think-arrow'>→</span><b>無料</b>。料金 ×<br>・「<span class='signal-word'>Click here and register</span>」<span class='think-arrow'>→</span><b>ネット申込</b>=オンライン<br>・「<span class='signal-word'>at least one week before</span>」<span class='think-arrow'>→</span><b>1週間前まで</b>（1ヶ月ではない）</div><div class='step'><b>注意</b>：「<span class='signal-word'>Click here</span>」（ここをクリック）は、<b>オンライン申込</b>を意味します。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>parents（親に申込）</b>→本文に親の記載なし<br>② <b>pay a fee（料金）</b>→本文 <b>free of charge</b>（無料）と<b>反対</b><br>③ <b>one month in advance</b>（1ヶ月前）→本文 <b>at least one week before</b>（1週間前）と<b>違う</b><br>④ <b>register online</b>（ネット登録）→本文 <b>Click here and register</b> と一致</div><div class='step'><b>例えば：</b> ②「pay a registration fee」を本文と照合してみると…<br>本文「<span class='signal-word'>All programs are free of charge</span>」=<b>無料</b>。<span class='think-arrow'>→</span>「料金を払う」と<b>正反対</b>。だから②は<b>×</b>。</div>"
+    ],
+    explain: '<p>「本文と一致する選択肢」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：④ You can register for the programs online.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 親に申し込んでもらう</td><td>本文に親の記載なし</td><td class="ng">×</td></tr><tr><td>② 登録料を払う</td><td>本文「<b>free of charge</b>」（無料）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 1ヶ月前までに申込</td><td>本文「<b>one week before</b>」（1週間前）</td><td class="ng">×</td></tr><tr><td>④ オンラインで登録</td><td>「<b>Click here and register</b>」と一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「free of charge」は「無料」</b><br><b>charge</b>=料金、<b>free of charge</b>=「料金がかからない」=<b>無料</b>。「fee（料金）を払う」と正反対。</p><p><b>判断のポイント2：「Click here」は「オンライン」</b><br><b>Click here and register</b>=「ここをクリックして登録」=<b>ネット経由</b>。これが<b>register online</b>と同じ意味。</p><p><b>判断のポイント3：日数の違い</b><br>本文 <b>at least one week before</b>=「少なくとも1週間前」。「<b>one month</b>（1ヶ月）」とは違うので③は ×。</p><p><b>覚えておきたい単語</b>：<b>free of charge</b>（無料）、<b>register / sign up</b>（登録／申込）、<b>online</b>（オンラインで）、<b>in advance</b>（前もって）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"夏期プログラム（状況判断）",
+    sharedNotice:"R6-1_notice",
+    question: "You are a junior high school student. During the summer vacation, you have soccer practice at 4 p.m. every day. Which program can you join?",
+    questionJa: "あなたは中学生で、夏休みは毎日午後4時にサッカー練習があります。どのプログラムに参加できますか？",
+    situation: "You are a <b>junior high school student (JHSS)</b>. You have soccer practice at <b>4 p.m. every day</b>.",
+    situationJa: "あなたは<b>中学生（JHSS）</b>。毎日<b>午後4時にサッカー練習</b>があります。",
+    choices: [
+      "Virtual World",
+      "Music Tells You",
+      "Book Worms",
+      "Bonbons"
+    ],
+    choicesJa: [
+      "バーチャルワールド（プログラミング）",
+      "ミュージック・テルズユー（劇団）",
+      "ブックワームズ（図書館）",
+      "ボンボン（パン作り）"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"junior high school", mean:"中学校", kana:"ジュニアハイスクール", ac:"ジュ"},
+      {w:"practice", mean:"練習", kana:"プラクティス", ac:"プラ"},
+      {w:"join", mean:"参加する", kana:"ジョイン", ac:"ジョ"},
+      {w:"program", mean:"プログラム", kana:"プログラム", ac:"プ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を整理</b>しましょう。</p><table class='word-table'><tr><th>条件</th><th>意味</th></tr><tr><td class='en'>JHSS</td><td class='ja'>junior high school student（中学生）</td></tr><tr><td class='en'>SHSS</td><td class='ja'>senior high school student（高校生）</td></tr><tr><td class='en'>4 p.m. soccer practice</td><td class='ja'>午後4時にサッカー練習＝それまでに終わる必要</td></tr></table>",
+      "<p>状況問題は<b>条件を1つずつチェック</b>します。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① 条件を<b>2つに分ける</b>：①中学生（JHSS） ②4時前に終わる<br>② 各プログラムを<b>表で確認</b>：両方クリアしたものが正解</div><div class='step'>4つのプログラムを表で整理してみましょう。<br><b>① Virtual World</b>: <b>SHSSのみ</b>（高校生限定）<span class='think-arrow'>→</span>中学生は<b>×</b><br><b>② Music Tells You</b>: 13:00-20:00（夜まで）<span class='think-arrow'>→</span>4時を<b>過ぎる</b>×<br><b>③ Book Worms</b>: 10:00-17:00<span class='think-arrow'>→</span>4時を<b>過ぎる</b>×<br><b>④ Bonbons</b>: 6:00-11:00（朝のみ）+ JHSS可<span class='think-arrow'>→</span>両方OK</div><div class='step'><b>注意</b>：「<span class='signal-word'>JHSS</span>」=中学生、「<span class='signal-word'>SHSS</span>」=高校生。本文末尾に説明があります。</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>SHSS のみ</b>のプログラムは中学生（JHSS）は ×<br>② <b>16時を過ぎる</b>プログラムは ×（サッカー練習に間に合わない）<br>③ <b>朝に終わる</b>プログラムが理想</div><div class='step'><b>例えば：</b> ②「Music Tells You」を見てください。<br>「<span class='signal-word'>August 9 / 13:00-20:00</span>」<span class='think-arrow'>→</span>夜8時まで。<br>午後4時のサッカー練習に<b>間に合わない</b>。だから②は<b>×</b>。</div><div class='step'>朝に終わるプログラムを探してください。1つだけあります。</div>"
+    ],
+    explain: '<p>「中学生・午後4時にサッカー練習」の条件で参加可能なプログラムを選ぶ <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：④ Bonbons</div><p><b>各プログラムを2つの条件で判定：</b></p><table class="check-table"><tr><th>プログラム</th><th>JHSS（中学生）OK?</th><th>4時前に終わる?</th><th>判定</th></tr><tr><td>① Virtual World</td><td><b>SHSSのみ</b>（高校生限定）</td><td>—</td><td class="ng">×</td></tr><tr><td>② Music Tells You</td><td>JHSS可 ✓</td><td>13:00-20:00（夜まで）</td><td class="ng">×</td></tr><tr><td>③ Book Worms</td><td>JHSS可 ✓</td><td>10:00-17:00（4時を過ぎる）</td><td class="ng">×</td></tr><tr><td>④ Bonbons</td><td>JHSS可 ✓</td><td>6:00-11:00（朝に終わる）✓</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：JHSS / SHSS の違い</b><br>本文末尾に「<b>JHSS = junior high school student</b>（中学生）／<b>SHSS = senior high school student</b>（高校生）」と書かれています。<b>SHSS のみ</b>とあるプログラム①は中学生は参加できません。</p><p><b>判断のポイント2：時間の確認</b><br>4時のサッカー練習に間に合うには、<b>15時前に終わる</b>必要があります。<br>・②は20:00まで → 過ぎる<br>・③は17:00まで → 過ぎる<br>・④は<b>11:00まで</b> → 余裕で間に合う！</p><p><b>判断のポイント3：両方クリアできる唯一のプログラム</b><br>JHSS可かつ朝に終わるのは<b>Bonbons（パン作り）</b>のみ。</p><p><b>覚えておきたい単語</b>：<b>JHSS</b>=中学生、<b>SHSS</b>=高校生、<b>practice</b>（練習）、<b>join</b>（参加する）。</p>'
+  }
+],
+
+// ============================================================
+// R6-2：Visit the University Library（大学図書館）
+// ============================================================
+"R6-2": [
+  {
+    no:1, qNum:18, topic:"大学図書館（目的）",
+    noticeTitle: "Visit the University Library",
+    noticeBody: `
+<div class="info-block">
+<h3>📚 Borrowing（貸出）</h3>
+<ul>
+<li>You can borrow a total of <b>20 books for two weeks</b>.</li>
+<li>You can check out books at the main counter or self-checkout machines.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>↩️ Returning（返却）</h3>
+<ul>
+<li>Bring books to the main counter, or put them into the return box at the entrance.</li>
+<li><b>Do NOT</b> return borrowed books to the bookshelf.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>🔍 Looking for Books / Making a Request（本の検索・取り寄せ）</h3>
+<ul>
+<li>You can use computers to search by title, author, or keyword.</li>
+<li>You can <b>request a book from other libraries</b> if we don't have it.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>💵 Library Fees（料金）</h3>
+<ul>
+<li>Printing &amp; making copies: B&amp;W <b>$0.10</b>/page, Color <b>$0.15</b>/page.</li>
+<li><b>Late fees</b>: <b>$1 a day per item</b> with $50 max fee.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>🍱 Lunchtime Use / Hours（利用時間）</h3>
+<ul>
+<li>Eating is <b>not allowed</b> anywhere in the library. Only water in designated areas.</li>
+<li>Open 8 a.m.-10 p.m. on weekdays, 8 a.m.-5 p.m. on weekends.</li>
+</ul>
+</div>
+`,
+    noticeBodyJa: "【貸出】20冊まで2週間借りられる。【返却】メインカウンターまたは入口の返却ボックスへ。本棚に戻すのは禁止。【検索・取り寄せ】コンピュータで検索可。所蔵がない本は他の図書館から取り寄せ可。【料金】白黒コピー$0.10/頁、カラー$0.15/頁。延滞料$1/日/冊（上限$50）。【利用時間】平日8時-22時、週末8時-17時。館内飲食禁止（指定エリアで水のみ可）。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To ask students to clean the library",
+      "To ask students to work in the library",
+      "To tell students how to use the library",
+      "To tell students about the events in the library"
+    ],
+    choicesJa: [
+      "学生に図書館の清掃を依頼するため",
+      "学生に図書館で働くよう依頼するため",
+      "学生に図書館の使い方を伝えるため",
+      "学生に図書館のイベントを伝えるため"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"how to use", mean:"使い方", kana:"ハウトゥーユーズ", ac:"ユーズ"},
+      {w:"clean", mean:"掃除する", kana:"クリーン", ac:"クリーン"},
+      {w:"work", mean:"働く", kana:"ワーク", ac:"ワー"},
+      {w:"events", mean:"イベント・行事", kana:"イヴェンツ", ac:"イ"},
+      {w:"borrow", mean:"借りる", kana:"ボロウ", ac:"ボ"},
+      {w:"library", mean:"図書館", kana:"ライブラリー", ac:"ライ"}
+    ],
+    hints: [
+      "<p>「目的問題」です。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>how to use</td><td class='ja'>使い方</td></tr><tr><td class='en'>clean the library</td><td class='ja'>図書館を掃除する</td></tr><tr><td class='en'>work in the library</td><td class='ja'>図書館で働く</td></tr><tr><td class='en'>events</td><td class='ja'>イベント・行事</td></tr></table>",
+      "<p>このお知らせは<b>セクション</b>がたくさんあります。<b>全体テーマ</b>を見抜きましょう。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<br>② <b>各セクションの見出し</b>を見る<span class='think-arrow'>→</span>共通テーマがわかる</div><div class='step'>このお知らせのセクション見出しを順に見ましょう：<br>・<span class='signal-word'>Borrowing</span>（貸出）<br>・<span class='signal-word'>Returning</span>（返却）<br>・<span class='signal-box'>Looking for Books</span>（本の検索）<br>・<span class='signal-word'>Library Fees</span>（料金）<br>・<span class='signal-word'>Lunchtime Use / Hours</span>（利用時間）</div><div class='step'>これら全部に共通するテーマは？<span class='think-arrow'>→</span><b>「図書館の使い方」</b>。「掃除」「労働」「イベント」ではないですね。</div>",
+      "<p>選択肢を<b>消去法</b>で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>clean</b>（掃除）→お知らせに掃除の話なし<br>② <b>work in the library</b>（図書館で働く）→働く話なし<br>③ <b>how to use</b>（使い方）→各セクションが全部「使い方」の説明<br>④ <b>events</b>（イベント）→イベント告知ではない</div><div class='step'><b>例えば：</b> ④「events in the library（図書館のイベント）」を見てください。<br>セクション見出しに「Concert」「Workshop」「Festival」などのイベント名は<b>出てこない</b>。<span class='think-arrow'>→</span>これは<b>×</b>。</div>"
+    ],
+    explain: '<p>このお知らせは <b>大学図書館の利用ガイド</b> で、利用方法の各セクションが並んでいます。</p><div class="ans-key">✅ 正解：③ To tell students how to use the library</div><p><b>各セクションの内容は全て「使い方」：</b></p><table class="check-table"><tr><th>セクション</th><th>内容</th></tr><tr><td><b>Borrowing</b></td><td>本の借り方（20冊・2週間）</td></tr><tr><td><b>Returning</b></td><td>本の返し方（カウンター or 返却箱）</td></tr><tr><td><b>Looking for Books</b></td><td>本の探し方・取り寄せ方法</td></tr><tr><td><b>Library Fees</b></td><td>コピー料金・延滞料</td></tr><tr><td><b>Lunchtime Use</b></td><td>飲食ルール・開館時間</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① 清掃を依頼</td><td>清掃の話はない</td><td class="ng">×</td></tr><tr><td>② 図書館で働くよう依頼</td><td>労働の話はない</td><td class="ng">×</td></tr><tr><td>③ 使い方を伝える</td><td>全セクションが「使い方」の説明</td><td class="ok">○</td></tr><tr><td>④ イベントの案内</td><td>イベント告知ではない</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：セクション見出しを並べると共通テーマがわかる</b><br>「貸出」「返却」「検索」「料金」「利用時間」<span style="color:#d94f4f">→</span>これら全部が<b>「使い方」</b>。だから③が正解。</p><p><b>判断のポイント2：「how to use」が選択肢にあるかチェック</b><br>「使い方」を表す英語は <b>how to use</b>（どう使うか）。これがある選択肢③が正解。</p><p><b>覚えておきたい単語</b>：<b>how to 〜</b>（〜の方法）、<b>borrow</b>（借りる）、<b>return</b>（返す）、<b>fees</b>（料金）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"大学図書館（真偽判定）",
+    sharedNotice:"R6-2_notice",
+    question: "Which of the following can students do in the library?",
+    questionJa: "学生は図書館で次のうちどれをできますか？",
+    choices: [
+      "Request a book that the library does not have",
+      "Return a borrowed book to the bookshelf",
+      "Eat lunch in the study rooms",
+      "Borrow 30 books at a time"
+    ],
+    choicesJa: [
+      "図書館にない本を取り寄せる",
+      "借りた本を本棚に戻す",
+      "学習室で昼食を食べる",
+      "一度に30冊借りる"
+    ],
+    answer: 1,
+    keyWords: [
+      {w:"request", mean:"依頼する・取り寄せる", kana:"リクエスト", ac:"クエ"},
+      {w:"bookshelf", mean:"本棚", kana:"ブックシェルフ", ac:"ブッ"},
+      {w:"at a time", mean:"一度に", kana:"アットアタイム", ac:"タイ"},
+      {w:"not allowed", mean:"禁止されている", kana:"ノットアラウド", ac:"ラウ"},
+      {w:"study rooms", mean:"学習室", kana:"スタディールームズ", ac:"スタ"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題。本文と1つずつ照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>request</td><td class='ja'>取り寄せる</td></tr><tr><td class='en'>bookshelf</td><td class='ja'>本棚</td></tr><tr><td class='en'>at a time</td><td class='ja'>一度に</td></tr><tr><td class='en'>not allowed</td><td class='ja'>禁止</td></tr><tr><td class='en'>study rooms</td><td class='ja'>学習室</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ <b>数字</b>はよく見る</div><div class='step'>各選択肢を本文と照合：<br>・<b>① request a book</b>→<b>Making a Request</b>セクションに「<span class='signal-word'>request a book from other libraries</span>」あり<br>・<b>② return to the bookshelf</b>→本文「<span class='signal-word'>Do NOT return books to the bookshelf</span>」と<b>反対</b><br>・<b>③ eat lunch</b>→本文「<span class='signal-word'>Eating is not allowed</span>」と<b>反対</b><br>・<b>④ 30 books</b>→本文「<span class='signal-word'>20 books</span>」と<b>違う</b></div>",
+      "<p>選択肢を<b>消去法</b>で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① 本文の <b>Do NOT</b>（禁止）に該当する選択肢は ×<br>② 本文の <b>数字</b> と違う選択肢は ×<br>③ 本文の指示と<b>同じ意味</b>の選択肢が正解</div><div class='step'><b>例えば：</b> ④「Borrow 30 books at a time」を本文と照合してみると…<br>本文「<span class='signal-word'>You can borrow a total of 20 books</span>」=<b>20冊まで</b>。<span class='think-arrow'>→</span>30冊は本文と<b>違う</b>。だから④は<b>×</b>。</div>"
+    ],
+    explain: '<p>「図書館で学生ができること」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：① Request a book that the library does not have</div><p><b>各選択肢を本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 取り寄せ依頼</td><td>「<b>request a book from other libraries</b>」と一致</td><td class="ok">○</td></tr><tr><td>② 本棚に戻す</td><td>「<b>Do NOT return to the bookshelf</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 学習室で昼食</td><td>「<b>Eating is not allowed</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 30冊借りる</td><td>本文「<b>20 books</b>」と<b>違う</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「Making a Request」セクションが鍵</b><br>本文の <b>You can request a book from other libraries if we do not have it</b>（所蔵がない本は他館から取り寄せ可）が、選択肢①の <b>Request a book that the library does not have</b> と<b>同じ意味</b>。</p><p><b>判断のポイント2：「Do NOT」と「not allowed」は禁止のサイン</b><br>本文の <b>Do NOT return books to the bookshelf</b>=本棚に戻すな、<b>Eating is not allowed</b>=食事禁止。これらに該当する②③は<b>×</b>。</p><p><b>判断のポイント3：数字は正確に</b><br>本文 <b>20 books for two weeks</b>=20冊・2週間。<b>30 books</b>は誤り。</p><p><b>覚えておきたい単語</b>：<b>request</b>（取り寄せる）、<b>bookshelf</b>（本棚）、<b>at a time</b>（一度に）、<b>not allowed</b>（禁止）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"大学図書館（料金計算）",
+    sharedNotice:"R6-2_notice",
+    question: "In the following situation, how much did you have to pay?",
+    questionJa: "次の状況では、いくら支払う必要がありましたか？",
+    situation: "You borrowed <b>three books</b> but forgot to return them on time. When you returned those three books yesterday, they were <b>five days late</b>.",
+    situationJa: "本を<b>3冊</b>借りましたが、期限内に返却するのを忘れました。昨日返却したとき、<b>5日延滞</b>していました。",
+    choices: [
+      "$1",
+      "$5",
+      "$15",
+      "$50"
+    ],
+    choicesJa: [
+      "1ドル",
+      "5ドル",
+      "15ドル",
+      "50ドル"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"late fee", mean:"延滞料", kana:"レイトフィー", ac:"レイ"},
+      {w:"per item", mean:"1冊につき", kana:"パーアイテム", ac:"ア"},
+      {w:"per day", mean:"1日につき", kana:"パーデイ", ac:"デイ"},
+      {w:"max", mean:"最大", kana:"マックス", ac:"マッ"},
+      {w:"on time", mean:"期限内に", kana:"オンタイム", ac:"タイ"}
+    ],
+    hints: [
+      "<p>「料金計算」問題です。本文の <b>料金規定</b> を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Late fees</td><td class='ja'>延滞料</td></tr><tr><td class='en'>$1 a day per item</td><td class='ja'>1日1冊につき$1</td></tr><tr><td class='en'>max fee</td><td class='ja'>最大料金（上限）</td></tr><tr><td class='en'>three books</td><td class='ja'>3冊</td></tr><tr><td class='en'>five days late</td><td class='ja'>5日延滞</td></tr></table>",
+      "<p>料金計算は<b>「冊数 × 日数 × 単価」</b>の式で考えます。</p><div class='strategy'><b>料金計算の黄金ルール：</b><br>① 本文の <b>per item</b>（1冊につき）と <b>per day</b>（1日につき）に注目<br>② <b>3つの数</b>（冊数・日数・単価）を全部かける</div><div class='step'>本文「<span class='signal-word'>$1 a day per item</span>」を分解！<br>・<b>$1</b> = 単価<br>・<b>a day</b> = 1日につき → 5日なら×5<br>・<b>per item</b> = 1冊につき → 3冊なら×3</div><div class='step'>計算式：<b>$1 × 3冊 × 5日 = $15</b><br>「<span class='signal-word'>$50 max fee</span>」（上限$50）には届かないので、$15 がそのまま支払額。</div>",
+      "<p>選択肢を<b>消去法</b>で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>$1</b>=1冊1日分のみ（数の計算が不足）<br>② <b>$5</b>=1冊×5日のみ（冊数が抜けている）<br>③ <b>$15</b>=$1×3冊×5日（正しい計算）<br>④ <b>$50</b>=上限（max）。今回は到達しない</div><div class='step'><b>例えば：</b> ②「$5」を計算してみると…<br>$1×5日=$5（1冊分のみ）。<span class='think-arrow'>→</span>3冊借りたのに<b>1冊分</b>しか計算していない。だから②は<b>×</b>。</div><div class='step'>3冊×5日×$1 を正確に計算すれば答えが出ます。</div>"
+    ],
+    explain: '<p>「3冊・5日延滞」の延滞料を計算する <b>料金計算</b> 問題です。</p><div class="ans-key">✅ 正解：③ $15</div><p><b>本文の料金規定：</b></p><table class="check-table"><tr><th>項目</th><th>内容</th></tr><tr><td><b>延滞料単価</b></td><td><b>$1 a day per item</b>（1日・1冊につき$1）</td></tr><tr><td><b>上限</b></td><td><b>$50 max fee</b>（最大$50）</td></tr></table><p><b>計算式：</b></p><div style="background:#fffcf3;padding:12px;border-radius:6px;font-size:1.1rem;text-align:center;font-weight:700;color:#d94f4f;margin:10px 0;">$1 × <b>3冊</b> × <b>5日</b> = <b>$15</b></div><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>計算の意味</th><th>判定</th></tr><tr><td>① $1</td><td>1冊1日分のみ（数が不足）</td><td class="ng">×</td></tr><tr><td>② $5</td><td>1冊×5日のみ（冊数が抜け）</td><td class="ng">×</td></tr><tr><td>③ $15</td><td>$1×3冊×5日 = 正解</td><td class="ok">○</td></tr><tr><td>④ $50</td><td>上限料金（今回は届かない）</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「per item」「a day」両方かける</b><br><b>per item</b>=「1冊につき」なので<b>冊数（3）をかける</b>。<br><b>a day</b>=「1日につき」なので<b>日数（5）をかける</b>。<br>両方かけ忘れると、①②のような中途半端な答えになります。</p><p><b>判断のポイント2：上限（max）に注意</b><br>本文「<b>$50 max fee</b>」=上限$50。今回の$15は上限以下なのでそのまま支払い。もし $50 を超える計算結果が出たら、$50 で打ち止め。</p><p><b>覚えておきたい単語</b>：<b>per item</b>（1冊につき）、<b>per day / a day</b>（1日につき）、<b>late fee</b>（延滞料）、<b>max</b>（最大・上限）。</p>'
+  }
+]
+
+};
+
+// お知らせ本文の共有マップ（同じお知らせを複数の問で参照）
+const SHARED_NOTICES = {};
+Object.keys(QUESTIONS_DATA).forEach(year => {
+  const firstQ = QUESTIONS_DATA[year][0];
+  if(firstQ.noticeBody){
+    SHARED_NOTICES[year + "_notice"] = {
+      title: firstQ.noticeTitle,
+      body: firstQ.noticeBody,
+      bodyJa: firstQ.noticeBodyJa
+    };
+  }
+});
+
+function getNotice(q, year){
+  if(q.noticeBody) return {title:q.noticeTitle, body:q.noticeBody, bodyJa:q.noticeBodyJa};
+  if(q.sharedNotice) return SHARED_NOTICES[q.sharedNotice];
+  // フォールバック：年の最初の問題から
+  const first = QUESTIONS_DATA[year][0];
+  return {title:first.noticeTitle, body:first.noticeBody, bodyJa:first.noticeBodyJa};
+}
+
+
+// ==================== 状態管理 ====================
+let currentYear = "R7-1";
+let currentQ = 0;
+let currentMode = "hint"; // "hint" or "explain"
+let answeredMap = {}; // {"R7-1_0": 1, ...}
+let savedWords = []; // [{w, m, k, year, qNo}, ...]
+
+function getKey(year, q){ return year + "_" + q; }
+
+// ==================== 描画：年タブ ====================
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  ["R7-1","R7-2","R6-1","R6-2"].forEach(y=>{
+    if(QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = `令和${y[1]}年 第${y[3]}回`;
+      if(y === currentYear) b.classList.add('on');
+      b.onclick = ()=>{
+        stopAllPlay();
+        currentYear = y; currentQ = 0;
+        renderYearPick(); renderTabs(); renderQuestion();
+      };
+      yp.appendChild(b);
+    }
+  });
+}
+
+// ==================== 描画：問題タブ ====================
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML = '';
+  data.forEach((q, i)=>{
+    const t = document.createElement('button');
+    t.className = 'q-tab' + (i === currentQ ? ' active' : '');
+    t.innerHTML = `問${q.no}<br><span style="font-size:.7rem;font-weight:500">No.${q.qNum}</span>`;
+    t.onclick = ()=>{ stopAllPlay(); currentQ = i; renderTabs(); renderQuestion(); };
+    tabs.appendChild(t);
+  });
+}
+
+// ==================== キーワードハイライト ====================
+function highlightWord(text, words){
+  if(!words || words.length === 0) return text;
+  // 長い順に処理してオーバーラップを防ぐ
+  const sorted = [...words].sort((a,b) => b.w.length - a.w.length);
+  let result = text;
+  // 既にハイライトしたキーワードは記録（同じ語を複数回処理しない）
+  const replaced = new Set();
+  sorted.forEach(kw => {
+    if(replaced.has(kw.w.toLowerCase())) return;
+    const safe = kw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // 単語境界（\b）が日本語に対応しないので、英語語のみ対象
+    const regex = new RegExp(`\\b(${safe})\\b`, 'i');
+    if(result.match(regex)){
+      const opts = JSON.stringify({m:kw.mean, k:kw.kana, a:kw.ac});
+      const escapedOpts = opts.replace(/"/g, '&quot;');
+      result = result.replace(regex, 
+        `<span class="word" data-opts="${escapedOpts}" onclick="showVwPop(this,event)">$1</span>`);
+      replaced.add(kw.w.toLowerCase());
+    }
+  });
+  return result;
+}
+
+// ==================== 描画：問題本体 ====================
+function renderQuestion(){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const c = document.getElementById('qContainer');
+  const notice = getNotice(data, currentYear);
+
+  // お知らせ本文にもキーワードハイライトを適用
+  const decoratedNoticeBody = highlightWord(notice.body, data.keyWords);
+  // 質問文にもハイライト
+  const decoratedQuestion = highlightWord(data.question, data.keyWords);
+  // 選択肢にもハイライト
+  const decoratedChoices = data.choices.map(c => highlightWord(c, data.keyWords));
+
+  // 状況設定（あれば）
+  const situationHtml = data.situation
+    ? `<div class="qsec-situation">📝 <b>状況：</b>${data.situation}<br><span style="font-size:.92em;color:#7a4a10">${data.situationJa || ''}</span></div>`
+    : '';
+
+  // 選択肢HTML
+  let choicesHtml = '';
+  decoratedChoices.forEach((ch, i)=>{
+    choicesHtml += `<button class="choice" data-idx="${i}" onclick="pickChoice(${i})">
+      <span class="num">${i+1}</span>${ch}
+    </button>`;
+  });
+
+  // ヒントHTML
+  let hintsHtml = '';
+  data.hints.forEach((h, i)=>{
+    hintsHtml += `<div class="hint-box" id="hint${i}"><span class="hint-num">ヒント${i+1}</span><div>${h}</div></div>`;
+  });
+
+  c.innerHTML = `
+    <div class="qcard">
+      <div class="topic">📋 ${data.topic}</div>
+      <div class="q-instruction">次のお知らせを読み、質問の答えとして最も適当なものを 1〜4 から一つ選びなさい。<b>（解答番号 ${data.qNum}）</b></div>
+      <button class="sentence-play" onclick="playNotice()">🔊 お知らせを読み上げる</button>
+
+      <div class="notice-box">
+        <div class="notice-title">${notice.title}</div>
+        ${decoratedNoticeBody}
+      </div>
+
+      <button class="toggle-ja" onclick="toggleJa()">📝 お知らせの日本語要約を表示／非表示</button>
+      <div class="notice-ja-box" id="noticeJa" style="display:none;background:var(--hint);padding:10px 12px;border-radius:8px;margin-bottom:10px;font-size:.85rem;line-height:1.65;border-left:3px solid var(--accent2)">
+        ${notice.bodyJa || ''}
+      </div>
+
+      <div class="qsec">
+        <div class="qsec-head">
+          <span class="qsec-num">設問 No.${data.qNum}</span>
+        </div>
+        <div class="qsec-question">${decoratedQuestion}</div>
+        <div style="font-size:.82rem;color:#666;margin-bottom:6px">${data.questionJa}</div>
+        ${situationHtml}
+        <div class="choices" id="choicesBox">${choicesHtml}</div>
+        <div class="result-msg" id="resultMsg"></div>
+      </div>
+
+      <div class="mode-tabs">
+        <button class="mode-btn ${currentMode==='hint'?'active':''}" onclick="setMode('hint')">💡 ヒントモード</button>
+        <button class="mode-btn ${currentMode==='explain'?'active':''}" onclick="setMode('explain')">📚 詳しい解説</button>
+      </div>
+
+      <div class="mode-panel ${currentMode==='hint'?'show':''}" id="hintPanel">
+        <h3>💡 段階的ヒント（お知らせ読解のコツ）</h3>
+        <div class="hint-notice">
+          ⚠️ <b>このヒントは「合格点（40点〜）を取るための戦略」です。</b>本番で安定して点を取るには、<b>中学英単語・中学英文法</b>の基礎力が必要です。
+        </div>
+        <div class="hint-buttons">
+          <button class="hint-btn" onclick="showHint(0)">①カギの単語</button>
+          <button class="hint-btn" onclick="showHint(1)">②本文の見方</button>
+          <button class="hint-btn" onclick="showHint(2)">③消去法</button>
+        </div>
+        ${hintsHtml}
+      </div>
+
+      <div class="mode-panel ${currentMode==='explain'?'show':''}" id="explainPanel">
+        <h3>📚 詳しい解説</h3>
+        <div class="explain-box">${data.explain}</div>
+        <div class="study-rec">
+          <h4>📖 もっと安定して点を取りたい方へ</h4>
+          このアプリのヒントは「<b>本文を全部読まなくても解ける戦略</b>」を紹介しています。本番でもっと余裕を持って解きたい方は、<b>中学英単語・中学英文法</b>のアプリで基礎を固めましょう。基礎ができれば、ヒントなしでも安定して解けるようになります。<br>
+          <a href="https://realizefield.github.io/j-engglish-word/" target="_blank">📚 中学英単語アプリ</a>
+          <a href="https://realizefield.github.io/j-english/" target="_blank">📝 中学英文法アプリ</a>
+          <a href="https://realizefield.github.io/kounin_eng_grammer/kounineng-index.html" target="_blank">🎯 高認英文法アプリ</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // 既に解答済みなら復元
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined){
+    revealAnswer(answeredMap[k], false);
+  }
+}
+
+// ==================== 日本語訳トグル ====================
+function toggleJa(){
+  const el = document.getElementById('noticeJa');
+  if(!el) return;
+  el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+}
+
+// ==================== モード切替 ====================
+function setMode(m){
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  if(event && event.target) event.target.classList.add('active');
+  const hp = document.getElementById('hintPanel');
+  const ep = document.getElementById('explainPanel');
+  if(hp) hp.classList.toggle('show', m === 'hint');
+  if(ep) ep.classList.toggle('show', m === 'explain');
+}
+
+// ==================== ヒント表示 ====================
+function showHint(i){
+  const box = document.getElementById('hint' + i);
+  if(box) box.classList.toggle('show');
+}
+
+// ==================== 選択肢 ====================
+function pickChoice(i){
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined) return;
+  answeredMap[k] = i;
+  revealAnswer(i, true);
+}
+
+function revealAnswer(picked, showMsg){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const ans = data.answer - 1;
+  const choicesEl = document.getElementById('choicesBox');
+  if(!choicesEl) return;
+  const buttons = choicesEl.querySelectorAll('.choice');
+  buttons.forEach((btn, i)=>{
+    if(i === ans) btn.classList.add('correct');
+    else if(i === picked) btn.classList.add('wrong');
+  });
+  if(showMsg){
+    const msg = document.getElementById('resultMsg');
+    if(picked === ans){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `残念。正解は ${data.answer} 番です。`;
+    }
+  }
+}
+
+// ==================== vw popup ====================
+let activeWordPop = null;
+
+function showVwPop(el, ev){
+  if(ev) ev.stopPropagation();
+  if(activeWordPop && activeWordPop !== el){
+    closeVwPop(activeWordPop);
+  }
+  if(el.classList.contains('tapped')){
+    closeVwPop(el);
+    return;
+  }
+  el.classList.add('tapped');
+  const opts = JSON.parse(el.getAttribute('data-opts').replace(/&quot;/g, '"'));
+  const word = el.textContent;
+  const isSaved = savedWords.some(w => w.w === word);
+
+  const pop = document.createElement('span');
+  pop.className = 'word-pop show';
+  pop.innerHTML = `
+    <div class="pop-row">
+      <div>
+        <div><b>${word}</b> [${opts.k}] ${opts.a ? `<span class="accent">▶${opts.a}</span>` : ''}</div>
+        <div>${opts.m}</div>
+      </div>
+      <div class="pop-buttons">
+        <button class="speak" onclick="event.stopPropagation();speakWord('${word.replace(/'/g, "\\'")}')">🔊</button>
+        <button class="${isSaved ? 'saved' : 'save'}" onclick="event.stopPropagation();saveWord('${word.replace(/'/g, "\\'")}','${opts.m.replace(/'/g, "\\'")}','${opts.k.replace(/'/g, "\\'")}',this)">${isSaved ? '✓' : '保存'}</button>
+      </div>
+    </div>
+  `;
+  el.appendChild(pop);
+  activeWordPop = el;
+}
+
+function closeVwPop(el){
+  el.classList.remove('tapped');
+  const pop = el.querySelector('.word-pop');
+  if(pop) pop.remove();
+  if(activeWordPop === el) activeWordPop = null;
+}
+
+document.addEventListener('click', e => {
+  if(activeWordPop && !activeWordPop.contains(e.target)){
+    closeVwPop(activeWordPop);
+  }
+});
+
+function saveWord(w, m, k, btn){
+  if(savedWords.some(x => x.w === w)) return;
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  savedWords.push({w, m, k, year:currentYear, qNo:data.no});
+  btn.textContent = '✓';
+  btn.className = 'saved';
+  document.getElementById('reviewCount').textContent = savedWords.length;
+}
+
+// ==================== 音声合成 ====================
+let voices = [];
+let currentSpeech = null;
+
+function loadVoices(){
+  voices = window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function pickVoice(){
+  if(voices.length === 0) loadVoices();
+  const priorityNames = [
+    'Samantha','Karen','Zira','Google US English','Google UK English Female',
+    'Microsoft Zira','Allison','Ava','Susan'
+  ];
+  for(const name of priorityNames){
+    const v = voices.find(voice =>
+      voice.name.includes(name) && /en-US|en-GB|en-AU/i.test(voice.lang)
+    );
+    if(v) return v;
+  }
+  const femaleByName = voices.find(v =>
+    /en-US|en-GB|en-AU/i.test(v.lang) && /female|woman/i.test(v.name)
+  );
+  if(femaleByName) return femaleByName;
+  const maleNames = /male|man|David|Daniel|Alex|Tom|James|Mark|George|Fred/i;
+  const nonMaleEn = voices.find(v =>
+    /en-US|en-GB|en-AU/i.test(v.lang) && !maleNames.test(v.name)
+  );
+  if(nonMaleEn) return nonMaleEn;
+  return voices.find(v => /en/i.test(v.lang)) || voices[0];
+}
+
+function speakWord(word){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  u.pitch = 1.15;
+  speechSynthesis.speak(u);
+}
+
+function playNotice(){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const notice = getNotice(data, currentYear);
+  // HTMLタグを除去してテキスト化
+  const div = document.createElement('div');
+  div.innerHTML = notice.body;
+  const text = (notice.title + '. ' + (div.innerText || div.textContent || ''))
+    .replace(/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uffef\u4e00-\u9faf]+/g, ' ') // 日本語除去
+    .replace(/\s+/g, ' ').trim();
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  u.pitch = 1.15;
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function stopAllPlay(){
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+  }
+  currentSpeech = null;
+}
+
+// ==================== 復習リスト ====================
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(savedWords.length === 0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:20px">まだ単語が保存されていません。<br>本文中の<span style="color:var(--accent2);text-decoration:underline">下線つきの単語</span>をタップして「保存」ボタンを押してください。</p>';
+  } else {
+    body.innerHTML = savedWords.map((w, i)=>`
+      <div class="review-card">
+        <div class="review-word">${w.w}</div>
+        <div class="review-q">[${w.k}] ${w.m}</div>
+        <div style="font-size:.75rem;color:#888;">令和${w.year[1]}年 第${w.year[3]}回 問${w.qNo}より</div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="removeWord(${i})">✓ 覚えた</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+function removeWord(i){
+  savedWords.splice(i, 1);
+  document.getElementById('reviewCount').textContent = savedWords.length;
+  openReview();
+}
+
+// ==================== 初期化 ====================
+renderYearPick();
+renderTabs();
+renderQuestion();
+
+</script>
+
+</body>
+</html>
