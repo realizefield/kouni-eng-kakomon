@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>高認英語 過去問対策 単元表 | GAMBA</title>
+<title>高認英語 単元表 | GAMBA</title>
 <style>
 :root{
   --bg:#fef9f3;
@@ -18,6 +18,11 @@
   --good:#3d8b5a;
   --muted:#8a7f6e;
   --shadow:0 2px 0 rgba(0,0,0,.06);
+  /* セクション色 */
+  --kakomon:#2c5f8d;
+  --kakomon-light:#e3edf5;
+  --ruidai:#5a4a8a;
+  --ruidai-light:#ebe5f5;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
@@ -29,7 +34,16 @@ header h1{font-size:1.35rem;font-weight:800;letter-spacing:.02em;margin-bottom:4
 header .sub{font-size:.85rem;opacity:.92;margin-bottom:8px}
 header .meta{font-size:.75rem;opacity:.85;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:6px;display:inline-block}
 
-/* セクション見出し */
+/* 大セクション見出し（過去問/類題用） */
+.big-section{margin:18px 0 14px;border-radius:14px;padding:14px 16px;color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.big-section::after{content:"";position:absolute;right:-20px;top:-20px;width:110px;height:110px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+.big-section.kakomon{background:linear-gradient(135deg,var(--kakomon),#1a4870)}
+.big-section.ruidai{background:linear-gradient(135deg,var(--ruidai),#3a2a6a)}
+.big-section h2{font-size:1.15rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.big-section .desc{font-size:.78rem;opacity:.95;line-height:1.55}
+.big-section .desc b{background:rgba(255,255,255,.2);padding:1px 6px;border-radius:4px}
+
+/* セクション見出し（旧スタイル） */
 .sec-title{font-size:1.05rem;font-weight:800;color:var(--accent2);margin:18px 0 10px 4px;padding-left:10px;border-left:5px solid var(--accent3);line-height:1.2}
 .sec-title small{display:block;font-size:.72rem;color:var(--muted);font-weight:600;margin-top:2px}
 
@@ -42,16 +56,26 @@ header .meta{font-size:.75rem;opacity:.85;background:rgba(255,255,255,.12);paddi
 .q-card.ready:active{transform:translateY(0)}
 .q-card.coming{opacity:.55;cursor:not-allowed;background:repeating-linear-gradient(45deg,var(--paper),var(--paper) 8px,var(--soft) 8px,var(--soft) 16px)}
 
-.q-num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.78rem;padding:2px 10px;border-radius:8px;letter-spacing:.04em}
+/* 過去問版カードは青系のアクセント、類題版カードは紫系 */
+.q-card.kakomon{border-left:4px solid var(--kakomon)}
+.q-card.ruidai{border-left:4px solid var(--ruidai)}
+
+.q-num{display:inline-block;color:#fff;font-weight:800;font-size:.78rem;padding:2px 10px;border-radius:8px;letter-spacing:.04em}
+.q-card.kakomon .q-num{background:var(--kakomon)}
+.q-card.ruidai .q-num{background:var(--ruidai)}
 .q-card.coming .q-num{background:var(--muted)}
+
 .q-status{position:absolute;top:12px;right:12px;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:6px}
 .q-status.ready{background:#e8f5e9;color:var(--good);border:1px solid #c5e1cb}
 .q-status.coming{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
 
 .q-title{font-size:1.0rem;font-weight:800;margin:8px 0 4px;color:var(--accent2);line-height:1.35}
+.q-card.ruidai .q-title{color:var(--ruidai)}
 .q-desc{font-size:.78rem;color:#555;line-height:1.55;margin-bottom:10px}
 .q-info{display:flex;flex-wrap:wrap;gap:6px;font-size:.7rem}
-.q-info span{background:var(--soft);padding:2px 8px;border-radius:6px;color:var(--accent2);font-weight:700}
+.q-info span{padding:2px 8px;border-radius:6px;font-weight:700}
+.q-card.kakomon .q-info span{background:var(--kakomon-light);color:var(--kakomon)}
+.q-card.ruidai .q-info span{background:var(--ruidai-light);color:var(--ruidai)}
 .q-card.coming .q-info span{background:#eee5d6;color:var(--muted)}
 
 .q-go{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:.82rem;font-weight:700;color:var(--accent)}
@@ -67,11 +91,14 @@ table.mgmt th,table.mgmt td{padding:8px 6px;border-bottom:1px solid var(--line);
 table.mgmt thead th{background:var(--accent2);color:#fff;font-weight:700;font-size:.75rem;border-bottom:none}
 table.mgmt thead th:first-child{border-radius:6px 0 0 0;text-align:left;padding-left:10px}
 table.mgmt thead th:last-child{border-radius:0 6px 0 0}
+table.mgmt.ruidai thead th{background:var(--ruidai)}
 table.mgmt tbody tr:hover{background:#fff8ed}
 table.mgmt td.q-label{text-align:left;font-weight:700;color:var(--accent2);padding-left:10px;background:var(--soft);width:30%}
+table.mgmt.ruidai td.q-label{color:var(--ruidai)}
 table.mgmt td.q-label small{display:block;color:var(--muted);font-weight:500;font-size:.7rem;margin-top:2px}
 table.mgmt td.cnt{font-family:"Georgia",serif;font-weight:700;font-size:.92rem;color:var(--accent)}
 table.mgmt td.total{background:var(--hint);font-weight:800;color:var(--accent2);font-size:.95rem}
+table.mgmt.ruidai td.total{color:var(--ruidai)}
 table.mgmt tfoot td{background:var(--soft);font-weight:800;color:var(--accent);border-top:2px solid var(--accent3);border-bottom:none}
 table.mgmt tfoot td:first-child{text-align:left;padding-left:10px}
 
@@ -89,6 +116,14 @@ table.mgmt tfoot td:first-child{text-align:left;padding-left:10px}
 .guide ol li{margin-bottom:4px}
 .guide ol li b{color:var(--accent)}
 
+/* 案内バー：過去問と類題の使い分け */
+.usage-banner{background:linear-gradient(135deg,#fff8e1,#ffe9b8);border:1px solid #e8a838;padding:12px 14px;border-radius:10px;font-size:.82rem;color:#5a3a10;margin-bottom:14px;line-height:1.7}
+.usage-banner b{color:var(--accent)}
+.usage-banner .row{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.usage-banner .tag{padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700}
+.usage-banner .tag.k{background:var(--kakomon);color:#fff}
+.usage-banner .tag.r{background:var(--ruidai);color:#fff}
+
 footer{text-align:center;font-size:.7rem;color:var(--muted);margin-top:20px;padding-top:12px;border-top:1px dashed var(--line)}
 footer b{color:var(--accent2)}
 </style>
@@ -96,20 +131,37 @@ footer b{color:var(--accent2)}
 <body>
 
 <header>
-  <h1>📚 高認英語 過去問対策</h1>
+  <h1>📚 高認英語 単元表</h1>
   <p class="sub">設問ごとの形式と攻略ポイントを<b>1問1問</b>マスターしよう</p>
-  <span class="meta">令和5年〜令和7年 過去問対応</span>
+  <span class="meta">過去問演習 + 類題演習</span>
 </header>
 
-<!-- ============ 1. 設問別アプリ ============ -->
-<div class="sec-title">設問別アプリ
-  <small>各設問の出題形式に合わせた専用トレーニング</small>
+<!-- 案内バナー -->
+<div class="usage-banner">
+  💡 <b>このページの使い方</b><br>
+  下の2つのセクションから、目的に合わせて選んでください。
+  <div class="row">
+    <span class="tag k">📘 過去問演習</span>
+    <span>令和5〜7年の<b>本物の過去問</b>を解いて出題形式に慣れる</span>
+  </div>
+  <div class="row">
+    <span class="tag r">📚 類題演習</span>
+    <span>過去問と<b>同じパターン</b>で作ったオリジナル問題を反復演習</span>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- ============ 1. 過去問演習 =============== -->
+<!-- ========================================== -->
+<div class="big-section kakomon">
+  <h2>📘 過去問演習</h2>
+  <p class="desc">令和5年〜令和7年の<b>過去問</b>から出題。本番形式に慣れたい方はこちら。</p>
 </div>
 
 <div class="q-grid">
 
-  <!-- 第1問 -->
-  <a class="q-card ready" href="https://realizefield.github.io/kouni-eng-kakomon/kounin_eng_q1.html">
+  <!-- 過去問 第1問 -->
+  <a class="q-card kakomon ready" href="https://realizefield.github.io/kouni-eng-kakomon/kounin_eng_q1.html">
     <span class="q-status ready">✓ 完成</span>
     <span class="q-num">第 1 問</span>
     <div class="q-title">対話文の応答選択</div>
@@ -122,8 +174,8 @@ footer b{color:var(--accent2)}
     <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
   </a>
 
-  <!-- 第2問 -->
-  <a class="q-card ready" href="kounin_eng_q2.html">
+  <!-- 過去問 第2問 -->
+  <a class="q-card kakomon ready" href="kounin_eng_q2.html">
     <span class="q-status ready">✓ 完成</span>
     <span class="q-num">第 2 問</span>
     <div class="q-title">短文の語句穴埋め</div>
@@ -136,8 +188,8 @@ footer b{color:var(--accent2)}
     <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
   </a>
 
-  <!-- 第3問 -->
-  <a class="q-card ready" href="kounin_eng_q3.html">
+  <!-- 過去問 第3問 -->
+  <a class="q-card kakomon ready" href="kounin_eng_q3.html">
     <span class="q-status ready">✓ 完成</span>
     <span class="q-num">第 3 問</span>
     <div class="q-title">メッセージの意図</div>
@@ -150,8 +202,8 @@ footer b{color:var(--accent2)}
     <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
   </a>
 
-  <!-- 第4問 -->
-  <a class="q-card ready" href="kounin_eng_q4.html">
+  <!-- 過去問 第4問 -->
+  <a class="q-card kakomon ready" href="kounin_eng_q4.html">
     <span class="q-status ready">✓ 完成</span>
     <span class="q-num">第 4 問</span>
     <div class="q-title">文の並べ替え</div>
@@ -164,47 +216,44 @@ footer b{color:var(--accent2)}
     <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
   </a>
 
-  <!-- 第5問 -->
-  <div class="q-card coming">
-    <span class="q-status coming">準備中</span>
+  <!-- 過去問 第5問 -->
+  <a class="q-card kakomon ready" href="kounin_eng_q5.html">
+    <span class="q-status ready">✓ 完成</span>
     <span class="q-num">第 5 問</span>
     <div class="q-title">図表・お知らせ読み取り</div>
     <div class="q-desc">広告・案内・お知らせなど実用的な資料から必要な情報を読み取る。</div>
     <div class="q-info">
-      <span>未収録</span>
-      <span>—</span>
+      <span>12問</span>
+      <span>R6〜R7</span>
       <span>情報処理</span>
     </div>
-    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
-  </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
 
-  <!-- 第6問 -->
-  <div class="q-card coming">
-    <span class="q-status coming">準備中</span>
+  <!-- 過去問 第6問 -->
+  <a class="q-card kakomon ready" href="kounin_eng_q6.html">
+    <span class="q-status ready">✓ 完成</span>
     <span class="q-num">第 6 問</span>
     <div class="q-title">長文読解（物語文）</div>
     <div class="q-desc">300語前後の物語文・体験談を読み、内容理解の設問に答える。</div>
     <div class="q-info">
-      <span>未収録</span>
-      <span>—</span>
+      <span>16問</span>
+      <span>R6〜R7</span>
       <span>長文読解</span>
     </div>
-    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
-  </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
 
 </div>
 
-<!-- ============ 2. 収録範囲一覧（管理表） ============ -->
-<div class="sec-title">収録範囲一覧
-  <small>各設問・年度ごとの収録問題数</small>
-</div>
-
+<!-- 過去問の収録範囲 -->
 <div class="mgmt-box">
   <div class="note">
     📌 <b>R5（令和5年度）の出題形式の注意：</b><br>
     ・<b>第2問（短文穴埋め）</b>はR5では<b>第5問</b>として出題されました。R6以降は第2問。<br>
     ・<b>第3問（メッセージの意図）</b>はR5では<b>第4問</b>として出題されました。R6以降は第3問。<br>
     ・<b>第4問（文の並べ替え）</b>は<b>R6から登場</b>した形式で、R5には対応する設問がありません（R5の第3問は語句並べ替え）。<br>
+    ・<b>第5問（お知らせ）・第6問（長文）</b>は<b>R6から登場</b>した形式。R5には対応する設問がありません。<br>
     表中ではすべて現在の設問番号で集計しています。
   </div>
   <table class="mgmt">
@@ -263,6 +312,161 @@ footer b{color:var(--accent2)}
       </tr>
       <tr>
         <td class="q-label">第5問<small>図表・お知らせ読み取り</small></td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="total">12</td>
+      </tr>
+      <tr>
+        <td class="q-label">第6問<small>長文読解（物語文）</small></td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">—</td>
+        <td class="cnt">—</td>
+        <td class="total">16</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>収録済み 合計</td>
+        <td>22</td>
+        <td>22</td>
+        <td>22</td>
+        <td>22</td>
+        <td>11</td>
+        <td>11</td>
+        <td>110</td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="legend">
+    <span><span class="dot ready"></span>収録済み</span>
+    <span><span class="dot coming"></span>未収録（順次追加）</span>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- ============ 2. 類題演習 ================= -->
+<!-- ========================================== -->
+<div class="big-section ruidai">
+  <h2>📚 類題演習</h2>
+  <p class="desc">過去問と同じ形式・レベルの<b>オリジナル類題</b>。反復演習で力をつけたい方はこちら。<br>各設問は <b>Set-A〜Set-F の6セット</b> で構成（R7〜R5の各回に対応）。</p>
+</div>
+
+<div class="q-grid">
+
+  <!-- 類題 第1問 -->
+  <div class="q-card ruidai coming">
+    <span class="q-status coming">準備中</span>
+    <span class="q-num">第 1 問</span>
+    <div class="q-title">対話文の応答選択</div>
+    <div class="q-desc">日常会話の自然な応答を選ぶ問題。<b>類題で反復練習</b>で得点源に。</div>
+    <div class="q-info">
+      <span>未収録</span>
+      <span>Set-A〜F</span>
+      <span>応答選択</span>
+    </div>
+    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
+  </div>
+
+  <!-- 類題 第2問 -->
+  <a class="q-card ruidai ready" href="gamba_eng_q2.html">
+    <span class="q-status ready">✓ 完成</span>
+    <span class="q-num">第 2 問</span>
+    <div class="q-title">短文の語句穴埋め</div>
+    <div class="q-desc">語彙力と文脈把握の<b>反復演習</b>。前後のヒントを読み取る訓練に最適。</div>
+    <div class="q-info">
+      <span>24問</span>
+      <span>Set-A〜F</span>
+      <span>語彙・文法</span>
+    </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 類題 第3問 -->
+  <a class="q-card ruidai ready" href="gamba_eng_q3.html">
+    <span class="q-status ready">✓ 完成</span>
+    <span class="q-num">第 3 問</span>
+    <div class="q-title">メッセージの意図</div>
+    <div class="q-desc">英文メッセージの目的を読み取る問題。<b>選択肢が日本語</b>なので得点源!</div>
+    <div class="q-info">
+      <span>22問</span>
+      <span>Set-A〜F</span>
+      <span>意図把握</span>
+    </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 類題 第4問 -->
+  <a class="q-card ruidai ready" href="gamba_eng_q4.html">
+    <span class="q-status ready">✓ 完成</span>
+    <span class="q-num">第 4 問</span>
+    <div class="q-title">文の並べ替え</div>
+    <div class="q-desc">3つの英文を並べる類題。<b>つなぎ言葉と代名詞</b>のコツを反復練習。</div>
+    <div class="q-info">
+      <span>12問</span>
+      <span>Set-A〜F</span>
+      <span>論理構造</span>
+    </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 類題 第5問 -->
+  <a class="q-card ruidai ready" href="gamba_eng_q5.html">
+    <span class="q-status ready">✓ 完成</span>
+    <span class="q-num">第 5 問</span>
+    <div class="q-title">図表・お知らせ読み取り</div>
+    <div class="q-desc">広告・案内・お知らせから必要な情報を読み取る類題。<b>料金計算</b>含む。</div>
+    <div class="q-info">
+      <span>18問</span>
+      <span>Set-A〜F</span>
+      <span>情報処理</span>
+    </div>
+    <div class="q-go"><span>挑戦する</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 類題 第6問 -->
+  <div class="q-card ruidai coming">
+    <span class="q-status coming">準備中</span>
+    <span class="q-num">第 6 問</span>
+    <div class="q-title">長文読解（物語文）</div>
+    <div class="q-desc">300語前後の物語文・体験談の類題。<b>段落と設問の対応</b>を意識した読解訓練。</div>
+    <div class="q-info">
+      <span>未収録</span>
+      <span>Set-A〜F</span>
+      <span>長文読解</span>
+    </div>
+    <div class="q-go"><span>近日公開</span><span class="arrow">…</span></div>
+  </div>
+
+</div>
+
+<!-- 類題の収録範囲 -->
+<div class="mgmt-box">
+  <div class="note">
+    📌 <b>類題演習について：</b>各設問は<b>Set-A〜Set-Fの6セット</b>で構成（過去問のR7-1〜R5-2に対応）。R5に対応する過去問形式がない第4問〜第6問の<b>Set-E/Set-F</b>は<b>形式を踏襲したオリジナル類題</b>として作成しています。
+  </div>
+  <table class="mgmt ruidai">
+    <thead>
+      <tr>
+        <th>設問</th>
+        <th>Set-A<br><small style="font-weight:400;opacity:.8">R7-1類題</small></th>
+        <th>Set-B<br><small style="font-weight:400;opacity:.8">R7-2類題</small></th>
+        <th>Set-C<br><small style="font-weight:400;opacity:.8">R6-1類題</small></th>
+        <th>Set-D<br><small style="font-weight:400;opacity:.8">R6-2類題</small></th>
+        <th>Set-E<br><small style="font-weight:400;opacity:.8">R5-1類題</small></th>
+        <th>Set-F<br><small style="font-weight:400;opacity:.8">R5-2類題</small></th>
+        <th>合計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="q-label">第1問<small>対話文の応答選択</small></td>
         <td class="cnt">—</td>
         <td class="cnt">—</td>
         <td class="cnt">—</td>
@@ -270,6 +474,46 @@ footer b{color:var(--accent2)}
         <td class="cnt">—</td>
         <td class="cnt">—</td>
         <td class="cnt">—</td>
+      </tr>
+      <tr>
+        <td class="q-label">第2問<small>短文の語句穴埋め</small></td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="total">24</td>
+      </tr>
+      <tr>
+        <td class="q-label">第3問<small>メッセージの意図</small></td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">4</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="total">22</td>
+      </tr>
+      <tr>
+        <td class="q-label">第4問<small>文の並べ替え</small></td>
+        <td class="cnt">2</td>
+        <td class="cnt">2</td>
+        <td class="cnt">2</td>
+        <td class="cnt">2</td>
+        <td class="cnt">2</td>
+        <td class="cnt">2</td>
+        <td class="total">12</td>
+      </tr>
+      <tr>
+        <td class="q-label">第5問<small>図表・お知らせ読み取り</small></td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="cnt">3</td>
+        <td class="total">18</td>
       </tr>
       <tr>
         <td class="q-label">第6問<small>長文読解（物語文）</small></td>
@@ -285,13 +529,13 @@ footer b{color:var(--accent2)}
     <tfoot>
       <tr>
         <td>収録済み 合計</td>
-        <td>15</td>
-        <td>15</td>
-        <td>15</td>
-        <td>15</td>
-        <td>11</td>
-        <td>11</td>
-        <td>82</td>
+        <td>13</td>
+        <td>13</td>
+        <td>13</td>
+        <td>13</td>
+        <td>12</td>
+        <td>12</td>
+        <td>76</td>
       </tr>
     </tfoot>
   </table>
@@ -312,16 +556,23 @@ footer b{color:var(--accent2)}
     <li>まずは<b>第3問（メッセージの意図）</b>から始めましょう。<b>選択肢が日本語</b>なので、英語が苦手でも<b>得点源</b>になりやすい問題です。</li>
     <li>次に<b>第2問（短文穴埋め）</b>。<b>カギの単語</b>を1つ知っていれば解けることが多く、語彙力アップにもつながります。</li>
     <li><b>第4問（文の並べ替え）</b>は<b>つなぎ言葉と代名詞</b>に注目するコツを覚えれば、英文を全部訳さなくても解けます。</li>
+    <li><b>第5問・第6問</b>は読解問題。<b>「お知らせの該当部分だけ」「段落と設問の対応」</b>を意識して、必要な箇所だけ読む練習をしましょう。</li>
     <li>各問題で4択を選んだあと、<b>ヒントモード</b>で考え方を確認しましょう。<b>3段階のヒント</b>を順に開くのがおすすめです。</li>
     <li>英文中の<b>下線つき単語</b>をタップ → 意味・カナ・🔊音声が確認できます。覚えたい単語は<b>「保存」</b>ボタンで復習リストへ。</li>
     <li>「<b>📚 詳しい解説</b>」モードでは、選択肢の○×判定や考え方のコツを<b>判定表</b>で確認できます。本番で迷わなくなります。</li>
+  </ol>
+  <h3 style="margin-top:14px">🔄 過去問演習と類題演習の使い分け</h3>
+  <ol>
+    <li><b>📘 過去問演習</b>でまず本物の問題に触れ、出題形式・難易度を体感。</li>
+    <li><b>📚 類題演習</b>で同じパターンを<b>たくさん</b>解いて、コツを定着。</li>
+    <li>再度過去問に戻って、力がついたか確認。これを繰り返すのが最強の学習法です。</li>
   </ol>
   <h3 style="margin-top:14px">⚠️ ヒントの位置づけ</h3>
   <p style="font-size:.84rem;line-height:1.7">このアプリ群のヒントは「<b>英語が苦手な方が 40点合格を取る</b>」ための<b>戦略的</b>なものです。確実に得点を伸ばすには、<b>中学英単語・中学英文法</b>の基礎力が欠かせません。<a href="https://realizefield.github.io/j-engglish-word/" target="_blank" style="color:var(--accent2);font-weight:700">中学英単語アプリ</a>・<a href="https://realizefield.github.io/j-english/" target="_blank" style="color:var(--accent2);font-weight:700">中学英文法アプリ</a>と併せて学習しましょう。</p>
 </div>
 
 <footer>
-  <b>江原予備校 GAMBA</b> 高認英語 過去問対策<br>
+  <b>江原予備校 GAMBA</b> 高認英語 過去問対策 + 類題演習<br>
   © Realize Field
 </footer>
 
