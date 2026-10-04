@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMBA 高認英語 第5問 類題演習</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.tip-banner{background:linear-gradient(135deg,#e8f4ff,#d4eaff);border:1px solid #a0c8e8;padding:10px 14px;border-radius:10px;font-size:.82rem;color:#1a4870;margin-bottom:12px;line-height:1.6}
+.tip-banner b{color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink)}
+.q-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.topic{background:var(--soft);padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px}
+
+.q-instruction{font-size:.82rem;color:#666;margin-bottom:8px;background:#fffcf3;padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3);line-height:1.5}
+
+/* お知らせ枠：q4のframeに相当 */
+.notice-box{font-size:.92rem;line-height:1.85;font-family:"Georgia",serif;padding:14px;background:#fdf8f0;border-radius:10px;border:1px dashed var(--line);margin-bottom:10px;max-height:48vh;overflow-y:auto}
+.notice-box .notice-title{font-weight:800;text-align:center;font-size:1.05rem;color:var(--accent2);margin:0 0 12px;padding:8px 0;border-top:2px solid var(--accent2);border-bottom:2px solid var(--accent2);font-family:"Georgia",serif}
+.notice-box p{margin-bottom:8px}
+.notice-box table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.86rem}
+.notice-box table th,.notice-box table td{border:1px solid #c8b894;padding:5px 7px;vertical-align:top;text-align:left}
+.notice-box table th{background:#f0e4ce;font-weight:bold}
+.notice-box .info-block{background:#fff7e6;border-left:3px solid var(--accent3);padding:8px 12px;margin:8px 0;border-radius:4px}
+.notice-box .info-block ul{margin:2px 0;padding-left:20px}
+.notice-box .info-block li{margin-bottom:3px}
+.notice-box .info-block h3{font-size:.92rem;margin:2px 0 6px;color:var(--accent2);font-family:"Hiragino Maru Gothic ProN",sans-serif}
+.notice-box::-webkit-scrollbar{width:6px}
+.notice-box::-webkit-scrollbar-track{background:var(--soft)}
+.notice-box::-webkit-scrollbar-thumb{background:#c8b894;border-radius:3px}
+
+.toggle-ja{margin-bottom:10px;padding:6px 12px;background:var(--paper);border:1.5px solid var(--accent2);color:var(--accent2);border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit}
+
+.sentence-play{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 2px 6px rgba(217,79,79,.3);display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:inherit}
+.sentence-play:active{transform:scale(.98)}
+
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+.word-pop button.speak{background:var(--accent2);font-size:.85rem;padding:3px 9px}
+.word-pop button.speak:active{background:#1a4870}
+.word-pop .pop-buttons{display:flex;gap:4px;flex-direction:column}
+
+/* 第5問特有：質問エリア */
+.qsec{background:#fafafa;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
+.qsec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qsec-num{display:inline-block;background:var(--accent2);color:#fff;font-weight:800;padding:3px 10px;border-radius:6px;font-size:.78rem}
+.qsec-question{font-family:"Georgia",serif;font-size:.95rem;line-height:1.6;margin-bottom:8px;color:var(--ink)}
+.qsec-situation{background:#fff7e6;border-left:3px solid var(--accent3);padding:8px 10px;border-radius:5px;margin:6px 0 10px;font-size:.85rem;line-height:1.5;font-family:"Hiragino Maru Gothic ProN",sans-serif;color:#5a3a10}
+.qsec-situation b{color:var(--accent)}
+
+.choices{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.92rem;cursor:pointer;text-align:left;font-family:"Georgia",serif;color:var(--ink);transition:all .15s;line-height:1.45;font-weight:600}
+.choice .num{display:inline-block;background:var(--soft);color:var(--accent2);font-weight:800;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;margin-right:8px;font-size:.78rem;font-family:sans-serif;vertical-align:middle}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+.hint-box .strategy{margin-top:8px;padding:10px 12px;background:#e8f4ff;border-radius:6px;border-left:3px solid var(--accent2)}
+.hint-box .strategy b{color:var(--accent2)}
+.hint-box .ng-mark{color:var(--accent);font-weight:800}
+.hint-box .ok-mark{color:var(--good);font-weight:800}
+.hint-box .signal-word{background:#fff5d6;padding:1px 6px;border-radius:4px;font-weight:800;color:var(--accent);font-family:"Georgia",serif}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+.explain-box{background:var(--paper);padding:14px;border-radius:8px;border-left:4px solid var(--accent3);font-size:.9rem;line-height:1.85}
+.explain-box p{margin-bottom:10px}
+.explain-box p:last-child{margin-bottom:0}
+.explain-box b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+.explain-box .ans-key{display:inline-block;background:#fffcf3;border:1.5px solid var(--good);color:var(--good);padding:3px 10px;border-radius:6px;font-weight:800;margin-bottom:8px;font-size:.92rem}
+.explain-box .check-table{width:100%;border-collapse:collapse;margin:10px 0;background:#fafafa;border-radius:6px;overflow:hidden;font-size:.85rem}
+.explain-box .check-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-size:.78rem}
+.explain-box .check-table td{padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.explain-box .check-table tr:last-child td{border-bottom:none}
+.explain-box .check-table .ng{color:var(--accent);font-weight:700}
+.explain-box .check-table .ok{color:var(--good);font-weight:700}
+.explain-box .ja-trans{background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:10px;border-left:3px solid var(--accent2)}
+.explain-box .ja-trans b{color:var(--accent2);background:transparent;padding:0}
+
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+/* ヒントモード冒頭の注意書き */
+.hint-notice{background:#fff8e1;border:1px solid #ffd982;padding:10px 12px;border-radius:8px;font-size:.8rem;color:#806000;margin-bottom:10px;line-height:1.55}
+.hint-notice b{color:#a05000}
+
+/* 解説末尾の学習のすすめ */
+.study-rec{background:linear-gradient(135deg,#f0f8e8,#dcefcd);border:1px solid #a5c97c;padding:12px 14px;border-radius:10px;font-size:.85rem;color:#3a5a1f;margin-top:14px;line-height:1.7}
+.study-rec b{color:#2c4a14}
+.study-rec h4{color:#2c4a14;margin-bottom:6px;font-size:.92rem}
+.study-rec a{display:inline-block;background:#5a8a2c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:.82rem;margin:4px 4px 0 0;font-family:inherit}
+.study-rec a:hover{background:#3e6a14}
+
+@media (max-width:480px){
+  .notice-box{font-size:.88rem;max-height:42vh}
+  .notice-box .notice-title{font-size:1rem}
+  .qsec-question{font-size:.9rem}
+  .choice{font-size:.88rem;padding:9px 10px}
+}
+
+.app-note{background:#eef7ff;border:1px solid #c7e0f7;padding:8px 12px;border-radius:8px;font-size:.78rem;color:#1a4870;margin-bottom:10px;line-height:1.55}
+.app-note b{color:var(--accent2)}
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>📋 GAMBA 高認英語 第5問 類題演習</h1>
+  <p><span class="badge">お知らせ読解</span>本文に答えがある!・オリジナル類題</p>
+</header>
+
+<div class="app-note">
+  📝 <b>ご利用にあたって：</b>本アプリの問題は、<b>高認過去問の形式・レベルに合わせてオリジナル作成した類題</b>です。実際の過去問そのものは含まれません。本番試験と同じ出題パターン（お知らせの内容を読み取る）で反復演習することで、得点力アップを目指します。
+</div>
+
+<div class="tip-banner">
+  💡 <b>第5問は「お知らせの中に答えがある」!</b> 全部訳す必要はありません。<b>タイトル・冒頭・該当セクション</b>を集中して見るだけで答えが見つかります。ヒントを使って一緒に練習しましょう。
+</div>
+
+<div class="year-pick" id="yearPick"></div>
+<div class="q-tabs" id="qTabs"></div>
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+
+<script>
+const QUESTIONS_DATA = {
+
+// ============================================================
+// Set-A（R7-1類題）：迷子猫さがし
+// ============================================================
+"Set-A": [
+  {
+    no:1, qNum:18, topic:"迷子猫モモを探して（目的）",
+    noticeTitle: "Help Us Find Momo, Our Beloved Cat!",
+    noticeBody: `
+<p>Momo has been missing since <b>October 12th</b>. She was last seen near Sakura Park around 6 p.m. on that day. We are deeply worried about her and seeking your help in bringing her back home.</p>
+<p>Please look out for Momo and share this notice with everyone you know.</p>
+<div class="info-block">
+<h3>🐱 Momo's Profile</h3>
+<ul>
+<li><b>Type</b>: Mixed breed cat（雑種）</li>
+<li><b>Size</b>: Medium (about 4 kg)</li>
+<li><b>Color</b>: White with brown spots</li>
+<li><b>Age</b>: 3 (adult cat)</li>
+<li><b>Gender</b>: Female</li>
+<li><b>Distinctive Feature</b>: <b>Blue collar with a small bell</b>（鈴付きの青い首輪）</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>📞 Contact Information</h3>
+<ul>
+<li><b>Daytime contact</b>: Please <b>CALL</b> Sarah Tanaka at 080-555-1234.</li>
+<li><b>Evening contact</b>: Please <b>TEXT</b> Kenji Tanaka at 090-666-7890.</li>
+</ul>
+</div>
+<p>Momo is shy and nervous around strangers. So, if you find her, please do <b>not chase or pick her up</b>. Instead, please contact us right away.</p>
+`,
+    noticeBodyJa: "モモは10月12日から行方不明です。その日の午後6時頃、サクラ公園の近くで最後に目撃されました。【プロフィール】雑種猫・中型（約4kg）・白に茶色い斑点・3歳・メス・鈴付きの青い首輪。【連絡先】日中はサラ・タナカに電話、夕方〜夜はケンジ・タナカにメッセージ。モモは臆病なので、追いかけたり抱き上げたりせず、すぐに連絡してください。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To find a new owner for an unwanted cat",
+      "To get help finding a missing pet",
+      "To warn neighbors about a dangerous animal",
+      "To advertise a pet shop opening"
+    ],
+    choicesJa: [
+      "いらない猫の新しい飼い主を探すため",
+      "迷子のペットを見つける手伝いを得るため",
+      "近所の人に危険な動物について警告するため",
+      "ペットショップ開店を宣伝するため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"missing", mean:"行方不明の", kana:"ミッシング", ac:"ミ"},
+      {w:"worried", mean:"心配している", kana:"ウォリード", ac:"ウォ"},
+      {w:"look out for", mean:"気をつけて見ておく", kana:"ルックアウトフォー", ac:"ル"},
+      {w:"shy", mean:"臆病な", kana:"シャイ", ac:"シャ"},
+      {w:"nervous", mean:"神経質な", kana:"ナーヴァス", ac:"ナー"},
+      {w:"strangers", mean:"知らない人", kana:"ストレインジャーズ", ac:"レイ"},
+      {w:"missing pet", mean:"迷子のペット", kana:"ミッシングペット", ac:"ミ"},
+      {w:"unwanted", mean:"いらない", kana:"アンウォンティド", ac:"ウォ"},
+      {w:"dangerous animal", mean:"危険な動物", kana:"デインジャラスアニマル", ac:"デイ"}
+    ],
+    hints: [
+      "<p>第5問は<b>「お知らせの中に答えが必ず書いてある」</b>問題です。まずカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>missing</td><td class='ja'>行方不明の</td></tr><tr><td class='en'>help finding</td><td class='ja'>見つける手伝い</td></tr><tr><td class='en'>unwanted cat</td><td class='ja'>いらない猫</td></tr><tr><td class='en'>dangerous animal</td><td class='ja'>危険な動物</td></tr></table>",
+      "<p>「目的を問う問題」は <b>3つのコツ</b> で解けます。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<span class='think-arrow'>→</span>大きなヒントが書いてある<br>② <b>冒頭の1〜2文</b>を見る<span class='think-arrow'>→</span>「何の話か」が書いてある<br>③ 全部訳さない！<b>キーワード</b>を一致させる</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Help Us Find Momo</span>（モモを見つけるのを手伝って）<span class='think-arrow'>→</span>「<b>find（見つける）</b>」が大きなヒント！<br><b>冒頭</b>: <span class='signal-word'>Momo has been missing</span>（モモは行方不明）<span class='think-arrow'>→</span>「<b>missing（行方不明）</b>」がキーワード！</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <span class='signal-word'>missing</span>（行方不明）と同じ意味の語が選択肢にあるか？<span class='think-arrow'>→</span><b>missing pet</b>（迷子のペット）が出てくる選択肢がある！<br>② 「<b>いらない猫</b>」「<b>危険な動物</b>」「<b>ペットショップ開店</b>」は本文にあるか？<span class='think-arrow'>→</span>本文には書かれていない</div><div class='step'><b>例えば：</b> ③「dangerous animal（危険な動物）」を見てください。<br>本文には「<span class='signal-word'>shy and nervous</span>」（臆病で神経質）と書かれている。<span class='think-arrow'>→</span>「危険」とは<b>正反対</b>。だから③は<b>×</b>。</div>"
+    ],
+    explain: '<p>このお知らせは <b>飼い猫モモが行方不明になり、見つけるのを手伝ってほしい</b> という内容です。</p><div class="ans-key">✅ 正解：② To get help finding a missing pet</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Help Us Find Momo</b></td><td>「モモを見つけるのを手伝って」</td></tr><tr><td><b>冒頭</b></td><td><b>Momo has been missing</b></td><td>「モモは行方不明」</td></tr><tr><td><b>2段落目</b></td><td><b>seeking your help in bringing her back home</b></td><td>「家に連れ戻すお手伝いを求めている」</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① いらない猫の飼い主探し</td><td>モモは大切な飼い猫。本文と<b>反対</b></td><td class="ng">×</td></tr><tr><td>② 迷子のペットを見つける手伝い</td><td>「missing」「help finding」と一致</td><td class="ok">○</td></tr><tr><td>③ 危険な動物の警告</td><td>「shy and nervous」（臆病）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ ペットショップ開店</td><td>店の宣伝ではない</td><td class="ng">×</td></tr></table><p><b>覚えておきたい単語</b>：<b>missing / lost</b>（行方不明・迷子）、<b>find</b>（見つける）、<b>help finding 〜</b>（〜を見つけるのを手伝う）、<b>shy</b>（臆病）⇔<b>dangerous</b>（危険）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"迷子猫モモの特徴（真偽判定）",
+    sharedNotice:"Set-A_notice",
+    question: "Which of the following is true about Momo?",
+    questionJa: "モモについて正しいものは次のうちどれですか？",
+    choices: [
+      "She is older than five years old.",
+      "She has a bell on her collar.",
+      "She loves meeting new people.",
+      "She is a black male cat."
+    ],
+    choicesJa: [
+      "彼女は5歳より年上だ",
+      "彼女は首輪に鈴を付けている",
+      "彼女は新しい人と出会うのが大好きだ",
+      "彼女は黒いオス猫だ"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"older", mean:"年上の", kana:"オウルダー", ac:"オウ"},
+      {w:"bell", mean:"鈴", kana:"ベル", ac:"ベ"},
+      {w:"collar", mean:"首輪", kana:"カラー", ac:"カ"},
+      {w:"meeting new people", mean:"新しい人に会う", kana:"ミーティングニューピープル", ac:"ミー"},
+      {w:"black", mean:"黒", kana:"ブラック", ac:"ブラッ"},
+      {w:"male", mean:"オス", kana:"メイル", ac:"メイ"},
+      {w:"adult cat", mean:"成猫", kana:"アダルトキャット", ac:"ア"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題です。<b>選択肢を1つずつ本文と照合</b>します。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>older than five</td><td class='ja'>5歳より年上</td></tr><tr><td class='en'>bell on her collar</td><td class='ja'>首輪に鈴</td></tr><tr><td class='en'>meeting new people</td><td class='ja'>新しい人に会う</td></tr><tr><td class='en'>black male</td><td class='ja'>黒いオス</td></tr></table>",
+      "<p>真偽判定の <b>3つのコツ</b> を覚えましょう。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の <b>キーワード</b> を本文の中で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ 本文に<b>書かれていない</b>ことを言う選択肢も ×</div><div class='step'>このお知らせの<b>「Profile」</b>欄を集中して見ましょう！<br>・<b>Age: 3</b>（3歳）<span class='think-arrow'>→</span>5歳より<b>若い</b><br>・<b>Blue collar with a small bell</b>（鈴付きの青い首輪）<span class='think-arrow'>→</span>「鈴」のキーワード！<br>・<b>Color: White with brown spots</b>（白に茶色い斑点）<span class='think-arrow'>→</span>黒ではない<br>・<b>Gender: Female</b>（メス）<span class='think-arrow'>→</span>オスではない<br>・<b>shy and nervous around strangers</b>（知らない人に臆病）<span class='think-arrow'>→</span>「新しい人が好き」とは<b>反対</b></div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <b>① older than five</b>（5歳より年上）<span class='think-arrow'>→</span>本文 <b>Age: 3</b> と<b>違う</b><br>② <b>② bell on her collar</b>（首輪に鈴）<span class='think-arrow'>→</span>本文 <b>Blue collar with a small bell</b> と一致<br>③ <b>③ loves meeting new people</b>（新しい人が大好き）<span class='think-arrow'>→</span>本文 <b>shy and nervous around strangers</b> と<b>反対</b><br>④ <b>④ black male</b>（黒いオス）<span class='think-arrow'>→</span>本文「白に茶色い斑点・メス」と<b>違う</b></div>"
+    ],
+    explain: '<p>「Momo について本文と一致するもの」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：② She has a bell on her collar.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 5歳より年上</td><td>本文「<b>Age: 3</b>」（3歳）と<b>違う</b></td><td class="ng">×</td></tr><tr><td>② 首輪に鈴がある</td><td>本文「<b>Blue collar with a small bell</b>」と一致</td><td class="ok">○</td></tr><tr><td>③ 新しい人が大好き</td><td>本文「<b>shy and nervous around strangers</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 黒いオス猫</td><td>本文「白に茶色い斑点・メス」と<b>違う</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント1：プロフィール欄は宝の山</b><br>真偽判定問題では<b>具体的な数字（年齢・体重）</b>や<b>固有名詞</b>がよく問われます。プロフィール欄を集中的に見ましょう。</p><p><b>判断のポイント2：「shy / nervous」と「loves meeting people」は反対</b><br>性格を表す表現は<b>反対の意味</b>を狙ってひっかけが作られます。<b>shy（臆病）</b>と<b>loves meeting new people（人好き）</b>は正反対。</p><p><b>覚えておきたい単語</b>：<b>collar</b>（首輪）、<b>bell</b>（鈴）、<b>shy</b>（臆病）⇔<b>outgoing</b>（社交的）、<b>female</b>（メス）⇔<b>male</b>（オス）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"迷子猫を見つけたら（状況判断）",
+    sharedNotice:"Set-A_notice",
+    question: "In the following situation, what should you do?",
+    questionJa: "次の状況では、何をすべきですか？",
+    situation: "You spot a white cat with brown spots and a blue collar at <b>11 a.m.</b>",
+    situationJa: "<b>午前11時</b>に、青い首輪をした白に茶色い斑点の猫を見かけました。",
+    choices: [
+      "Pick up the cat and bring it home",
+      "Text Kenji's phone immediately",
+      "Call Sarah without delay",
+      "Take the cat to a vet"
+    ],
+    choicesJa: [
+      "猫を抱き上げて家に連れて行く",
+      "すぐにケンジの携帯にメッセージを送る",
+      "すぐにサラに電話する",
+      "猫を獣医に連れて行く"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"daytime", mean:"日中", kana:"デイタイム", ac:"デイ"},
+      {w:"evening", mean:"夕方〜夜", kana:"イーヴニング", ac:"イー"},
+      {w:"contact", mean:"連絡する", kana:"コンタクト", ac:"コン"},
+      {w:"text", mean:"メッセージを送る（動詞）", kana:"テキスト", ac:"テ"},
+      {w:"call", mean:"電話する", kana:"コール", ac:"コー"},
+      {w:"pick up", mean:"抱き上げる", kana:"ピックアップ", ac:"ピッ"},
+      {w:"vet", mean:"獣医", kana:"ヴェット", ac:"ヴェッ"},
+      {w:"without delay", mean:"遅滞なく", kana:"ウィズアウトディレイ", ac:"レイ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を確認</b>してから本文の該当部分を見ましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>11 a.m.</td><td class='ja'>午前11時 = 日中</td></tr><tr><td class='en'>Daytime</td><td class='ja'>日中</td></tr><tr><td class='en'>Evening</td><td class='ja'>夕方〜夜</td></tr><tr><td class='en'>CALL</td><td class='ja'>電話する</td></tr><tr><td class='en'>TEXT</td><td class='ja'>メッセージを送る</td></tr><tr><td class='en'>do not pick her up</td><td class='ja'>抱き上げない（禁止）</td></tr></table>",
+      "<p>状況問題は <b>2つのコツ</b> で解けます。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① 状況の<b>キー条件</b>を見つける<span class='think-arrow'>→</span>今回は<b>「午前11時」</b><br>② 本文の<b>「Contact」「ルール」欄</b>を見る<span class='think-arrow'>→</span>連絡先や指示が書いてある</div><div class='step'>このお知らせの<b>「Contact Information」</b>欄を確認！<br>・<b>Daytime</b>（日中）<span class='think-arrow'>→</span><b>CALL</b> Sarah Tanaka<br>・<b>Evening</b>（夕方〜夜）<span class='think-arrow'>→</span><b>TEXT</b> Kenji Tanaka<br><b>午前11時</b>は<b>Daytime</b>（日中）ですね。</div><div class='step'><b>注意</b>：本文最後に「<b>do not chase or pick her up</b>」（追いかけたり抱き上げたりしない）という指示もあります。これに反する選択肢は<b>×</b>。</div>"
+    ],
+    explain: '<p>「午前11時に猫を見つけた場合、何をすべきか」を本文から判断する <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：③ Call Sarah without delay</div><p><b>条件と本文の照合：</b></p><table class="check-table"><tr><th>条件</th><th>本文の指示</th><th>該当する行動</th></tr><tr><td><b>午前11時</b>（=日中）</td><td>「Daytime contact: Please <b>CALL</b> Sarah Tanaka」</td><td><b>Sarah に電話</b></td></tr><tr><td>猫を見つけたら</td><td>「<b>do not chase or pick her up</b>」（抱き上げない）</td><td>抱き上げ ×</td></tr><tr><td>連絡先</td><td>飼い主のみ（獣医の記載なし）</td><td>獣医 ×</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 抱き上げて家に連れて行く</td><td>「do not pick her up」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>② Kenji にメッセージ</td><td>Kenji への TEXT は <b>Evening</b> 専用</td><td class="ng">×</td></tr><tr><td>③ Sarah に電話</td><td>11時=Daytime → Sarah に CALL と一致</td><td class="ok">○</td></tr><tr><td>④ 獣医に連れて行く</td><td>本文に獣医の指示なし</td><td class="ng">×</td></tr></table><p><b>判断のポイント：時間帯と連絡方法の組み合わせ</b><br>第5問の状況問題では「<b>時間帯（Daytime/Evening）+ 連絡方法（CALL/TEXT）+ 連絡先（誰）</b>」の3点セットで判断します。<b>禁止事項</b>（do not 〜）にも注意。</p><p><b>覚えておきたい単語</b>：<b>Daytime</b>（日中）／<b>Evening</b>（夕方〜夜）、<b>contact</b>（連絡する）、<b>call</b>（電話する）／<b>text</b>（メッセージを送る）、<b>pick up</b>（抱き上げる）。</p>'
+  }
+],
+
+// ============================================================
+// Set-B（R7-2類題）：学園祭ボランティア
+// ============================================================
+"Set-B": [
+  {
+    no:1, qNum:18, topic:"学園祭ボランティア（目的）",
+    noticeTitle: "Volunteers Wanted! — MIDORI HIGH SCHOOL FESTIVAL",
+    noticeBody: `
+<p><b>The Festival Day: November 3, 2025</b></p>
+<p>We are looking for student volunteers for the <b>annual</b> Midori High School Festival! If you want to be part of this exciting event without performing on stage, becoming a volunteer is the best way. Click here to apply!</p>
+<table>
+<tr><th>Role</th><th>Description &amp; Age Limit</th></tr>
+<tr><td><b>Reception Desk</b><br>受付</td><td>Welcome guests and hand out programs.<br><b>14 or older</b>.</td></tr>
+<tr><td><b>Stage Helpers</b><br>ステージ補助</td><td>Set up microphones and instruments.<br><b>16 or older</b>.</td></tr>
+<tr><td><b>Food Stall Staff</b><br>屋台スタッフ</td><td>Sell snacks and drinks.<br><b>16 or older</b>. <b>Training</b> will be held the week before.</td></tr>
+<tr><td><b>Cleanup Crew</b><br>清掃係</td><td>Help clean up after the festival.<br><b>14 or older</b>. <b>Training</b> will be held the day before.</td></tr>
+</table>
+<div class="info-block">
+<h3>📋 Notes</h3>
+<ul>
+<li>Volunteers who are <b>17 or younger</b> must have a parent or guardian sign a consent form.</li>
+<li>Email questions to volunteer@midori-hs.jp</li>
+</ul>
+</div>
+`,
+    noticeBodyJa: "【祭典日：2025年11月3日】毎年恒例のミドリ高校祭ボランティア募集中！【役割】①受付（14歳以上）②ステージ補助（16歳以上）③屋台スタッフ（16歳以上・前週に研修）④清掃係（14歳以上・前日研修）。【注意】17歳以下は保護者の同意書必須。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To sell tickets for the festival performances",
+      "To recruit students as event volunteers",
+      "To recruit famous performers for the festival",
+      "To announce the cancellation of the festival"
+    ],
+    choicesJa: [
+      "祭典の公演のチケットを売るため",
+      "生徒をイベントボランティアとして募集するため",
+      "祭典に有名なパフォーマーを募集するため",
+      "祭典の中止を知らせるため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"volunteer", mean:"ボランティア（をする）", kana:"ヴォランティア", ac:"ヴォ"},
+      {w:"annual", mean:"毎年恒例の", kana:"アニュアル", ac:"ア"},
+      {w:"recruit", mean:"募集する", kana:"リクルート", ac:"ルー"},
+      {w:"performers", mean:"演者・パフォーマー", kana:"パフォーマーズ", ac:"フォー"},
+      {w:"cancellation", mean:"中止", kana:"キャンセレイション", ac:"レイ"},
+      {w:"tickets", mean:"チケット", kana:"ティケッツ", ac:"ティ"}
+    ],
+    hints: [
+      "<p>「目的を問う問題」です。まずカギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>volunteer</td><td class='ja'>ボランティア（をする）</td></tr><tr><td class='en'>recruit</td><td class='ja'>募集する</td></tr><tr><td class='en'>annual</td><td class='ja'>毎年恒例の</td></tr><tr><td class='en'>performers</td><td class='ja'>演者・パフォーマー</td></tr><tr><td class='en'>cancellation</td><td class='ja'>中止</td></tr></table>",
+      "<p>「目的問題」は <b>タイトル＋冒頭</b> がカギです。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<span class='think-arrow'>→</span>大きなヒントが書いてある<br>② <b>冒頭の1〜2文</b>を見る<span class='think-arrow'>→</span>「何の話か」が書いてある</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Volunteers Wanted!</span>（ボランティア求む！）<span class='think-arrow'>→</span>「<b>volunteer（ボランティア）</b>」が大きなキーワード<br><b>冒頭</b>: <span class='signal-word'>We are looking for student volunteers</span>（生徒ボランティアを探している）</div>",
+      "<p>選択肢を <b>消去法</b> で絞り込みましょう。</p><div class='strategy'><b>絞り込みの視点：</b><br>① <span class='signal-word'>tickets</span>（チケット販売）？<span class='think-arrow'>→</span>本文はボランティア募集<br>② <span class='signal-word'>volunteers</span>（ボランティア）→タイトルと一致<br>③ <span class='signal-word'>famous performers</span>（有名なパフォーマー）→本文にない<br>④ <span class='signal-word'>cancellation</span>（中止）→本文に開催日（11/3）あり</div>"
+    ],
+    explain: '<p>このお知らせは <b>ミドリ高校祭のボランティアを募集する</b> 内容です。</p><div class="ans-key">✅ 正解：② To recruit students as event volunteers</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Volunteers Wanted!</b></td><td>「ボランティア求む！」</td></tr><tr><td><b>冒頭</b></td><td><b>We are looking for student volunteers</b></td><td>「生徒ボランティアを探している」</td></tr><tr><td><b>2文目</b></td><td><b>becoming a volunteer is the best way</b></td><td>「ボランティアが一番の方法」</td></tr></table><p><b>判断のポイント：「volunteer / recruit」のサイン</b><br>本文には<b>volunteer</b>（ボランティア）が何度も出てきます。これがお知らせのテーマ。「<b>recruit</b>（募集する）」と「<b>looking for</b>（探している）」も同じ意味。</p><p><b>覚えておきたい単語</b>：<b>volunteer</b>（ボランティア）、<b>recruit</b>（募集する）、<b>annual</b>（毎年恒例の）、<b>cancellation</b>（中止）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"学園祭ボランティア（真偽判定）",
+    sharedNotice:"Set-B_notice",
+    question: "Which of the following is true?",
+    questionJa: "次のうち正しいものはどれですか？",
+    choices: [
+      "The Midori High School Festival is held for the first time this year.",
+      "Volunteer registration ends on November 3rd.",
+      "Volunteers should apply by phone to the school office.",
+      "Some volunteers need parental consent to participate."
+    ],
+    choicesJa: [
+      "ミドリ高校祭は今年初めて開催される",
+      "ボランティア登録は11月3日に終わる",
+      "ボランティアは学校事務室に電話で申し込む",
+      "参加に保護者の同意が必要なボランティアもいる"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"annual", mean:"毎年恒例の", kana:"アニュアル", ac:"ア"},
+      {w:"guardian", mean:"保護者", kana:"ガーディアン", ac:"ガー"},
+      {w:"consent form", mean:"同意書", kana:"コンセントフォーム", ac:"セン"},
+      {w:"parental consent", mean:"保護者の同意", kana:"パレンタルコンセント", ac:"レン"},
+      {w:"apply", mean:"申し込む", kana:"アプライ", ac:"ライ"},
+      {w:"first time", mean:"初めて", kana:"ファーストタイム", ac:"ファー"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題です。選択肢を1つずつ本文と照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>annual</td><td class='ja'>毎年恒例の</td></tr><tr><td class='en'>parental consent</td><td class='ja'>保護者の同意</td></tr><tr><td class='en'>17 or younger</td><td class='ja'>17歳以下</td></tr><tr><td class='en'>Click here to apply</td><td class='ja'>ここをクリックして申込（=ネット申込）</td></tr><tr><td class='en'>first time</td><td class='ja'>初めて</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ <b>数字や日付</b>はよく見る</div><div class='step'>本文の<b>「Notes」</b>欄に注目！<br>・「<span class='signal-word'>17 or younger must have a parent or guardian sign a consent form</span>」<span class='think-arrow'>→</span>17歳以下は保護者の同意書が必要<br><b>注意</b>：「<span class='signal-word'>annual</span>」は「<b>毎年恒例の</b>」=「初めて」とは反対の意味。</div>"
+    ],
+    explain: '<p>「本文と一致する選択肢」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：④ Some volunteers need parental consent to participate.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 今年初めて開催</td><td>本文「<b>annual</b>」（毎年恒例）と<b>反対</b></td><td class="ng">×</td></tr><tr><td>② 11/3に登録終了</td><td>11/3は<b>祭典当日</b>。登録期限ではない</td><td class="ng">×</td></tr><tr><td>③ 電話で申込</td><td>本文「<b>Click here to apply</b>」（ネット申込）</td><td class="ng">×</td></tr><tr><td>④ 親の同意が必要な人もいる</td><td>「17歳以下は<b>parent or guardian</b>... <b>consent form</b>」と一致</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「annual」は「毎年恒例」</b><br><b>annual</b>=「<b>毎年恒例の</b>」。「初めて開催」とは正反対の意味。</p><p><b>判断のポイント2：「Click here to apply」は「オンライン」</b><br><b>Click here to apply</b>=「ここをクリックして申込」=<b>ネット経由</b>。電話の指示はありません。</p><p><b>覚えておきたい単語</b>：<b>annual</b>（毎年恒例）、<b>parental consent</b>（保護者の同意）、<b>guardian</b>（保護者）、<b>apply</b>（申し込む）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"学園祭ボランティア（状況判断）",
+    sharedNotice:"Set-B_notice",
+    question: "In the following situation, which role can you sign up for?",
+    questionJa: "次の状況では、どの役割に申し込めますか？",
+    situation: "You are <b>15 years old</b>. You are available <b>only on the festival day</b>.",
+    situationJa: "あなたは<b>15歳</b>で、<b>祭典当日のみ</b>参加可能です。",
+    choices: [
+      "Reception Desk",
+      "Stage Helpers",
+      "Food Stall Staff",
+      "Cleanup Crew"
+    ],
+    choicesJa: [
+      "受付",
+      "ステージ補助",
+      "屋台スタッフ",
+      "清掃係"
+    ],
+    answer: 1,
+    keyWords: [
+      {w:"age limit", mean:"年齢制限", kana:"エイジリミット", ac:"エイ"},
+      {w:"training", mean:"事前研修", kana:"トレイニング", ac:"トレイ"},
+      {w:"available", mean:"参加可能", kana:"アヴェイラブル", ac:"ヴェイ"},
+      {w:"festival day", mean:"祭典当日", kana:"フェスティヴァルデイ", ac:"フェ"},
+      {w:"or older", mean:"以上", kana:"オアオウルダー", ac:"オウ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を整理</b>してから本文と照合しましょう。</p><table class='word-table'><tr><th>条件</th><th>意味</th></tr><tr><td class='en'>15 years old</td><td class='ja'>15歳</td></tr><tr><td class='en'>only on the festival day</td><td class='ja'>祭典当日のみ参加可（事前研修は不可）</td></tr><tr><td class='en'>14 or older</td><td class='ja'>14歳以上</td></tr><tr><td class='en'>16 or older</td><td class='ja'>16歳以上</td></tr><tr><td class='en'>training</td><td class='ja'>事前研修</td></tr></table>",
+      "<p>状況問題は <b>条件を1つずつチェック</b> します。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① 条件を<b>2つに分ける</b>：今回は ①15歳 ②当日のみ<br>② 各役割を<b>2つの条件で判定</b>：両方クリアしたものが正解</div><div class='step'>4つの役割を表で整理してみましょう。<br><b>① Reception Desk</b>: 14歳以上 ✓ 研修不要 ✓ <span class='think-arrow'>→</span>両方OK<br><b>② Stage Helpers</b>: 16歳以上必要 <span class='think-arrow'>→</span>15歳は<b>×</b><br><b>③ Food Stall Staff</b>: 16歳以上+研修必要 <span class='think-arrow'>→</span>両方<b>×</b><br><b>④ Cleanup Crew</b>: 14歳以上 ✓ <b>研修必要</b>（前日） <span class='think-arrow'>→</span>当日のみは<b>×</b></div>"
+    ],
+    explain: '<p>「15歳・当日のみ参加可」の状況で適切な役割を選ぶ <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：① Reception Desk</div><p><b>各役割を2つの条件で判定：</b></p><table class="check-table"><tr><th>役割</th><th>15歳OK?</th><th>当日のみOK?</th><th>判定</th></tr><tr><td>① Reception Desk（受付）</td><td>14歳以上 ✓</td><td>研修不要 ✓</td><td class="ok">○</td></tr><tr><td>② Stage Helpers</td><td><b>16歳以上</b>必要</td><td>—</td><td class="ng">×</td></tr><tr><td>③ Food Stall Staff</td><td><b>16歳以上</b>必要</td><td>研修必要</td><td class="ng">×</td></tr><tr><td>④ Cleanup Crew</td><td>14歳以上 ✓</td><td><b>前日研修必要</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント：両方の条件をクリアできる役割は1つだけ</b><br>15歳OK＆研修不要、両方を満たすのは<b>① Reception Desk</b>のみ。第5問の状況問題は<b>条件を表にして消去法</b>で確実に。</p><p><b>覚えておきたい単語</b>：<b>14 or older</b>（14歳以上）、<b>training</b>（事前研修）、<b>available</b>（参加可能）、<b>festival day</b>（祭典当日）。</p>'
+  }
+],
+
+// ============================================================
+// Set-C（R6-1類題）：春期キッズプログラム
+// ============================================================
+"Set-C": [
+  {
+    no:1, qNum:18, topic:"春期キッズプログラム（目的）",
+    noticeTitle: "Spring Break Programs 2025 — &ldquo;Discover Your World&rdquo;",
+    noticeBody: `
+<p>We will offer programs for <b>elementary and junior high school students</b> in Yokohama during the spring break. Through each program, you can gain valuable <b>hands-on experience</b> that will help you discover new interests. Join a program, and discover your world!</p>
+<p>All programs are <b>free of charge</b>. These programs require you to sign up in advance. Click here and register at least <b>three days</b> before the start date.</p>
+<table>
+<tr><th>Date &amp; Time</th><th>Participants</th><th>Program</th></tr>
+<tr><td>March 25-26<br>10:00-15:00</td><td>JHSS</td><td><b>Robot Lab</b><br>Engineers at Tech Future Co.<br>(Need basic computer skills)</td></tr>
+<tr><td>March 26<br>14:00-19:00</td><td>ELES / JHSS</td><td><b>Magic of Words</b><br>Yokohama Storytellers Group.</td></tr>
+<tr><td>March 27-28<br>10:00-16:00</td><td>ELES / JHSS</td><td><b>Garden Adventure</b><br>Yokohama Botanical Garden.</td></tr>
+<tr><td>March 29<br>7:00-12:00</td><td>ELES</td><td><b>Sweet Cookies</b><br>Happy Bakery.</td></tr>
+</table>
+<p style="font-size:.85em;color:#666"><b>ELES</b> = elementary school student（小学生） / <b>JHSS</b> = junior high school student（中学生）</p>
+`,
+    noticeBodyJa: "横浜在住の小中学生向け春休みプログラム。【プログラム】①Robot Lab（3/25-26・中学生・パソコン基礎要）②Magic of Words（3/26・小中学生・物語）③Garden Adventure（3/27-28・小中学生・植物園）④Sweet Cookies（3/29朝のみ・小学生・パン作り）。【特徴】無料、要事前申込（開始日の3日以上前）。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To recruit teachers for elementary schools",
+      "To encourage children to try new experiences",
+      "To advertise summer camp tours abroad",
+      "To collect donations for a charity event"
+    ],
+    choicesJa: [
+      "小学校の先生を募集するため",
+      "子どもたちに新しい体験を勧めるため",
+      "海外のサマーキャンプツアーを宣伝するため",
+      "チャリティイベントの寄付を集めるため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"hands-on experience", mean:"実体験", kana:"ハンズオンエクスピリエンス", ac:"ピ"},
+      {w:"elementary", mean:"小学校の", kana:"エレメンタリー", ac:"メ"},
+      {w:"junior high", mean:"中学校の", kana:"ジュニアハイ", ac:"ジュ"},
+      {w:"teachers", mean:"先生", kana:"ティーチャーズ", ac:"ティー"},
+      {w:"encourage", mean:"勧める", kana:"エンカリッジ", ac:"カ"},
+      {w:"summer camp", mean:"サマーキャンプ", kana:"サマーキャンプ", ac:"サ"},
+      {w:"abroad", mean:"海外で", kana:"アブロード", ac:"ブロー"},
+      {w:"donations", mean:"寄付", kana:"ドウネイションズ", ac:"ネイ"},
+      {w:"charity", mean:"チャリティ・慈善", kana:"チャリティ", ac:"チャ"}
+    ],
+    hints: [
+      "<p>「目的問題」です。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>hands-on experience</td><td class='ja'>実体験</td></tr><tr><td class='en'>encourage</td><td class='ja'>勧める</td></tr><tr><td class='en'>teachers</td><td class='ja'>先生</td></tr><tr><td class='en'>summer camp abroad</td><td class='ja'>海外サマーキャンプ</td></tr><tr><td class='en'>donations</td><td class='ja'>寄付</td></tr></table>",
+      "<p>「目的問題」は <b>タイトル＋冒頭</b> がカギです。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<br>② <b>冒頭の1〜2文</b>を見る<span class='think-arrow'>→</span>「誰に・何を・何のため」が書いてある</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Spring Break Programs 2025 — Discover Your World</span>（春休みプログラム・世界を発見）<br><b>冒頭</b>: <span class='signal-word'>programs for elementary and junior high school students</span>（小中学生向けプログラム）／<span class='signal-word'>gain valuable hands-on experience</span>（貴重な実体験ができる）</div><div class='step'>キーワードは<b>「hands-on experience（実体験）」「discover new interests（新しい興味の発見）」</b>。これが選択肢に出てくるものを探しましょう。</div>"
+    ],
+    explain: '<p>このお知らせは <b>横浜在住の小中学生向け春期プログラム</b> を案内する内容です。</p><div class="ans-key">✅ 正解：② To encourage children to try new experiences</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Discover Your World</b></td><td>「世界を発見しよう」</td></tr><tr><td><b>冒頭</b></td><td><b>elementary and junior high school students</b></td><td>「小中学生」（=children）</td></tr><tr><td><b>主旨</b></td><td><b>hands-on experience / discover new interests</b></td><td>「実体験・新しい興味」（=new experiences）</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① 先生の募集</td><td>対象は<b>生徒（児童）</b>。先生ではない</td><td class="ng">×</td></tr><tr><td>② 子どもに新体験を勧める</td><td>「encourage / hands-on experience」と一致</td><td class="ok">○</td></tr><tr><td>③ 海外サマーキャンプ</td><td>「abroad（海外）」の語なし。横浜のプログラム</td><td class="ng">×</td></tr><tr><td>④ チャリティ寄付集め</td><td>「donations / charity」の語なし</td><td class="ng">×</td></tr></table><p><b>判断のポイント：「new experiences」と「hands-on experience」は同じ意味</b><br><b>hands-on experience</b>=実体験、<b>new interests</b>=新しい興味、=<b>new experiences</b>（新しい体験）。本文と選択肢が<b>違う英語</b>でも<b>同じ意味</b>なら正解です。</p><p><b>覚えておきたい単語</b>：<b>hands-on experience</b>（実体験）、<b>encourage</b>（勧める）、<b>discover</b>（発見する）、<b>donations</b>（寄付）、<b>charity</b>（チャリティ）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"春期キッズプログラム（真偽判定）",
+    sharedNotice:"Set-C_notice",
+    question: "Which of the following statements is true?",
+    questionJa: "次の文のうち正しいものはどれですか？",
+    choices: [
+      "All programs are open to children of any age.",
+      "You have to bring your own lunch every day.",
+      "You can register for the programs through the internet.",
+      "You must apply at least one month in advance."
+    ],
+    choicesJa: [
+      "すべてのプログラムは何歳の子どもでも参加できる",
+      "毎日自分のお弁当を持参しなければならない",
+      "インターネットでプログラムに申し込める",
+      "少なくとも1ヶ月前までに申し込まなければならない"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"sign up", mean:"申し込む", kana:"サインアップ", ac:"サイ"},
+      {w:"register", mean:"登録する", kana:"レジスター", ac:"レ"},
+      {w:"three days", mean:"3日", kana:"スリーデイズ", ac:"スリー"},
+      {w:"in advance", mean:"前もって", kana:"インアドヴァンス", ac:"ヴァ"},
+      {w:"free of charge", mean:"無料", kana:"フリーオブチャージ", ac:"フリー"},
+      {w:"any age", mean:"どんな年齢でも", kana:"エニエイジ", ac:"エ"},
+      {w:"lunch", mean:"昼食・お弁当", kana:"ランチ", ac:"ラ"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題。本文と1つずつ照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>free of charge</td><td class='ja'>無料</td></tr><tr><td class='en'>register / sign up</td><td class='ja'>登録する／申し込む</td></tr><tr><td class='en'>three days before</td><td class='ja'>3日前までに</td></tr><tr><td class='en'>Click here</td><td class='ja'>ここをクリック（=オンライン）</td></tr><tr><td class='en'>any age</td><td class='ja'>どんな年齢でも</td></tr><tr><td class='en'>own lunch</td><td class='ja'>自分のお弁当</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② <b>数字や金額</b>はよく見る（ひっかけ多い）<br>③ <b>反対の意味</b>の選択肢は ×</div><div class='step'>本文の<b>申込ルール</b>に注目！<br>・「<span class='signal-word'>Click here and register</span>」<span class='think-arrow'>→</span><b>ネット申込</b>=オンライン<br>・「<span class='signal-word'>at least three days before</span>」<span class='think-arrow'>→</span><b>3日前まで</b>（1ヶ月ではない）<br>・対象は<b>elementary and junior high</b>（小中学生）<span class='think-arrow'>→</span>「any age（誰でも）」ではない<br>・本文に<b>lunch</b>（弁当）の記載なし</div>"
+    ],
+    explain: '<p>「本文と一致する選択肢」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：③ You can register for the programs through the internet.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 何歳でもOK</td><td>対象は<b>小中学生（ELES/JHSS）</b>のみ</td><td class="ng">×</td></tr><tr><td>② お弁当持参</td><td>本文にお弁当の記載なし</td><td class="ng">×</td></tr><tr><td>③ ネットで申込</td><td>「<b>Click here and register</b>」と一致</td><td class="ok">○</td></tr><tr><td>④ 1ヶ月前までに申込</td><td>本文「<b>three days before</b>」（3日前）</td><td class="ng">×</td></tr></table><p><b>判断のポイント：「Click here」=「オンライン申込」</b><br><b>Click here and register</b>=「ここをクリックして登録」=<b>ネット経由</b>。これが<b>register through the internet</b>と同じ意味。</p><p><b>覚えておきたい単語</b>：<b>register / sign up</b>（登録／申込）、<b>through the internet / online</b>（ネット経由）、<b>in advance</b>（前もって）、<b>three days before</b>（3日前）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"春期キッズプログラム（状況判断）",
+    sharedNotice:"Set-C_notice",
+    question: "You are an elementary school student. You have piano lessons at 1 p.m. every day. Which program can you join?",
+    questionJa: "あなたは小学生で、毎日午後1時にピアノレッスンがあります。どのプログラムに参加できますか？",
+    situation: "You are an <b>elementary school student (ELES)</b>. You have piano lessons at <b>1 p.m. every day</b>.",
+    situationJa: "あなたは<b>小学生（ELES）</b>。毎日<b>午後1時にピアノレッスン</b>があります。",
+    choices: [
+      "Robot Lab",
+      "Magic of Words",
+      "Garden Adventure",
+      "Sweet Cookies"
+    ],
+    choicesJa: [
+      "ロボット ラボ",
+      "言葉の魔法",
+      "ガーデン アドベンチャー",
+      "甘いクッキー"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"elementary school", mean:"小学校", kana:"エレメンタリースクール", ac:"メ"},
+      {w:"piano lessons", mean:"ピアノレッスン", kana:"ピアノレッスンズ", ac:"ピ"},
+      {w:"join", mean:"参加する", kana:"ジョイン", ac:"ジョ"},
+      {w:"program", mean:"プログラム", kana:"プログラム", ac:"プ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を整理</b>しましょう。</p><table class='word-table'><tr><th>条件</th><th>意味</th></tr><tr><td class='en'>ELES</td><td class='ja'>elementary school student（小学生）</td></tr><tr><td class='en'>JHSS</td><td class='ja'>junior high school student（中学生）</td></tr><tr><td class='en'>1 p.m. piano lesson</td><td class='ja'>午後1時にピアノ＝それまでに終わる必要</td></tr></table>",
+      "<p>状況問題は<b>条件を1つずつチェック</b>します。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① 条件を<b>2つに分ける</b>：①小学生（ELES） ②13時前に終わる<br>② 各プログラムを<b>表で確認</b>：両方クリアしたものが正解</div><div class='step'>4つのプログラムを表で整理してみましょう。<br><b>① Robot Lab</b>: <b>JHSSのみ</b>（中学生限定）<span class='think-arrow'>→</span>小学生は<b>×</b><br><b>② Magic of Words</b>: 14:00-19:00（夜まで）<span class='think-arrow'>→</span>13時を<b>過ぎる</b>×<br><b>③ Garden Adventure</b>: 10:00-16:00<span class='think-arrow'>→</span>13時を<b>過ぎる</b>×<br><b>④ Sweet Cookies</b>: 7:00-12:00（朝のみ）+ ELES可<span class='think-arrow'>→</span>両方OK</div>"
+    ],
+    explain: '<p>「小学生・午後1時にピアノ」の条件で参加可能なプログラムを選ぶ <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：④ Sweet Cookies</div><p><b>各プログラムを2つの条件で判定：</b></p><table class="check-table"><tr><th>プログラム</th><th>ELES（小学生）OK?</th><th>13時前に終わる?</th><th>判定</th></tr><tr><td>① Robot Lab</td><td><b>JHSSのみ</b>（中学生限定）</td><td>—</td><td class="ng">×</td></tr><tr><td>② Magic of Words</td><td>ELES可 ✓</td><td>14:00-19:00（夜まで）</td><td class="ng">×</td></tr><tr><td>③ Garden Adventure</td><td>ELES可 ✓</td><td>10:00-16:00（13時を過ぎる）</td><td class="ng">×</td></tr><tr><td>④ Sweet Cookies</td><td>ELES可 ✓</td><td>7:00-12:00（朝に終わる）✓</td><td class="ok">○</td></tr></table><p><b>判断のポイント：両方の条件をクリア</b><br>ELES可＆13時前に終わる、両方を満たすのは<b>Sweet Cookies（パン作り）</b>のみ。第5問の状況問題は<b>「対象者」と「時間帯」の2軸</b>で考えるのがコツ。</p><p><b>覚えておきたい単語</b>：<b>ELES</b>=小学生、<b>JHSS</b>=中学生、<b>join</b>（参加する）、<b>piano lessons</b>（ピアノレッスン）。</p>'
+  }
+],
+
+// ============================================================
+// Set-D（R6-2類題）：市民プール案内（料金計算問題含む）
+// ============================================================
+"Set-D": [
+  {
+    no:1, qNum:18, topic:"市民プール（目的）",
+    noticeTitle: "Welcome to Aoba City Pool",
+    noticeBody: `
+<div class="info-block">
+<h3>🏊 Pool Areas（プールエリア）</h3>
+<ul>
+<li>Main pool: 25m × 8 lanes for swimming.</li>
+<li>Children's pool: shallow water for kids under 12.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>🎫 Admission Fees（入場料）</h3>
+<ul>
+<li>Adults (18 and over): <b>$5</b>/visit.</li>
+<li>Students (under 18): <b>$3</b>/visit.</li>
+<li>Children (under 6): <b>free</b>.</li>
+<li>Locker rental: <b>$1</b>/visit (optional).</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>🏊‍♀️ Swimming Lessons（水泳教室）</h3>
+<ul>
+<li>You can take group lessons every Saturday.</li>
+<li>Beginner course: ages 6-12. Advanced course: ages 13-18.</li>
+<li>Each lesson costs <b>$10</b> per person.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>📋 Rules（ルール）</h3>
+<ul>
+<li>Swimming caps are <b>required</b> for all swimmers.</li>
+<li><b>Eating is NOT allowed</b> inside the pool area. Only water is allowed.</li>
+<li>Open 9 a.m.-9 p.m. on weekdays, 9 a.m.-6 p.m. on weekends.</li>
+</ul>
+</div>
+`,
+    noticeBodyJa: "【プールエリア】メインプール（25m×8レーン）、子どもプール（12歳未満）。【入場料】大人（18歳以上）$5、生徒（18歳未満）$3、6歳未満無料、ロッカー$1。【水泳教室】土曜日にグループレッスン。初級6-12歳、上級13-18歳、各$10/人。【ルール】水泳帽必須、プール内飲食禁止（水のみ可）、平日9-21時、週末9-18時。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To tell people how to use the city pool",
+      "To recruit lifeguards for the summer season",
+      "To announce that the pool will be closed",
+      "To advertise a swimming competition"
+    ],
+    choicesJa: [
+      "市民プールの利用方法を伝えるため",
+      "夏のシーズンのライフガードを募集するため",
+      "プールが閉鎖されることを発表するため",
+      "水泳大会を宣伝するため"
+    ],
+    answer: 1,
+    keyWords: [
+      {w:"how to use", mean:"使い方", kana:"ハウトゥーユーズ", ac:"ユーズ"},
+      {w:"city pool", mean:"市民プール", kana:"スィティプール", ac:"ス"},
+      {w:"lifeguards", mean:"ライフガード", kana:"ライフガーズ", ac:"ライ"},
+      {w:"closed", mean:"閉鎖された", kana:"クロウズド", ac:"クロウ"},
+      {w:"swimming competition", mean:"水泳大会", kana:"スィミングコンペティション", ac:"ペ"},
+      {w:"admission", mean:"入場", kana:"アドミッション", ac:"ミ"}
+    ],
+    hints: [
+      "<p>「目的問題」です。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>how to use</td><td class='ja'>使い方</td></tr><tr><td class='en'>lifeguards</td><td class='ja'>ライフガード</td></tr><tr><td class='en'>closed</td><td class='ja'>閉鎖された</td></tr><tr><td class='en'>swimming competition</td><td class='ja'>水泳大会</td></tr></table>",
+      "<p>このお知らせは<b>セクション</b>がたくさんあります。<b>全体テーマ</b>を見抜きましょう。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<br>② <b>各セクションの見出し</b>を見る<span class='think-arrow'>→</span>共通テーマがわかる</div><div class='step'>このお知らせのセクション見出しを順に見ましょう：<br>・<span class='signal-word'>Pool Areas</span>（プールエリア）<br>・<span class='signal-word'>Admission Fees</span>（入場料）<br>・<span class='signal-word'>Swimming Lessons</span>（水泳教室）<br>・<span class='signal-word'>Rules</span>（ルール）</div><div class='step'>これら全部に共通するテーマは？<span class='think-arrow'>→</span><b>「プールの利用方法・案内」</b>。「ライフガード募集」「閉鎖」「水泳大会」ではないですね。</div>"
+    ],
+    explain: '<p>このお知らせは <b>市民プールの利用ガイド</b> で、利用方法の各セクションが並んでいます。</p><div class="ans-key">✅ 正解：① To tell people how to use the city pool</div><p><b>各セクションの内容は全て「使い方」：</b></p><table class="check-table"><tr><th>セクション</th><th>内容</th></tr><tr><td><b>Pool Areas</b></td><td>プールの種類</td></tr><tr><td><b>Admission Fees</b></td><td>料金</td></tr><tr><td><b>Swimming Lessons</b></td><td>水泳教室</td></tr><tr><td><b>Rules</b></td><td>ルール・営業時間</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① 使い方を伝える</td><td>全セクションが「使い方」の説明</td><td class="ok">○</td></tr><tr><td>② ライフガード募集</td><td>募集の話なし</td><td class="ng">×</td></tr><tr><td>③ 閉鎖の発表</td><td>営業時間あり=開いている</td><td class="ng">×</td></tr><tr><td>④ 水泳大会の宣伝</td><td>大会ではなく利用案内</td><td class="ng">×</td></tr></table><p><b>判断のポイント：セクション見出しを並べると共通テーマがわかる</b><br>「エリア」「料金」「教室」「ルール」<span style="color:#d94f4f">→</span>これら全部が<b>「使い方」</b>。だから①が正解。</p><p><b>覚えておきたい単語</b>：<b>how to 〜</b>（〜の方法）、<b>admission</b>（入場）、<b>fees</b>（料金）、<b>rules</b>（ルール）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"市民プール（真偽判定）",
+    sharedNotice:"Set-D_notice",
+    question: "Which of the following is true about Aoba City Pool?",
+    questionJa: "アオバ市民プールについて、次のうち正しいものはどれですか？",
+    choices: [
+      "Children under 6 can use the pool for free.",
+      "You can eat snacks anywhere in the pool area.",
+      "Swimming caps are not necessary for children.",
+      "The pool is open until 10 p.m. on weekends."
+    ],
+    choicesJa: [
+      "6歳未満の子どもは無料でプールを使える",
+      "プールエリアのどこでもお菓子を食べられる",
+      "子どもには水泳帽は必要ない",
+      "週末はプールは午後10時まで開いている"
+    ],
+    answer: 1,
+    keyWords: [
+      {w:"under 6", mean:"6歳未満", kana:"アンダースィックス", ac:"ア"},
+      {w:"for free", mean:"無料で", kana:"フォーフリー", ac:"フリー"},
+      {w:"snacks", mean:"お菓子", kana:"スナックス", ac:"スナッ"},
+      {w:"swimming caps", mean:"水泳帽", kana:"スィミングキャップス", ac:"スィ"},
+      {w:"required", mean:"必須の", kana:"リクワイアド", ac:"クワ"},
+      {w:"weekends", mean:"週末", kana:"ウィークエンズ", ac:"ウィー"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題。本文と1つずつ照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>under 6</td><td class='ja'>6歳未満</td></tr><tr><td class='en'>free</td><td class='ja'>無料</td></tr><tr><td class='en'>Eating is NOT allowed</td><td class='ja'>飲食禁止</td></tr><tr><td class='en'>required</td><td class='ja'>必須</td></tr><tr><td class='en'>weekends 9-18</td><td class='ja'>週末は9-18時</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ <b>数字</b>はよく見る</div><div class='step'>各選択肢を本文と照合：<br>・<b>① under 6 free</b>→<b>Admission Fees</b>欄に「<span class='signal-word'>Children (under 6): free</span>」あり<br>・<b>② eat snacks</b>→本文「<span class='signal-word'>Eating is NOT allowed</span>」と<b>反対</b><br>・<b>③ swimming caps not necessary</b>→本文「<span class='signal-word'>Swimming caps are required for all swimmers</span>」と<b>反対</b><br>・<b>④ until 10 p.m. weekends</b>→本文「<span class='signal-word'>weekends 9-18</span>」と<b>違う</b></div>"
+    ],
+    explain: '<p>「市民プールについて本文と一致するもの」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：① Children under 6 can use the pool for free.</div><p><b>各選択肢を本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 6歳未満は無料</td><td>「<b>Children (under 6): free</b>」と一致</td><td class="ok">○</td></tr><tr><td>② どこでもお菓子OK</td><td>「<b>Eating is NOT allowed</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 水泳帽は不要</td><td>「<b>Swimming caps are required</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>④ 週末22時まで</td><td>本文「<b>weekends 9-18</b>」（週末は18時まで）</td><td class="ng">×</td></tr></table><p><b>判断のポイント：「NOT allowed」「required」は重要サイン</b><br>本文の <b>NOT allowed</b>=禁止、<b>required</b>=必須。これらに該当する選択肢の真偽は<b>反対の意味</b>に注意。</p><p><b>覚えておきたい単語</b>：<b>under 6</b>（6歳未満）、<b>required</b>（必須）⇔<b>not necessary</b>（不要）、<b>not allowed</b>（禁止）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"市民プール（料金計算）",
+    sharedNotice:"Set-D_notice",
+    question: "In the following situation, how much do you need to pay?",
+    questionJa: "次の状況では、いくら支払う必要がありますか？",
+    situation: "You are <b>20 years old</b>. You will go to the pool with your <b>15-year-old brother</b> and rent <b>two lockers</b>. You will both <b>only swim</b> (no lessons).",
+    situationJa: "あなたは<b>20歳</b>で、<b>15歳の弟</b>と一緒にプールに行き、<b>ロッカーを2つ</b>借ります。二人とも<b>泳ぐだけ</b>（レッスンなし）。",
+    choices: [
+      "$8",
+      "$9",
+      "$10",
+      "$18"
+    ],
+    choicesJa: [
+      "8ドル",
+      "9ドル",
+      "10ドル",
+      "18ドル"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"adults", mean:"大人", kana:"アダルツ", ac:"ア"},
+      {w:"students", mean:"生徒", kana:"スチューデンツ", ac:"チュー"},
+      {w:"locker rental", mean:"ロッカー使用料", kana:"ロッカーレンタル", ac:"ロッ"},
+      {w:"per visit", mean:"1回につき", kana:"パーヴィズィット", ac:"ヴィ"},
+      {w:"lessons", mean:"レッスン", kana:"レッスンズ", ac:"レッ"}
+    ],
+    hints: [
+      "<p>「料金計算」問題です。本文の <b>料金規定</b> を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Adults (18 and over): $5</td><td class='ja'>大人（18歳以上）$5</td></tr><tr><td class='en'>Students (under 18): $3</td><td class='ja'>生徒（18歳未満）$3</td></tr><tr><td class='en'>Locker rental: $1</td><td class='ja'>ロッカー$1</td></tr><tr><td class='en'>20 years old</td><td class='ja'>20歳=大人</td></tr><tr><td class='en'>15-year-old brother</td><td class='ja'>15歳の弟=生徒</td></tr><tr><td class='en'>two lockers</td><td class='ja'>ロッカー2つ</td></tr></table>",
+      "<p>料金計算は<b>「人数 × 料金」+「ロッカー × 個数」</b>で考えます。</p><div class='strategy'><b>料金計算の黄金ルール：</b><br>① 各人の<b>料金区分</b>を本文で確認<br>② <b>追加料金</b>（ロッカー等）も忘れずに<br>③ <b>不要なもの</b>（今回はレッスン）は計算しない</div><div class='step'>計算してみましょう！<br>・<b>あなた（20歳=大人）</b>：$5<br>・<b>弟（15歳=生徒）</b>：$3<br>・<b>ロッカー2つ</b>：$1 × 2 = $2<br>・<b>レッスンなし</b>：$0<br><br>合計：<b>$5 + $3 + $2 = $10</b></div>"
+    ],
+    explain: '<p>「20歳・15歳の弟・ロッカー2つ」の料金を計算する <b>料金計算</b> 問題です。</p><div class="ans-key">✅ 正解：③ $10</div><p><b>本文の料金規定：</b></p><table class="check-table"><tr><th>項目</th><th>料金</th></tr><tr><td><b>大人（18歳以上）</b></td><td>$5/visit</td></tr><tr><td><b>生徒（18歳未満）</b></td><td>$3/visit</td></tr><tr><td><b>ロッカー</b></td><td>$1/visit</td></tr><tr><td><b>レッスン</b></td><td>$10/人（今回は不要）</td></tr></table><p><b>計算式：</b></p><div style="background:#fffcf3;padding:12px;border-radius:6px;font-size:1.05rem;text-align:center;font-weight:700;color:#d94f4f;margin:10px 0;"><b>$5</b>（大人=自分）+ <b>$3</b>（生徒=弟）+ <b>$1×2</b>（ロッカー2つ）= <b>$10</b></div><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>計算の意味</th><th>判定</th></tr><tr><td>① $8</td><td>大人+生徒のみ（ロッカー忘れ）</td><td class="ng">×</td></tr><tr><td>② $9</td><td>大人+生徒+ロッカー1つ（2つ忘れ）</td><td class="ng">×</td></tr><tr><td>③ $10</td><td>$5+$3+$2 = 正解</td><td class="ok">○</td></tr><tr><td>④ $18</td><td>レッスン代を加えた誤り</td><td class="ng">×</td></tr></table><p><b>判断のポイント1：年齢区分の確認</b><br><b>20歳 → 18歳以上 → 大人 ($5)</b>、<b>15歳 → 18歳未満 → 生徒 ($3)</b>。年齢で料金が変わるので<b>区分を間違えない</b>こと。</p><p><b>判断のポイント2：必要なもの・不要なものの仕分け</b><br>「<b>only swim (no lessons)</b>」=泳ぐだけ。レッスン代 $10 は<b>不要</b>。④はこのレッスン代を入れた誤り。</p><p><b>判断のポイント3：個数を忘れない</b><br>ロッカーは<b>2つ</b>=$1×2=$2。「2つ」を見落とすと②の $9 に。</p><p><b>覚えておきたい単語</b>：<b>per visit</b>（1回につき）、<b>locker rental</b>（ロッカー）、<b>and over / under</b>（以上／未満）、<b>lessons</b>（レッスン）。</p>'
+  }
+],
+
+// ============================================================
+// Set-E（R5-1類題・形式踏襲のオリジナル）：写真展覧会
+// ============================================================
+"Set-E": [
+  {
+    no:1, qNum:18, topic:"写真展覧会（目的）",
+    noticeTitle: "Citizens' Photography Exhibition 2025",
+    noticeBody: `
+<p><b>Date: April 12-19, 2025</b></p>
+<p>The Yamato City Cultural Center is happy to invite all citizens to the <b>14th annual</b> Photography Exhibition. Come and enjoy beautiful photos taken by local people of all ages. Click here to see more details about each photographer!</p>
+<table>
+<tr><th>Section</th><th>Theme &amp; Description</th></tr>
+<tr><td><b>Nature</b><br>自然</td><td>Mountains, rivers, and seasons. Suitable for all ages.</td></tr>
+<tr><td><b>People</b><br>人物</td><td>Family portraits and community life. Suitable for all ages.</td></tr>
+<tr><td><b>City Life</b><br>街の生活</td><td>Streets, shops, and architecture in Yamato City.</td></tr>
+<tr><td><b>Children's Eye</b><br>子どもの目</td><td>Photos taken by children aged 6-15 only.</td></tr>
+</table>
+<div class="info-block">
+<h3>📋 Visitor Information</h3>
+<ul>
+<li><b>Admission</b>: Free for all visitors.</li>
+<li><b>Open hours</b>: 10 a.m. - 6 p.m. (Closed on Mondays).</li>
+<li><b>Photo voting</b>: You can vote for your favorite photo at the entrance.</li>
+<li>Email questions to photo@yamato-cc.jp</li>
+</ul>
+</div>
+`,
+    noticeBodyJa: "【期間：2025年4月12-19日】ヤマト市文化センターが第14回市民写真展覧会を開催。地元の人々が撮影した美しい写真を全員で楽しもう。【セクション】①Nature（自然）②People（人物）③City Life（街の生活）④Children's Eye（6-15歳の子どもが撮影）。【情報】入場無料、10-18時、月曜休館、お気に入り投票あり。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To recruit professional photographers",
+      "To invite citizens to a photo exhibition",
+      "To sell photography equipment",
+      "To announce a new camera shop opening"
+    ],
+    choicesJa: [
+      "プロの写真家を募集するため",
+      "市民を写真展覧会に招待するため",
+      "写真機材を販売するため",
+      "新しいカメラ店の開店を発表するため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"exhibition", mean:"展覧会", kana:"エクスィビション", ac:"ビ"},
+      {w:"invite", mean:"招待する", kana:"インヴァイト", ac:"ヴァイ"},
+      {w:"citizens", mean:"市民", kana:"スィティズンズ", ac:"ス"},
+      {w:"photographers", mean:"写真家", kana:"フォトグラファーズ", ac:"ト"},
+      {w:"professional", mean:"プロの", kana:"プロフェッショナル", ac:"フェ"},
+      {w:"equipment", mean:"機材", kana:"イクィップメント", ac:"クィッ"},
+      {w:"camera shop", mean:"カメラ店", kana:"キャメラショップ", ac:"キャ"}
+    ],
+    hints: [
+      "<p>「目的問題」です。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>exhibition</td><td class='ja'>展覧会</td></tr><tr><td class='en'>invite citizens</td><td class='ja'>市民を招待する</td></tr><tr><td class='en'>professional photographers</td><td class='ja'>プロの写真家</td></tr><tr><td class='en'>equipment</td><td class='ja'>機材</td></tr></table>",
+      "<p>「目的問題」は <b>タイトル＋冒頭</b> がカギです。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<br>② <b>冒頭の1〜2文</b>を見る</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Citizens' Photography Exhibition</span>（市民写真展覧会）<span class='think-arrow'>→</span>「<b>展覧会</b>」がキーワード<br><b>冒頭</b>: <span class='signal-word'>The Cultural Center is happy to invite all citizens</span>（文化センターが市民を招待）<span class='think-arrow'>→</span>「<b>invite citizens</b>」がキーワード</div>"
+    ],
+    explain: '<p>このお知らせは <b>市民写真展覧会への招待</b> です。</p><div class="ans-key">✅ 正解：② To invite citizens to a photo exhibition</div><p><b>目的問題は「タイトル」「冒頭」を見る！</b></p><table class="check-table"><tr><th>場所</th><th>キーワード</th><th>意味</th></tr><tr><td><b>タイトル</b></td><td><b>Photography Exhibition</b></td><td>「写真展覧会」</td></tr><tr><td><b>冒頭</b></td><td><b>invite all citizens</b></td><td>「市民全員を招待」</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① プロ写真家募集</td><td>本文は「<b>local people of all ages</b>」（地元の人々）。プロ募集ではない</td><td class="ng">×</td></tr><tr><td>② 市民を写真展に招待</td><td>「invite」「citizens」「exhibition」と一致</td><td class="ok">○</td></tr><tr><td>③ 写真機材販売</td><td>機材販売の話なし</td><td class="ng">×</td></tr><tr><td>④ カメラ店開店</td><td>店の宣伝ではない</td><td class="ng">×</td></tr></table><p><b>覚えておきたい単語</b>：<b>exhibition</b>（展覧会）、<b>invite</b>（招待する）、<b>citizens</b>（市民）、<b>professional</b>（プロの）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"写真展覧会（真偽判定）",
+    sharedNotice:"Set-E_notice",
+    question: "Which of the following is true about the exhibition?",
+    questionJa: "展覧会について次のうち正しいものはどれですか？",
+    choices: [
+      "Only adult photographers can submit photos.",
+      "Visitors have to pay to enter the exhibition.",
+      "The exhibition is held every year.",
+      "The Cultural Center is open seven days a week."
+    ],
+    choicesJa: [
+      "大人の写真家のみが写真を出展できる",
+      "来訪者は入場料を払わなければならない",
+      "展覧会は毎年開催される",
+      "文化センターは週7日開いている"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"submit", mean:"出展する・提出する", kana:"サブミット", ac:"ミ"},
+      {w:"adult", mean:"大人", kana:"アダルト", ac:"ア"},
+      {w:"pay", mean:"払う", kana:"ペイ", ac:"ペイ"},
+      {w:"every year / annual", mean:"毎年", kana:"エヴリイヤー", ac:"エ"},
+      {w:"closed on Mondays", mean:"月曜休館", kana:"クロウズドオンマンデイズ", ac:"クロウ"},
+      {w:"seven days a week", mean:"週7日", kana:"セヴンデイズアウィーク", ac:"セ"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題。本文と1つずつ照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>14th annual</td><td class='ja'>第14回目の毎年恒例</td></tr><tr><td class='en'>Free for all visitors</td><td class='ja'>来訪者全員無料</td></tr><tr><td class='en'>Closed on Mondays</td><td class='ja'>月曜休館</td></tr><tr><td class='en'>Children aged 6-15</td><td class='ja'>6-15歳の子ども（=大人だけではない）</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② <b>反対の意味</b>の選択肢は ×</div><div class='step'>本文に注目！<br>・<span class='signal-word'>14th annual</span>（第14回目の毎年恒例）<span class='think-arrow'>→</span>毎年開催されている=③一致<br>・<span class='signal-word'>Free for all visitors</span>（無料）<span class='think-arrow'>→</span>②（払う）と反対<br>・<span class='signal-word'>Closed on Mondays</span>（月曜休館）<span class='think-arrow'>→</span>④（週7日）と反対<br>・<span class='signal-word'>Children's Eye: aged 6-15</span><span class='think-arrow'>→</span>子どもも出展可能、①（大人のみ）と反対</div>"
+    ],
+    explain: '<p>「展覧会について本文と一致するもの」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：③ The exhibition is held every year.</div><p><b>各選択肢を1つずつ本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 大人のみ出展</td><td>「Children\'s Eye: 6-15歳」あり=子どもも出展可</td><td class="ng">×</td></tr><tr><td>② 入場料を払う</td><td>「<b>Free for all visitors</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 毎年開催</td><td>「<b>14th annual</b>」（第14回毎年恒例）と一致</td><td class="ok">○</td></tr><tr><td>④ 週7日開館</td><td>「<b>Closed on Mondays</b>」と<b>反対</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント：「14th annual」=「毎年14回目」</b><br><b>annual</b>=毎年恒例、<b>14th</b>=14回目。つまり「14年連続で毎年開催」=<b>every year</b>。</p><p><b>覚えておきたい単語</b>：<b>annual / every year</b>（毎年）、<b>free / no charge</b>（無料）、<b>closed</b>（休館）⇔<b>open</b>（開館）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"写真展覧会（状況判断）",
+    sharedNotice:"Set-E_notice",
+    question: "In the following situation, which section can you submit a photo to?",
+    questionJa: "次の状況では、どのセクションに写真を出展できますか？",
+    situation: "You are a <b>10-year-old child</b> who took a beautiful photo of <b>your grandmother</b>.",
+    situationJa: "あなたは<b>10歳の子ども</b>で、<b>祖母</b>の美しい写真を撮りました。",
+    choices: [
+      "Nature",
+      "People",
+      "City Life",
+      "Children's Eye"
+    ],
+    choicesJa: [
+      "自然",
+      "人物",
+      "街の生活",
+      "子どもの目"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"submit", mean:"出展する", kana:"サブミット", ac:"ミ"},
+      {w:"section", mean:"セクション・部門", kana:"セクション", ac:"セ"},
+      {w:"grandmother", mean:"祖母", kana:"グランドマザー", ac:"グラ"},
+      {w:"taken by children", mean:"子どもが撮影した", kana:"テイクンバイチルドレン", ac:"テイ"},
+      {w:"aged 6-15", mean:"6-15歳", kana:"エイジドスィックストゥフィフティーン", ac:"エイ"}
+    ],
+    hints: [
+      "<p>「状況設定型」問題です。<b>条件を整理</b>しましょう。</p><table class='word-table'><tr><th>条件</th><th>意味</th></tr><tr><td class='en'>10-year-old child</td><td class='ja'>10歳の子ども</td></tr><tr><td class='en'>grandmother</td><td class='ja'>祖母（=人物）</td></tr><tr><td class='en'>Nature</td><td class='ja'>自然（×人物ではない）</td></tr><tr><td class='en'>People</td><td class='ja'>人物（OK）</td></tr><tr><td class='en'>Children\'s Eye</td><td class='ja'>子ども（6-15歳）が撮った写真専用</td></tr></table>",
+      "<p>状況問題は <b>2つの条件で絞り込み</b>ます。</p><div class='strategy'><b>状況問題の黄金ルール：</b><br>① <b>撮影者</b>：10歳の子ども<br>② <b>被写体</b>：祖母（=人物）<br>③ 両方を満たすセクションを選ぶ</div><div class='step'>4つのセクションを表で整理：<br>・<b>① Nature</b>: 自然<span class='think-arrow'>→</span>祖母は自然ではない×<br>・<b>② People</b>: 人物<span class='think-arrow'>→</span>祖母OK、ただし「<b>Children\'s Eye</b>」が<b>子ども専用</b>だから選択優先順位を確認<br>・<b>③ City Life</b>: 街・建物<span class='think-arrow'>→</span>祖母は街ではない×<br>・<b>④ Children\'s Eye</b>: <b>子ども（6-15歳）が撮った写真専用</b><span class='think-arrow'>→</span>10歳の子どもが撮ったから<b>このセクション</b>に該当！</div><div class='step'><b>注意</b>：「<span class='signal-word'>Photos taken by children aged 6-15 only</span>」（6-15歳の子どもが撮影した写真<b>専用</b>）<span class='think-arrow'>→</span>子どもが撮影した写真は<b>このセクションに出すべき</b>。</div>"
+    ],
+    explain: '<p>「10歳・祖母の写真」の状況で適切なセクションを選ぶ <b>状況設定型</b> 問題です。</p><div class="ans-key">✅ 正解：④ Children\'s Eye</div><p><b>各セクションを2つの条件で判定：</b></p><table class="check-table"><tr><th>セクション</th><th>10歳の子どもが撮影?</th><th>祖母の写真OK?</th><th>判定</th></tr><tr><td>① Nature（自然）</td><td>—</td><td>×（祖母は自然ではない）</td><td class="ng">×</td></tr><tr><td>② People（人物）</td><td>子ども専用ではない</td><td>○ ただし④優先</td><td class="ng">×</td></tr><tr><td>③ City Life（街）</td><td>—</td><td>×（祖母は街ではない）</td><td class="ng">×</td></tr><tr><td>④ Children\'s Eye</td><td>○（6-15歳）</td><td>○（被写体に制限なし）</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：「only」のサインに注目</b><br>本文「<b>Photos taken by children aged 6-15 only</b>」（6-15歳の子どもが撮った写真<b>のみ</b>）<span style="color:#d94f4f">→</span>このセクションは<b>子ども専用枠</b>。10歳の子どもが撮った写真は<b>このセクションに該当</b>します。</p><p><b>判断のポイント2：「专用」セクションが優先</b><br>「People」セクションも人物写真OKですが、<b>子ども専用枠</b>がある場合、<b>該当する子どもはそちらを優先</b>します（「only」=他の人は撮れない、つまり子ども枠が用意されている）。</p><p><b>覚えておきたい単語</b>：<b>section</b>（セクション・部門）、<b>submit</b>（出展する）、<b>aged 6-15</b>（6-15歳）、<b>only</b>（〜だけ）。</p>'
+  }
+],
+
+// ============================================================
+// Set-F（R5-2類題・形式踏襲のオリジナル）：公民館貸出（料金計算含む）
+// ============================================================
+"Set-F": [
+  {
+    no:1, qNum:18, topic:"公民館貸出（目的）",
+    noticeTitle: "Sakuragaoka Community Hall — Room Rental Guide",
+    noticeBody: `
+<div class="info-block">
+<h3>🏢 Available Rooms（利用可能な部屋）</h3>
+<ul>
+<li>Meeting Room A: up to 10 people. Whiteboard included.</li>
+<li>Meeting Room B: up to 30 people. Projector available.</li>
+<li>Music Room: up to 15 people. Piano and chairs included.</li>
+<li>Kitchen Studio: up to 12 people. Cooking tools available.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>💴 Rental Fees（利用料金）</h3>
+<ul>
+<li>Meeting Room A: <b>$3</b>/hour.</li>
+<li>Meeting Room B: <b>$6</b>/hour.</li>
+<li>Music Room: <b>$5</b>/hour.</li>
+<li>Kitchen Studio: <b>$8</b>/hour.</li>
+<li>Equipment rental (projector, piano, etc.): already included.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>📅 How to Reserve（予約方法）</h3>
+<ul>
+<li>Reservations are accepted <b>online only</b>, up to 3 months in advance.</li>
+<li>Cancellation: free up to 2 days before. After that: <b>50% fee</b>.</li>
+</ul>
+</div>
+<div class="info-block">
+<h3>📋 Rules（ルール）</h3>
+<ul>
+<li>No food in Meeting Rooms or Music Room. Eating is only allowed in Kitchen Studio.</li>
+<li>Open 9 a.m.-9 p.m. every day except New Year holidays.</li>
+</ul>
+</div>
+`,
+    noticeBodyJa: "【利用可能な部屋】会議室A（10人・ホワイトボード）、会議室B（30人・プロジェクター）、音楽室（15人・ピアノ）、調理スタジオ（12人・調理器具）。【料金】会議室A=$3/時、会議室B=$6/時、音楽室=$5/時、調理スタジオ=$8/時。機材使用料込み。【予約】オンライン予約のみ、3ヶ月前から、2日前までキャンセル無料、それ以降50%。【ルール】会議室・音楽室は食事不可、調理スタジオのみ可。9-21時、年末年始除く。",
+    question: "What is the main purpose of this notice?",
+    questionJa: "このお知らせの主な目的は何ですか？",
+    choices: [
+      "To advertise community classes for adults",
+      "To explain how to rent the hall's rooms",
+      "To recruit volunteers for the community hall",
+      "To announce a free music festival"
+    ],
+    choicesJa: [
+      "大人向けのコミュニティ教室を宣伝するため",
+      "公民館の部屋の借り方を説明するため",
+      "公民館のボランティアを募集するため",
+      "無料の音楽祭を発表するため"
+    ],
+    answer: 2,
+    keyWords: [
+      {w:"rent", mean:"借りる", kana:"レント", ac:"レン"},
+      {w:"rental", mean:"貸出・レンタル", kana:"レンタル", ac:"レン"},
+      {w:"available", mean:"利用可能な", kana:"アヴェイラブル", ac:"ヴェイ"},
+      {w:"fees", mean:"料金", kana:"フィーズ", ac:"フィー"},
+      {w:"reserve", mean:"予約する", kana:"リザーヴ", ac:"ザー"},
+      {w:"community classes", mean:"コミュニティ教室", kana:"コミュニティクラスィズ", ac:"ミュ"},
+      {w:"music festival", mean:"音楽祭", kana:"ミュージックフェスティヴァル", ac:"ミュー"}
+    ],
+    hints: [
+      "<p>「目的問題」です。カギの単語を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>main purpose</td><td class='ja'>主な目的</td></tr><tr><td class='en'>rent / rental</td><td class='ja'>借りる／貸出</td></tr><tr><td class='en'>community classes</td><td class='ja'>コミュニティ教室</td></tr><tr><td class='en'>volunteers</td><td class='ja'>ボランティア</td></tr><tr><td class='en'>music festival</td><td class='ja'>音楽祭</td></tr></table>",
+      "<p>このお知らせは<b>セクション</b>がたくさんあります。<b>全体テーマ</b>を見抜きましょう。</p><div class='strategy'><b>目的問題の黄金ルール：</b><br>① <b>タイトル</b>を見る<br>② <b>各セクション見出し</b>を見る</div><div class='step'>このお知らせを見てみましょう。<br><b>タイトル</b>: <span class='signal-word'>Room Rental Guide</span>（部屋貸出ガイド）<br><b>セクション</b>:<br>・<span class='signal-word'>Available Rooms</span>（利用可能な部屋）<br>・<span class='signal-word'>Rental Fees</span>（利用料金）<br>・<span class='signal-word'>How to Reserve</span>（予約方法）<br>・<span class='signal-word'>Rules</span>（ルール）<br><span class='think-arrow'>→</span>全部「部屋を借りる方法」の説明！</div>"
+    ],
+    explain: '<p>このお知らせは <b>サクラガオカ公民館の部屋貸出ガイド</b> です。</p><div class="ans-key">✅ 正解：② To explain how to rent the hall\'s rooms</div><p><b>各セクションの内容は全て「部屋の借り方」：</b></p><table class="check-table"><tr><th>セクション</th><th>内容</th></tr><tr><td><b>Available Rooms</b></td><td>部屋の種類</td></tr><tr><td><b>Rental Fees</b></td><td>料金</td></tr><tr><td><b>How to Reserve</b></td><td>予約方法</td></tr><tr><td><b>Rules</b></td><td>ルール</td></tr></table><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との一致</th><th>判定</th></tr><tr><td>① 大人向け教室の宣伝</td><td>教室の話なし。部屋貸出のみ</td><td class="ng">×</td></tr><tr><td>② 部屋の借り方の説明</td><td>全セクションが「部屋を借りる方法」</td><td class="ok">○</td></tr><tr><td>③ ボランティア募集</td><td>募集の話なし</td><td class="ng">×</td></tr><tr><td>④ 無料音楽祭</td><td>音楽室はあるが祭ではない</td><td class="ng">×</td></tr></table><p><b>判断のポイント：「Rental」がキーワード</b><br>タイトル <b>Room Rental Guide</b>=「部屋貸出案内」、本文の <b>Rental Fees</b>=「貸出料金」。<b>rental</b>（貸出）=<b>how to rent</b>（借り方）と同じ意味。</p><p><b>覚えておきたい単語</b>：<b>rent / rental</b>（借りる／貸出）、<b>fees</b>（料金）、<b>reserve</b>（予約する）、<b>available</b>（利用可能）。</p>'
+  },
+  {
+    no:2, qNum:19, topic:"公民館貸出（真偽判定）",
+    sharedNotice:"Set-F_notice",
+    question: "Which of the following can users do at the community hall?",
+    questionJa: "公民館で利用者は次のうちどれをできますか？",
+    choices: [
+      "Reserve a room by visiting the hall in person",
+      "Eat snacks in the Music Room",
+      "Cancel a reservation 3 days before for free",
+      "Pay extra to use the projector in Meeting Room B"
+    ],
+    choicesJa: [
+      "公民館に直接行って部屋を予約する",
+      "音楽室でお菓子を食べる",
+      "予約を3日前までに無料でキャンセルする",
+      "会議室Bでプロジェクターを使うため追加料金を払う"
+    ],
+    answer: 3,
+    keyWords: [
+      {w:"online only", mean:"オンラインのみ", kana:"オンラインオウンリー", ac:"オン"},
+      {w:"in person", mean:"直接", kana:"インパースン", ac:"パー"},
+      {w:"cancel", mean:"キャンセルする", kana:"キャンセル", ac:"キャ"},
+      {w:"reservation", mean:"予約", kana:"レザヴェイション", ac:"ヴェイ"},
+      {w:"included", mean:"含まれている", kana:"インクルーディド", ac:"クルー"},
+      {w:"extra", mean:"追加の", kana:"エクストラ", ac:"エ"},
+      {w:"snacks", mean:"お菓子", kana:"スナックス", ac:"スナッ"}
+    ],
+    hints: [
+      "<p>「真偽判定」問題。本文と1つずつ照合しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>online only</td><td class='ja'>オンラインのみ</td></tr><tr><td class='en'>cancel free up to 2 days before</td><td class='ja'>2日前までキャンセル無料</td></tr><tr><td class='en'>No food in Meeting Rooms or Music Room</td><td class='ja'>会議室・音楽室は食事禁止</td></tr><tr><td class='en'>Equipment rental: already included</td><td class='ja'>機材使用料込み（追加料金なし）</td></tr></table>",
+      "<p>真偽判定の<b>3つのコツ</b>を使います。</p><div class='strategy'><b>真偽判定の黄金ルール：</b><br>① 選択肢の<b>キーワード</b>を本文で探す<br>② 本文と<b>反対のこと</b>を言っている選択肢は ×<br>③ <b>数字</b>はよく見る</div><div class='step'>各選択肢を本文と照合：<br>・<b>① 直接予約</b>→本文「<span class='signal-word'>online only</span>」と<b>反対</b><br>・<b>② 音楽室で食事</b>→本文「<span class='signal-word'>No food in Music Room</span>」と<b>反対</b><br>・<b>③ 3日前までキャンセル無料</b>→本文「<span class='signal-word'>free up to 2 days before</span>」（2日前）<span class='think-arrow'>→</span>3日前なら2日前より早いので無料！<b>OK</b><br>・<b>④ プロジェクター追加料金</b>→本文「<span class='signal-word'>Equipment rental already included</span>」と<b>反対</b></div>"
+    ],
+    explain: '<p>「公民館で利用者ができること」を選ぶ <b>真偽判定</b> 問題です。</p><div class="ans-key">✅ 正解：③ Cancel a reservation 3 days before for free</div><p><b>各選択肢を本文と照合：</b></p><table class="check-table"><tr><th>選択肢</th><th>本文との照合</th><th>判定</th></tr><tr><td>① 直接予約</td><td>「<b>online only</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>② 音楽室で食事</td><td>「<b>No food in Music Room</b>」と<b>反対</b></td><td class="ng">×</td></tr><tr><td>③ 3日前にキャンセル無料</td><td>「<b>free up to 2 days before</b>」=2日前まで無料 → 3日前なら無料 ✓</td><td class="ok">○</td></tr><tr><td>④ プロジェクター追加料金</td><td>「<b>Equipment rental already included</b>」と<b>反対</b></td><td class="ng">×</td></tr></table><p><b>判断のポイント1：「up to 2 days before」の意味</b><br><b>up to 2 days before</b>=「2日前<b>まで</b>」=「2日前以前なら」OK。だから<b>3日前は2日前より早い</b>のでキャンセル無料に該当します。</p><p><b>判断のポイント2：「included」=「料金に含まれる」</b><br>機材使用料が <b>already included</b>（すでに含まれている）=追加料金なし。④の「extra（追加）」は<b>反対</b>。</p><p><b>覚えておきたい単語</b>：<b>online only</b>（オンラインのみ）、<b>cancel</b>（キャンセル）、<b>up to ~</b>（〜まで）、<b>included</b>（含まれる）⇔<b>extra</b>（追加）。</p>'
+  },
+  {
+    no:3, qNum:20, topic:"公民館貸出（料金計算）",
+    sharedNotice:"Set-F_notice",
+    question: "In the following situation, how much do you need to pay?",
+    questionJa: "次の状況では、いくら支払う必要がありますか？",
+    situation: "You will rent <b>Meeting Room B</b> for <b>3 hours</b>. You will use the <b>projector</b> during the meeting.",
+    situationJa: "<b>会議室B</b>を<b>3時間</b>借ります。会議中に<b>プロジェクター</b>を使います。",
+    choices: [
+      "$3",
+      "$6",
+      "$9",
+      "$18"
+    ],
+    choicesJa: [
+      "3ドル",
+      "6ドル",
+      "9ドル",
+      "18ドル"
+    ],
+    answer: 4,
+    keyWords: [
+      {w:"per hour", mean:"1時間につき", kana:"パーアウア", ac:"ア"},
+      {w:"included", mean:"含まれている", kana:"インクルーディド", ac:"クルー"},
+      {w:"projector", mean:"プロジェクター", kana:"プロジェクター", ac:"ジェ"},
+      {w:"meeting", mean:"会議", kana:"ミーティング", ac:"ミー"},
+      {w:"3 hours", mean:"3時間", kana:"スリーアウアズ", ac:"スリー"}
+    ],
+    hints: [
+      "<p>「料金計算」問題です。本文の <b>料金規定</b> を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Meeting Room B</td><td class='ja'>会議室B</td></tr><tr><td class='en'>$6/hour</td><td class='ja'>1時間$6</td></tr><tr><td class='en'>3 hours</td><td class='ja'>3時間</td></tr><tr><td class='en'>Equipment rental already included</td><td class='ja'>機材使用料込み（追加なし）</td></tr><tr><td class='en'>projector</td><td class='ja'>プロジェクター</td></tr></table>",
+      "<p>料金計算は<b>「料金 × 時間 + 追加料金」</b>で考えます。</p><div class='strategy'><b>料金計算の黄金ルール：</b><br>① 本文の <b>per hour</b>（1時間につき）に注目<br>② <b>不要な追加料金</b>に注意（今回は機材使用料込み）<br>③ <b>料金 × 時間</b>で計算</div><div class='step'>計算してみましょう！<br>・<b>会議室B</b>：$6/hour<br>・<b>3時間</b>：$6 × 3 = $18<br>・<b>プロジェクター</b>：「<span class='signal-word'>Equipment rental already included</span>」<span class='think-arrow'>→</span>追加料金<b>なし</b>（料金に含まれている）<br><br>合計：<b>$6 × 3 = $18</b></div>"
+    ],
+    explain: '<p>「会議室B・3時間・プロジェクター使用」の料金を計算する <b>料金計算</b> 問題です。</p><div class="ans-key">✅ 正解：④ $18</div><p><b>本文の料金規定：</b></p><table class="check-table"><tr><th>項目</th><th>料金</th></tr><tr><td><b>会議室B</b></td><td>$6/hour</td></tr><tr><td><b>機材使用料</b><br>（プロジェクター含む）</td><td><b>料金に含まれる</b>（追加なし）</td></tr></table><p><b>計算式：</b></p><div style="background:#fffcf3;padding:12px;border-radius:6px;font-size:1.1rem;text-align:center;font-weight:700;color:#d94f4f;margin:10px 0;"><b>$6/hour × 3 hours</b> = <b>$18</b></div><p><b>各選択肢のチェック：</b></p><table class="check-table"><tr><th>選択肢</th><th>計算の意味</th><th>判定</th></tr><tr><td>① $3</td><td>会議室Aの1時間分？（部屋を間違えた）</td><td class="ng">×</td></tr><tr><td>② $6</td><td>会議室Bの1時間分のみ</td><td class="ng">×</td></tr><tr><td>③ $9</td><td>会議室Aの3時間分（部屋を間違えた）</td><td class="ng">×</td></tr><tr><td>④ $18</td><td>$6×3 = 正解</td><td class="ok">○</td></tr></table><p><b>判断のポイント1：部屋の料金区分を間違えない</b><br>会議室<b>A</b>=$3、会議室<b>B</b>=$6。<b>会議室を取り違える</b>と①や③のような誤答に。</p><p><b>判断のポイント2：「per hour」は時間をかける</b><br><b>per hour</b>=「1時間につき」なので<b>時間数（3）をかける</b>。<b>$6 × 3 = $18</b>。</p><p><b>判断のポイント3：機材使用料は要注意</b><br>本文「<b>Equipment rental already included</b>」（機材使用料込み）<span style="color:#d94f4f">→</span>プロジェクター追加料金は<b>不要</b>。「included」（含まれる）が出てきたら<b>追加料金なし</b>のサイン。</p><p><b>覚えておきたい単語</b>：<b>per hour</b>（1時間につき）、<b>included</b>（含まれる）、<b>equipment</b>（機材）、<b>extra</b>（追加）。</p>'
+  }
+]
+
+};
+
+// セット名のラベル変換（過去問との対応）
+const SET_LABELS = {
+  "Set-A":"R7年1回類題",
+  "Set-B":"R7年2回類題",
+  "Set-C":"R6年1回類題",
+  "Set-D":"R6年2回類題",
+  "Set-E":"R5年1回類題",
+  "Set-F":"R5年2回類題"
+};
+
+// お知らせ本文の共有マップ（同じお知らせを複数の問で参照）
+const SHARED_NOTICES = {};
+Object.keys(QUESTIONS_DATA).forEach(year => {
+  const firstQ = QUESTIONS_DATA[year][0];
+  if(firstQ.noticeBody){
+    SHARED_NOTICES[year + "_notice"] = {
+      title: firstQ.noticeTitle,
+      body: firstQ.noticeBody,
+      bodyJa: firstQ.noticeBodyJa
+    };
+  }
+});
+
+function getNotice(q, year){
+  if(q.noticeBody) return {title:q.noticeTitle, body:q.noticeBody, bodyJa:q.noticeBodyJa};
+  if(q.sharedNotice) return SHARED_NOTICES[q.sharedNotice];
+  // フォールバック：年の最初の問題から
+  const first = QUESTIONS_DATA[year][0];
+  return {title:first.noticeTitle, body:first.noticeBody, bodyJa:first.noticeBodyJa};
+}
+
+
+// ==================== 状態管理 ====================
+let currentYear = "Set-A";
+let currentQ = 0;
+let currentMode = "hint"; // "hint" or "explain"
+let answeredMap = {}; // {"R7-1_0": 1, ...}
+let savedWords = []; // [{w, m, k, year, qNo}, ...]
+
+function getKey(year, q){ return year + "_" + q; }
+
+// ==================== 描画：年タブ ====================
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  ["Set-A","Set-B","Set-C","Set-D","Set-E","Set-F"].forEach(y=>{
+    if(QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = SET_LABELS[y] || y;
+      if(y === currentYear) b.classList.add('on');
+      b.onclick = ()=>{
+        stopAllPlay();
+        currentYear = y; currentQ = 0;
+        renderYearPick(); renderTabs(); renderQuestion();
+      };
+      yp.appendChild(b);
+    }
+  });
+}
+
+// ==================== 描画：問題タブ ====================
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML = '';
+  data.forEach((q, i)=>{
+    const t = document.createElement('button');
+    t.className = 'q-tab' + (i === currentQ ? ' active' : '');
+    t.innerHTML = `問${q.no}<br><span style="font-size:.7rem;font-weight:500">No.${q.qNum}</span>`;
+    t.onclick = ()=>{ stopAllPlay(); currentQ = i; renderTabs(); renderQuestion(); };
+    tabs.appendChild(t);
+  });
+}
+
+// ==================== キーワードハイライト ====================
+function highlightWord(text, words){
+  if(!words || words.length === 0) return text;
+  // 長い順に処理してオーバーラップを防ぐ
+  const sorted = [...words].sort((a,b) => b.w.length - a.w.length);
+  let result = text;
+  // 既にハイライトしたキーワードは記録（同じ語を複数回処理しない）
+  const replaced = new Set();
+  sorted.forEach(kw => {
+    if(replaced.has(kw.w.toLowerCase())) return;
+    const safe = kw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // 単語境界（\b）が日本語に対応しないので、英語語のみ対象
+    const regex = new RegExp(`\\b(${safe})\\b`, 'i');
+    if(result.match(regex)){
+      const opts = JSON.stringify({m:kw.mean, k:kw.kana, a:kw.ac});
+      const escapedOpts = opts.replace(/"/g, '&quot;');
+      result = result.replace(regex, 
+        `<span class="word" data-opts="${escapedOpts}" onclick="showVwPop(this,event)">$1</span>`);
+      replaced.add(kw.w.toLowerCase());
+    }
+  });
+  return result;
+}
+
+// ==================== 描画：問題本体 ====================
+function renderQuestion(){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const c = document.getElementById('qContainer');
+  const notice = getNotice(data, currentYear);
+
+  // お知らせ本文にもキーワードハイライトを適用
+  const decoratedNoticeBody = highlightWord(notice.body, data.keyWords);
+  // 質問文にもハイライト
+  const decoratedQuestion = highlightWord(data.question, data.keyWords);
+  // 選択肢にもハイライト
+  const decoratedChoices = data.choices.map(c => highlightWord(c, data.keyWords));
+
+  // 状況設定（あれば）
+  const situationHtml = data.situation
+    ? `<div class="qsec-situation">📝 <b>状況：</b>${data.situation}<br><span style="font-size:.92em;color:#7a4a10">${data.situationJa || ''}</span></div>`
+    : '';
+
+  // 選択肢HTML
+  let choicesHtml = '';
+  decoratedChoices.forEach((ch, i)=>{
+    choicesHtml += `<button class="choice" data-idx="${i}" onclick="pickChoice(${i})">
+      <span class="num">${i+1}</span>${ch}
+    </button>`;
+  });
+
+  // ヒントHTML
+  let hintsHtml = '';
+  data.hints.forEach((h, i)=>{
+    hintsHtml += `<div class="hint-box" id="hint${i}"><span class="hint-num">ヒント${i+1}</span><div>${h}</div></div>`;
+  });
+
+  c.innerHTML = `
+    <div class="qcard">
+      <div class="topic">📋 ${data.topic}</div>
+      <div class="q-instruction">次のお知らせを読み、質問の答えとして最も適当なものを 1〜4 から一つ選びなさい。<b>（解答番号 ${data.qNum}）</b></div>
+      <button class="sentence-play" onclick="playNotice()">🔊 お知らせを読み上げる</button>
+
+      <div class="notice-box">
+        <div class="notice-title">${notice.title}</div>
+        ${decoratedNoticeBody}
+      </div>
+
+      <button class="toggle-ja" onclick="toggleJa()">📝 お知らせの日本語要約を表示／非表示</button>
+      <div class="notice-ja-box" id="noticeJa" style="display:none;background:var(--hint);padding:10px 12px;border-radius:8px;margin-bottom:10px;font-size:.85rem;line-height:1.65;border-left:3px solid var(--accent2)">
+        ${notice.bodyJa || ''}
+      </div>
+
+      <div class="qsec">
+        <div class="qsec-head">
+          <span class="qsec-num">設問 No.${data.qNum}</span>
+        </div>
+        <div class="qsec-question">${decoratedQuestion}</div>
+        <div style="font-size:.82rem;color:#666;margin-bottom:6px">${data.questionJa}</div>
+        ${situationHtml}
+        <div class="choices" id="choicesBox">${choicesHtml}</div>
+        <div class="result-msg" id="resultMsg"></div>
+      </div>
+
+      <div class="mode-tabs">
+        <button class="mode-btn ${currentMode==='hint'?'active':''}" onclick="setMode('hint')">💡 ヒントモード</button>
+        <button class="mode-btn ${currentMode==='explain'?'active':''}" onclick="setMode('explain')">📚 詳しい解説</button>
+      </div>
+
+      <div class="mode-panel ${currentMode==='hint'?'show':''}" id="hintPanel">
+        <h3>💡 段階的ヒント（お知らせ読解のコツ）</h3>
+        <div class="hint-notice">
+          ⚠️ <b>このヒントは「合格点（40点〜）を取るための戦略」です。</b>本番で安定して点を取るには、<b>中学英単語・中学英文法</b>の基礎力が必要です。
+        </div>
+        <div class="hint-buttons">
+          <button class="hint-btn" onclick="showHint(0)">①カギの単語</button>
+          <button class="hint-btn" onclick="showHint(1)">②本文の見方</button>
+          <button class="hint-btn" onclick="showHint(2)">③消去法</button>
+        </div>
+        ${hintsHtml}
+      </div>
+
+      <div class="mode-panel ${currentMode==='explain'?'show':''}" id="explainPanel">
+        <h3>📚 詳しい解説</h3>
+        <div class="explain-box">${data.explain}</div>
+        <div class="study-rec">
+          <h4>📖 もっと安定して点を取りたい方へ</h4>
+          このアプリのヒントは「<b>本文を全部読まなくても解ける戦略</b>」を紹介しています。本番でもっと余裕を持って解きたい方は、<b>中学英単語・中学英文法</b>のアプリで基礎を固めましょう。基礎ができれば、ヒントなしでも安定して解けるようになります。<br>
+          <a href="https://realizefield.github.io/j-engglish-word/" target="_blank">📚 中学英単語アプリ</a>
+          <a href="https://realizefield.github.io/j-english/" target="_blank">📝 中学英文法アプリ</a>
+          <a href="https://realizefield.github.io/kounin_eng_grammer/kounineng-index.html" target="_blank">🎯 高認英文法アプリ</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // 既に解答済みなら復元
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined){
+    revealAnswer(answeredMap[k], false);
+  }
+}
+
+// ==================== 日本語訳トグル ====================
+function toggleJa(){
+  const el = document.getElementById('noticeJa');
+  if(!el) return;
+  el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+}
+
+// ==================== モード切替 ====================
+function setMode(m){
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  if(event && event.target) event.target.classList.add('active');
+  const hp = document.getElementById('hintPanel');
+  const ep = document.getElementById('explainPanel');
+  if(hp) hp.classList.toggle('show', m === 'hint');
+  if(ep) ep.classList.toggle('show', m === 'explain');
+}
+
+// ==================== ヒント表示 ====================
+function showHint(i){
+  const box = document.getElementById('hint' + i);
+  if(box) box.classList.toggle('show');
+}
+
+// ==================== 選択肢 ====================
+function pickChoice(i){
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined) return;
+  answeredMap[k] = i;
+  revealAnswer(i, true);
+}
+
+function revealAnswer(picked, showMsg){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const ans = data.answer - 1;
+  const choicesEl = document.getElementById('choicesBox');
+  if(!choicesEl) return;
+  const buttons = choicesEl.querySelectorAll('.choice');
+  buttons.forEach((btn, i)=>{
+    if(i === ans) btn.classList.add('correct');
+    else if(i === picked) btn.classList.add('wrong');
+  });
+  if(showMsg){
+    const msg = document.getElementById('resultMsg');
+    if(picked === ans){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `残念。正解は ${data.answer} 番です。`;
+    }
+  }
+}
+
+// ==================== vw popup ====================
+let activeWordPop = null;
+
+function showVwPop(el, ev){
+  if(ev) ev.stopPropagation();
+  if(activeWordPop && activeWordPop !== el){
+    closeVwPop(activeWordPop);
+  }
+  if(el.classList.contains('tapped')){
+    closeVwPop(el);
+    return;
+  }
+  el.classList.add('tapped');
+  const opts = JSON.parse(el.getAttribute('data-opts').replace(/&quot;/g, '"'));
+  const word = el.textContent;
+  const isSaved = savedWords.some(w => w.w === word);
+
+  const pop = document.createElement('span');
+  pop.className = 'word-pop show';
+  pop.innerHTML = `
+    <div class="pop-row">
+      <div>
+        <div><b>${word}</b> [${opts.k}] ${opts.a ? `<span class="accent">▶${opts.a}</span>` : ''}</div>
+        <div>${opts.m}</div>
+      </div>
+      <div class="pop-buttons">
+        <button class="speak" onclick="event.stopPropagation();speakWord('${word.replace(/'/g, "\\'")}')">🔊</button>
+        <button class="${isSaved ? 'saved' : 'save'}" onclick="event.stopPropagation();saveWord('${word.replace(/'/g, "\\'")}','${opts.m.replace(/'/g, "\\'")}','${opts.k.replace(/'/g, "\\'")}',this)">${isSaved ? '✓' : '保存'}</button>
+      </div>
+    </div>
+  `;
+  el.appendChild(pop);
+  activeWordPop = el;
+}
+
+function closeVwPop(el){
+  el.classList.remove('tapped');
+  const pop = el.querySelector('.word-pop');
+  if(pop) pop.remove();
+  if(activeWordPop === el) activeWordPop = null;
+}
+
+document.addEventListener('click', e => {
+  if(activeWordPop && !activeWordPop.contains(e.target)){
+    closeVwPop(activeWordPop);
+  }
+});
+
+function saveWord(w, m, k, btn){
+  if(savedWords.some(x => x.w === w)) return;
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  savedWords.push({w, m, k, year:currentYear, qNo:data.no});
+  btn.textContent = '✓';
+  btn.className = 'saved';
+  document.getElementById('reviewCount').textContent = savedWords.length;
+}
+
+// ==================== 音声合成 ====================
+let voices = [];
+let currentSpeech = null;
+
+function loadVoices(){
+  voices = window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function pickVoice(){
+  if(voices.length === 0) loadVoices();
+  const priorityNames = [
+    'Samantha','Karen','Zira','Google US English','Google UK English Female',
+    'Microsoft Zira','Allison','Ava','Susan'
+  ];
+  for(const name of priorityNames){
+    const v = voices.find(voice =>
+      voice.name.includes(name) && /en-US|en-GB|en-AU/i.test(voice.lang)
+    );
+    if(v) return v;
+  }
+  const femaleByName = voices.find(v =>
+    /en-US|en-GB|en-AU/i.test(v.lang) && /female|woman/i.test(v.name)
+  );
+  if(femaleByName) return femaleByName;
+  const maleNames = /male|man|David|Daniel|Alex|Tom|James|Mark|George|Fred/i;
+  const nonMaleEn = voices.find(v =>
+    /en-US|en-GB|en-AU/i.test(v.lang) && !maleNames.test(v.name)
+  );
+  if(nonMaleEn) return nonMaleEn;
+  return voices.find(v => /en/i.test(v.lang)) || voices[0];
+}
+
+function speakWord(word){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  u.pitch = 1.15;
+  speechSynthesis.speak(u);
+}
+
+function playNotice(){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const notice = getNotice(data, currentYear);
+  // HTMLタグを除去してテキスト化
+  const div = document.createElement('div');
+  div.innerHTML = notice.body;
+  const text = (notice.title + '. ' + (div.innerText || div.textContent || ''))
+    .replace(/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uffef\u4e00-\u9faf]+/g, ' ') // 日本語除去
+    .replace(/\s+/g, ' ').trim();
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  u.pitch = 1.15;
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function stopAllPlay(){
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+  }
+  currentSpeech = null;
+}
+
+// ==================== 復習リスト ====================
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(savedWords.length === 0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:20px">まだ単語が保存されていません。<br>本文中の<span style="color:var(--accent2);text-decoration:underline">下線つきの単語</span>をタップして「保存」ボタンを押してください。</p>';
+  } else {
+    body.innerHTML = savedWords.map((w, i)=>`
+      <div class="review-card">
+        <div class="review-word">${w.w}</div>
+        <div class="review-q">[${w.k}] ${w.m}</div>
+        <div style="font-size:.75rem;color:#888;">${SET_LABELS[w.year] || w.year} 問${w.qNo}より</div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="removeWord(${i})">✓ 覚えた</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+function removeWord(i){
+  savedWords.splice(i, 1);
+  document.getElementById('reviewCount').textContent = savedWords.length;
+  openReview();
+}
+
+// ==================== 初期化 ====================
+renderYearPick();
+renderTabs();
+renderQuestion();
+
+
+</script>
+</body>
+</html>

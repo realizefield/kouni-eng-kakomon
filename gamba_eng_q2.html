@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMBA 高認英語 第2問 類題演習</title>
+<style>
+:root{
+  --bg:#fef9f3;
+  --paper:#ffffff;
+  --ink:#2b2b2b;
+  --accent:#d94f4f;
+  --accent2:#2c5f8d;
+  --accent3:#e8a838;
+  --soft:#f3ece1;
+  --line:#d8cfc0;
+  --hint:#fff5e0;
+  --good:#3d8b5a;
+  --shadow:0 2px 0 rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Yu Gothic",-apple-system,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+body{padding:12px;max-width:780px;margin:0 auto;padding-bottom:80px}
+
+header{background:linear-gradient(135deg,var(--accent2),#1a4870);color:#fff;padding:18px 16px;border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);border-radius:50%}
+header h1{font-size:1.25rem;font-weight:800;letter-spacing:.02em;margin-bottom:4px}
+header p{font-size:.82rem;opacity:.92}
+.badge{display:inline-block;background:var(--accent3);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:8px;font-weight:700;margin-right:6px}
+
+.q-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.q-tab{flex:1;min-width:62px;padding:10px 6px;background:var(--paper);border:2px solid var(--line);border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;text-align:center;transition:all .15s;color:var(--ink)}
+.q-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.year-pick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.year-pick button{flex:1;min-width:80px;padding:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.year-pick button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+
+.qcard{background:var(--paper);border-radius:14px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.topic{background:var(--soft);padding:6px 12px;border-radius:8px;display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px}
+
+/* 短文表示 */
+.sentence{font-size:1rem;line-height:2;font-family:"Georgia",serif;padding:12px;background:#fdf8f0;border-radius:10px;border:1px dashed var(--line)}
+.sentence-play{background:linear-gradient(135deg,var(--accent),#b73e3e);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 2px 6px rgba(217,79,79,.3);display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:inherit}
+.sentence-play:active{transform:scale(.98)}
+
+.blank{display:inline-block;background:var(--hint);border:2px dashed var(--accent3);padding:2px 28px;border-radius:6px;font-weight:700;color:var(--accent3);min-width:120px;text-align:center}
+
+.word{position:relative;border-bottom:2px dotted var(--accent2);cursor:help;color:var(--accent2);font-weight:600}
+.word:hover, .word.tapped{background:#fff5d6}
+.word-pop{position:absolute;left:50%;top:100%;transform:translateX(-50%);background:#2b2b2b;color:#fff;padding:8px 10px;border-radius:8px;font-size:.78rem;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:500;line-height:1.5;white-space:nowrap;z-index:50;display:none;margin-top:6px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.word-pop::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:#2b2b2b}
+.word-pop.show{display:block}
+.word-pop .pop-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.word-pop .accent{color:#ffd166;font-weight:700}
+.word-pop button{background:var(--accent3);color:#fff;border:none;border-radius:6px;padding:3px 8px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.word-pop button.save{background:var(--good)}
+.word-pop button.saved{background:#888}
+
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.choice{background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:10px;font-size:.92rem;cursor:pointer;text-align:left;font-family:"Georgia",serif;color:var(--ink);transition:all .15s;line-height:1.4;display:block;width:100%}
+.choice .num{display:inline-block;background:var(--soft);color:var(--accent2);font-weight:800;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;margin-right:6px;font-size:.78rem;font-family:sans-serif}
+.choice.correct{background:#e8f5e9;border-color:var(--good)}
+.choice.correct .num{background:var(--good);color:#fff}
+.choice.wrong{background:#fde8e8;border-color:var(--accent);opacity:.85}
+.choice.wrong .num{background:var(--accent);color:#fff}
+.choice .ja-row{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.15);font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:.82rem;color:#444;align-items:center;gap:8px}
+.choices.revealed .choice .ja-row{display:flex}
+.choice .ja-text{flex:1;line-height:1.5}
+.choice .ja-icon{color:var(--accent2);font-weight:800;font-family:sans-serif}
+
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 10px}
+.mode-btn{padding:10px 8px;border:2px solid var(--line);background:var(--paper);border-radius:10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;color:var(--ink);line-height:1.3}
+.mode-btn.active{background:var(--accent3);color:#fff;border-color:var(--accent3)}
+
+.mode-panel{background:var(--soft);padding:14px;border-radius:10px;margin-top:6px;display:none;border:1px solid var(--line)}
+.mode-panel.show{display:block}
+.mode-panel h3{font-size:.92rem;color:var(--accent2);margin-bottom:8px;border-left:4px solid var(--accent3);padding-left:8px}
+
+.hint-buttons{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.hint-btn{flex:1;min-width:80px;padding:8px;background:var(--accent3);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer}
+.hint-box{background:var(--paper);padding:10px 12px;border-left:4px solid var(--accent3);border-radius:6px;margin-bottom:6px;font-size:.88rem;line-height:1.6;display:none}
+.hint-box.show{display:block;animation:slidein .25s}
+.hint-box p{margin-bottom:6px}
+.hint-box p:last-child{margin-bottom:0}
+
+/* ヒント内の単語表 */
+.hint-box .word-table{width:100%;border-collapse:collapse;margin:8px 0;background:var(--soft);border-radius:6px;overflow:hidden;font-size:.85rem}
+.hint-box .word-table th{background:var(--accent2);color:#fff;padding:5px 8px;text-align:left;font-weight:700;font-size:.78rem}
+.hint-box .word-table td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.hint-box .word-table tr:last-child td{border-bottom:none}
+.hint-box .word-table .en{font-family:"Georgia",serif;font-weight:700;color:var(--accent2);width:40%}
+.hint-box .word-table .ja{color:var(--ink)}
+.hint-box .step{margin-top:8px;padding:8px 10px;background:#fff5e0;border-radius:6px;border-left:3px solid var(--accent3)}
+.hint-box .think-arrow{color:var(--accent);font-weight:800;margin:0 4px}
+@keyframes slidein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.hint-num{font-weight:800;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:6px;font-size:.78rem;margin-bottom:6px}
+
+/* 解説本体 */
+.explain-box{background:var(--paper);padding:14px;border-radius:8px;border-left:4px solid var(--accent3);font-size:.9rem;line-height:1.85}
+.explain-box p{margin-bottom:10px}
+.explain-box p:last-child{margin-bottom:0}
+.explain-box b{color:var(--accent);background:#fff;padding:0 3px;border-radius:3px}
+.explain-box .ja-trans{background:var(--hint);padding:8px 10px;border-radius:6px;margin-top:10px;border-left:3px solid var(--accent2)}
+.explain-box .ja-trans b{color:var(--accent2);background:transparent;padding:0}
+
+.review-fab{position:fixed;bottom:14px;right:14px;background:var(--accent);color:#fff;border:none;border-radius:30px;padding:12px 16px;font-weight:800;font-size:.85rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
+.review-fab .count{background:#fff;color:var(--accent);border-radius:50%;padding:1px 7px;margin-left:6px;font-size:.75rem}
+.review-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:14px}
+.review-modal.show{display:flex}
+.review-content{background:var(--paper);border-radius:14px;padding:18px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.review-content h2{color:var(--accent);font-size:1.05rem;margin-bottom:10px}
+.review-card{background:var(--soft);padding:12px;border-radius:10px;margin-bottom:10px}
+.review-word{font-size:1.1rem;font-weight:800;color:var(--accent2);margin-bottom:6px;font-family:"Georgia",serif}
+.review-q{font-size:.85rem;margin-bottom:8px;color:#555}
+.review-choices{display:grid;gap:6px}
+.review-choice{background:var(--paper);border:1.5px solid var(--line);padding:8px;border-radius:6px;font-size:.85rem;cursor:pointer;text-align:left;color:var(--ink)}
+.review-choice.right{background:#e8f5e9;border-color:var(--good)}
+.review-choice.bad{background:#fde8e8;border-color:var(--accent)}
+.review-actions{display:flex;gap:6px;margin-top:8px}
+.review-actions button{flex:1;padding:8px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8rem;color:#fff}
+.btn-remember{background:var(--good)}
+.close-btn{background:#888;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
+
+.result-msg{margin-top:10px;padding:12px;border-radius:8px;font-weight:700;text-align:center;display:none}
+.result-msg.show{display:block}
+.result-msg.ok{background:#e8f5e9;color:var(--good)}
+.result-msg.ng{background:#fde8e8;color:var(--accent)}
+
+.r5-note{background:#fff8e1;border:1px solid #ffe0a0;padding:8px 12px;border-radius:8px;font-size:.78rem;color:#806000;margin-bottom:10px;line-height:1.5}
+.r5-note b{color:#5a4500}
+
+@media (max-width:480px){
+  .choices{grid-template-columns:1fr}
+  .mode-tabs{grid-template-columns:1fr}
+}
+
+/* === 類題版で追加 === */
+.app-note{background:#eef7ff;border:1px solid #c7e0f7;padding:8px 12px;border-radius:8px;font-size:.78rem;color:#1a4870;margin-bottom:10px;line-height:1.55}
+.app-note b{color:var(--accent2)}
+.tip-banner{background:linear-gradient(135deg,#e8f4ff,#d4eaff);border:1px solid #a0c8e8;padding:10px 14px;border-radius:10px;font-size:.82rem;color:#1a4870;margin-bottom:12px;line-height:1.6}
+.tip-banner b{color:var(--accent)}
+.hint-note{background:#fff;border:1px dashed var(--line);padding:6px 10px;border-radius:6px;font-size:.72rem;color:#666;line-height:1.5;margin-bottom:10px}
+.hint-note b{color:var(--accent2)}
+.strategy{margin-top:8px;padding:10px 12px;background:#e8f4ff;border-radius:6px;border-left:3px solid var(--accent2)}
+.strategy b{color:var(--accent2)}
+.check-table{width:100%;border-collapse:collapse;margin:10px 0;background:#fafafa;border-radius:6px;overflow:hidden;font-size:.85rem}
+.check-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-size:.78rem}
+.check-table td{padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.check-table tr:last-child td{border-bottom:none}
+.check-table .ng{color:var(--accent);font-weight:700}
+.check-table .ok{color:var(--good);font-weight:700}
+.ng-mark{color:var(--accent);font-weight:800}
+.ok-mark{color:var(--good);font-weight:800}
+.q-instruction{font-size:.82rem;color:#666;margin-bottom:8px;background:#fffcf3;padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent3);line-height:1.5}
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>🎯 GAMBA 高認英語 第2問 類題演習</h1>
+  <p><span class="badge">短文穴埋め</span>語彙・文法をしっかり!・オリジナル類題</p>
+</header>
+
+<div class="app-note">
+  📝 <b>ご利用にあたって：</b>本アプリの問題は、<b>高認過去問の形式・レベルに合わせてオリジナル作成した類題</b>です。実際の過去問そのものは含まれません。本番試験と同じ出題パターン（短文の空所に入れる単語を選ぶ）で反復演習することで、得点力アップを目指します。
+</div>
+
+<div class="tip-banner">
+  💡 <b>第2問は「文の流れ」を読むのがコツ!</b> 空所の前後にある<b>キーワード</b>から「どんな意味の単語が入るか」を予想し、選択肢の中で意味が合うものを選びます。
+</div>
+
+<div class="year-pick" id="yearPick"></div>
+<div class="q-tabs" id="qTabs"></div>
+<div id="qContainer"></div>
+
+<button class="review-fab" onclick="openReview()">📚 復習リスト<span class="count" id="reviewCount">0</span></button>
+
+<div class="review-modal" id="reviewModal">
+  <div class="review-content">
+    <h2>📚 復習リスト</h2>
+    <div id="reviewBody"></div>
+    <button class="close-btn" onclick="closeReview()">閉じる</button>
+  </div>
+</div>
+
+
+<script>
+const QUESTIONS_DATA = {
+
+// ============================================================
+// Set-A（R7-1類題）
+// ============================================================
+"Set-A": [
+  {
+    no:1, topic:"部活と継続",
+    sentence:'When practice gets tough, the most important thing is to never <span class="blank">[ 8 ]</span> up. If you keep going, you will see results in the end.',
+    sentenceJa:"練習が厳しくなったとき、一番大切なことは決してあきらめないことです。続けていれば、最後には結果が見えてきます。",
+    answer:3,
+    choices:[
+      {t:"catch", ja:"つかまえる"},
+      {t:"get",   ja:"得る・なる"},
+      {t:"give",  ja:"あたえる"},
+      {t:"make",  ja:"作る"}
+    ],
+    keyWords:[
+      {w:"practice",mean:"練習",kana:"プラクティス",ac:"プラ"},
+      {w:"tough",mean:"厳しい",kana:"タフ",ac:"タ"},
+      {w:"important",mean:"大切な",kana:"インポータント",ac:"ポー"},
+      {w:"never",mean:"決して〜ない",kana:"ネヴァー",ac:"ネ"},
+      {w:"give up",mean:"あきらめる",kana:"ギブアップ",ac:"ア"},
+      {w:"keep going",mean:"続ける",kana:"キープゴウイング",ac:"キー"},
+      {w:"results",mean:"結果",kana:"リザルツ",ac:"リ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>practice</td><td class='ja'>練習</td></tr><tr><td class='en'>get tough</td><td class='ja'>厳しくなる</td></tr><tr><td class='en'>most important</td><td class='ja'>最も大切な</td></tr><tr><td class='en'>never</td><td class='ja'>決して〜ない</td></tr><tr><td class='en'>keep going</td><td class='ja'>続ける</td></tr><tr><td class='en'>results</td><td class='ja'>結果</td></tr></table><p>選択肢の単語の意味も確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>catch up</td><td class='ja'>追いつく</td></tr><tr><td class='en'>get up</td><td class='ja'>起きる</td></tr><tr><td class='en'>give up</td><td class='ja'>あきらめる</td></tr><tr><td class='en'>make up</td><td class='ja'>作り上げる・仲直りする</td></tr></table>",
+      "<p>テーマは<b>部活の練習と続けること</b>です。</p><div class='step'>「練習が厳しくなった時に、決して<b>___ up</b>してはいけない」「<b>続けていれば</b>結果が見える」と続きます。<span class='think-arrow'>→</span>つまり空所には、<b>「途中でやめない」</b>という意味になる動詞が入ります。</div>",
+      "「決して<b>___ up</b>しない」+「続けていれば結果が見える」。<br><b>up</b>と組み合わせて<b>「あきらめる」</b>になる動詞は、選択肢のうちどれでしょう？"
+    ],
+    explain:'<p><b>When 〜</b>＝「〜のとき」。<b>practice gets tough</b>＝「練習が厳しくなる」。<b>get + 形容詞</b>で「〜になる」という変化を表します。</p><p><b>the most important thing is to 〜</b>＝「最も大切なことは〜することだ」。<b>to + 動詞</b>は「〜すること」と訳します。</p><p><b>never give up</b>＝<b>「決してあきらめない」</b>。<b>give up</b>は<b>「あきらめる・断念する」</b>という重要熟語です。</p><p><b>If you keep going</b>＝「もし続けていれば」。<b>keep + 動詞-ing</b>で<b>「〜し続ける」</b>です。<b>keep going</b>＝「進み続ける・続ける」。</p><p><b>in the end</b>＝<b>「最後には・結局は」</b>という決まった言い方です。</p><div class="ja-trans"><b>全体訳：</b>練習が厳しくなったとき、一番大切なことは決してあきらめないことです。続けていれば、最後には結果が見えてきます。</div>'
+  },
+  {
+    no:2, topic:"人気のカフェ",
+    sentence:'This cafe serves delicious cakes at fair prices. The desserts are so <span class="blank">[ 9 ]</span> that you have to make a reservation a week in advance.',
+    sentenceJa:"このカフェは手頃な価格でおいしいケーキを出しています。デザートはとても人気があるので、1週間前に予約しなければなりません。",
+    answer:2,
+    choices:[
+      {t:"long",     ja:"長い"},
+      {t:"popular",  ja:"人気のある"},
+      {t:"scary",    ja:"恐ろしい"},
+      {t:"expensive",ja:"高価な"}
+    ],
+    keyWords:[
+      {w:"cafe",mean:"カフェ",kana:"カフェイ",ac:"カ"},
+      {w:"serves",mean:"出す・提供する",kana:"サーヴズ",ac:"サー"},
+      {w:"delicious",mean:"おいしい",kana:"ディリシャス",ac:"リ"},
+      {w:"fair prices",mean:"手頃な価格",kana:"フェアプライセズ",ac:"フェア"},
+      {w:"desserts",mean:"デザート",kana:"ディザーツ",ac:"ザー"},
+      {w:"so ... that",mean:"とても…なので〜",kana:"ソウザット",ac:"ソウ"},
+      {w:"make a reservation",mean:"予約をする",kana:"メイクアレザヴェイション",ac:"ヴェイ"},
+      {w:"in advance",mean:"前もって",kana:"インアドヴァンス",ac:"ヴァ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>delicious</td><td class='ja'>おいしい</td></tr><tr><td class='en'>fair prices</td><td class='ja'>手頃な価格</td></tr><tr><td class='en'>so ... that 〜</td><td class='ja'>とても…なので〜</td></tr><tr><td class='en'>make a reservation</td><td class='ja'>予約をする</td></tr><tr><td class='en'>a week in advance</td><td class='ja'>1週間前に</td></tr></table>",
+      "<p>テーマは<b>人気のカフェ</b>です。</p><div class='step'>「おいしいケーキ」「手頃な価格」と良い特徴が並んでいます。さらに「<b>so ___ that</b> 1週間前に予約しないといけない」と続きます。<span class='think-arrow'>→</span>つまり空所には、<b>「予約が必要なほど客が多い」</b>状況を表す形容詞が入ります。</div>",
+      "「とても<b>___</b>なので予約が必要」。<br>「客が多くて予約が必要」=<b>「人気がある」</b>。選択肢の中で<b>「人気のある」</b>の意味になる単語はどれでしょう？"
+    ],
+    explain:'<p><b>serves</b>＝「出す・提供する」。お店が料理を「出す」ときに使います。</p><p><b>at fair prices</b>＝「手頃な価格で」。<b>fair</b>は「妥当な・公正な」という意味で、「高すぎず安すぎない」価格を表します。</p><p><b>so 形容詞 that 〜</b>＝<b>「とても…なので〜」</b>という重要構文です。<b>so popular that 〜</b>＝「とても人気があるので〜」。<b>that</b>のあとには「結果」が来ます。</p><p><b>have to 〜</b>＝「〜しなければならない」。<b>make a reservation</b>＝「予約する」。<b>reserve</b>と同じ意味の名詞表現です。</p><p><b>a week in advance</b>＝<b>「1週間前に」</b>。<b>in advance</b>＝「前もって」。</p><div class="ja-trans"><b>全体訳：</b>このカフェは手頃な価格でおいしいケーキを出しています。デザートはとても人気があるので、1週間前に予約しなければなりません。</div>'
+  },
+  {
+    no:3, topic:"食品ロス問題",
+    sentence:'In Japan, a lot of food is thrown away every day. We need to <span class="blank">[ 10 ]</span> the amount of food waste and protect our planet.',
+    sentenceJa:"日本では毎日たくさんの食品が捨てられています。私たちは食品廃棄の量を減らし、地球を守る必要があります。",
+    answer:1,
+    choices:[
+      {t:"reduce",   ja:"減らす"},
+      {t:"increase", ja:"増やす"},
+      {t:"buy",      ja:"買う"},
+      {t:"collect",  ja:"集める"}
+    ],
+    keyWords:[
+      {w:"thrown away",mean:"捨てられる",kana:"スロウンアウェイ",ac:"スロウ"},
+      {w:"every day",mean:"毎日",kana:"エヴリデイ",ac:"エ"},
+      {w:"amount",mean:"量",kana:"アマウント",ac:"マウ"},
+      {w:"food waste",mean:"食品廃棄・食品ロス",kana:"フードウェイスト",ac:"ウェイ"},
+      {w:"protect",mean:"守る",kana:"プロテクト",ac:"テ"},
+      {w:"planet",mean:"地球・惑星",kana:"プラネット",ac:"プラ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>thrown away</td><td class='ja'>捨てられる</td></tr><tr><td class='en'>amount of food waste</td><td class='ja'>食品廃棄の量</td></tr><tr><td class='en'>protect</td><td class='ja'>守る</td></tr><tr><td class='en'>planet</td><td class='ja'>地球</td></tr></table>",
+      "<p>テーマは<b>食品ロスの問題</b>です。</p><div class='step'>「たくさんの食品が捨てられている」「<b>地球を守る</b>必要がある」という流れです。<span class='think-arrow'>→</span>つまり、食品廃棄を<b>「悪い状況」</b>として捉えています。</div><div class='step'>「food wasteの量を___」+「地球を守る」。<span class='think-arrow'>→</span>地球を守るには、捨てる量を<b>少なくする</b>のが自然ですね。</div>",
+      "「food wasteの量を___」「地球を守る」。<br>選択肢の中で<b>「減らす」</b>の意味になる単語はどれでしょう？"
+    ],
+    explain:'<p><b>a lot of 〜</b>＝「たくさんの〜」。<b>thrown away</b>は<b>throw away</b>（捨てる）の過去分詞で、<b>受動態（is + 過去分詞）</b>になっています。「捨てられる」という意味です。</p><p><b>need to + 動詞</b>＝「〜する必要がある」。</p><p><b>reduce</b>＝<b>「減らす」</b>。重要動詞の1つで、環境問題でよく出てきます。<b>reduce, reuse, recycle</b>（3R）の<b>reduce</b>です。</p><p><b>amount of 〜</b>＝<b>「〜の量」</b>。<b>food waste</b>＝「食品廃棄・食品ロス」。</p><p><b>protect our planet</b>＝<b>「地球を守る」</b>。<b>planet</b>は「惑星」という意味ですが、<b>our planet</b>で「地球」を指す表現としてよく使われます。</p><div class="ja-trans"><b>全体訳：</b>日本では毎日たくさんの食品が捨てられています。私たちは食品廃棄の量を減らし、地球を守る必要があります。</div>'
+  },
+  {
+    no:4, topic:"スマホでの写真共有",
+    sentence:'These days, more and more people share their photos through online <span class="blank">[ 11 ]</span> instead of printing them. With smartphones, you can send pictures to friends in just a few seconds.',
+    sentenceJa:"最近、ますます多くの人が写真を印刷する代わりにオンラインのメッセージで共有しています。スマートフォンがあれば、わずか数秒で友達に写真を送ることができます。",
+    answer:1,
+    choices:[
+      {t:"messages",  ja:"メッセージ"},
+      {t:"buildings", ja:"建物"},
+      {t:"countries", ja:"国"},
+      {t:"newspapers",ja:"新聞"}
+    ],
+    keyWords:[
+      {w:"these days",mean:"最近",kana:"ズィーズデイズ",ac:"ズィー"},
+      {w:"more and more",mean:"ますます多くの",kana:"モアアンドモア",ac:"モア"},
+      {w:"share",mean:"共有する",kana:"シェア",ac:"シェア"},
+      {w:"through",mean:"〜を通して",kana:"スルー",ac:"スルー"},
+      {w:"online",mean:"オンラインの",kana:"オンライン",ac:"オン"},
+      {w:"instead of",mean:"〜の代わりに",kana:"インステッドオブ",ac:"ステッ"},
+      {w:"printing",mean:"印刷",kana:"プリンティング",ac:"プリン"},
+      {w:"smartphones",mean:"スマートフォン",kana:"スマートフォウンズ",ac:"スマー"},
+      {w:"in just a few seconds",mean:"わずか数秒で",kana:"インジャストアフューセカンズ",ac:"フュー"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>share their photos</td><td class='ja'>写真を共有する</td></tr><tr><td class='en'>through online ___</td><td class='ja'>オンラインの___を通して</td></tr><tr><td class='en'>instead of printing</td><td class='ja'>印刷する代わりに</td></tr><tr><td class='en'>send pictures</td><td class='ja'>写真を送る</td></tr><tr><td class='en'>in just a few seconds</td><td class='ja'>わずか数秒で</td></tr></table>",
+      "<p>テーマは<b>スマートフォンでの写真共有</b>です。</p><div class='step'>「オンラインの<b>___</b>を通して写真を共有」「印刷する代わりに」「数秒で送れる」と続きます。<span class='think-arrow'>→</span>つまり空所には、<b>スマホで使う通信手段</b>を表す名詞が入ります。</div>",
+      "「online ___（オンラインの___）を通して写真を送る」。<br>選択肢の中で<b>「メッセージ・通信手段」</b>を表す単語はどれでしょう？"
+    ],
+    explain:'<p><b>These days</b>＝「最近・近頃」。<b>nowadays</b>と同じ意味です。</p><p><b>more and more 人</b>＝<b>「ますます多くの人」</b>。<b>more and more</b>は「ますます」という意味です。</p><p><b>share + 物 + through 〜</b>＝「〜を通して物を共有する」。<b>share</b>は「共有する」、<b>through</b>は「〜を通して」。</p><p><b>online messages</b>＝<b>「オンラインメッセージ」</b>。LINEやメールなどの電子メッセージ全般を指します。</p><p><b>instead of + 名詞 / -ing</b>＝<b>「〜の代わりに」</b>。重要表現です。</p><p><b>in just a few seconds</b>＝「わずか数秒で」。<b>just</b>は「ほんの・たった」、<b>a few</b>は「少しの」。</p><div class="ja-trans"><b>全体訳：</b>最近、ますます多くの人が写真を印刷する代わりにオンラインのメッセージで共有しています。スマートフォンがあれば、わずか数秒で友達に写真を送ることができます。</div>'
+  }
+],
+
+// ============================================================
+// Set-B（R7-2類題）
+// ============================================================
+"Set-B": [
+  {
+    no:1, topic:"日本のアニメの人気",
+    sentence:'Japanese anime is loved by fans all over the world. There are many <span class="blank">[ 8 ]</span> for its global popularity, such as creative stories and beautiful drawings.',
+    sentenceJa:"日本のアニメは世界中のファンに愛されています。世界的な人気には、創造的なストーリーや美しい絵などの多くの理由があります。",
+    answer:1,
+    choices:[
+      {t:"reasons",  ja:"理由"},
+      {t:"problems", ja:"問題"},
+      {t:"weather",  ja:"天気"},
+      {t:"sports",   ja:"スポーツ"}
+    ],
+    keyWords:[
+      {w:"Japanese anime",mean:"日本のアニメ",kana:"ジャパニーズアニメ",ac:"ニー"},
+      {w:"loved by",mean:"〜に愛される",kana:"ラヴドバイ",ac:"ラ"},
+      {w:"all over the world",mean:"世界中で",kana:"オールオーヴァーザワールド",ac:"オーヴァー"},
+      {w:"global popularity",mean:"世界的な人気",kana:"グロウバルポピュラリティ",ac:"グロウ"},
+      {w:"such as",mean:"〜のような",kana:"サッチアズ",ac:"サッ"},
+      {w:"creative",mean:"創造的な",kana:"クリエイティヴ",ac:"エイ"},
+      {w:"drawings",mean:"絵・描画",kana:"ドローイングズ",ac:"ドロー"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>loved by fans</td><td class='ja'>ファンに愛されている</td></tr><tr><td class='en'>global popularity</td><td class='ja'>世界的な人気</td></tr><tr><td class='en'>such as 〜</td><td class='ja'>〜のような（例示）</td></tr><tr><td class='en'>creative stories</td><td class='ja'>創造的なストーリー</td></tr><tr><td class='en'>beautiful drawings</td><td class='ja'>美しい絵</td></tr></table>",
+      "<p>テーマは<b>日本のアニメの人気</b>です。</p><div class='step'>「世界的な人気の<b>___</b>」「<b>such as</b>（例えば）創造的なストーリーや美しい絵」と続きます。<span class='think-arrow'>→</span>つまり空所のあとに「具体例」が並んでいます。</div><div class='step'>「人気の___」+ 具体例（〜のような）。<span class='think-arrow'>→</span>つまり<b>「人気の何」</b>でしょうか？「人気の<b>理由</b>」が一番自然ですね。</div>",
+      "「世界的な人気の<b>___</b>」「such as（〜のような）...」。<br>選択肢の中で<b>「理由」</b>を表す単語はどれでしょう？"
+    ],
+    explain:'<p><b>be loved by 〜</b>＝「〜に愛される」（受動態）。<b>be + 過去分詞</b>で「〜される」を表します。</p><p><b>all over the world</b>＝<b>「世界中で」</b>。決まった言い方です。</p><p><b>There are many reasons for 〜</b>＝<b>「〜には多くの理由がある」</b>。<b>reason for 〜</b>＝「〜の理由」。<b>for</b>とセットで使います。</p><p><b>global popularity</b>＝「世界的な人気」。<b>global</b>＝「世界的な」、<b>popularity</b>＝「人気」（形容詞 popular の名詞形）。</p><p><b>such as 〜</b>＝<b>「〜のような・例えば〜」</b>。具体例を出すときに使う重要表現です。</p><p><b>creative stories</b>＝「創造的なストーリー」、<b>beautiful drawings</b>＝「美しい絵」。これらが「人気の理由」の<b>具体例</b>として並べられています。</p><div class="ja-trans"><b>全体訳：</b>日本のアニメは世界中のファンに愛されています。世界的な人気には、創造的なストーリーや美しい絵などの多くの理由があります。</div>'
+  },
+  {
+    no:2, topic:"がっかりしたレストラン",
+    sentence:'I went to a famous restaurant with my family last weekend. However, the food was cooked so <span class="blank">[ 9 ]</span> that we could not enjoy our dinner at all.',
+    sentenceJa:"先週末、家族と有名なレストランに行きました。しかし、料理がとても下手に作られていたので、夕食を全く楽しむことができませんでした。",
+    answer:2,
+    choices:[
+      {t:"quickly", ja:"すばやく"},
+      {t:"poorly",  ja:"下手に"},
+      {t:"happily", ja:"楽しそうに"},
+      {t:"early",   ja:"早く"}
+    ],
+    keyWords:[
+      {w:"famous",mean:"有名な",kana:"フェイマス",ac:"フェイ"},
+      {w:"restaurant",mean:"レストラン",kana:"レストラン",ac:"レ"},
+      {w:"last weekend",mean:"先週末",kana:"ラストウィークエンド",ac:"ラ"},
+      {w:"However",mean:"しかし",kana:"ハウエヴァー",ac:"エ"},
+      {w:"was cooked",mean:"調理された",kana:"ワズクックト",ac:"クッ"},
+      {w:"so ... that",mean:"とても…なので〜",kana:"ソウザット",ac:"ソウ"},
+      {w:"not ... at all",mean:"全く〜ない",kana:"ノットアットオール",ac:"オール"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>However</td><td class='ja'>しかし（流れの転換）</td></tr><tr><td class='en'>was cooked</td><td class='ja'>調理された（受動態）</td></tr><tr><td class='en'>so ... that 〜</td><td class='ja'>とても…なので〜</td></tr><tr><td class='en'>not ... at all</td><td class='ja'>全く〜ない</td></tr></table>",
+      "<p>テーマは<b>レストランへのがっかり体験</b>です。</p><div class='step'>「有名なレストランに行った」→「<b>However</b>（しかし）」+「料理が<b>so ___ that</b> 楽しめなかった」と続きます。<span class='think-arrow'>→</span>「However」のあとは<b>マイナスのこと</b>が来るはず。「楽しめなかった」のは料理の調理が<b>悪い</b>から。</div>",
+      "「料理が<b>so ___ that</b> 楽しめなかった」。<br>「下手に作られている」と<b>マイナスの調理状態</b>を表す副詞はどれでしょう？"
+    ],
+    explain:'<p><b>However</b>＝<b>「しかし」</b>。前の内容と<b>反対</b>のことを言うときに使います。「有名なレストラン」というプラスから、その後のマイナスへ転換するサインです。</p><p><b>be cooked</b>＝「調理される」（受動態）。料理は人が作るので「料理は作られる」という受動態になります。</p><p><b>so + 副詞 + that 〜</b>＝<b>「とても〜なので…」</b>という構文。ここでは<b>so poorly that</b>で「とても下手に作られていたので」。</p><p><b>poorly</b>＝<b>「下手に・粗末に」</b>。形容詞 <b>poor</b>（下手な・乏しい）に <b>-ly</b> がついた副詞形。</p><p><b>not ... at all</b>＝<b>「全く〜ない」</b>。否定を強める表現です。</p><div class="ja-trans"><b>全体訳：</b>先週末、家族と有名なレストランに行きました。しかし、料理がとても下手に作られていたので、夕食を全く楽しむことができませんでした。</div>'
+  },
+  {
+    no:3, topic:"新しい部活",
+    sentence:'I joined the basketball club last month. At first, I was a little nervous, but now playing with my new teammates is very <span class="blank">[ 10 ]</span> for me.',
+    sentenceJa:"先月、バスケットボール部に入部しました。最初は少し緊張しましたが、今では新しいチームメイトとプレーすることはとても楽しいです。",
+    answer:1,
+    choices:[
+      {t:"enjoyable", ja:"楽しい"},
+      {t:"painful",   ja:"痛い"},
+      {t:"boring",    ja:"退屈な"},
+      {t:"silent",    ja:"静かな"}
+    ],
+    keyWords:[
+      {w:"joined",mean:"加入した",kana:"ジョインド",ac:"ジョイ"},
+      {w:"basketball club",mean:"バスケットボール部",kana:"バスケットボールクラブ",ac:"バ"},
+      {w:"last month",mean:"先月",kana:"ラストマンス",ac:"ラ"},
+      {w:"At first",mean:"最初は",kana:"アットファースト",ac:"ファー"},
+      {w:"a little nervous",mean:"少し緊張した",kana:"アリトルナーヴァス",ac:"ナー"},
+      {w:"teammates",mean:"チームメイト",kana:"ティームメイツ",ac:"ティー"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>At first</td><td class='ja'>最初は</td></tr><tr><td class='en'>nervous</td><td class='ja'>緊張した</td></tr><tr><td class='en'>but now</td><td class='ja'>でも今は（流れの転換）</td></tr><tr><td class='en'>teammates</td><td class='ja'>チームメイト</td></tr></table>",
+      "<p>テーマは<b>新しい部活への適応</b>です。</p><div class='step'>「最初は緊張した」→「<b>but now</b>（でも今は）」<span class='think-arrow'>→</span>感情が<b>マイナスからプラスへ</b>変化しました。</div><div class='step'>「今ではチームメイトとプレーすることは<b>___</b>」。<span class='think-arrow'>→</span>プラスの感情なので<b>「楽しい」</b>系の形容詞が入ります。</div>",
+      "「最初は緊張」→「今では___」。<br>選択肢の中で<b>「楽しい・うれしい」</b>を表す形容詞はどれでしょう？"
+    ],
+    explain:'<p><b>joined</b>＝「加入した」。<b>join</b>は「（チームや集まりに）参加する」という動詞です。</p><p><b>At first 〜, but now ...</b>＝<b>「最初は〜、でも今は…」</b>という感情の変化を表す決まったパターンです。</p><p><b>a little + 形容詞</b>＝「少し〜」。<b>nervous</b>＝「緊張した」。</p><p><b>playing with my new teammates</b>＝「新しいチームメイトとプレーすること」。<b>動詞-ing</b>は名詞のように使えます（動名詞）。</p><p><b>enjoyable</b>＝<b>「楽しい・楽しめる」</b>。<b>enjoy</b>（楽しむ）に<b>-able</b>（〜できる）がついた形容詞。</p><div class="ja-trans"><b>全体訳：</b>先月、バスケットボール部に入部しました。最初は少し緊張しましたが、今では新しいチームメイトとプレーすることはとても楽しいです。</div>'
+  },
+  {
+    no:4, topic:"レストランの予約",
+    sentence:'My family and I are planning to celebrate my mother\'s birthday next Saturday. We need to <span class="blank">[ 11 ]</span> a table at her favorite Italian restaurant in advance.',
+    sentenceJa:"私の家族と私は来週土曜日に母の誕生日をお祝いする予定です。母のお気に入りのイタリアンレストランで、前もって席を予約する必要があります。",
+    answer:3,
+    choices:[
+      {t:"throw",   ja:"投げる"},
+      {t:"close",   ja:"閉める"},
+      {t:"reserve", ja:"予約する"},
+      {t:"forget",  ja:"忘れる"}
+    ],
+    keyWords:[
+      {w:"planning to",mean:"〜する予定",kana:"プランニングトゥ",ac:"プラ"},
+      {w:"celebrate",mean:"お祝いする",kana:"セレブレイト",ac:"セ"},
+      {w:"birthday",mean:"誕生日",kana:"バースデイ",ac:"バー"},
+      {w:"need to",mean:"〜する必要がある",kana:"ニードトゥ",ac:"ニー"},
+      {w:"favorite",mean:"お気に入りの",kana:"フェイヴァリット",ac:"フェイ"},
+      {w:"Italian restaurant",mean:"イタリアンレストラン",kana:"イタリアンレストラン",ac:"タ"},
+      {w:"in advance",mean:"前もって",kana:"インアドヴァンス",ac:"ヴァ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>celebrate ... birthday</td><td class='ja'>誕生日をお祝いする</td></tr><tr><td class='en'>need to</td><td class='ja'>〜する必要がある</td></tr><tr><td class='en'>a table</td><td class='ja'>席（レストランで）</td></tr><tr><td class='en'>in advance</td><td class='ja'>前もって</td></tr></table>",
+      "<p>テーマは<b>レストランで誕生日のお祝い</b>です。</p><div class='step'>「来週土曜日に誕生日のお祝い」「人気店で前もって席を<b>___</b>する必要」と続きます。<span class='think-arrow'>→</span>レストランで<b>前もって席を確保する</b>ことを何と言うでしょうか？</div>",
+      "「席を___」+「前もって（in advance）」。<br>選択肢の中で<b>「予約する」</b>を表す動詞はどれでしょう？"
+    ],
+    explain:'<p><b>be planning to + 動詞</b>＝「〜する予定だ」。<b>plan to + 動詞</b>と同じ意味で、現在進行形「〜している最中」のニュアンスを加えています。</p><p><b>celebrate my mother\'s birthday</b>＝「母の誕生日をお祝いする」。<b>celebrate</b>＝「お祝いする」。</p><p><b>need to + 動詞</b>＝「〜する必要がある」。</p><p><b>reserve</b>＝<b>「予約する」</b>。<b>make a reservation</b>と同じ意味の動詞です。<b>reserve a table</b>＝「席を予約する」（レストランで）。</p><p><b>her favorite Italian restaurant</b>＝「彼女のお気に入りのイタリアンレストラン」。<b>favorite</b>＝「お気に入りの」。</p><p><b>in advance</b>＝<b>「前もって」</b>。重要な熟語です。</p><div class="ja-trans"><b>全体訳：</b>私の家族と私は来週土曜日に母の誕生日をお祝いする予定です。母のお気に入りのイタリアンレストランで、前もって席を予約する必要があります。</div>'
+  }
+],
+
+// ============================================================
+// Set-C（R6-1類題）
+// ============================================================
+"Set-C": [
+  {
+    no:1, topic:"朝食の効果",
+    sentence:'Eating a healthy breakfast every morning has many benefits. It can give you a <span class="blank">[ 8 ]</span> start to the day and help you focus on your work.',
+    sentenceJa:"毎朝、健康的な朝食をとることには多くの利点があります。それは1日の前向きなスタートを与え、仕事に集中するのを助けてくれます。",
+    answer:1,
+    choices:[
+      {t:"positive", ja:"前向きな"},
+      {t:"sleepy",   ja:"眠い"},
+      {t:"strange",  ja:"奇妙な"},
+      {t:"empty",    ja:"空っぽの"}
+    ],
+    keyWords:[
+      {w:"healthy",mean:"健康的な",kana:"ヘルスィ",ac:"ヘル"},
+      {w:"breakfast",mean:"朝食",kana:"ブレックファスト",ac:"ブレッ"},
+      {w:"benefits",mean:"利点",kana:"ベネフィッツ",ac:"ベ"},
+      {w:"give a ... start",mean:"…なスタートを与える",kana:"ギヴアスタート",ac:"スター"},
+      {w:"focus on",mean:"〜に集中する",kana:"フォウカスオン",ac:"フォウ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>healthy breakfast</td><td class='ja'>健康的な朝食</td></tr><tr><td class='en'>benefits</td><td class='ja'>利点</td></tr><tr><td class='en'>give you a ... start</td><td class='ja'>…なスタートを与える</td></tr><tr><td class='en'>focus on</td><td class='ja'>〜に集中する</td></tr></table>",
+      "<p>テーマは<b>朝食の良い効果</b>です。</p><div class='step'>「健康的な朝食には<b>多くの利点</b>がある」「1日の<b>___ start</b>」「仕事に集中できる」と続きます。<span class='think-arrow'>→</span>すべて<b>プラスの効果</b>を述べていますね。</div>",
+      "「1日の<b>___</b> start（スタート）」。<br>選択肢の中で<b>「プラスのイメージ」</b>を持つ形容詞はどれでしょう？"
+    ],
+    explain:'<p><b>Eating a healthy breakfast</b>＝「健康的な朝食を食べること」。<b>動詞-ing</b>は「〜すること」（動名詞）として主語になれます。</p><p><b>have many benefits</b>＝「多くの利点がある」。<b>benefit</b>＝「利点・恩恵」。</p><p><b>give 人 a + 形容詞 + start</b>＝<b>「人に…なスタートを与える」</b>。<b>positive start</b>＝「前向きなスタート」。</p><p><b>positive</b>＝<b>「前向きな・プラスの」</b>。反対語は<b>negative</b>（後ろ向きな・マイナスの）。</p><p><b>focus on 〜</b>＝「〜に集中する」。重要熟語です。</p><div class="ja-trans"><b>全体訳：</b>毎朝、健康的な朝食をとることには多くの利点があります。それは1日の前向きなスタートを与え、仕事に集中するのを助けてくれます。</div>'
+  },
+  {
+    no:2, topic:"アルバイトと給料",
+    sentence:'Yuki started a part-time job at a bookstore last summer. She works there twice a week and uses her <span class="blank">[ 9 ]</span> to buy books and save for college.',
+    sentenceJa:"ユキは去年の夏、書店でアルバイトを始めました。彼女は週2回そこで働き、給料を本の購入と大学の貯金に使っています。",
+    answer:2,
+    choices:[
+      {t:"hobby",     ja:"趣味"},
+      {t:"salary",    ja:"給料"},
+      {t:"vacation",  ja:"休暇"},
+      {t:"hometown",  ja:"故郷"}
+    ],
+    keyWords:[
+      {w:"started",mean:"始めた",kana:"スターティド",ac:"スター"},
+      {w:"part-time job",mean:"アルバイト",kana:"パートタイムジョブ",ac:"パー"},
+      {w:"bookstore",mean:"書店",kana:"ブックストア",ac:"ブッ"},
+      {w:"twice a week",mean:"週2回",kana:"トワイスアウィーク",ac:"トワ"},
+      {w:"save for",mean:"〜のために貯金する",kana:"セイヴフォー",ac:"セイ"},
+      {w:"college",mean:"大学",kana:"カレッジ",ac:"カ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>part-time job</td><td class='ja'>アルバイト</td></tr><tr><td class='en'>twice a week</td><td class='ja'>週2回</td></tr><tr><td class='en'>uses her ___</td><td class='ja'>彼女の___を使う</td></tr><tr><td class='en'>save for college</td><td class='ja'>大学のために貯金する</td></tr></table>",
+      "<p>テーマは<b>アルバイトでお金を稼ぐ</b>です。</p><div class='step'>「書店でアルバイト」「週2回働く」+「<b>___</b>を使って本を買い貯金する」と続きます。<span class='think-arrow'>→</span>つまり、<b>働いて得るもの</b>＝何でしょうか？</div>",
+      "「アルバイトで働いて、<b>___</b>を本の購入や貯金に使う」。<br>選択肢の中で<b>「労働の対価」</b>を表す名詞はどれでしょう？"
+    ],
+    explain:'<p><b>started a part-time job</b>＝「アルバイトを始めた」。<b>part-time</b>＝「パートタイムの・短時間の」。</p><p><b>twice a week</b>＝<b>「週2回」</b>。<b>once a week</b>＝週1回、<b>three times a week</b>＝週3回。</p><p><b>salary</b>＝<b>「給料」</b>。月給などの定期的な給料を指します。アルバイトの場合は<b>wage</b>（時給）も使われます。</p><p><b>save for 〜</b>＝<b>「〜のために貯金する」</b>。<b>save</b>は「貯める・節約する」。</p><p><b>college</b>＝「大学」。<b>university</b>もほぼ同じ意味で使えます。</p><div class="ja-trans"><b>全体訳：</b>ユキは去年の夏、書店でアルバイトを始めました。彼女は週2回そこで働き、給料を本の購入と大学の貯金に使っています。</div>'
+  },
+  {
+    no:3, topic:"言語習得",
+    sentence:'Learning a new language takes time and patience. Even if you cannot speak it well at first, your skills will <span class="blank">[ 10 ]</span> improve through daily practice.',
+    sentenceJa:"新しい言語を学ぶには時間と忍耐が必要です。最初は上手に話せなくても、毎日の練習を通じて、あなたのスキルは少しずつ向上します。",
+    answer:3,
+    choices:[
+      {t:"loudly",   ja:"大声で"},
+      {t:"suddenly", ja:"突然"},
+      {t:"gradually",ja:"少しずつ"},
+      {t:"strongly", ja:"強く"}
+    ],
+    keyWords:[
+      {w:"Learning",mean:"学ぶこと",kana:"ラーニング",ac:"ラー"},
+      {w:"language",mean:"言語",kana:"ランゲッジ",ac:"ラン"},
+      {w:"takes time",mean:"時間がかかる",kana:"テイクスタイム",ac:"テイ"},
+      {w:"patience",mean:"忍耐",kana:"ペイシェンス",ac:"ペイ"},
+      {w:"Even if",mean:"たとえ〜でも",kana:"イーヴンイフ",ac:"イー"},
+      {w:"at first",mean:"最初は",kana:"アットファースト",ac:"ファー"},
+      {w:"skills",mean:"スキル・技能",kana:"スキルズ",ac:"ス"},
+      {w:"improve",mean:"向上する",kana:"インプルーヴ",ac:"プルー"},
+      {w:"through",mean:"〜を通じて",kana:"スルー",ac:"スルー"},
+      {w:"daily practice",mean:"毎日の練習",kana:"デイリープラクティス",ac:"デイ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>takes time and patience</td><td class='ja'>時間と忍耐が必要</td></tr><tr><td class='en'>Even if</td><td class='ja'>たとえ〜でも</td></tr><tr><td class='en'>at first</td><td class='ja'>最初は</td></tr><tr><td class='en'>skills will ___ improve</td><td class='ja'>スキルが___向上する</td></tr><tr><td class='en'>through daily practice</td><td class='ja'>毎日の練習を通じて</td></tr></table>",
+      "<p>テーマは<b>新しい言語学習</b>です。</p><div class='step'>「時間と忍耐が必要」「最初はうまく話せない」「毎日の練習でスキルが<b>___</b>向上する」と続きます。<span class='think-arrow'>→</span>言語学習は<b>急に上達せず、徐々に上達する</b>ものですね。</div>",
+      "「最初はうまく話せない」+「毎日の練習で<b>___</b>向上する」。<br>選択肢の中で<b>「少しずつ・徐々に」</b>を表す副詞はどれでしょう？"
+    ],
+    explain:'<p><b>Learning a new language</b>＝「新しい言語を学ぶこと」（動名詞）。</p><p><b>takes time and patience</b>＝「時間と忍耐がかかる」。<b>take</b>は「（時間や努力が）かかる」という意味でも使われます。</p><p><b>Even if 〜</b>＝<b>「たとえ〜でも」</b>。譲歩の表現です。</p><p><b>at first</b>＝「最初は」（始まりの時期）。</p><p><b>gradually</b>＝<b>「少しずつ・徐々に」</b>。重要副詞で、変化が時間をかけて進むことを表します。<b>suddenly</b>（突然）の反対語と覚えましょう。</p><p><b>improve</b>＝「向上する」。<b>through</b>＝「〜を通じて」。</p><div class="ja-trans"><b>全体訳：</b>新しい言語を学ぶには時間と忍耐が必要です。最初は上手に話せなくても、毎日の練習を通じて、あなたのスキルは少しずつ向上します。</div>'
+  },
+  {
+    no:4, topic:"靴のマナー",
+    sentence:'When you visit a Japanese home, you should always <span class="blank">[ 11 ]</span> your shoes at the entrance. This is an important custom that shows respect for the host.',
+    sentenceJa:"日本の家を訪問するときは、玄関で必ず靴を脱ぐべきです。これは家主への敬意を示す大切な習慣です。",
+    answer:4,
+    choices:[
+      {t:"carry",  ja:"運ぶ"},
+      {t:"wash",   ja:"洗う"},
+      {t:"break",  ja:"壊す"},
+      {t:"remove", ja:"取り外す・脱ぐ"}
+    ],
+    keyWords:[
+      {w:"visit",mean:"訪問する",kana:"ヴィズィット",ac:"ヴィ"},
+      {w:"Japanese home",mean:"日本の家",kana:"ジャパニーズホウム",ac:"ニー"},
+      {w:"always",mean:"いつも・必ず",kana:"オールウェイズ",ac:"オール"},
+      {w:"shoes",mean:"靴",kana:"シューズ",ac:"シュー"},
+      {w:"entrance",mean:"玄関・入口",kana:"エントランス",ac:"エン"},
+      {w:"custom",mean:"習慣",kana:"カスタム",ac:"カ"},
+      {w:"shows respect",mean:"敬意を示す",kana:"ショウズリスペクト",ac:"ペ"},
+      {w:"host",mean:"家主・接待する人",kana:"ホウスト",ac:"ホウ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Japanese home</td><td class='ja'>日本の家</td></tr><tr><td class='en'>at the entrance</td><td class='ja'>玄関で</td></tr><tr><td class='en'>important custom</td><td class='ja'>大切な習慣</td></tr><tr><td class='en'>shows respect for</td><td class='ja'>〜への敬意を示す</td></tr><tr><td class='en'>host</td><td class='ja'>家主</td></tr></table>",
+      "<p>テーマは<b>日本の家での靴マナー</b>です。</p><div class='step'>「日本の家を訪問するとき」「玄関で靴を<b>___</b> する」と続きます。<span class='think-arrow'>→</span>日本では家に入る前に<b>靴をどうする</b>のが習慣でしょうか？</div>",
+      "「玄関で靴を<b>___</b>」=日本の習慣。<br>選択肢の中で<b>「靴を脱ぐ」</b>に当てはまる動詞はどれでしょう？"
+    ],
+    explain:'<p><b>visit</b>＝「訪問する」。</p><p><b>should always 〜</b>＝「いつも〜すべき」。<b>should</b>は義務・推奨を表します。</p><p><b>remove</b>＝<b>「取り外す・脱ぐ」</b>。<b>remove your shoes</b>＝「靴を脱ぐ」、<b>remove your hat</b>＝「帽子を取る」。<b>take off</b>と同じ意味で使えます。</p><p><b>at the entrance</b>＝「玄関で・入口で」。</p><p><b>This is an important custom</b>＝「これは大切な習慣」。<b>custom</b>＝「習慣・しきたり」。</p><p><b>shows respect for 〜</b>＝<b>「〜への敬意を示す」</b>。<b>respect</b>＝「敬意」。</p><div class="ja-trans"><b>全体訳：</b>日本の家を訪問するときは、玄関で必ず靴を脱ぐべきです。これは家主への敬意を示す大切な習慣です。</div>'
+  }
+],
+
+// ============================================================
+// Set-D（R6-2類題）
+// ============================================================
+"Set-D": [
+  {
+    no:1, topic:"朝寝坊を避ける",
+    sentence:'To start the day well, it is important to <span class="blank">[ 8 ]</span> staying up too late at night. If you go to bed early, you will wake up feeling refreshed.',
+    sentenceJa:"1日を良いスタートで始めるためには、夜更かしを避けることが大切です。早く寝れば、すっきりとした気分で目覚めることができます。",
+    answer:4,
+    choices:[
+      {t:"enjoy",  ja:"楽しむ"},
+      {t:"forget", ja:"忘れる"},
+      {t:"share",  ja:"共有する"},
+      {t:"avoid",  ja:"避ける"}
+    ],
+    keyWords:[
+      {w:"start the day",mean:"1日を始める",kana:"スタートザデイ",ac:"スター"},
+      {w:"important to",mean:"〜することが大切",kana:"インポータントトゥ",ac:"ポー"},
+      {w:"staying up",mean:"夜更かし",kana:"ステイングアップ",ac:"ステイ"},
+      {w:"too late",mean:"遅すぎる",kana:"トゥーレイト",ac:"レイ"},
+      {w:"go to bed early",mean:"早く寝る",kana:"ゴウトゥベッドアーリー",ac:"アー"},
+      {w:"wake up",mean:"目覚める",kana:"ウェイクアップ",ac:"ウェイ"},
+      {w:"refreshed",mean:"すっきりした",kana:"リフレッシュト",ac:"フレッ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>start the day well</td><td class='ja'>1日を良いスタートで始める</td></tr><tr><td class='en'>staying up too late</td><td class='ja'>夜更かし</td></tr><tr><td class='en'>If you go to bed early</td><td class='ja'>早く寝れば</td></tr><tr><td class='en'>refreshed</td><td class='ja'>すっきりした</td></tr></table>",
+      "<p>テーマは<b>早寝早起きの効果</b>です。</p><div class='step'>「夜更かしを<b>___</b> することが大切」「早く寝れば、すっきり目覚める」と続きます。<span class='think-arrow'>→</span>「すっきり目覚める」のは「夜更かしをしない」ことが必要。</div>",
+      "「夜更かしを<b>___</b>」=「夜更かしを<b>しない</b>こと」。<br>選択肢の中で<b>「〜を避ける」</b>を表す動詞はどれでしょう？"
+    ],
+    explain:'<p><b>To start the day well</b>＝「1日を良くスタートするために」。<b>To + 動詞</b>は「〜するために」（目的）の意味で文頭に置けます。</p><p><b>it is important to + 動詞</b>＝<b>「〜することが大切」</b>。重要構文です。</p><p><b>avoid + 動詞-ing</b>＝<b>「〜することを避ける」</b>。<b>avoid</b>のあとは<b>必ず -ing</b>形（動名詞）が来ます。<b>avoid to do</b>とは言いません。</p><p><b>staying up</b>＝「（寝ずに）起きていること」。<b>stay up</b>＝「夜更かしする」。</p><p><b>If you go to bed early</b>＝「早く寝れば」。<b>If 〜, you will ...</b>は「もし〜なら、…するでしょう」の条件文。</p><p><b>refreshed</b>＝「すっきりした・気分爽快な」。</p><div class="ja-trans"><b>全体訳：</b>1日を良いスタートで始めるためには、夜更かしを避けることが大切です。早く寝れば、すっきりとした気分で目覚めることができます。</div>'
+  },
+  {
+    no:2, topic:"旅の経験",
+    sentence:'Last year, I traveled alone to Hokkaido for the first time. The trip was a wonderful <span class="blank">[ 9 ]</span> that taught me how to plan and solve problems by myself.',
+    sentenceJa:"昨年、私は初めて北海道へ一人旅をしました。その旅は、自分で計画を立てて問題を解決する方法を教えてくれた素晴らしい経験でした。",
+    answer:1,
+    choices:[
+      {t:"experience", ja:"経験"},
+      {t:"hospital",   ja:"病院"},
+      {t:"machine",    ja:"機械"},
+      {t:"weather",    ja:"天気"}
+    ],
+    keyWords:[
+      {w:"traveled alone",mean:"一人旅をした",kana:"トラヴェルドアロウン",ac:"ロウ"},
+      {w:"for the first time",mean:"初めて",kana:"フォーザファーストタイム",ac:"ファー"},
+      {w:"wonderful",mean:"素晴らしい",kana:"ワンダフル",ac:"ワン"},
+      {w:"taught",mean:"教えた",kana:"トート",ac:"トー"},
+      {w:"how to",mean:"〜する方法",kana:"ハウトゥ",ac:"ハウ"},
+      {w:"solve problems",mean:"問題を解決する",kana:"ソルヴプロブレムズ",ac:"ソル"},
+      {w:"by myself",mean:"自分で",kana:"バイマイセルフ",ac:"セ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>traveled alone</td><td class='ja'>一人旅をした</td></tr><tr><td class='en'>for the first time</td><td class='ja'>初めて</td></tr><tr><td class='en'>wonderful</td><td class='ja'>素晴らしい</td></tr><tr><td class='en'>taught me how to</td><td class='ja'>〜する方法を教えてくれた</td></tr><tr><td class='en'>by myself</td><td class='ja'>自分で</td></tr></table>",
+      "<p>テーマは<b>初めての一人旅</b>です。</p><div class='step'>「初めて一人旅をした」「その旅は<b>素晴らしい ___</b>」「計画を立てて問題を解決する方法を教えてくれた」と続きます。<span class='think-arrow'>→</span>「教えてくれた」「素晴らしい」のは何でしょうか？</div>",
+      "「素晴らしい<b>___</b> で、何かを学んだ」。<br>選択肢の中で<b>「経験・体験」</b>を表す名詞はどれでしょう？"
+    ],
+    explain:'<p><b>traveled alone</b>＝「一人で旅した」。<b>alone</b>＝「一人で」。</p><p><b>for the first time</b>＝<b>「初めて」</b>。重要熟語です。</p><p><b>experience</b>＝<b>「経験・体験」</b>。名詞でも動詞（経験する）でも使えます。</p><p><b>that taught me how to 〜</b>＝「私に〜の方法を教えてくれた（経験）」。<b>that</b>は関係代名詞で、前の<b>experience</b>を修飾しています。</p><p><b>how to + 動詞</b>＝<b>「〜する方法・〜の仕方」</b>。<b>how to plan</b>＝計画する方法、<b>how to solve</b>＝解決する方法。</p><p><b>by myself</b>＝<b>「自分で・自分一人で」</b>。<b>alone</b>と似た意味の重要熟語。</p><div class="ja-trans"><b>全体訳：</b>昨年、私は初めて北海道へ一人旅をしました。その旅は、自分で計画を立てて問題を解決する方法を教えてくれた素晴らしい経験でした。</div>'
+  },
+  {
+    no:3, topic:"地元の食材",
+    sentence:'Recently, more people are interested in food that is grown <span class="blank">[ 10 ]</span>. Eating fresh vegetables from nearby farms is good for both your health and the environment.',
+    sentenceJa:"最近、地元で育てられた食べ物に興味を持つ人が増えています。近くの農場の新鮮な野菜を食べることは、健康にも環境にも良いのです。",
+    answer:3,
+    choices:[
+      {t:"loudly",     ja:"大声で"},
+      {t:"deeply",     ja:"深く"},
+      {t:"locally",    ja:"地元で"},
+      {t:"perfectly",  ja:"完璧に"}
+    ],
+    keyWords:[
+      {w:"Recently",mean:"最近",kana:"リーセントリー",ac:"リー"},
+      {w:"interested in",mean:"〜に興味がある",kana:"インタレスティドイン",ac:"イン"},
+      {w:"grown",mean:"育てられた",kana:"グロウン",ac:"グロウ"},
+      {w:"fresh vegetables",mean:"新鮮な野菜",kana:"フレッシュヴェジタブルズ",ac:"フレッ"},
+      {w:"nearby farms",mean:"近くの農場",kana:"ニアバイファームズ",ac:"ニア"},
+      {w:"both A and B",mean:"AもBも両方",kana:"ボウスエンド",ac:"ボウ"},
+      {w:"health",mean:"健康",kana:"ヘルス",ac:"ヘル"},
+      {w:"environment",mean:"環境",kana:"エンヴァイロンメント",ac:"ヴァイ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>interested in food that is grown ___</td><td class='ja'>___で育てられた食べ物に興味</td></tr><tr><td class='en'>fresh vegetables from nearby farms</td><td class='ja'>近くの農場の新鮮な野菜</td></tr><tr><td class='en'>good for both your health and the environment</td><td class='ja'>健康にも環境にも良い</td></tr></table>",
+      "<p>テーマは<b>地元産の食材</b>です。</p><div class='step'>「<b>___</b> で育てられた食べ物」「<b>近くの農場</b>の野菜」と続きます。<span class='think-arrow'>→</span>「近くの農場」=「<b>地元の</b>」と同じ意味ですね。</div>",
+      "「<b>___</b> で育てられた」=「nearby farms（近くの農場）」と同じ意味。<br>選択肢の中で<b>「地元で・近くで」</b>を表す副詞はどれでしょう？"
+    ],
+    explain:'<p><b>Recently</b>＝「最近」。<b>these days</b>と似た意味です。</p><p><b>more people are interested in 〜</b>＝「より多くの人が〜に興味を持っている」。<b>be interested in 〜</b>＝「〜に興味がある」。</p><p><b>that is grown locally</b>＝「地元で育てられた」。<b>that is + 過去分詞</b>は「〜される（た）」を表す関係代名詞構文。<b>grown</b>は<b>grow</b>（育てる）の過去分詞。</p><p><b>locally</b>＝<b>「地元で」</b>。<b>local</b>（地元の）の副詞形。<b>地産地消</b>＝<b>local production for local consumption</b>。</p><p><b>nearby farms</b>＝「近くの農場」。<b>nearby</b>＝「近くの」。</p><p><b>both A and B</b>＝<b>「AもBも両方」</b>。重要構文です。</p><div class="ja-trans"><b>全体訳：</b>最近、地元で育てられた食べ物に興味を持つ人が増えています。近くの農場の新鮮な野菜を食べることは、健康にも環境にも良いのです。</div>'
+  },
+  {
+    no:4, topic:"試験の不安",
+    sentence:'Before an important exam, many students feel <span class="blank">[ 11 ]</span> about their results. However, taking deep breaths and preparing well can help you stay calm.',
+    sentenceJa:"大切な試験の前、多くの生徒は結果について不安を感じます。しかし、深呼吸をしてしっかり準備すれば、落ち着いていられます。",
+    answer:2,
+    choices:[
+      {t:"happiness",  ja:"幸せ"},
+      {t:"anxiety",    ja:"不安"},
+      {t:"sleep",      ja:"睡眠"},
+      {t:"freedom",    ja:"自由"}
+    ],
+    keyWords:[
+      {w:"important exam",mean:"大切な試験",kana:"インポータントイグザム",ac:"ザ"},
+      {w:"feel ___ about",mean:"〜について…を感じる",kana:"フィール",ac:"フィー"},
+      {w:"results",mean:"結果",kana:"リザルツ",ac:"リ"},
+      {w:"However",mean:"しかし",kana:"ハウエヴァー",ac:"エ"},
+      {w:"deep breaths",mean:"深呼吸",kana:"ディープブレス",ac:"ディー"},
+      {w:"preparing well",mean:"よく準備する",kana:"プリペアリングウェル",ac:"ペア"},
+      {w:"stay calm",mean:"落ち着いていられる",kana:"ステイカーム",ac:"カー"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Before an important exam</td><td class='ja'>大切な試験の前</td></tr><tr><td class='en'>feel ___ about their results</td><td class='ja'>結果について___を感じる</td></tr><tr><td class='en'>However</td><td class='ja'>しかし</td></tr><tr><td class='en'>deep breaths</td><td class='ja'>深呼吸</td></tr><tr><td class='en'>stay calm</td><td class='ja'>落ち着いている</td></tr></table>",
+      "<p>テーマは<b>試験前の感情</b>です。</p><div class='step'>「大切な試験の前」「結果について <b>___</b>を感じる」「<b>However</b>（しかし）深呼吸して落ち着く」と続きます。<span class='think-arrow'>→</span>「However」のあとに「落ち着く」「準備する」と<b>マイナスを克服する</b>方法が来ます。<span class='think-arrow'>→</span>つまり<b>___</b>は<b>マイナスの感情</b>。</p>",
+      "「試験前」+「結果について<b>マイナスの感情</b>を感じる」。<br>選択肢の中で<b>「不安・心配」</b>を表す名詞はどれでしょう？"
+    ],
+    explain:'<p><b>Before an important exam</b>＝「大切な試験の前」。<b>before</b>＝「〜の前」。</p><p><b>feel + 名詞 + about 〜</b>＝「〜について…を感じる」。<b>feel anxiety</b>＝「不安を感じる」。</p><p><b>anxiety</b>＝<b>「不安・心配」</b>。形容詞は<b>anxious</b>（不安な）。</p><p><b>However</b>＝「しかし」。前の文と<b>反対</b>のことを言うときに使います。「不安」というマイナスから「克服法」というプラスへの転換です。</p><p><b>taking deep breaths</b>＝「深呼吸をすること」。<b>preparing well</b>＝「よく準備すること」。動名詞（-ing形）が並んで主語になっています。</p><p><b>help you stay calm</b>＝<b>「あなたが落ち着くのを助ける」</b>。<b>help + 人 + 動詞の元の形</b>で「人が〜するのを助ける」。<b>stay calm</b>＝「落ち着いていられる」。</p><div class="ja-trans"><b>全体訳：</b>大切な試験の前、多くの生徒は結果について不安を感じます。しかし、深呼吸をしてしっかり準備すれば、落ち着いていられます。</div>'
+  }
+],
+
+// ============================================================
+// Set-E（R5-1類題・形式踏襲のオリジナル）
+// ============================================================
+"Set-E": [
+  {
+    no:1, topic:"学習と運動",
+    sentence:'In some ways, studying is <span class="blank">[ 8 ]</span> to physical exercise. Just as your muscles get stronger with daily training, your brain becomes sharper with regular practice.',
+    sentenceJa:"ある意味で、勉強は運動に似ています。筋肉が毎日のトレーニングで強くなるように、脳も定期的な練習でより鋭くなります。",
+    answer:2,
+    choices:[
+      {t:"opposite", ja:"反対の"},
+      {t:"similar",  ja:"似ている"},
+      {t:"unfair",   ja:"不公平な"},
+      {t:"silent",   ja:"静かな"}
+    ],
+    keyWords:[
+      {w:"In some ways",mean:"ある意味で",kana:"インサムウェイズ",ac:"サ"},
+      {w:"studying",mean:"勉強すること",kana:"スタディング",ac:"スタ"},
+      {w:"physical exercise",mean:"運動",kana:"フィズィカルエクササイズ",ac:"フィ"},
+      {w:"Just as",mean:"ちょうど〜のように",kana:"ジャストアズ",ac:"ジャ"},
+      {w:"muscles",mean:"筋肉",kana:"マスルズ",ac:"マ"},
+      {w:"daily training",mean:"毎日のトレーニング",kana:"デイリートレイニング",ac:"デイ"},
+      {w:"brain",mean:"脳",kana:"ブレイン",ac:"ブレイ"},
+      {w:"sharper",mean:"より鋭い",kana:"シャープアー",ac:"シャー"},
+      {w:"regular practice",mean:"定期的な練習",kana:"レギュラープラクティス",ac:"レ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>studying is ___ to physical exercise</td><td class='ja'>勉強は運動に___</td></tr><tr><td class='en'>Just as ...</td><td class='ja'>ちょうど〜のように</td></tr><tr><td class='en'>muscles get stronger</td><td class='ja'>筋肉が強くなる</td></tr><tr><td class='en'>brain becomes sharper</td><td class='ja'>脳が鋭くなる</td></tr></table>",
+      "<p>テーマは<b>学習と運動の共通点</b>です。</p><div class='step'>「勉強は運動に<b>___</b>」「<b>Just as</b>（〜のように）筋肉が強くなる、脳も鋭くなる」と続きます。<span class='think-arrow'>→</span>「同じように」効果が出るので、勉強と運動は<b>類似している</b>ことを言っています。</div>",
+      "「勉強と運動は<b>共通点がある</b>」=「___」。<br>選択肢の中で<b>「似ている」</b>を表す形容詞はどれでしょう？"
+    ],
+    explain:'<p><b>In some ways</b>＝<b>「ある意味で」</b>。物事を一面的に見るときに使います。</p><p><b>similar to 〜</b>＝<b>「〜に似ている」</b>。<b>to</b>とセットで使います。<b>different from 〜</b>（〜と異なる）の反対語です。</p><p><b>Just as 〜, ...</b>＝<b>「ちょうど〜のように…」</b>。2つの事柄を並列して比較する重要構文です。</p><p><b>muscles get stronger</b>＝「筋肉が強くなる」。<b>get + 比較級</b>で「だんだん〜なる」。</p><p><b>brain becomes sharper</b>＝「脳が鋭くなる」。<b>become</b>も<b>get</b>と同じ「〜になる」の意味。</p><p><b>regular practice</b>＝「定期的な練習」。<b>regular</b>＝「定期的な・規則正しい」。</p><div class="ja-trans"><b>全体訳：</b>ある意味で、勉強は運動に似ています。筋肉が毎日のトレーニングで強くなるように、脳も定期的な練習でより鋭くなります。</div>'
+  },
+  {
+    no:2, topic:"アルバイトで学ぶ",
+    sentence:'Many high school students take part-time jobs to earn money. However, they also <span class="blank">[ 9 ]</span> important life skills, such as time management and communication.',
+    sentenceJa:"多くの高校生はお金を稼ぐためにアルバイトをします。しかし、時間管理やコミュニケーションといった大切な人生スキルも学びます。",
+    answer:3,
+    choices:[
+      {t:"forget",  ja:"忘れる"},
+      {t:"return",  ja:"返す"},
+      {t:"learn",   ja:"学ぶ"},
+      {t:"throw",   ja:"投げる"}
+    ],
+    keyWords:[
+      {w:"high school students",mean:"高校生",kana:"ハイスクールスチューデンツ",ac:"ハイ"},
+      {w:"part-time jobs",mean:"アルバイト",kana:"パートタイムジョブズ",ac:"パー"},
+      {w:"earn money",mean:"お金を稼ぐ",kana:"アーンマニー",ac:"アー"},
+      {w:"However",mean:"しかし",kana:"ハウエヴァー",ac:"エ"},
+      {w:"life skills",mean:"人生のスキル",kana:"ライフスキルズ",ac:"ライ"},
+      {w:"time management",mean:"時間管理",kana:"タイムマネジメント",ac:"マ"},
+      {w:"communication",mean:"コミュニケーション",kana:"コミュニケイション",ac:"ケイ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>part-time jobs</td><td class='ja'>アルバイト</td></tr><tr><td class='en'>to earn money</td><td class='ja'>お金を稼ぐために</td></tr><tr><td class='en'>However</td><td class='ja'>しかし（流れの転換）</td></tr><tr><td class='en'>important life skills</td><td class='ja'>大切な人生のスキル</td></tr><tr><td class='en'>such as 〜</td><td class='ja'>〜のような（例示）</td></tr></table>",
+      "<p>テーマは<b>アルバイトの良い点</b>です。</p><div class='step'>「お金を稼ぐためにアルバイト」→「<b>However</b>（しかし）」+「重要な人生スキルも<b>___</b>」と続きます。<span class='think-arrow'>→</span>「However」のあとは<b>追加の良いこと</b>。アルバイトを通じて<b>得られる</b>ものを表します。</div>",
+      "「アルバイトを通じて、人生スキルも<b>___</b>」。<br>選択肢の中で<b>「身につける・学ぶ」</b>を表す動詞はどれでしょう？"
+    ],
+    explain:'<p><b>take part-time jobs</b>＝「アルバイトをする」。<b>take a job</b>＝「仕事をする・引き受ける」。</p><p><b>to earn money</b>＝「お金を稼ぐために」。<b>to + 動詞</b>は「〜するために」（目的）。</p><p><b>However</b>＝「しかし」。ここでは前の「お金のため」と<b>違う側面</b>（=学びがある）への転換。</p><p><b>learn</b>＝<b>「学ぶ・身につける」</b>。<b>learn skills</b>＝「スキルを身につける」。</p><p><b>life skills</b>＝<b>「人生のスキル・生きていく上で必要な能力」</b>。</p><p><b>such as 〜</b>＝<b>「〜のような・例えば〜」</b>。具体例を挙げる重要表現です。</p><div class="ja-trans"><b>全体訳：</b>多くの高校生はお金を稼ぐためにアルバイトをします。しかし、時間管理やコミュニケーションといった大切な人生スキルも学びます。</div>'
+  },
+  {
+    no:3, topic:"犬の感情",
+    sentence:'Recent research shows that dogs have a wide range of <span class="blank">[ 10 ]</span>, just like humans. They can feel happiness, fear, and even jealousy.',
+    sentenceJa:"最近の研究では、犬は人間と同じように幅広い感情を持つことがわかりました。彼らは喜びや恐れ、そして嫉妬さえも感じることができます。",
+    answer:4,
+    choices:[
+      {t:"weights",   ja:"重さ"},
+      {t:"streets",   ja:"通り"},
+      {t:"machines",  ja:"機械"},
+      {t:"emotions",  ja:"感情"}
+    ],
+    keyWords:[
+      {w:"Recent research",mean:"最近の研究",kana:"リーセントリサーチ",ac:"リー"},
+      {w:"shows that",mean:"〜であることを示す",kana:"ショウズザット",ac:"ショウ"},
+      {w:"a wide range of",mean:"幅広い〜",kana:"アワイドレインジオブ",ac:"レイ"},
+      {w:"just like",mean:"〜と同じように",kana:"ジャストライク",ac:"ジャ"},
+      {w:"feel",mean:"感じる",kana:"フィール",ac:"フィー"},
+      {w:"happiness",mean:"喜び",kana:"ハピネス",ac:"ハ"},
+      {w:"fear",mean:"恐れ",kana:"フィア",ac:"フィ"},
+      {w:"jealousy",mean:"嫉妬",kana:"ジェラスィ",ac:"ジェ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Recent research</td><td class='ja'>最近の研究</td></tr><tr><td class='en'>a wide range of ___</td><td class='ja'>幅広い___</td></tr><tr><td class='en'>just like humans</td><td class='ja'>人間と同じように</td></tr><tr><td class='en'>happiness</td><td class='ja'>喜び</td></tr><tr><td class='en'>fear</td><td class='ja'>恐れ</td></tr><tr><td class='en'>jealousy</td><td class='ja'>嫉妬</td></tr></table>",
+      "<p>テーマは<b>犬が持つ気持ち</b>です。</p><div class='step'>「犬は幅広い<b>___</b>を持つ」「人間と同じように」「<b>喜び・恐れ・嫉妬</b>を感じる」と続きます。<span class='think-arrow'>→</span>具体例として「喜び・恐れ・嫉妬」が並んでいる<span class='think-arrow'>→</span>これらをまとめて何と言うでしょうか？</div>",
+      "「<b>幅広い ___</b>を持つ」+「具体例：喜び・恐れ・嫉妬」。<br>選択肢の中で<b>「感情」</b>を表す名詞はどれでしょう？"
+    ],
+    explain:'<p><b>Recent research</b>＝「最近の研究」。<b>recent</b>＝「最近の」。</p><p><b>shows that 〜</b>＝<b>「〜ということを示している」</b>。<b>that</b>のあとに文を続けます。</p><p><b>a wide range of 〜</b>＝<b>「幅広い〜・さまざまな〜」</b>。重要表現です。</p><p><b>emotions</b>＝<b>「感情」</b>。喜び・悲しみ・怒り・恐れ・嫉妬など、すべての気持ちを表す名詞です。</p><p><b>just like 〜</b>＝<b>「〜と同じように」</b>。比較を表す表現。</p><p><b>can feel</b>＝「感じることができる」。<b>can</b>は能力・可能性。</p><p><b>happiness, fear, jealousy</b>＝「喜び、恐れ、嫉妬」。これらはすべて<b>emotions</b>（感情）の例です。</p><div class="ja-trans"><b>全体訳：</b>最近の研究では、犬は人間と同じように幅広い感情を持つことがわかりました。彼らは喜びや恐れ、そして嫉妬さえも感じることができます。</div>'
+  },
+  {
+    no:4, topic:"努力と結果",
+    sentence:'In sports, the final result does not always <span class="blank">[ 11 ]</span> only on talent. Players who work hard every day often beat naturally talented athletes in the long run.',
+    sentenceJa:"スポーツでは、最終結果は才能だけにかかっているわけではありません。毎日努力する選手は、長期的には生まれつき才能のある選手に勝つことが多いのです。",
+    answer:1,
+    choices:[
+      {t:"depend",   ja:"頼る・かかる"},
+      {t:"agree",    ja:"同意する"},
+      {t:"borrow",   ja:"借りる"},
+      {t:"explain",  ja:"説明する"}
+    ],
+    keyWords:[
+      {w:"final result",mean:"最終結果",kana:"ファイナルリザルト",ac:"ファイ"},
+      {w:"not always",mean:"いつも〜とは限らない",kana:"ノットオールウェイズ",ac:"オール"},
+      {w:"only on",mean:"〜だけに",kana:"オウンリーオン",ac:"オウ"},
+      {w:"talent",mean:"才能",kana:"タレント",ac:"タ"},
+      {w:"work hard",mean:"努力する",kana:"ワークハード",ac:"ハー"},
+      {w:"beat",mean:"打ち負かす",kana:"ビート",ac:"ビー"},
+      {w:"naturally talented",mean:"生まれつき才能のある",kana:"ナチュラリータレンティド",ac:"ナ"},
+      {w:"in the long run",mean:"長期的には",kana:"インザロングラン",ac:"ロン"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>final result</td><td class='ja'>最終結果</td></tr><tr><td class='en'>not always</td><td class='ja'>いつも〜とは限らない</td></tr><tr><td class='en'>___ only on talent</td><td class='ja'>才能だけに___</td></tr><tr><td class='en'>work hard</td><td class='ja'>努力する</td></tr><tr><td class='en'>beat</td><td class='ja'>打ち負かす・勝つ</td></tr><tr><td class='en'>in the long run</td><td class='ja'>長期的には</td></tr></table>",
+      "<p>テーマは<b>努力と才能</b>です。</p><div class='step'>「結果は才能だけに <b>___</b>」「努力する選手が才能ある選手に勝つ」と続きます。<span class='think-arrow'>→</span>「結果が何かに左右される・かかっている」という関係を表す動詞が必要。</div>",
+      "「結果は talent（才能）だけに <b>___ on</b>」。<br>選択肢の中で<b>「〜にかかっている・依存する」</b>を表す動詞はどれでしょう？（前置詞 <b>on</b> とセット）"
+    ],
+    explain:'<p><b>final result</b>＝「最終結果」。</p><p><b>not always</b>＝<b>「いつも〜とは限らない」</b>（部分否定）。</p><p><b>depend on 〜</b>＝<b>「〜にかかっている・〜次第である」</b>。<b>on</b>とセットで使います。<b>It depends on you.</b>＝「それはあなた次第」。</p><p><b>talent</b>＝「才能」。<b>talented</b>＝「才能のある」（形容詞）。</p><p><b>work hard every day</b>＝「毎日努力する」。</p><p><b>beat</b>＝「打ち負かす・勝つ」。<b>beat - beat - beaten</b>と変化する不規則動詞。</p><p><b>naturally talented</b>＝「生まれつき才能のある」。<b>naturally</b>＝「生まれつき・自然に」。</p><p><b>in the long run</b>＝<b>「長期的には・結局のところ」</b>。重要熟語です。</p><div class="ja-trans"><b>全体訳：</b>スポーツでは、最終結果は才能だけにかかっているわけではありません。毎日努力する選手は、長期的には生まれつき才能のある選手に勝つことが多いのです。</div>'
+  }
+],
+
+// ============================================================
+// Set-F（R5-2類題・形式踏襲のオリジナル）
+// ============================================================
+"Set-F": [
+  {
+    no:1, topic:"読書の楽しみ方",
+    sentence:'There are many <span class="blank">[ 8 ]</span> ways to enjoy reading books. Some people read quietly at home, while others love discussing stories with friends at a book club.',
+    sentenceJa:"本を楽しむには、さまざまな方法があります。家で静かに読む人もいれば、読書クラブで友達とストーリーについて話し合うのが大好きな人もいます。",
+    answer:4,
+    choices:[
+      {t:"loud",     ja:"うるさい"},
+      {t:"narrow",   ja:"狭い"},
+      {t:"few",      ja:"少しの"},
+      {t:"different",ja:"さまざまな"}
+    ],
+    keyWords:[
+      {w:"There are many ___ ways",mean:"___な方法がたくさんある",kana:"ゼアアー",ac:"ゼア"},
+      {w:"enjoy reading",mean:"読書を楽しむ",kana:"エンジョイリーディング",ac:"エン"},
+      {w:"quietly",mean:"静かに",kana:"クワイエットリー",ac:"クワ"},
+      {w:"at home",mean:"家で",kana:"アットホウム",ac:"ホウ"},
+      {w:"while",mean:"一方で",kana:"ホワイル",ac:"ホワイ"},
+      {w:"others",mean:"他の人",kana:"アザーズ",ac:"ア"},
+      {w:"discussing",mean:"話し合う",kana:"ディスカスィング",ac:"カ"},
+      {w:"book club",mean:"読書クラブ",kana:"ブッククラブ",ac:"ブッ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>many ___ ways</td><td class='ja'>___な方法がたくさん</td></tr><tr><td class='en'>Some ..., while others ...</td><td class='ja'>〜する人もいれば、〜する人もいる</td></tr><tr><td class='en'>quietly at home</td><td class='ja'>家で静かに</td></tr><tr><td class='en'>discussing with friends</td><td class='ja'>友達と話し合う</td></tr></table>",
+      "<p>テーマは<b>読書の多様な楽しみ方</b>です。</p><div class='step'>「<b>多くの ___ な</b> 方法」「<b>Some ... while others ...</b>（〜する人もいれば〜する人もいる）」と続きます。<span class='think-arrow'>→</span>「家で静かに読む人」と「友達と話し合う人」では楽しみ方が<b>違う</b>ことがわかります。</div>",
+      "「楽しみ方は<b>人によって違う</b>」。<br>選択肢の中で<b>「さまざまな・違う」</b>を表す形容詞はどれでしょう？"
+    ],
+    explain:'<p><b>There are many ___ ways</b>＝「多くの___な方法がある」。</p><p><b>different</b>＝<b>「さまざまな・違う」</b>。<b>many different ways</b>＝「さまざまな方法」（決まった言い方）。</p><p><b>enjoy + 動詞-ing</b>＝<b>「〜することを楽しむ」</b>。<b>enjoy</b>のあとは<b>必ず -ing</b>形（動名詞）。</p><p><b>quietly</b>＝「静かに」（副詞）。形容詞は<b>quiet</b>。</p><p><b>Some ..., while others ...</b>＝<b>「〜する人もいれば、〜する人もいる」</b>という重要構文です。<b>while</b>はここでは「一方で」（対比）。</p><p><b>discussing 〜 with 人</b>＝「人と〜について話し合う」。<b>discuss</b>＝「話し合う」（他動詞）。</p><div class="ja-trans"><b>全体訳：</b>本を楽しむには、さまざまな方法があります。家で静かに読む人もいれば、読書クラブで友達とストーリーについて話し合うのが大好きな人もいます。</div>'
+  },
+  {
+    no:2, topic:"自販機の進化",
+    sentence:'Modern vending machines in Japan have become very advanced. With a touch screen, customers can <span class="blank">[ 9 ]</span> their favorite drinks from over 30 different choices.',
+    sentenceJa:"日本の現代の自動販売機はとても進化しました。タッチスクリーンを使って、お客は30種類以上の中からお気に入りの飲み物を選ぶことができます。",
+    answer:1,
+    choices:[
+      {t:"select",   ja:"選ぶ"},
+      {t:"break",    ja:"壊す"},
+      {t:"hide",     ja:"隠す"},
+      {t:"forget",   ja:"忘れる"}
+    ],
+    keyWords:[
+      {w:"Modern",mean:"現代の",kana:"モダン",ac:"モ"},
+      {w:"vending machines",mean:"自動販売機",kana:"ヴェンディングマシーンズ",ac:"ヴェン"},
+      {w:"advanced",mean:"進化した・高度な",kana:"アドヴァンスト",ac:"ヴァン"},
+      {w:"touch screen",mean:"タッチスクリーン",kana:"タッチスクリーン",ac:"タッ"},
+      {w:"customers",mean:"お客",kana:"カスタマーズ",ac:"カ"},
+      {w:"favorite",mean:"お気に入りの",kana:"フェイヴァリット",ac:"フェイ"},
+      {w:"over 30",mean:"30以上",kana:"オウヴァーサーティ",ac:"オウ"},
+      {w:"different choices",mean:"さまざまな選択肢",kana:"ディファレントチョイセズ",ac:"ディ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Modern vending machines</td><td class='ja'>現代の自動販売機</td></tr><tr><td class='en'>advanced</td><td class='ja'>進化した</td></tr><tr><td class='en'>customers can ___ their favorite drinks</td><td class='ja'>お客はお気に入りの飲み物を___できる</td></tr><tr><td class='en'>over 30 different choices</td><td class='ja'>30以上のさまざまな選択肢</td></tr></table>",
+      "<p>テーマは<b>自動販売機での操作</b>です。</p><div class='step'>「タッチスクリーンで」「お気に入りの飲み物を <b>___</b>」「<b>30種類以上の選択肢</b>から」と続きます。<span class='think-arrow'>→</span>多くの選択肢の中から<b>1つを決める</b>動作を表します。</div>",
+      "「30以上の選択肢から、お気に入りの飲み物を <b>___</b>」。<br>選択肢の中で<b>「選ぶ」</b>を表す動詞はどれでしょう？"
+    ],
+    explain:'<p><b>Modern</b>＝「現代の」。<b>have become advanced</b>＝「進化した」（現在完了）。</p><p><b>vending machines</b>＝<b>「自動販売機」</b>。<b>vend</b>＝「売る」、<b>machine</b>＝「機械」。</p><p><b>With a touch screen</b>＝「タッチスクリーンを使って」。<b>with</b>＝「〜を使って」（手段）。</p><p><b>select</b>＝<b>「選ぶ」</b>。<b>choose</b>と同じ意味で、より公式・丁寧な印象。</p><p><b>their favorite drinks</b>＝「お気に入りの飲み物」。</p><p><b>from over 30 different choices</b>＝「30以上のさまざまな選択肢から」。<b>over</b>＝「〜以上」。</p><div class="ja-trans"><b>全体訳：</b>日本の現代の自動販売機はとても進化しました。タッチスクリーンを使って、お客は30種類以上の中からお気に入りの飲み物を選ぶことができます。</div>'
+  },
+  {
+    no:3, topic:"木造建築",
+    sentence:'Traditional Japanese houses are made of wood. The natural materials provide a special <span class="blank">[ 10 ]</span> that is hard to feel in modern concrete buildings.',
+    sentenceJa:"日本の伝統的な家屋は木で作られています。天然素材は、現代のコンクリートの建物では感じにくい特別な快適さを与えてくれます。",
+    answer:2,
+    choices:[
+      {t:"smell",   ja:"におい"},
+      {t:"comfort", ja:"快適さ"},
+      {t:"price",   ja:"値段"},
+      {t:"size",    ja:"大きさ"}
+    ],
+    keyWords:[
+      {w:"Traditional",mean:"伝統的な",kana:"トラディショナル",ac:"ディ"},
+      {w:"made of wood",mean:"木で作られた",kana:"メイドオブウッド",ac:"ウッ"},
+      {w:"natural materials",mean:"天然素材",kana:"ナチュラルマテリアルズ",ac:"ナ"},
+      {w:"provide",mean:"提供する・与える",kana:"プロヴァイド",ac:"ヴァイ"},
+      {w:"special",mean:"特別な",kana:"スペシャル",ac:"ス"},
+      {w:"hard to feel",mean:"感じにくい",kana:"ハードトゥフィール",ac:"ハー"},
+      {w:"concrete buildings",mean:"コンクリートの建物",kana:"コンクリートビルディングズ",ac:"コン"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>Traditional Japanese houses</td><td class='ja'>伝統的な日本家屋</td></tr><tr><td class='en'>made of wood</td><td class='ja'>木で作られた</td></tr><tr><td class='en'>natural materials</td><td class='ja'>天然素材</td></tr><tr><td class='en'>provide a special ___</td><td class='ja'>特別な___を与える</td></tr><tr><td class='en'>hard to feel in modern concrete buildings</td><td class='ja'>現代のコンクリート建物では感じにくい</td></tr></table>",
+      "<p>テーマは<b>木造建築の良さ</b>です。</p><div class='step'>「天然素材は<b>特別な ___</b>を与える」「コンクリート建物では<b>感じにくい</b>」と続きます。<span class='think-arrow'>→</span>「特別な、感じることができる」もの。木造建築だからこそ得られる<b>プラスの感覚</b>を表します。</div>",
+      "「天然素材が与える、特別な、感じる <b>___</b>」。<br>選択肢の中で<b>「快適さ・心地よさ」</b>を表す名詞はどれでしょう？"
+    ],
+    explain:'<p><b>Traditional</b>＝「伝統的な」。<b>made of wood</b>＝「木で作られた」。<b>be made of 素材</b>で「〜でできている」。</p><p><b>natural materials</b>＝「天然素材」。<b>natural</b>＝「自然の・天然の」。</p><p><b>provide</b>＝<b>「提供する・与える」</b>。<b>provide A</b>で「Aを与える」。</p><p><b>comfort</b>＝<b>「快適さ・くつろぎ」</b>。形容詞は<b>comfortable</b>（快適な）。</p><p><b>that is hard to feel</b>＝「感じにくい（〜）」。<b>that</b>は関係代名詞、<b>hard to + 動詞</b>＝「〜するのが難しい」。</p><p><b>concrete buildings</b>＝「コンクリートの建物」。<b>concrete</b>＝「コンクリート」。</p><div class="ja-trans"><b>全体訳：</b>日本の伝統的な家屋は木で作られています。天然素材は、現代のコンクリートの建物では感じにくい特別な快適さを与えてくれます。</div>'
+  },
+  {
+    no:4, topic:"雨の日のスポーツ",
+    sentence:'<span class="blank">[ 11 ]</span> the heavy rain, the soccer team continued their practice outside. The coach said that real strength comes from training in difficult conditions.',
+    sentenceJa:"激しい雨にもかかわらず、サッカー部は外での練習を続けました。コーチは、本当の強さは厳しい状況での練習から生まれると言いました。",
+    answer:1,
+    choices:[
+      {t:"Despite", ja:"〜にもかかわらず"},
+      {t:"Against", ja:"〜に反対して"},
+      {t:"During",  ja:"〜の間"},
+      {t:"Behind",  ja:"〜の後ろに"}
+    ],
+    keyWords:[
+      {w:"heavy rain",mean:"激しい雨",kana:"ヘヴィレイン",ac:"ヘ"},
+      {w:"soccer team",mean:"サッカー部",kana:"サッカーティーム",ac:"サッ"},
+      {w:"continued",mean:"続けた",kana:"コンティニュード",ac:"ティ"},
+      {w:"practice",mean:"練習",kana:"プラクティス",ac:"プラ"},
+      {w:"outside",mean:"外で",kana:"アウトサイド",ac:"サイ"},
+      {w:"coach",mean:"コーチ",kana:"コウチ",ac:"コウ"},
+      {w:"real strength",mean:"本当の強さ",kana:"リアルストレングス",ac:"ストレ"},
+      {w:"difficult conditions",mean:"厳しい状況",kana:"ディフィカルトコンディションズ",ac:"ディ"}
+    ],
+    hints:[
+      "<p>まずは英文中の重要な単語・表現の意味を確認しましょう。</p><table class='word-table'><tr><th>英語</th><th>意味</th></tr><tr><td class='en'>heavy rain</td><td class='ja'>激しい雨</td></tr><tr><td class='en'>continued their practice outside</td><td class='ja'>外での練習を続けた</td></tr><tr><td class='en'>real strength</td><td class='ja'>本当の強さ</td></tr><tr><td class='en'>difficult conditions</td><td class='ja'>厳しい状況</td></tr></table>",
+      "<p>テーマは<b>雨の中の練習</b>です。</p><div class='step'>「<b>___</b> 激しい雨」「外で練習を続けた」と続きます。<span class='think-arrow'>→</span>「雨」と「外で練習」は<b>普通は両立しない</b>。「雨が降っている<b>のに</b>外で練習」=逆の関係。</div>",
+      "「激しい雨<b>____</b>、外で練習を続けた」。<br>選択肢の中で<b>「〜にもかかわらず」</b>を表す前置詞はどれでしょう？"
+    ],
+    explain:'<p><b>Despite + 名詞</b>＝<b>「〜にもかかわらず」</b>。前置詞なので、後ろは<b>名詞・名詞句</b>が来ます（<b>although</b>と違って <b>SV</b> は来ません）。</p><p><b>Despite the heavy rain</b>＝「激しい雨にもかかわらず」。<b>heavy rain</b>＝「激しい雨」。</p><p><b>continued their practice outside</b>＝「外で練習を続けた」。<b>continue</b>＝「続ける」。</p><p><b>real strength</b>＝「本当の強さ」。<b>real</b>＝「本当の・真の」、<b>strength</b>＝「強さ」（形容詞 strong の名詞形）。</p><p><b>comes from 〜</b>＝<b>「〜から生まれる・〜由来である」</b>。</p><p><b>difficult conditions</b>＝「厳しい状況・困難な条件」。<b>condition</b>＝「状況・条件」。</p><div class="ja-trans"><b>全体訳：</b>激しい雨にもかかわらず、サッカー部は外での練習を続けました。コーチは、本当の強さは厳しい状況での練習から生まれると言いました。</div>'
+  }
+]
+
+};
+
+// セット名のラベル変換（過去問との対応）
+const SET_LABELS = {
+  "Set-A":"R7年1回類題",
+  "Set-B":"R7年2回類題",
+  "Set-C":"R6年1回類題",
+  "Set-D":"R6年2回類題",
+  "Set-E":"R5年1回類題",
+  "Set-F":"R5年2回類題"
+};
+
+let currentYear = "Set-A";
+let currentQ = 0;
+let savedWords = [];
+let answeredMap = {}; // {key: choiceIdx}
+let currentMode = "hint"; // "hint" or "explain"
+
+function getKey(yr, idx){return `${yr}-${idx}`}
+
+function renderYearPick(){
+  const yp = document.getElementById('yearPick');
+  yp.innerHTML = '';
+  Object.keys(QUESTIONS_DATA).forEach(y=>{
+    const b = document.createElement('button');
+    b.textContent = SET_LABELS[y] || y;
+    if(y===currentYear) b.classList.add('on');
+    b.onclick = ()=>{
+      stopAllPlay();
+      currentYear=y;currentQ=0;renderYearPick();renderTabs();renderQuestion();
+    };
+    yp.appendChild(b);
+  });
+  ["Set-A","Set-B","Set-C","Set-D","Set-E","Set-F"].forEach(y=>{
+    if(!QUESTIONS_DATA[y]){
+      const b = document.createElement('button');
+      b.textContent = `${SET_LABELS[y]} (準備中)`;
+      b.style.opacity = "0.5";
+      b.disabled = true;
+      yp.appendChild(b);
+    }
+  });
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('qTabs');
+  const data = QUESTIONS_DATA[currentYear];
+  tabs.innerHTML = '';
+  data.forEach((q,i)=>{
+    const t = document.createElement('button');
+    t.className = 'q-tab' + (i===currentQ?' active':'');
+    t.textContent = `問${q.no}`;
+    t.onclick = ()=>{stopAllPlay();currentQ=i;renderTabs();renderQuestion();};
+    tabs.appendChild(t);
+  });
+}
+
+function highlightWord(text, words){
+  if(!words || words.length===0) return text;
+  const sorted = [...words].sort((a,b)=>b.w.length-a.w.length);
+  let result = text;
+  sorted.forEach((kw,i)=>{
+    const safeWord = kw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b(${safeWord})\\b`, 'i');
+    if(result.match(regex)){
+      const opts = JSON.stringify({m:kw.mean,k:kw.kana,a:kw.ac});
+      const escapedOpts = opts.replace(/"/g, '&quot;');
+      result = result.replace(regex, `<span class="word" data-opts="${escapedOpts}" onclick="showVwPop(this,event)">$1</span>`);
+    }
+  });
+  return result;
+}
+
+function renderQuestion(){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const c = document.getElementById('qContainer');
+  const isR5 = currentYear.startsWith("R5");
+  
+  let r5NoteHtml = '';
+  if(isR5){
+    r5NoteHtml = '<div class="r5-note">📝 <b>注意：</b>令和5年度では、この形式は<b>第5問</b>として出題されました。R6以降は<b>第2問</b>になっています。</div>';
+  }
+  
+  // 単語を装飾した文を作る
+  const decorated = highlightWord(data.sentence, data.keyWords);
+  
+  let choicesHtml = '';
+  data.choices.forEach((ch,i)=>{
+    choicesHtml += `<button class="choice" data-idx="${i}" onclick="pickChoice(${i})">
+      <span class="num">${i+1}</span>${ch.t}
+      <div class="ja-row"><span class="ja-icon">→</span><span class="ja-text">${ch.ja}</span></div>
+    </button>`;
+  });
+  
+  let hintsHtml = '';
+  data.hints.forEach((h,i)=>{
+    hintsHtml += `<div class="hint-box" id="hint${i}"><span class="hint-num">ヒント${i+1}</span><div>${h}</div></div>`;
+  });
+  
+  c.innerHTML = `
+    <div class="qcard">
+      ${r5NoteHtml}
+      <div class="topic">📖 ${data.topic}</div>
+      <button class="sentence-play" onclick="playSentence()">🔊 英文を読み上げる</button>
+      <div class="sentence" id="sentenceBox">${decorated}</div>
+      <div class="choices" id="choicesBox">${choicesHtml}</div>
+      <div class="result-msg" id="resultMsg"></div>
+      
+      <div class="mode-tabs">
+        <button class="mode-btn ${currentMode==='hint'?'active':''}" onclick="setMode('hint')">💡 ヒントモード</button>
+        <button class="mode-btn ${currentMode==='explain'?'active':''}" onclick="setMode('explain')">📚 詳しい解説</button>
+      </div>
+      
+      <div class="mode-panel ${currentMode==='hint'?'show':''}" id="hintPanel">
+        <h3>💡 段階的ヒント</h3>
+        <div class="hint-buttons">
+          <button class="hint-btn" onclick="showHint(0)">ヒント1</button>
+          <button class="hint-btn" onclick="showHint(1)">ヒント2</button>
+          <button class="hint-btn" onclick="showHint(2)">ヒント3</button>
+        </div>
+        ${hintsHtml}
+      </div>
+      
+      <div class="mode-panel ${currentMode==='explain'?'show':''}" id="explainPanel">
+        <h3>📚 詳しい解説</h3>
+        <div class="explain-box">${data.explain}</div>
+      </div>
+    </div>
+  `;
+  
+  // 既に解答済みなら復元
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined){
+    revealAnswer(answeredMap[k], false);
+  }
+}
+
+function setMode(m){
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('hintPanel').classList.toggle('show', m==='hint');
+  document.getElementById('explainPanel').classList.toggle('show', m==='explain');
+}
+
+function showHint(i){
+  const box = document.getElementById('hint'+i);
+  box.classList.toggle('show');
+}
+
+function pickChoice(i){
+  const k = getKey(currentYear, currentQ);
+  if(answeredMap[k] !== undefined) return;
+  answeredMap[k] = i;
+  revealAnswer(i, true);
+}
+
+function revealAnswer(picked, showMsg){
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  const ans = data.answer - 1;
+  const choicesEl = document.getElementById('choicesBox');
+  if(!choicesEl) return;
+  choicesEl.classList.add('revealed');
+  const buttons = choicesEl.querySelectorAll('.choice');
+  buttons.forEach((btn, i)=>{
+    if(i===ans) btn.classList.add('correct');
+    else if(i===picked) btn.classList.add('wrong');
+  });
+  if(showMsg){
+    const msg = document.getElementById('resultMsg');
+    if(picked===ans){
+      msg.className = 'result-msg ok show';
+      msg.textContent = '🎉 正解！ ';
+    } else {
+      msg.className = 'result-msg ng show';
+      msg.textContent = `残念。正解は ${data.answer} 番です。`;
+    }
+  }
+}
+
+// 単語ホバー
+let activeWordPop = null;
+function showVwPop(el, ev){
+  if(ev) ev.stopPropagation();
+  if(activeWordPop && activeWordPop !== el){
+    closeVwPop(activeWordPop);
+  }
+  if(el.classList.contains('tapped')){
+    closeVwPop(el);
+    return;
+  }
+  el.classList.add('tapped');
+  const opts = JSON.parse(el.getAttribute('data-opts').replace(/&quot;/g,'"'));
+  const word = el.textContent;
+  
+  // 既に保存されているか
+  const isSaved = savedWords.some(w=>w.w===word);
+  
+  const pop = document.createElement('span');
+  pop.className = 'word-pop show';
+  pop.innerHTML = `
+    <div class="pop-row">
+      <div>
+        <div><b>${word}</b> [${opts.k}] ${opts.a?`<span class="accent">▶${opts.a}</span>`:''}</div>
+        <div>${opts.m}</div>
+      </div>
+      <button class="${isSaved?'saved':'save'}" onclick="event.stopPropagation();saveWord('${word}','${opts.m}','${opts.k}',this)">${isSaved?'✓':'保存'}</button>
+    </div>
+  `;
+  el.appendChild(pop);
+  activeWordPop = el;
+}
+
+function closeVwPop(el){
+  el.classList.remove('tapped');
+  const pop = el.querySelector('.word-pop');
+  if(pop) pop.remove();
+  if(activeWordPop===el) activeWordPop = null;
+}
+
+document.addEventListener('click', (e)=>{
+  if(activeWordPop && !activeWordPop.contains(e.target)){
+    closeVwPop(activeWordPop);
+  }
+});
+
+function saveWord(w, m, k, btn){
+  if(savedWords.some(x=>x.w===w)){
+    return;
+  }
+  // 現在の問題の選択肢から問題情報を生成
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  savedWords.push({w, m, k, year:currentYear, qNo:data.no});
+  btn.textContent = '✓';
+  btn.className = 'saved';
+  document.getElementById('reviewCount').textContent = savedWords.length;
+}
+
+// 音声合成
+let voices = [];
+let currentSpeech = null;
+
+function loadVoices(){
+  voices = window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function pickVoice(){
+  if(voices.length===0) loadVoices();
+  // 英語ナレーション向けに男性英語声を選ぶ
+  const enVoice = voices.find(v => /en-US|en-GB/i.test(v.lang) && /male|David|Daniel|Alex/i.test(v.name));
+  return enVoice || voices.find(v=>/en/i.test(v.lang)) || voices[0];
+}
+
+function playSentence(){
+  if(!('speechSynthesis' in window)){
+    alert('お使いのブラウザは音声読み上げに対応していません');
+    return;
+  }
+  stopAllPlay();
+  const data = QUESTIONS_DATA[currentYear][currentQ];
+  // タグを除去して読み上げ用テキストを作る
+  let text = data.sentence.replace(/<[^>]+>/g, ' ').replace(/\[\s*\d+\s*\]/g, 'blank').replace(/\s+/g, ' ').trim();
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickVoice();
+  if(v) u.voice = v;
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  currentSpeech = u;
+  speechSynthesis.speak(u);
+}
+
+function stopAllPlay(){
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+  }
+  currentSpeech = null;
+}
+
+// 復習リスト
+function openReview(){
+  const body = document.getElementById('reviewBody');
+  if(savedWords.length===0){
+    body.innerHTML = '<p style="text-align:center;color:#888;padding:20px">まだ単語が保存されていません。<br>英文中の<span style="color:var(--accent2);text-decoration:underline">下線つきの単語</span>をタップして「保存」ボタンを押してください。</p>';
+  } else {
+    body.innerHTML = savedWords.map((w,i)=>`
+      <div class="review-card">
+        <div class="review-word">${w.w}</div>
+        <div class="review-q">[${w.k}] ${w.m}</div>
+        <div style="font-size:.75rem;color:#888;">${SET_LABELS[w.year] || w.year} 問${w.qNo}より</div>
+        <div class="review-actions">
+          <button class="btn-remember" onclick="removeWord(${i})">✓ 覚えた</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('reviewModal').classList.add('show');
+}
+function closeReview(){
+  document.getElementById('reviewModal').classList.remove('show');
+}
+function removeWord(i){
+  savedWords.splice(i, 1);
+  document.getElementById('reviewCount').textContent = savedWords.length;
+  openReview();
+}
+
+// 初期化
+renderYearPick();
+renderTabs();
+renderQuestion();
+
+</script>
+</body>
+</html>
